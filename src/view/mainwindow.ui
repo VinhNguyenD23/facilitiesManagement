@@ -211,7 +211,7 @@ QLabel
        <x>10</x>
        <y>10</y>
        <width>881</width>
-       <height>71</height>
+       <height>81</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -365,7 +365,7 @@ QTableWidget
        <x>670</x>
        <y>380</y>
        <width>221</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">

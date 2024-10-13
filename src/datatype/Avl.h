@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-template <typename T, typename K = int>
+template <class T, typename K = int>
 class AVLTree
 {
 public:
@@ -37,4 +37,4 @@ public:
     Node *deleteNode(Node *node, K key);
 };
 
-#endif AVL_TREE_H
+#endif // AVL_TREE_H

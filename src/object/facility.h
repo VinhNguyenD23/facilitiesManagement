@@ -6,11 +6,11 @@
 // TODO: Change name field this object [ priority: above normal ]
 struct Facility
 {
-    std::string maVT;
-    std::string tenVT;
-    std::string dVT;
-    long sLTonKho;
+    std::string id;
+    std::string name;
+    std::string unit;
+    long quantity;
     // TODO: Link with billing object [ priority: high ]
 };
 
-#endif FACILITY_H
+#endif // FACILITY_H

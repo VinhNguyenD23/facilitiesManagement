@@ -3,6 +3,7 @@
 StaffsModel::StaffsModel()
 {
     this->data = new DArray<Staff>[MAX_STAFF];
+    // TODO: Read data from databases [*.csv] in ../databases [ priority: high ]
 }
 
 DArray<Staff> *StaffsModel::getListData()

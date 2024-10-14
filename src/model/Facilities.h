@@ -1,5 +1,5 @@
-#ifndef Facilities_H
-#define Facilities_H
+#ifndef FACILITIES_H
+#define FACILITIES_H
 
 #include <iostream>
 #include "../object/facility.h"
@@ -18,4 +18,4 @@ public:
     AVLTree<Facility, std::string>::Node *findByDataId(std::string id);
 };
 
-#endif Facilities_H
+#endif // FACILITIES_H

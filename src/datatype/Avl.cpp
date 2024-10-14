@@ -1,24 +1,24 @@
 #include "Avl.h"
 
-template <typename T, typename K>
+template <class T, typename K>
 inline AVLTree<T, K>::AVLTree()
 {
     this->root = nullptr;
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 inline int AVLTree<T, K>::height(Node *node)
 {
     return node ? node->height : 0;
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 inline int AVLTree<T, K>::getBalance(Node *node)
 {
     return node ? height(node->left) - height(node->right) : 0;
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
 {
     Node *x = y->left;
@@ -33,7 +33,7 @@ AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
     return x;
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 AVLTree<T, K>::Node *AVLTree<T, K>::leftRotate(Node *x)
 {
     Node *y = x->right;
@@ -48,7 +48,7 @@ AVLTree<T, K>::Node *AVLTree<T, K>::leftRotate(Node *x)
     return y;
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 AVLTree<T, K>::Node *AVLTree<T, K>::insert(Node *node, T data, K key)
 {
     if (node == nullptr)
@@ -86,31 +86,31 @@ AVLTree<T, K>::Node *AVLTree<T, K>::insert(Node *node, T data, K key)
     return node;
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 void AVLTree<T, K>::preOrder(Node *node)
 {
     // TODO: Print AVL Tree [ priority: low ]
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 void AVLTree<T, K>::insert(T data, K key)
 {
     this->root = this->insert(root, data, key);
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 inline AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
 {
     return this->find(root, key);
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 inline AVLTree<T, K>::Node *AVLTree<T, K>::deleteNode(Node *node, K key)
 {
     // TODO: Delete Node in AVL Tree [ priority: normal ]
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 inline AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
 {
     // TODO: Find element in AVL Tree [ priority: normal ] [ In Testing ]
@@ -126,7 +126,7 @@ inline AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
     return nullptr;
 }
 
-template <typename T, typename K>
+template <class T, typename K>
 inline AVLTree<T, K>::Node::Node(T data, K key)
 {
     this->key = key;

@@ -5,7 +5,7 @@ Staff:
 Invoice:
 [id:string(20)],[date:Date{Object}],[owner:string],[type:bool]
 InvoiceDetail:
-[id:long],[parentId:string(20)],[nameFacility:string],[quantity:unsigned long],[price:unsigned long],[VAT:double]
+[id:long],[parentId:string(20)],[idFacilities:string(10)],[quantity:unsigned long],[price:unsigned long],[VAT:double]
 
 relationship:
 Staff < Invoice

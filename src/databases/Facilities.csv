@@ -1,100 +1,100 @@
-FAC001,Máy chiếu,Chiếc,10
-FAC002,Bảng trắng,Chiếc,5
-FAC003,Laptop,Chiếc,20
-FAC004,Loa,Chiếc,8
-FAC005,Micro,Chiếc,15
-FAC006,Bàn làm việc,Chiếc,30
-FAC007,Ghế văn phòng,Chiếc,50
-FAC008,Máy in,Chiếc,7
-FAC009,Scanner,Chiếc,4
-FAC010,Điều hòa,Chiếc,12
-FAC011,TV,Chiếc,6
-FAC012,Router,Chiếc,10
-FAC013,Modem,Chiếc,8
-FAC014,Desktop,Chiếc,25
-FAC015,Camera an ninh,Chiếc,9
-FAC016,Màn hình máy tính,Chiếc,14
-FAC017,Bàn phím,Chiếc,35
-FAC018,Chuột máy tính,Chiếc,40
-FAC019,Màn chiếu,Chiếc,3
-FAC020,Máy fax,Chiếc,2
-FAC021,Điều hòa không khí,Chiếc,10
-FAC022,Máy chiếu mini,Chiếc,6
-FAC023,Bảng trắng thông minh,Chiếc,15
-FAC024,Laptop xách tay,Chiếc,18
-FAC025,Loa Bluetooth,Chiếc,25
-FAC026,Micro không dây,Chiếc,12
-FAC027,Bàn họp,Chiếc,40
-FAC028,Ghế xoay,Chiếc,35
-FAC029,Máy in laser,Chiếc,9
-FAC030,Scanner siêu tốc,Chiếc,5
-FAC031,TV thông minh,Chiếc,11
-FAC032,Router wifi,Chiếc,22
-FAC033,Modem wifi,Chiếc,6
-FAC034,Desktop PC,Chiếc,32
-FAC035,Camera giám sát,Chiếc,18
-FAC036,Màn hình LED,Chiếc,27
-FAC037,Bàn phím cơ,Chiếc,60
-FAC038,Chuột không dây,Chiếc,50
-FAC039,Màn chiếu điện tử,Chiếc,8
-FAC040,Máy fax văn phòng,Chiếc,4
-FAC041,Điều hòa tiết kiệm điện,Chiếc,9
-FAC042,Máy chiếu chuyên dụng,Chiếc,14
-FAC043,Bảng trắng cảm ứng,Chiếc,12
-FAC044,Laptop văn phòng,Chiếc,21
-FAC045,Loa âm thanh,Chiếc,16
-FAC046,Micro cầm tay,Chiếc,18
-FAC047,Bàn làm việc có ngăn kéo,Chiếc,28
-FAC048,Ghế phòng họp,Chiếc,45
-FAC049,Máy in màu,Chiếc,10
-FAC050,Scanner tự động,Chiếc,7
-FAC051,TV 4K,Chiếc,13
-FAC052,Router 5G,Chiếc,11
-FAC053,Modem tốc độ cao,Chiếc,14
-FAC054,Desktop gaming,Chiếc,29
-FAC055,Camera chống trộm,Chiếc,23
-FAC056,Màn hình cảm ứng,Chiếc,16
-FAC057,Bàn phím không dây,Chiếc,40
-FAC058,Chuột gaming,Chiếc,48
-FAC059,Màn chiếu 3D,Chiếc,6
-FAC060,Máy fax khổ lớn,Chiếc,5
-FAC061,Điều hòa làm mát,Chiếc,11
-FAC062,Máy chiếu độ sáng cao,Chiếc,13
-FAC063,Bảng trắng di động,Chiếc,19
-FAC064,Laptop đồ họa,Chiếc,17
-FAC065,Loa siêu trầm,Chiếc,18
-FAC066,Micro thu âm,Chiếc,20
-FAC067,Bàn làm việc đa năng,Chiếc,42
-FAC068,Ghế thư giãn,Chiếc,38
-FAC069,Máy in tốc độ cao,Chiếc,11
-FAC070,Scanner màu,Chiếc,10
-FAC071,TV màn hình cong,Chiếc,15
-FAC072,Router băng tần kép,Chiếc,13
-FAC073,Modem đa chức năng,Chiếc,9
-FAC074,Desktop với card đồ họa mạnh,Chiếc,26
-FAC075,Camera siêu nét,Chiếc,21
-FAC076,Màn hình máy tính 4K,Chiếc,16
-FAC077,Bàn phím cơ học,Chiếc,52
-FAC078,Chuột game thủ,Chiếc,56
-FAC079,Màn chiếu rộng,Chiếc,9
-FAC080,Máy fax tự động,Chiếc,8
-FAC081,Điều hòa inverter,Chiếc,14
-FAC082,Máy chiếu LED,Chiếc,7
-FAC083,Bảng trắng kích thước lớn,Chiếc,16
-FAC084,Laptop chơi game,Chiếc,24
-FAC085,Loa Bluetooth di động,Chiếc,30
-FAC086,Micro karaoke,Chiếc,10
-FAC087,Bàn làm việc góc,Chiếc,33
-FAC088,Ghế sofa,Chiếc,51
-FAC089,Máy in laser màu,Chiếc,12
-FAC090,Scanner đa chức năng,Chiếc,13
-FAC091,TV LCD,Chiếc,9
-FAC092,Router gigabit,Chiếc,15
-FAC093,Modem ADSL,Chiếc,12
-FAC094,Desktop đồ họa,Chiếc,28
-FAC095,Camera quan sát,Chiếc,20
-FAC096,Màn hình UltraWide,Chiếc,22
-FAC097,Bàn phím LED,Chiếc,38
-FAC098,Chuột có dây,Chiếc,44
-FAC099,Màn chiếu gắn tường,Chiếc,5
-FAC100,Máy fax nhận fax,Chiếc,7
+FAC001,Thanh sắt,Chiếc,500
+FAC002,Thép tấm,Chiếc,300
+FAC003,Gạch men,Chiếc,1000
+FAC004,Đá granite,Chiếc,200
+FAC005,Xi măng,Chiếc,500
+FAC006,Cát xây dựng,Chiếc,1000
+FAC007,Đá dăm,Chiếc,800
+FAC008,Bê tông,Chiếc,600
+FAC009,Thanh thép tròn,Chiếc,350
+FAC010,Máy hàn,Chiếc,25
+FAC011,Móng bê tông,Chiếc,150
+FAC012,Thạch cao,Chiếc,200
+FAC013,Ống nước PVC,Chiếc,500
+FAC014,Cửa thép,Chiếc,100
+FAC015,Nhôm hợp kim,Chiếc,300
+FAC016,Gạch lát nền,Chiếc,1200
+FAC017,Bê tông cốt thép,Chiếc,400
+FAC018,Đá ốp lát,Chiếc,350
+FAC019,Ống thoát nước,Chiếc,250
+FAC020,Thùng sơn,Chiếc,500
+FAC021,Đinh vít,Chiếc,2000
+FAC022,Băng keo dán tường,Chiếc,100
+FAC023,Thanh gỗ,Chiếc,150
+FAC024,Gạch đỏ,Chiếc,800
+FAC025,Đá ốp tường,Chiếc,400
+FAC026,Sơn dầu,Chiếc,100
+FAC027,Cát đen,Chiếc,600
+FAC028,Đá xây dựng,Chiếc,1000
+FAC029,Thanh thép mạ kẽm,Chiếc,500
+FAC030,Búa,Chiếc,150
+FAC031,Chìa khóa cửa,Chiếc,250
+FAC032,Cửa sổ nhôm,Chiếc,100
+FAC033,Đá hộc,Chiếc,450
+FAC034,Ống thép,Chiếc,300
+FAC035,Tấm lợp fibro xi măng,Chiếc,200
+FAC036,Gạch ống,Chiếc,800
+FAC037,Chìa khóa sắt,Chiếc,400
+FAC038,Ống nhựa PVC,Chiếc,600
+FAC039,Thanh trượt cửa,Chiếc,150
+FAC040,Đá đỏ,Chiếc,350
+FAC041,Cây cột thép,Chiếc,200
+FAC042,Thanh bê tông,Chiếc,500
+FAC043,Ống đồng,Chiếc,300
+FAC044,Đá vôi,Chiếc,600
+FAC045,Thảm trải sàn,Chiếc,100
+FAC046,Tấm lợp nhựa,Chiếc,250
+FAC047,Đá cuội,Chiếc,500
+FAC048,Đá vân mây,Chiếc,200
+FAC049,Gạch chịu lửa,Chiếc,150
+FAC050,Ống nhựa HDPE,Chiếc,200
+FAC051,Chậu xi măng,Chiếc,100
+FAC052,Gạch bông,Chiếc,1200
+FAC053,Thanh giằng thép,Chiếc,400
+FAC054,Sắt tròn,Chiếc,500
+FAC055,Gạch ceramic,Chiếc,600
+FAC056,Đá marble,Chiếc,300
+FAC057,Thanh thép chữ U,Chiếc,350
+FAC058,Máng xối nhôm,Chiếc,100
+FAC059,Thanh thép chữ V,Chiếc,150
+FAC060,Ống gió,Chiếc,200
+FAC061,Đá xám,Chiếc,500
+FAC062,Ống nhựa PVC uPVC,Chiếc,300
+FAC063,Cỏ nhân tạo,Chiếc,50
+FAC064,Tấm cách âm,Chiếc,120
+FAC065,Thùng đựng vật liệu,Chiếc,300
+FAC066,Chai chống thấm,Chiếc,100
+FAC067,Đá trắng,Chiếc,250
+FAC068,Đá xanh,Chiếc,300
+FAC069,Thanh ván ép,Chiếc,500
+FAC070,Thép góc,Chiếc,250
+FAC071,Thanh xà gồ,Chiếc,400
+FAC072,Đá sỏi,Chiếc,800
+FAC073,Tấm thạch cao chống ẩm,Chiếc,200
+FAC074,Ống nhựa PE,Chiếc,500
+FAC075,Tấm chống thấm,Chiếc,150
+FAC076,Thanh thép vuông,Chiếc,350
+FAC077,Cửa nhựa,Chiếc,200
+FAC078,Thanh inox,Chiếc,300
+FAC079,Gạch bể,Chiếc,1000
+FAC080,Ống sắt,Chiếc,600
+FAC081,Tấm xi măng,Chiếc,350
+FAC082,Đá ong,Chiếc,150
+FAC083,Đá bazan,Chiếc,400
+FAC084,Tấm chắn ánh sáng,Chiếc,250
+FAC085,Đá tự nhiên,Chiếc,300
+FAC086,Thép ống,Chiếc,350
+FAC087,Đá khò,Chiếc,450
+FAC088,Thanh thép tấm,Chiếc,300
+FAC089,Khối bê tông nhẹ,Chiếc,250
+FAC090,Đá cẩm thạch,Chiếc,200
+FAC091,Ống gang,Chiếc,150
+FAC092,Bột trét tường,Chiếc,200
+FAC093,Thép thanh,Chiếc,400
+FAC094,Thanh thép hộp,Chiếc,350
+FAC095,Tấm lợp sợi thủy tinh,Chiếc,100
+FAC096,Ống nhựa PPR,Chiếc,300
+FAC097,Đá tảng,Chiếc,500
+FAC098,Ống thép vuông,Chiếc,150
+FAC099,Gạch đỏ nung,Chiếc,600
+FAC100,Tấm lót sàn,Chiếc,250

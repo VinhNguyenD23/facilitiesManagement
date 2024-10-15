@@ -12,7 +12,7 @@ AVLTree<T, K>::~AVLTree()
 }
 
 template <class T, typename K>
-inline int AVLTree<T, K>::height(Node *node)
+inline int AVLTree<T, K>::getHeight(Node *node)
 {
     return node ? node->height : 0;
 }
@@ -20,7 +20,7 @@ inline int AVLTree<T, K>::height(Node *node)
 template <class T, typename K>
 inline int AVLTree<T, K>::getBalance(Node *node)
 {
-    return node ? height(node->left) - height(node->right) : 0;
+    return node ? getHeight(node->left) - getHeight(node->right) : 0;
 }
 
 template <class T, typename K>
@@ -32,8 +32,8 @@ AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
     x->right = y;
     y->left = T2;
 
-    y->height = std::max(height(y->left), height(y->right)) + 1;
-    x->height = std::max(height(x->left), height(x->right)) + 1;
+    y->height = std::max(getHeight(y->left), getHeight(y->right)) + 1;
+    x->height = std::max(getHeight(x->left), getHeight(x->right)) + 1;
 
     return x;
 }
@@ -47,8 +47,8 @@ AVLTree<T, K>::Node *AVLTree<T, K>::leftRotate(Node *x)
     y->left = x;
     x->right = T2;
 
-    x->height = std::max(height(x->left), height(x->right)) + 1;
-    y->height = std::max(height(y->left), height(y->right)) + 1;
+    x->height = std::max(getHeight(x->left), getHeight(x->right)) + 1;
+    y->height = std::max(getHeight(y->left), getHeight(y->right)) + 1;
 
     return y;
 }
@@ -60,32 +60,32 @@ AVLTree<T, K>::Node *AVLTree<T, K>::insert(Node *node, T data, K key)
         return new Node(data, key);
 
     if (key < node->key)
-        node->left = this->insert(node->left, key);
+        node->left = insert(node->left, key);
     else if (key > node->key)
-        node->right = this->insert(node->right, key);
+        node->right = insert(node->right, key);
     else
         return node;
 
-    node->height = 1 + std::max(this->height(node->left), this->height(node->right));
+    node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
 
-    int balance = this->getBalance(node);
+    int balance = getBalance(node);
 
     if (balance > 1 && key < node->left->key)
-        return this->rightRotate(node);
+        return rightRotate(node);
 
     if (balance < -1 && key > node->right->key)
-        return this->leftRotate(node);
+        return leftRotate(node);
 
     if (balance > 1 && key > node->left->key)
     {
-        node->left = this->leftRotate(node->left);
-        return this->rightRotate(node);
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
     }
 
     if (balance < -1 && key < node->right->key)
     {
-        node->right = this->rightRotate(node->right);
-        return this->leftRotate(node);
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
     }
 
     return node;
@@ -100,13 +100,13 @@ void AVLTree<T, K>::preOrder(Node *node)
 template <class T, typename K>
 void AVLTree<T, K>::insert(T data, K key)
 {
-    this->root = this->insert(root, data, key);
+    this->root = insert(root, data, key);
 }
 
 template <class T, typename K>
 inline AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
 {
-    return this->find(root, key);
+    return find(root, key);
 }
 
 template <class T, typename K>

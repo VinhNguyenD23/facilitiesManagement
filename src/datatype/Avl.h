@@ -29,7 +29,7 @@ private:
 public:
     AVLTree();
     ~AVLTree();
-    int height(Node *node);
+    int getHeight(Node *node);
     int getBalance(Node *node);
     Node *insert(Node *node, T data, K key);
     void preOrder(Node *node);

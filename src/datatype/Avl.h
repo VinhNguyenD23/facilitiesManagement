@@ -23,14 +23,14 @@ private:
 
 private:
     Node *find(Node *root, K key);
+    Node *rightRotate(Node *y);
+    Node *leftRotate(Node *x);
 
 public:
     AVLTree();
     ~AVLTree();
     int height(Node *node);
     int getBalance(Node *node);
-    Node *rightRotate(Node *y);
-    Node *leftRotate(Node *x);
     Node *insert(Node *node, T data, K key);
     void preOrder(Node *node);
     void insert(T data, K key);

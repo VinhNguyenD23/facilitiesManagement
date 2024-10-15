@@ -13,6 +13,7 @@ private:
 
 public:
     DArray();
+    ~DArray();
     DArray(long capacity);
     void push(T *data);
     // void pushFront(T *data);

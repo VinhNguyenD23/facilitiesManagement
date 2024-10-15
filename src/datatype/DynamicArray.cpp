@@ -9,6 +9,11 @@ inline DArray<T>::DArray()
 }
 
 template <class T>
+DArray<T>::~DArray()
+{
+}
+
+template <class T>
 inline DArray<T>::DArray(long capacity)
 {
     this->capacity = capacity;

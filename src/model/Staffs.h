@@ -13,6 +13,7 @@ private:
 
 public:
     StaffsModel();
+    ~StaffsModel();
     DArray<Staff> *getListData();
     void insertData(Staff *data);
     void removeData(Staff *data);

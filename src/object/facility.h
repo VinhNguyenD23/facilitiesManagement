@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-// TODO: Change name field this object [ priority: above normal ]
+// TODO: Change name field this object [ priority: above normal ] [Status: DONE]
 struct Facility
 {
     std::string id;

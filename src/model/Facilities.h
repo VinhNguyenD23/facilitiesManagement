@@ -12,6 +12,7 @@ private:
 
 public:
     FacilitiesModel();
+    ~FacilitiesModel();
     AVLTree<Facility, std::string> *getListData();
     AVLTree<Facility, std::string> *updateData(Facility data);
     AVLTree<Facility, std::string> *removeData(std::string id);

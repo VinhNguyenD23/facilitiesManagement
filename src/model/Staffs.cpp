@@ -6,6 +6,10 @@ StaffsModel::StaffsModel()
     // TODO: Read data from databases [*.csv] in ../databases [ priority: high ]
 }
 
+StaffsModel::~StaffsModel()
+{
+}
+
 DArray<Staff> *StaffsModel::getListData()
 {
     return this->data;

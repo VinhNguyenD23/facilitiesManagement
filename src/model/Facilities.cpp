@@ -6,6 +6,10 @@ FacilitiesModel::FacilitiesModel()
     this->data = nullptr;
 }
 
+FacilitiesModel::~FacilitiesModel()
+{
+}
+
 AVLTree<Facility, std::string> *FacilitiesModel::getListData()
 {
     return this->data;

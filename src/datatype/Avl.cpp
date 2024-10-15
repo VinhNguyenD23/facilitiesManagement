@@ -7,6 +7,11 @@ inline AVLTree<T, K>::AVLTree()
 }
 
 template <class T, typename K>
+AVLTree<T, K>::~AVLTree()
+{
+}
+
+template <class T, typename K>
 inline int AVLTree<T, K>::height(Node *node)
 {
     return node ? node->height : 0;

@@ -26,6 +26,7 @@ private:
 
 public:
     AVLTree();
+    ~AVLTree();
     int height(Node *node);
     int getBalance(Node *node);
     Node *rightRotate(Node *y);

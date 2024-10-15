@@ -32,6 +32,7 @@ void DArray<T>::push(T *data)
     this->size++;
 }
 
+#pragma region unused
 // template <class T>
 // void DArray<T>::pushFront(T *data)
 // {
@@ -63,6 +64,7 @@ void DArray<T>::push(T *data)
 //     }
 //     this->listData[index] = data;
 // }
+#pragma endregion
 
 template <class T>
 void DArray<T>::popAt(T *data)

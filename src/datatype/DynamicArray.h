@@ -2,6 +2,7 @@
 #define DARRAY_H
 #define DEFAULT INT_MAX
 #include <iostream>
+#include "../object/Staff.h"
 
 template <class T>
 class DArray
@@ -15,7 +16,7 @@ public:
     DArray();
     ~DArray();
     DArray(long capacity);
-    void push(T *data);
+    void push(T data);
     // void pushFront(T *data);
     // void pushAt(size_t index, T *data);
     void popAt(T *data);

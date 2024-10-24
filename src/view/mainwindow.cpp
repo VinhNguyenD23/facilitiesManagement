@@ -1,11 +1,13 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "../model/Staffs.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    StaffsModel *staffs = new StaffsModel();
 }
 
 MainWindow::~MainWindow()
@@ -15,7 +17,4 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_addButton_clicked()
 {
-    QMessageBox messageBox;
-    messageBox.setText("Hello World");
-    messageBox.exec();
 }

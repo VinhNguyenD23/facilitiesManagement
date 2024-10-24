@@ -2,6 +2,7 @@
 #define AVL_TREE_H
 
 #include <iostream>
+#include "../object/Facility.h"
 
 template <class T, typename K = int>
 class AVLTree

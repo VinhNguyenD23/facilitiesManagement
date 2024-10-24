@@ -1,7 +1,7 @@
 #include "Avl.h"
 
 template <class T, typename K>
-inline AVLTree<T, K>::AVLTree()
+AVLTree<T, K>::AVLTree()
 {
     this->root = nullptr;
 }
@@ -12,19 +12,19 @@ AVLTree<T, K>::~AVLTree()
 }
 
 template <class T, typename K>
-inline int AVLTree<T, K>::getHeight(Node *node)
+int AVLTree<T, K>::getHeight(Node *node)
 {
     return node ? node->height : 0;
 }
 
 template <class T, typename K>
-inline int AVLTree<T, K>::getBalance(Node *node)
+int AVLTree<T, K>::getBalance(Node *node)
 {
     return node ? getHeight(node->left) - getHeight(node->right) : 0;
 }
 
 template <class T, typename K>
-AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
+typename AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
 {
     Node *x = y->left;
     Node *T2 = x->right;
@@ -39,7 +39,7 @@ AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
 }
 
 template <class T, typename K>
-AVLTree<T, K>::Node *AVLTree<T, K>::leftRotate(Node *x)
+typename AVLTree<T, K>::Node *AVLTree<T, K>::leftRotate(Node *x)
 {
     Node *y = x->right;
     Node *T2 = y->left;
@@ -54,15 +54,15 @@ AVLTree<T, K>::Node *AVLTree<T, K>::leftRotate(Node *x)
 }
 
 template <class T, typename K>
-AVLTree<T, K>::Node *AVLTree<T, K>::insert(Node *node, T data, K key)
+typename AVLTree<T, K>::Node *AVLTree<T, K>::insert(Node *node, T data, K key)
 {
     if (node == nullptr)
         return new Node(data, key);
 
     if (key < node->key)
-        node->left = insert(node->left, key);
+        node->left = insert(node->left, data, key);
     else if (key > node->key)
-        node->right = insert(node->right, key);
+        node->right = insert(node->right, data, key);
     else
         return node;
 
@@ -104,19 +104,23 @@ void AVLTree<T, K>::insert(T data, K key)
 }
 
 template <class T, typename K>
-inline AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
+typename AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
 {
     return find(root, key);
 }
 
 template <class T, typename K>
-inline AVLTree<T, K>::Node *AVLTree<T, K>::deleteNode(Node *node, K key)
+typename AVLTree<T, K>::Node *AVLTree<T, K>::deleteNode(Node *node, K key)
 {
     // TODO: Delete Node in AVL Tree [ priority: normal ]
+    if (!find(node, key))
+    {
+        throw std::runtime_error("[ERROR] Element not found!");
+    }
 }
 
 template <class T, typename K>
-inline AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
+typename AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
 {
     // TODO: Find element in AVL Tree [ priority: normal ] [ In Testing ]
     if (root != nullptr)
@@ -132,7 +136,7 @@ inline AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
 }
 
 template <class T, typename K>
-inline AVLTree<T, K>::Node::Node(T data, K key)
+AVLTree<T, K>::Node::Node(T data, K key)
 {
     this->key = key;
     this->data = data;
@@ -140,3 +144,5 @@ inline AVLTree<T, K>::Node::Node(T data, K key)
     this->right = nullptr;
     this->height = 1;
 }
+
+template class AVLTree<Facility, std::string>;

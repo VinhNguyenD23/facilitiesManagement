@@ -2,12 +2,13 @@
 #define STAFF_H
 
 #include <iostream>
+#include <QString>
 
 struct Staff
 {
-    std::string id; // Example: QL00X, TN00Y, BH00Z, TV00A
-    std::string firstName;
-    std::string lastName;
+    QString id; // Example: QL00X, TN00Y, BH00Z, TV00A
+    QString firstName;
+    QString lastName;
     bool gender;
     // TODO: Link to billing array [ priority: high ]
 };

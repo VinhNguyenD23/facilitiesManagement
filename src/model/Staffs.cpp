@@ -1,9 +1,11 @@
 #include "Staffs.h"
+#include<string>
+#include<fstream>
+#include<sstream>
 
 StaffsModel::StaffsModel()
 {
     // TODO: Read data from databases [*.csv] in ../databases [ priority: high ]
-
     // Read data from databases
     this->data = new DArray<Staff>(MAX_STAFF);
     QFile file("../databases/staff.csv");

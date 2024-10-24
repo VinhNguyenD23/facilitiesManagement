@@ -8,7 +8,7 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
+set(CMAKE_PREFIX_PATH "C:/Qt/6.7.3/mingw_64/lib/cmake")
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
@@ -39,6 +39,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/object/Staff.h
         src/service/FacilityService.h src/service/FacilityService.cpp
         src/service/InvoiceDetailService.h src/service/InvoiceDetailService.cpp
+        src/service/InvoiceService.cpp src/service/InvoiceService.h
+        src/service/StaffService.cpp src/service/StaffService.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET facilitiesManagement APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

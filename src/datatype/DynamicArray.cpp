@@ -102,5 +102,11 @@ long DArray<T>::getCapacity() const
     return this->capacity;
 }
 
+template <class T>
+T DArray<T>::at(int index)
+{
+    return this->listData[index];
+}
 
 template class DArray<Staff>;
+template class DArray<std::string>;

@@ -5,6 +5,9 @@
 #include "../object/Staff.h"
 #include <fstream>
 #include <sstream>
+#include <QDebug>
+#include <QString>
+#include <QFile>
 
 #define MAX_STAFF 500L
 

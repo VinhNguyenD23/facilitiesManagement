@@ -6,27 +6,34 @@ StaffsModel::StaffsModel()
 
     // Read data from databases
     this->data = new DArray<Staff>(MAX_STAFF);
-    std::fstream f("../databases/staff.csv", std::ios::in | std::ios::out);
+    QFile file("../databases/staff.csv");
     std::string line;
-    if(f.is_open())
-    {
-        while (getline(f, line))
-        {
-            std::istringstream fileData(line);
-            std::string tempData;
-            Staff getUser;
-            DArray<std::string> temp;
-            while (getline(fileData, tempData, ','))
-            {
-                temp.push(tempData);
-            }
-            std::cout << std::endl;
-        }
-    }
-    else
+    QStringList field;
+    if (!file.open(QIODevice::ReadOnly))
     {
         throw new std::runtime_error("[ERROR] This database not found or broken, please try again !");
     }
+    QTextStream in(&file);
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        field = line.split(',');
+        if (field.size() != 4)
+        {
+            throw new std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        }
+        Staff tempStaff;
+        tempStaff.id = field.at(0);
+        tempStaff.lastName = field.at(1);
+        tempStaff.firstName = field.at(2);
+        tempStaff.gender = (field.at(3) == QString::fromStdString("1") ? true : false);
+        this->data->push(tempStaff);
+    }
+    for (int i = 0; i < data->getSize(); i++)
+    {
+        qDebug() << this->data->at(i).id << ' ' << this->data->at(i).lastName << ' ' << this->data->at(i).firstName << ' ' << this->data->at(i).gender;
+    }
+    file.close();
 }
 
 StaffsModel::~StaffsModel()

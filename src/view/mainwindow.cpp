@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    StaffsModel *staffs = new StaffsModel();
 }
 
 MainWindow::~MainWindow()
@@ -16,5 +17,4 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_addButton_clicked()
 {
-    StaffsModel *staffs = new StaffsModel();
 }

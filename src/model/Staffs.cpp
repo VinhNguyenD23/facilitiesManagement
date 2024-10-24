@@ -1,7 +1,5 @@
 #include "Staffs.h"
-#include<string>
-#include<fstream>
-#include<sstream>
+#include <string>
 
 StaffsModel::StaffsModel()
 {
@@ -9,7 +7,6 @@ StaffsModel::StaffsModel()
     // Read data from databases
     this->data = new DArray<Staff>(MAX_STAFF);
     QFile file("../databases/staff.csv");
-    std::string line;
     QStringList field;
     if (!file.open(QIODevice::ReadOnly))
     {
@@ -29,7 +26,7 @@ StaffsModel::StaffsModel()
         tempStaff.lastName = field.at(1);
         tempStaff.firstName = field.at(2);
         tempStaff.gender = (field.at(3) == QString::fromStdString("1") ? true : false);
-        this->data->push(tempStaff);
+        this->insertData(tempStaff);
     }
     for (int i = 0; i < data->getSize(); i++)
     {

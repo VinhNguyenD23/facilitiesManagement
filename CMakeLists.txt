@@ -25,6 +25,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         src/datatype/Avl.h src/datatype/Avl.cpp
         src/datatype/DynamicArray.h src/datatype/DynamicArray.cpp
+        src/datatype/LinkedList.h src/datatype/LinkedList.cpp
         src/controller/FacilityController.h src/controller/FacilityController.cpp
         src/controller/InvoiceController.h src/controller/InvoiceController.cpp
         src/controller/InvoiceDetailController.h src/controller/InvoiceDetailController.cpp

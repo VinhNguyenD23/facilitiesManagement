@@ -2,13 +2,14 @@
 #define FACILITY_H
 
 #include <iostream>
+#include <QString>
 
 // TODO: Change name field this object [ priority: above normal ] [Status: DONE]
 struct Facility
 {
-    std::string id;
-    std::string name;
-    std::string unit;
+    QString id;
+    QString name;
+    QString unit;
     long quantity;
     // TODO: Link with billing object [ priority: high ]
 };

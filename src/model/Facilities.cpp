@@ -1,60 +1,61 @@
 #include "Facilities.h"
-#include<fstream>
-#include<sstream>
+
+const QString FILE_PATH = "databases/facilities.csv";
 
 FacilitiesModel::FacilitiesModel()
-{   // TODO: Read data from databases [*.csv] in ../databases [ priority: high ]
-
-    this -> data = AVLTree<Facility, std::string>;
-    std::fstream f("../databases/Facilities.csv", std::ios::in | std::ios::out);
-    std::string line;
-    if(f.is_open())
-    {
-        while (getline(f, line))
-        {
-            std::istringstream fileData(line);
-            std::string tempData;
-            Facility getUser;
-            AVLTree<std::string> temp;
-            while (getline(fileData, tempData, ','))
-            {
-                temp.insert(tempData);
-            }
-            std::cout << std::endl;
-        }
-    }
-    else
+{ // TODO: Read data from databases [*.csv] in ../databases [ priority: high ]
+    this->data = new AVLTree<Facility, QString>();
+    QFile file(FILE_PATH);
+    QStringList field;
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         throw new std::runtime_error("[ERROR] This database not found or broken, please try again !");
     }
-   
-    
+    QTextStream in(&file);
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        field = line.split(',');
+        if (field.size() != 4)
+        {
+            throw new std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        }
+        Facility tempFacility;
+        tempFacility.id = field.at(0);
+        tempFacility.name = field.at(1);
+        tempFacility.unit = field.at(2);
+        tempFacility.quantity = field.at(3).toLong();
+        this->data->insert(tempFacility, tempFacility.id);
+    }
+    DArray<Facility> toDynamicArray = this->data->toDynamicArray();
+    for (int i = 0; i < toDynamicArray.getSize(); i++)
+    {
+        qDebug() << toDynamicArray.at(i).id + ' ' + toDynamicArray.at(i).name + ' ' + toDynamicArray.at(i).unit;
+    }
 }
 
 FacilitiesModel::~FacilitiesModel()
 {
 }
 
-AVLTree<Facility, std::string> *FacilitiesModel::getListData()
+AVLTree<Facility, QString> *FacilitiesModel::getListData()
 {
     return this->data;
 }
 
-AVLTree<Facility, std::string> *FacilitiesModel::updateData(Facility data)
+void FacilitiesModel::updateData(Facility data)
 {
     // TODO: Code update data for facilities [ priority: above normal ]
-    return nullptr;
 }
 
-AVLTree<Facility, std::string> *FacilitiesModel::removeData(std::string id)
+void FacilitiesModel::removeData(QString id)
 {
     // TODO: Code remove data for facilities [ priority: above normal ]
-    return nullptr;
 }
 
-AVLTree<Facility, std::string>::Node *FacilitiesModel::findByDataId(std::string id)
+AVLTree<Facility, QString>::Node *FacilitiesModel::findByDataId(QString id)
 {
-    AVLTree<Facility, std::string>::Node *findElement = this->data->findIndex(id);
+    AVLTree<Facility, QString>::Node *findElement = this->data->findIndex(id);
     if (findElement != nullptr)
         return findElement;
     return nullptr;

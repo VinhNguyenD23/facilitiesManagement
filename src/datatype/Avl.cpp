@@ -24,6 +24,18 @@ int AVLTree<T, K>::getBalance(Node *node)
 }
 
 template <class T, typename K>
+void AVLTree<T, K>::pushDataToDynamicArray(DArray<T> &data, Node *node)
+{
+    if (node == nullptr)
+    {
+        return;
+    }
+    this->pushDataToDynamicArray(data, node->left);
+    data.push(node->data);
+    this->pushDataToDynamicArray(data, node->right);
+}
+
+template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
 {
     Node *x = y->left;
@@ -92,12 +104,6 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::insert(Node *node, T data, K key)
 }
 
 template <class T, typename K>
-void AVLTree<T, K>::preOrder(Node *node)
-{
-    // TODO: Print AVL Tree [ priority: low ]
-}
-
-template <class T, typename K>
 void AVLTree<T, K>::insert(T data, K key)
 {
     this->root = insert(root, data, key);
@@ -117,6 +123,14 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::deleteNode(Node *node, K key)
     {
         throw std::runtime_error("[ERROR] Element not found!");
     }
+}
+
+template <class T, typename K>
+DArray<T> AVLTree<T, K>::toDynamicArray()
+{
+    DArray<T> data = DArray<T>();
+    this->pushDataToDynamicArray(data, this->root);
+    return data;
 }
 
 template <class T, typename K>
@@ -145,4 +159,4 @@ AVLTree<T, K>::Node::Node(T data, K key)
     this->height = 1;
 }
 
-template class AVLTree<Facility, std::string>;
+template class AVLTree<Facility, QString>;

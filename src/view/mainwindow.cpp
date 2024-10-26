@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "../model/Staffs.h"
+#include "../model/Facilities.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -8,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     StaffsModel *staffs = new StaffsModel();
+    FacilitiesModel *Facilities = new FacilitiesModel();
 }
 
 MainWindow::~MainWindow()

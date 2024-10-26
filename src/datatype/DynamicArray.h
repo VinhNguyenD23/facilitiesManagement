@@ -3,6 +3,7 @@
 #define DEFAULT 10000
 #include <iostream>
 #include "../object/Staff.h"
+#include "../object/Facility.h"
 
 template <class T>
 class DArray

@@ -1,22 +1,23 @@
 #ifndef FACILITIES_H
 #define FACILITIES_H
 
-#include <iostream>
 #include "../object/facility.h"
 #include "../datatype/Avl.h"
-
+#include <QString>
+#include <QFile>
+#include <QDebug>
 class FacilitiesModel
 {
 private:
-    AVLTree<Facility, std::string> *data;
+    AVLTree<Facility, QString> *data;
 
 public:
     FacilitiesModel();
     ~FacilitiesModel();
-    AVLTree<Facility, std::string> *getListData();
-    AVLTree<Facility, std::string> *updateData(Facility data);
-    AVLTree<Facility, std::string> *removeData(std::string id);
-    AVLTree<Facility, std::string>::Node *findByDataId(std::string id);
+    AVLTree<Facility, QString> *getListData();
+    void updateData(Facility data);
+    void removeData(QString id);
+    AVLTree<Facility, QString>::Node *findByDataId(QString id);
 };
 
 #endif // FACILITIES_H

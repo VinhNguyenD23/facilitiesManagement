@@ -3,11 +3,10 @@
 
 #include "../datatype/DynamicArray.h"
 #include "../object/Staff.h"
-#include <fstream>
-#include <sstream>
 #include <QDebug>
 #include <QString>
 #include <QFile>
+#include <QMessageBox>
 
 #define MAX_STAFF 500L
 
@@ -23,7 +22,8 @@ public:
     void insertData(Staff data);
     void removeData(Staff data);
     void updateData(Staff data);
-    Staff *getDataById(std::string id);
+    void refreshData();
+    Staff *getDataById(QString id);
     size_t getSize();
     long getMaxStaff();
 };

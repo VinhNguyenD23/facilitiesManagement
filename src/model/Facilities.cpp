@@ -46,6 +46,7 @@ AVLTree<Facility, QString> *FacilitiesModel::getListData()
 void FacilitiesModel::updateData(Facility data)
 {
     // TODO: Code update data for facilities [ priority: above normal ]
+    this->data->insert(data, data.id);
 }
 
 void FacilitiesModel::removeData(QString id)

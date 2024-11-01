@@ -42,7 +42,7 @@ void linkedList<T>::deleteData(T data)
 {
     if (this->head == nullptr)
     {
-        throw new std::runtime_error("[ERROR] Data is empty, Can't delete");
+        throw new std::logic_error("[ERROR] Data is empty, Can't delete");
     }
     if (this->head->data == data)
     {
@@ -98,3 +98,5 @@ void linkedList<T>::clear() noexcept
     }
     this->head = nullptr;
 }
+
+template class linkedList<Invoice>;

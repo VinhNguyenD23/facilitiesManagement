@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <QString>
+#include "Invoice.h"
 
 struct Staff
 {
@@ -10,7 +11,7 @@ struct Staff
     QString firstName;
     QString lastName;
     bool gender;
-    // TODO: Link to billing array [ priority: high ]
+    Invoice **invoices = nullptr;
 };
 
 #endif

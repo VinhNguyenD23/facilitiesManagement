@@ -4,7 +4,6 @@ const QString FILE_PATH = "databases/staff.csv";
 
 StaffsModel::StaffsModel()
 {
-    // TODO: Read data from databases [*.csv] in ../databases [ priority: high ]
     // Read data from databases
     this->data = new DArray<Staff>(MAX_STAFF);
     QFile file(FILE_PATH);
@@ -53,7 +52,7 @@ void StaffsModel::insertData(Staff data)
 
 void StaffsModel::removeData(Staff data)
 {
-    // TODO: Code remove function for list staffs [ priority: above normal ]
+    // TODO: Code remove function for list staffs [ priority: above normal ] [Testing]
     QFile file(FILE_PATH);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
@@ -72,7 +71,8 @@ void StaffsModel::removeData(Staff data)
 
 void StaffsModel::updateData(Staff data)
 {
-    // TODO: Code update function for list staffs [ priority: above normal ]
+    // TODO: Code update function for list staffs [ priority: above normal ] [TODO]
+    this->data->push(data);
 }
 
 void StaffsModel::refreshData()
@@ -110,7 +110,7 @@ void StaffsModel::refreshData()
 
 Staff *StaffsModel::getDataById(QString id)
 {
-    // TODO: Code get data by id object [ priority: above normal ]
+    // TODO: Code get data by id object [ priority: above normal ] [TESTING]
     Staff *findData = nullptr;
     for (int i = 0; i < this->getSize(); i++)
     {
@@ -131,4 +131,10 @@ size_t StaffsModel::getSize()
 long StaffsModel::getMaxStaff()
 {
     return MAX_STAFF;
+}
+
+template <typename T>
+void StaffsModel::linkData(T *data)
+{
+    // TODO: Link Data
 }

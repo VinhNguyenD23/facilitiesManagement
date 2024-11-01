@@ -26,5 +26,7 @@ public:
     Staff *getDataById(QString id);
     size_t getSize();
     long getMaxStaff();
+    template <typename T>
+    void linkData(T *data);
 };
 #endif

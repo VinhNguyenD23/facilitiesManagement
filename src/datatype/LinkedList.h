@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 
 #include <iostream>
+#include "../object/Invoice.h"
 
 template <typename T>
 class linkedList

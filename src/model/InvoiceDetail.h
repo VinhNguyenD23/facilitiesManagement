@@ -7,6 +7,8 @@ private:
     /* data */
 public:
     InvoiceDetailModel(/* args */);
+    template <typename T>
+    void linkData(T *data);
     ~InvoiceDetailModel();
 };
 

@@ -46,7 +46,7 @@ void linkedList<T>::deleteData(T data)
     }
     if (this->head->data == data)
     {
-        linkedList<T>::Node temp = this->head;
+        linkedList<T>::Node *temp = this->head;
         this->head = this->head->next;
         delete temp;
         return;

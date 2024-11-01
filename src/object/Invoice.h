@@ -10,6 +10,16 @@ struct Invoice
     Date date;
     bool type; // true: Export, false: Import
     InvoiceDetail *invoiceDetail = nullptr;
+
+    bool operator==(Invoice &other)
+    {
+        return this->id == other.id;
+    }
+
+    bool operator!=(Invoice &other)
+    {
+        return this->id != other.id;
+    }
 };
 
 #endif

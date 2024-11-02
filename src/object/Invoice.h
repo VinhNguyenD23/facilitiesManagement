@@ -3,14 +3,14 @@
 #include <QString>
 #include "Date.h"
 #include "InvoiceDetail.h"
-
 struct Invoice
 {
     QString id;
     Date date;
+    QString staffId;
     bool type; // true: Export, false: Import
-    InvoiceDetail *invoiceDetail = nullptr;
 
+    InvoiceDetail *invoiceDetail = nullptr;
     bool operator==(Invoice &other)
     {
         return this->id == other.id;

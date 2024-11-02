@@ -2,6 +2,8 @@
 #define INVOICEMODEL_H
 #include "../datatype/LinkedList.h"
 #include "../object/Invoice.h"
+#include "../object/Date.h"
+#include <QString>
 #include <QFile>
 #include <QTextStream>
 class InvoiceModel

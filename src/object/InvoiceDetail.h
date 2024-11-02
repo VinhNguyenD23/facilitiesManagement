@@ -6,11 +6,20 @@
 struct InvoiceDetail
 {
     QString id;
+    QString invoiceId;
     QString facilityId;
-    Facility *facility = nullptr;
     int quantity;
-    double price;
+    long price;
     double vat;
+    bool operator==(Invoice &other)
+    {
+        return this->id == other.id;
+    }
+
+    bool operator!=(Invoice &other)
+    {
+        return this->id != other.id;
+    }
 };
 
 #endif

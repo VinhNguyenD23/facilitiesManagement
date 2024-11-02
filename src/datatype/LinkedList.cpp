@@ -1,6 +1,17 @@
 #include "LinkedList.h"
 
 template <typename T>
+void linkedList<T>::pushDataToDynamicArray(DArray<T> &data, Node *node)
+{
+    if (node == nullptr)
+    {
+        return;
+    }
+    data.push(node->data);
+    this->pushDataToDynamicArray(data, node->next);
+}
+
+template <typename T>
 linkedList<T>::linkedList()
 {
     this->head = nullptr;
@@ -97,6 +108,13 @@ void linkedList<T>::clear() noexcept
         delete temp;
     }
     this->head = nullptr;
+}
+
+template <typename T>
+DArray<T> linkedList<T>::toDynamicArray()
+{
+    DArray<T> dynamicData = DArray<T>();
+    this->pushDataToDynamicArray(dynamicData, this->getData());
 }
 
 template class linkedList<Invoice>;

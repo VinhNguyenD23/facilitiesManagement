@@ -4,23 +4,20 @@
 
 struct Date
 {
-    int day, month, year, hour, minute, second;
+    int day, month, year;
     Date()
     {
     }
-    Date(int year, int month, int day, int second, int minute, int hour)
+    Date(int year, int month, int day)
     {
         this->year = year;
         this->month = month;
         this->day = day;
-        this->second = second;
-        this->minute = minute;
-        this->hour = hour;
     }
     QString getFormatValue()
     {
         QString date;
-        date = QString::number(this->year) + '/' + QString::number(this->month) + QString::number(this->day) + ' ' + QString::number(this->hour) + ':' + QString::number(this->minute) + ':' + QString::number(this->second);
+        date = QString::number(this->year) + '/' + QString::number(this->month) + '/' + QString::number(this->day);
         return date;
     }
 };

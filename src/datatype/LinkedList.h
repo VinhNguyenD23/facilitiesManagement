@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "../object/Invoice.h"
-
+#include "DynamicArray.h"
 template <typename T>
 class linkedList
 {
@@ -22,6 +22,7 @@ private:
 private:
     Node *head;
     size_t size;
+    void pushDataToDynamicArray(DArray<T> &data, Node *node);
 
 public:
     linkedList();
@@ -32,6 +33,7 @@ public:
     size_t getSize() const;
     Node *getData() const;
     void clear() noexcept;
+    DArray<T> toDynamicArray();
 };
 
 #endif

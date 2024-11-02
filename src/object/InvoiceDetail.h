@@ -1,7 +1,6 @@
 #ifndef INVOICEDETAIL_H
 #define INVOICEDETAIL_H
 #include <QString>
-#include "Facility.h"
 
 struct InvoiceDetail
 {
@@ -11,12 +10,12 @@ struct InvoiceDetail
     int quantity;
     long price;
     double vat;
-    bool operator==(Invoice &other)
+    bool operator==(InvoiceDetail &other)
     {
         return this->id == other.id;
     }
 
-    bool operator!=(Invoice &other)
+    bool operator!=(InvoiceDetail &other)
     {
         return this->id != other.id;
     }

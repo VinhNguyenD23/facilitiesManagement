@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "../object/Invoice.h"
+#include "../object/InvoiceDetail.h"
 #include "DynamicArray.h"
 template <typename T>
 class linkedList

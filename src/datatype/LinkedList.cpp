@@ -115,6 +115,8 @@ DArray<T> linkedList<T>::toDynamicArray()
 {
     DArray<T> dynamicData = DArray<T>();
     this->pushDataToDynamicArray(dynamicData, this->getData());
+    return dynamicData;
 }
 
 template class linkedList<Invoice>;
+template class linkedList<InvoiceDetail>;

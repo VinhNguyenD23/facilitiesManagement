@@ -38,6 +38,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/object/Invoice.h
         src/object/InvoiceDetail.h
         src/object/Staff.h
+        src/object/Date.h
         src/service/FacilityService.h src/service/FacilityService.cpp
         src/service/InvoiceDetailService.h src/service/InvoiceDetailService.cpp
         src/service/InvoiceService.cpp src/service/InvoiceService.h

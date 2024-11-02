@@ -4,6 +4,8 @@
 #include <iostream>
 #include "../object/Staff.h"
 #include "../object/Facility.h"
+#include "../object/Invoice.h"
+#include "../object/InvoiceDetail.h"
 
 template <class T>
 class DArray

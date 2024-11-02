@@ -110,4 +110,6 @@ T DArray<T>::at(int index)
 
 template class DArray<Staff>;
 template class DArray<Facility>;
+template class DArray<Invoice>;
+template class DArray<InvoiceDetail>;
 template class DArray<std::string>;

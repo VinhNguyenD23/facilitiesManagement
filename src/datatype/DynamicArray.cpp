@@ -67,7 +67,7 @@ void DArray<T>::push(T data)
 #pragma endregion
 
 template <class T>
-void DArray<T>::popAt(T *data)
+void DArray<T>::popAt(T data)
 {
 }
 

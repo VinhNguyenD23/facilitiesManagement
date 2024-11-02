@@ -53,7 +53,7 @@ void linkedList<T>::deleteData(T data)
 {
     if (this->head == nullptr)
     {
-        throw new std::logic_error("[ERROR] Data is empty, Can't delete");
+        throw std::logic_error("[ERROR] Data is empty, Can't delete");
     }
     if (this->head->data == data)
     {

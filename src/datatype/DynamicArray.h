@@ -22,7 +22,7 @@ public:
     void push(T data);
     // void pushFront(T *data);
     // void pushAt(size_t index, T *data);
-    void popAt(T *data);
+    void popAt(T data);
     bool isEmpty() const;
     bool isFull() const;
     void clear() noexcept;

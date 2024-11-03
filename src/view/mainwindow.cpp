@@ -8,6 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setFixedSize(QSize(1150, 670));
     this->setWindowTitle("Phần mềm quản lý vật tư");
+    this->facilitiesModel = new FacilitiesModel();
+    this->invoiceDetailModel = new InvoiceDetailModel();
+    this->staffsModel = new StaffsModel();
+    this->invoiceModel = new InvoiceModel();
 }
 
 MainWindow::~MainWindow()

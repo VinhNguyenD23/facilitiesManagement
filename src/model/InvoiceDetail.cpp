@@ -9,16 +9,16 @@ InvoiceDetailModel::InvoiceDetailModel()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        throw std::runtime_error("[ERROR] This database (invoiceDetail) not found or broken, please try again !");
     }
     QTextStream in(&file);
     while (!in.atEnd())
     {
         QString line = in.readLine();
         field = line.split(',');
-        if (field.size() != 4)
+        if (field.size() != 6)
         {
-            throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+            throw std::runtime_error("[ERROR] This database (invoiceDetail) not found or broken, please try again !");
         }
         InvoiceDetail tempInvoiceDetail;
         tempInvoiceDetail.id = field[0];
@@ -59,7 +59,7 @@ void InvoiceDetailModel::refreshData()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        throw std::runtime_error("[ERROR] This database (invoiceDetail) not found or broken, please try again !");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -68,7 +68,7 @@ void InvoiceDetailModel::refreshData()
         field = line.split(',');
         if (field.size() != 4)
         {
-            throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+            throw std::runtime_error("[ERROR] This database (invoiceDetail) not found or broken, please try again !");
         }
         InvoiceDetail tempInvoiceDetail;
         tempInvoiceDetail.id = field[0];

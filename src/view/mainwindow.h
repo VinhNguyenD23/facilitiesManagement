@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "../model/Facilities.h"
+#include "../model/Staffs.h"
+#include "../model/InvoiceDetail.h"
+#include "../model/Invoices.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -20,5 +24,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    FacilitiesModel *facilitiesModel = nullptr;
+    StaffsModel *staffsModel = nullptr;
+    InvoiceDetailModel *invoiceDetailModel = nullptr;
+    InvoiceModel *invoiceModel = nullptr;
 };
 #endif // MAINWINDOW_H

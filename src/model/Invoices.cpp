@@ -1,6 +1,6 @@
 #include "Invoices.h"
 
-const QString FILE_PATH = "database/invoice.csv";
+const QString FILE_PATH = "databases/invoice.csv";
 
 InvoiceModel::InvoiceModel()
 {
@@ -9,21 +9,24 @@ InvoiceModel::InvoiceModel()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
     }
     QTextStream in(&file);
     while (!in.atEnd())
     {
         QString line = in.readLine();
         field = line.split(',');
+        qDebug() << field;
         if (field.size() != 4)
         {
-            throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+            qDebug() << field.size();
+            throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
         }
         Invoice tempInvoice;
         Date tempDate;
         tempInvoice.id = field[0];
         QStringList fieldDate = field[1].split('/');
+        qDebug() << fieldDate;
         tempDate = Date(fieldDate[0].toInt(), fieldDate[1].toInt(), fieldDate[2].toInt());
         tempInvoice.date = tempDate;
         tempInvoice.staffId = field[2];
@@ -60,7 +63,7 @@ void InvoiceModel::refreshData()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -69,7 +72,7 @@ void InvoiceModel::refreshData()
         field = line.split(',');
         if (field.size() != 4)
         {
-            throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+            throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
         }
         Invoice tempInvoice;
         Date tempDate;

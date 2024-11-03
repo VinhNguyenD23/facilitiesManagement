@@ -10,7 +10,7 @@ StaffsModel::StaffsModel()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -19,7 +19,7 @@ StaffsModel::StaffsModel()
         field = line.split(',');
         if (field.size() != 4)
         {
-            throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+            throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
         }
         Staff tempStaff;
         tempStaff.id = field.at(0);
@@ -56,7 +56,7 @@ void StaffsModel::removeData(Staff data)
     QFile file(FILE_PATH);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
     }
     QTextStream outData(&file);
     for (int i = 0; i < this->getSize(); i++)
@@ -83,7 +83,7 @@ void StaffsModel::refreshData()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+        throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -92,7 +92,7 @@ void StaffsModel::refreshData()
         field = line.split(',');
         if (field.size() != 4)
         {
-            throw std::runtime_error("[ERROR] This database not found or broken, please try again !");
+            throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
         }
         Staff tempStaff;
         tempStaff.id = field.at(0);

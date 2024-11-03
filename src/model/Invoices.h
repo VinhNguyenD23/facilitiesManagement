@@ -6,6 +6,7 @@
 #include <QString>
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 class InvoiceModel
 {
 private:

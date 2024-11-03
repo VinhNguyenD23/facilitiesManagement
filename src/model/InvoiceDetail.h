@@ -5,6 +5,7 @@
 #include "../datatype/LinkedList.h"
 #include <QString>
 #include <QFile>
+#include <QDebug>
 #include <QTextStream>
 class InvoiceDetailModel
 {

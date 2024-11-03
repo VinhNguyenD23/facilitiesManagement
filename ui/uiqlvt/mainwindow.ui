@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1150</width>
+    <height>670</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>100000</width>
+    <height>100000</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#centralwidget {
+	background-color: #606470
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="maximumSize">
+    <size>
+     <width>1440</width>
+     <height>1349</height>
+    </size>
+   </property>
+   <widget class="QWidget" name="trang" native="true">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>1111</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1440</width>
+      <height>1349</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#trang { 
+	background-color: #f5f6fa;
+	border-radius: 7px;
+}
+#dsvt, #dsnv {
+	background-color: #f5f6fa;
+}
+
+#tdvt, #tdnv, #tdhd, #tdtk, #tk_4 {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Lato&quot;;
+	border-radius: 7px
+}
+
+#nvt, #ivt, #ihd, #lhdn, #lhdx, #ttg, #dt, #nnv, #inv, #dt_4 {
+	font: Bold &quot;Lato&quot;;
+	color: #aab2c8;
+}</string>
+    </property>
+    <widget class="QWidget" name="noidung" native="true">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>0</y>
+       <width>941</width>
+       <height>571</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#noidung {
+	background-color: white;
+}</string>
+     </property>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>941</width>
+        <height>571</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="accessibleName">
+       <string/>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#VT, #NV, #HD, #TKDT, #TKTG { 
+	background-color: #ffffff;
+}
+
+#dvt, #mvt, #slt, #tvt, #mnv, #ho, #ten, #phai, #dongia_2, #hoten_2, #ngay_2, #loai_2, #tenvattu_2, #soluong_2, #trigia_2, #shd, #nl, #lhd, #htnvl, #tghd, #thang, #doanhthu{
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}
+
+#them, #xoa, #hieuchinh,#them_2, #xoa_2, #hieuchinh_2, #hdn_2, #hdx_2 {
+	font: Bold &quot;Lato&quot;;
+	color: #aab2c8;
+}
+</string>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::TabPosition::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::TabShape::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>3</number>
+      </property>
+      <widget class="QWidget" name="VT">
+       <attribute name="title">
+        <string>VẬT TƯ</string>
+       </attribute>
+       <widget class="QListView" name="dsvt">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>861</width>
+          <height>411</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>295</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="them">
+           <property name="text">
+            <string>Thêm</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="xoa">
+           <property name="text">
+            <string>Xóa</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="hieuchinh">
+           <property name="text">
+            <string>Hiệu chỉnh</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>861</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="mvt">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Mã vật tư</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="tvt">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Tên vật tư</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="dvt">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>ĐVT</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="slt">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Số lượng tồn</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>21</x>
+          <y>11</y>
+          <width>341</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="tdvt">
+           <property name="styleSheet">
+            <string notr="true">#vattu {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: &quot;Lato&quot;;
+	border-radius: 7px
+}</string>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Vật tư&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="nvt">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Nhập vật tư</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ivt">
+           <property name="text">
+            <string>In vật tư tồn kho</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="NV">
+       <attribute name="title">
+        <string>NHÂN VIÊN</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>295</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QPushButton" name="them_2">
+           <property name="text">
+            <string>Thêm</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="xoa_2">
+           <property name="text">
+            <string>Xóa</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="hieuchinh_2">
+           <property name="text">
+            <string>Hiệu chỉnh</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QListView" name="dsnv">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>851</width>
+          <height>411</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>851</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="mnv">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Mã nhân viên</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="ho">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Họ</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="ten">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Tên</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="phai">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Phái</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>351</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="tdnv">
+           <property name="styleSheet">
+            <string notr="true">#vattu {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: &quot;Lato&quot;;
+	border-radius: 7px
+}</string>
+           </property>
+           <property name="text">
+            <string>Nhân viên</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="nnv">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Nhập nhân viên</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="inv">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>In nhân viên</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="HD">
+       <attribute name="title">
+        <string>HÓA ĐƠN</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>19</x>
+          <y>50</y>
+          <width>362</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QPushButton" name="hdn_2">
+           <property name="text">
+            <string>Lập hóa đơn nhập</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="hdx_2">
+           <property name="text">
+            <string>Lập hóa đơn xuất</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QListView" name="dsnv_2">
+        <property name="geometry">
+         <rect>
+          <x>19</x>
+          <y>120</y>
+          <width>851</width>
+          <height>411</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget_4">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>851</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="ngay_2">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Ngày</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="hoten_2">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Họ tên</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="loai_2">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Loại</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="tenvattu_2">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Tên vật tư</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="soluong_2">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Số lượng</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="dongia_2">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Đơn giá</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="trigia_2">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Trị giá</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>521</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="tdhd">
+           <property name="styleSheet">
+            <string notr="true">#vattu {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: &quot;Lato&quot;;
+	border-radius: 7px
+}</string>
+           </property>
+           <property name="text">
+            <string>Hóa đơn</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="lhdn">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Lập hóa đơn nhập</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="lhdx">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Lập hóa đơn xuất</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ihd">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>In hóa đơn</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="TKDT">
+       <attribute name="title">
+        <string>THỐNG KÊ THEO DOANH THU</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget_11">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>90</y>
+          <width>851</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_20">
+         <item>
+          <widget class="QLabel" name="shd">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Số hóa đơn</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="nl">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Ngày lập</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lhd">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Loại hóa đơn</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="htnvl">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Họ tên nhân viên lập</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="tghd">
+           <property name="styleSheet">
+            <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+           </property>
+           <property name="text">
+            <string>Trị giá hóa đơn</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QListView" name="dsnv_5">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>120</y>
+          <width>851</width>
+          <height>411</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="tieude_2">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>10</y>
+          <width>671</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#tieude {
+	font: bold &quot;Goldman&quot;;
+	color: #ffffff;
+}</string>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG LIỆT KÊ CÁC HÓA ĐƠN TRONG KHOẢNG THỜI GIAN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>50</y>
+          <width>421</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_21">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Từ ngày :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="dateEdit"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Đến ngày :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="dateEdit_2"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="layoutWidget_5">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>10</y>
+          <width>131</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QLabel" name="tdtk">
+           <property name="styleSheet">
+            <string notr="true">#vattu {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: &quot;Lato&quot;;
+	border-radius: 7px
+}</string>
+           </property>
+           <property name="text">
+            <string>Thống kê</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="ttg">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Theo thời gian</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="TKTG">
+       <attribute name="title">
+        <string>THÔNG KÊ THEO THỜI GIAN</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget_6">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>80</y>
+          <width>131</width>
+          <height>81</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QLabel" name="tk_4">
+           <property name="styleSheet">
+            <string notr="true">#vattu {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: &quot;Lato&quot;;
+	border-radius: 7px
+}</string>
+           </property>
+           <property name="text">
+            <string>Thống kê</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="dt_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Doanh thu</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QListView" name="dsnv_6">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>110</y>
+          <width>691</width>
+          <height>421</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="thang">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>80</y>
+          <width>191</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+        </property>
+        <property name="text">
+         <string>THÁNG</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="doanhthu">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>80</y>
+          <width>491</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#label {
+	background-color: #00A4E8;
+	color: #ffffff;
+	font: Bold &quot;Inter&quot;;
+}</string>
+        </property>
+        <property name="text">
+         <string>DOANH THU</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>30</y>
+          <width>421</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="tieude_3">
+           <property name="styleSheet">
+            <string notr="true">#tieude {
+	font: bold &quot;Goldman&quot;;
+	color: #ffffff;
+}</string>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG THỐNG KÊ DOANH THU NĂM&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit"/>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="tieude">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>0</y>
+      <width>351</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#tieude {
+	font: bold &quot;Goldman&quot;;
+	color: #ffffff;
+}</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;QUẢN LÝ NHẬP XUẤT VẬT TƯ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>0</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #f5f6fa;</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1150</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

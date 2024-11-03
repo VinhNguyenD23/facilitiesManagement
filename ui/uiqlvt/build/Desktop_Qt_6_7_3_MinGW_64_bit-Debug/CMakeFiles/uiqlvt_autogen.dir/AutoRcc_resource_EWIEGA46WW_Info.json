@@ -1,0 +1,28 @@
+{
+	"BUILD_DIR" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/uiqlvt_autogen",
+	"CMAKE_BINARY_DIR" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt",
+	"CMAKE_SOURCE_DIR" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/uiqlvt_autogen/include",
+	"INPUTS" : 
+	[
+		"D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/img/chart.svg",
+		"D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/img/invoice.svg",
+		"D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/img/person.svg",
+		"D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/img/box-seam.svg"
+	],
+	"LOCK_FILE" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/uiqlvt_autogen.dir/AutoRcc_resource_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resource" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resource.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/6.7.3/mingw_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/CMakeFiles/uiqlvt_autogen.dir/AutoRcc_resource_EWIEGA46WW_Used.txt",
+	"SOURCE" : "D:/C++/DSAE23/Quanlyvattu/ui/uiqlvt/resource.qrc",
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

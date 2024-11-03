@@ -36,7 +36,7 @@ QPushButton {
 	height: 24px;
 }
 
-QListView
+QTableView
 {
 	background-color: #fff;
 }
@@ -170,27 +170,27 @@ QPushButton {
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
         <string>VẬT TƯ</string>
        </attribute>
-       <widget class="QListView" name="facilityTable">
+       <widget class="QTableView" name="facilityTable">
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>120</y>
+          <y>50</y>
           <width>1071</width>
-          <height>441</height>
+          <height>471</height>
          </rect>
         </property>
        </widget>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>50</y>
+          <x>830</x>
+          <y>530</y>
           <width>261</width>
           <height>31</height>
          </rect>
@@ -232,7 +232,7 @@ QPushButton {
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>90</y>
+          <y>10</y>
           <width>1071</width>
           <height>31</height>
          </rect>
@@ -308,48 +308,18 @@ QPushButton {
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>21</x>
-          <y>11</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="QLabel" name="tdvt">
-           <property name="styleSheet">
-            <string notr="true">#vattu {
-	background-color: #00A4E8;
-	color: #ffffff;
-	font: &quot;Lato&quot;;
-	border-radius: 7px
-}</string>
-           </property>
-           <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Vật tư&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
       </widget>
       <widget class="QWidget" name="Staff">
        <attribute name="title">
         <string>NHÂN VIÊN</string>
        </attribute>
-       <widget class="QListView" name="staffTable">
+       <widget class="QTableWidget" name="staffTable">
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>120</y>
+          <y>50</y>
           <width>1071</width>
-          <height>441</height>
+          <height>471</height>
          </rect>
         </property>
        </widget>
@@ -357,7 +327,7 @@ QPushButton {
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>90</y>
+          <y>10</y>
           <width>1071</width>
           <height>31</height>
          </rect>
@@ -433,41 +403,11 @@ QPushButton {
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>10</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <item>
-          <widget class="QLabel" name="tdnv">
-           <property name="styleSheet">
-            <string notr="true">#vattu {
-	background-color: #00A4E8;
-	color: #ffffff;
-	font: &quot;Lato&quot;;
-	border-radius: 7px
-}</string>
-           </property>
-           <property name="text">
-            <string>Nhân viên</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
        <widget class="QWidget" name="layoutWidget_7">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>50</y>
+          <x>830</x>
+          <y>530</y>
           <width>261</width>
           <height>31</height>
          </rect>
@@ -510,13 +450,13 @@ QPushButton {
        <attribute name="title">
         <string>HÓA ĐƠN</string>
        </attribute>
-       <widget class="QListView" name="InvoiceTable">
+       <widget class="QTableView" name="InvoiceTable">
         <property name="geometry">
          <rect>
           <x>19</x>
-          <y>120</y>
+          <y>50</y>
           <width>1071</width>
-          <height>441</height>
+          <height>471</height>
          </rect>
         </property>
        </widget>
@@ -524,7 +464,7 @@ QPushButton {
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>90</y>
+          <y>10</y>
           <width>1071</width>
           <height>31</height>
          </rect>
@@ -651,41 +591,11 @@ QPushButton {
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>10</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_7">
-         <item>
-          <widget class="QLabel" name="tdhd">
-           <property name="styleSheet">
-            <string notr="true">#vattu {
-	background-color: #00A4E8;
-	color: #ffffff;
-	font: &quot;Lato&quot;;
-	border-radius: 7px
-}</string>
-           </property>
-           <property name="text">
-            <string>Hóa đơn</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
        <widget class="QWidget" name="layoutWidget_8">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>50</y>
+          <x>830</x>
+          <y>530</y>
           <width>261</width>
           <height>31</height>
          </rect>
@@ -825,7 +735,7 @@ QPushButton {
          </item>
         </layout>
        </widget>
-       <widget class="QListView" name="dsnv_5">
+       <widget class="QTableWidget" name="dsnv_5">
         <property name="geometry">
          <rect>
           <x>30</x>
@@ -886,109 +796,17 @@ QPushButton {
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="layoutWidget_5">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>10</y>
-          <width>131</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="tdtk">
-           <property name="styleSheet">
-            <string notr="true">#vattu {
-	background-color: #00A4E8;
-	color: #ffffff;
-	font: &quot;Lato&quot;;
-	border-radius: 7px
-}</string>
-           </property>
-           <property name="text">
-            <string>Thống kê</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="ttg">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(13, 202, 240);</string>
-           </property>
-           <property name="text">
-            <string>Thời gian</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
       </widget>
       <widget class="QWidget" name="statisticsByTime">
        <attribute name="title">
         <string>THÔNG KÊ THEO THỜI GIAN</string>
        </attribute>
-       <widget class="QWidget" name="layoutWidget_6">
+       <widget class="QTableView" name="dsnv_6">
         <property name="geometry">
          <rect>
-          <x>40</x>
-          <y>80</y>
-          <width>131</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_5">
-         <item row="0" column="0">
-          <widget class="QLabel" name="tk_4">
-           <property name="styleSheet">
-            <string notr="true">#vattu {
-	background-color: #00A4E8;
-	color: #ffffff;
-	font: &quot;Lato&quot;;
-	border-radius: 7px
-}</string>
-           </property>
-           <property name="text">
-            <string>Thống kê</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="dt_4">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(13, 202, 240);</string>
-           </property>
-           <property name="text">
-            <string>Doanh thu</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QListView" name="dsnv_6">
-        <property name="geometry">
-         <rect>
-          <x>200</x>
+          <x>20</x>
           <y>110</y>
-          <width>891</width>
+          <width>1071</width>
           <height>451</height>
          </rect>
         </property>
@@ -996,9 +814,9 @@ QPushButton {
        <widget class="QLabel" name="thang">
         <property name="geometry">
          <rect>
-          <x>200</x>
+          <x>20</x>
           <y>80</y>
-          <width>241</width>
+          <width>421</width>
           <height>31</height>
          </rect>
         </property>

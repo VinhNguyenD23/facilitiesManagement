@@ -3,6 +3,7 @@
 #include "../datatype/LinkedList.h"
 #include "../object/Invoice.h"
 #include "../object/Date.h"
+#include "../common/FilePath.h"
 #include <QString>
 #include <QFile>
 #include <QTextStream>
@@ -10,11 +11,11 @@
 class InvoiceModel
 {
 private:
-    linkedList<Invoice> *data;
+    LinkedList<Invoice> *data;
 
 public:
     InvoiceModel();
-    linkedList<Invoice> *getListData();
+    LinkedList<Invoice> *getListData();
     void insertData(Invoice data);
     void removeData(Invoice data);
     void updateData(Invoice data);

@@ -3,6 +3,7 @@
 
 #include "../datatype/DynamicArray.h"
 #include "../object/Staff.h"
+#include "../common/FilePath.h"
 #include <QDebug>
 #include <QString>
 #include <QFile>

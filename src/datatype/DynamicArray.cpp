@@ -69,6 +69,10 @@ void DArray<T>::push(T data)
 template <class T>
 void DArray<T>::popAt(T data)
 {
+    if (this->isEmpty())
+    {
+        throw std::logic_error("[ERROR] This dynamic array is empty. Can't remove any data.");
+    }
 }
 
 template <class T>

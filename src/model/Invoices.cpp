@@ -4,8 +4,8 @@ const QString FILE_PATH = "databases/invoice.csv";
 
 InvoiceModel::InvoiceModel()
 {
-    this->data = new linkedList<Invoice>();
-    QFile file(FILE_PATH);
+    this->data = new LinkedList<Invoice>();
+    QFile file(FilePath::getPath(FilePath::databases::INVOICE));
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -33,9 +33,10 @@ InvoiceModel::InvoiceModel()
         tempInvoice.type = field[3].toInt();
         this->data->add(tempInvoice);
     }
+    file.close();
 }
 
-linkedList<Invoice> *InvoiceModel::getListData()
+LinkedList<Invoice> *InvoiceModel::getListData()
 {
     return this->data;
 }
@@ -53,12 +54,16 @@ void InvoiceModel::removeData(Invoice data)
 void InvoiceModel::updateData(Invoice data)
 {
     // TODO: Find data and update data
+    if (this->getDataById(data.id) == nullptr)
+    {
+        throw std::out_of_range("[ERROR] Data not found.");
+    }
 }
 
 void InvoiceModel::refreshData()
 {
     this->data->clear();
-    this->data = new linkedList<Invoice>();
+    this->data = new LinkedList<Invoice>();
     QFile file(FILE_PATH);
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -88,6 +93,15 @@ void InvoiceModel::refreshData()
 
 Invoice *InvoiceModel::getDataById(QString id)
 {
+    auto *temp = this->data->getData();
+    while (temp != nullptr && temp->next != nullptr)
+    {
+        if (temp->data.id == id)
+        {
+            return &temp->data;
+        }
+        temp = temp->next;
+    }
     return nullptr;
 }
 

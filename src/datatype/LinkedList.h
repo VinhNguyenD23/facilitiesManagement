@@ -1,12 +1,11 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#include <iostream>
 #include "../object/Invoice.h"
 #include "../object/InvoiceDetail.h"
 #include "DynamicArray.h"
 template <typename T>
-class linkedList
+class LinkedList
 {
 private:
     struct Node
@@ -26,8 +25,8 @@ private:
     void pushDataToDynamicArray(DArray<T> &data, Node *node);
 
 public:
-    linkedList();
-    ~linkedList();
+    LinkedList();
+    ~LinkedList();
     void add(T data);
     void deleteData(T data);
     bool isEmpty() const;

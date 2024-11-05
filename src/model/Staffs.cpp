@@ -1,12 +1,10 @@
 #include "Staffs.h"
 
-const QString FILE_PATH = "databases/staff.csv";
-
 StaffsModel::StaffsModel()
 {
     // Read data from databases
     this->data = new DArray<Staff>(MAX_STAFF);
-    QFile file(FILE_PATH);
+    QFile file(FilePath::getPath(FilePath::databases::STAFF));
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -53,7 +51,7 @@ void StaffsModel::insertData(Staff data)
 void StaffsModel::removeData(Staff data)
 {
     // TODO: Code remove function for list staffs [ priority: above normal ] [Testing]
-    QFile file(FILE_PATH);
+    QFile file(FilePath::getPath(FilePath::databases::STAFF));
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
@@ -79,7 +77,7 @@ void StaffsModel::refreshData()
 {
     this->data->clear();
     this->data = new DArray<Staff>(MAX_STAFF);
-    QFile file(FILE_PATH);
+    QFile file(FilePath::getPath(FilePath::databases::STAFF));
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

@@ -1,7 +1,7 @@
 #include "LinkedList.h"
 
 template <typename T>
-void linkedList<T>::pushDataToDynamicArray(DArray<T> &data, Node *node)
+void LinkedList<T>::pushDataToDynamicArray(DArray<T> &data, Node *node)
 {
     if (node == nullptr)
     {
@@ -12,34 +12,34 @@ void linkedList<T>::pushDataToDynamicArray(DArray<T> &data, Node *node)
 }
 
 template <typename T>
-linkedList<T>::linkedList()
+LinkedList<T>::LinkedList()
 {
     this->head = nullptr;
 }
 
 template <typename T>
-linkedList<T>::~linkedList()
+LinkedList<T>::~LinkedList()
 {
     this->size = 0;
-    linkedList<T>::Node *currentNode = head;
+    LinkedList<T>::Node *currentNode = head;
     while (currentNode->next != nullptr)
     {
-        linkedList<T>::Node *temp = currentNode;
+        LinkedList<T>::Node *temp = currentNode;
         currentNode = currentNode->next;
         delete temp;
     }
 }
 
 template <typename T>
-void linkedList<T>::add(T data)
+void LinkedList<T>::add(T data)
 {
-    linkedList<T>::Node *newNode = new linkedList<T>::Node(data);
+    LinkedList<T>::Node *newNode = new LinkedList<T>::Node(data);
     if (this->head == nullptr)
     {
         this->head = newNode;
         return;
     }
-    linkedList<T>::Node *currentNode = this->head;
+    LinkedList<T>::Node *currentNode = this->head;
     while (currentNode->next != nullptr)
     {
         currentNode = currentNode->next;
@@ -49,7 +49,7 @@ void linkedList<T>::add(T data)
 }
 
 template <typename T>
-void linkedList<T>::deleteData(T data)
+void LinkedList<T>::deleteData(T data)
 {
     if (this->head == nullptr)
     {
@@ -57,13 +57,13 @@ void linkedList<T>::deleteData(T data)
     }
     if (this->head->data == data)
     {
-        linkedList<T>::Node *temp = this->head;
+        LinkedList<T>::Node *temp = this->head;
         this->head = this->head->next;
         delete temp;
         return;
     }
 
-    linkedList<T>::Node *currentNode = this->head;
+    LinkedList<T>::Node *currentNode = this->head;
     while (currentNode->next != nullptr && currentNode->next->data != data)
     {
         currentNode = currentNode->next;
@@ -71,7 +71,7 @@ void linkedList<T>::deleteData(T data)
 
     if (currentNode->next != nullptr)
     {
-        linkedList<T>::Node *temp = currentNode->next;
+        LinkedList<T>::Node *temp = currentNode->next;
         currentNode->next = temp->next;
         delete temp;
         return;
@@ -79,31 +79,31 @@ void linkedList<T>::deleteData(T data)
 }
 
 template <typename T>
-bool linkedList<T>::isEmpty() const
+bool LinkedList<T>::isEmpty() const
 {
     return this->head == nullptr;
 }
 
 template <typename T>
-size_t linkedList<T>::getSize() const
+size_t LinkedList<T>::getSize() const
 {
     return this->size;
 }
 
 template <typename T>
-typename linkedList<T>::Node *linkedList<T>::getData() const
+typename LinkedList<T>::Node *LinkedList<T>::getData() const
 {
     return this->head;
 }
 
 template <typename T>
-void linkedList<T>::clear() noexcept
+void LinkedList<T>::clear() noexcept
 {
     this->size = 0;
-    linkedList<T>::Node *currentNode = head;
+    LinkedList<T>::Node *currentNode = head;
     while (currentNode->next != nullptr)
     {
-        linkedList<T>::Node *temp = currentNode;
+        LinkedList<T>::Node *temp = currentNode;
         currentNode = currentNode->next;
         delete temp;
     }
@@ -111,12 +111,12 @@ void linkedList<T>::clear() noexcept
 }
 
 template <typename T>
-DArray<T> linkedList<T>::toDynamicArray()
+DArray<T> LinkedList<T>::toDynamicArray()
 {
     DArray<T> dynamicData = DArray<T>();
     this->pushDataToDynamicArray(dynamicData, this->getData());
     return dynamicData;
 }
 
-template class linkedList<Invoice>;
-template class linkedList<InvoiceDetail>;
+template class LinkedList<Invoice>;
+template class LinkedList<InvoiceDetail>;

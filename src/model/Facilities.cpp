@@ -1,11 +1,9 @@
 #include "Facilities.h"
 
-const QString FILE_PATH = "databases/facilities.csv";
-
 FacilitiesModel::FacilitiesModel()
 { // TODO: Read data from databases [*.csv] in ../databases [ priority: high ]
     this->data = new AVLTree<Facility, QString>();
-    QFile file(FILE_PATH);
+    QFile file(FilePath::getPath(FilePath::databases::FACILITY));
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

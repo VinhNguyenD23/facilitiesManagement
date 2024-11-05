@@ -1,11 +1,9 @@
 #include "InvoiceDetail.h"
 
-const QString FILE_PATH = "databases/invoicedetail.csv";
-
 InvoiceDetailModel::InvoiceDetailModel()
 {
-    this->data = new linkedList<InvoiceDetail>();
-    QFile file(FILE_PATH);
+    this->data = new LinkedList<InvoiceDetail>();
+    QFile file(FilePath::getPath(FilePath::databases::INVOICEDETAIL));
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -31,7 +29,7 @@ InvoiceDetailModel::InvoiceDetailModel()
     }
 }
 
-linkedList<InvoiceDetail> *InvoiceDetailModel::getListData()
+LinkedList<InvoiceDetail> *InvoiceDetailModel::getListData()
 {
     return this->data;
 }
@@ -54,8 +52,8 @@ void InvoiceDetailModel::updateData(InvoiceDetail data)
 void InvoiceDetailModel::refreshData()
 {
     this->data->clear();
-    this->data = new linkedList<InvoiceDetail>();
-    QFile file(FILE_PATH);
+    this->data = new LinkedList<InvoiceDetail>();
+    QFile file(FilePath::getPath(FilePath::databases::INVOICEDETAIL));
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {

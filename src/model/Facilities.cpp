@@ -1,7 +1,7 @@
 #include "Facilities.h"
 
-FacilitiesModel::FacilitiesModel()
-{ // TODO: Read data from databases [*.csv] in ../databases [ priority: high ]
+void FacilitiesModel::readFile()
+{
     this->data = new AVLTree<Facility, QString>();
     QFile file(FilePath::getPath(FilePath::databases::FACILITY));
     QStringList field;
@@ -30,6 +30,12 @@ FacilitiesModel::FacilitiesModel()
     {
         qDebug() << toDynamicArray.at(i).id + ' ' + toDynamicArray.at(i).name + ' ' + toDynamicArray.at(i).unit;
     }
+    file.close();
+}
+
+FacilitiesModel::FacilitiesModel()
+{
+    this->readFile();
 }
 
 FacilitiesModel::~FacilitiesModel()
@@ -50,6 +56,13 @@ void FacilitiesModel::updateData(Facility data)
 void FacilitiesModel::removeData(QString id)
 {
     // TODO: Code remove data for facilities [ priority: above normal ]
+}
+
+void FacilitiesModel::refreshData()
+{
+    // TODO: Add function clear to AVL tree
+    // this->data->clear();
+    this->readFile();
 }
 
 AVLTree<Facility, QString>::Node *FacilitiesModel::findByDataId(QString id)

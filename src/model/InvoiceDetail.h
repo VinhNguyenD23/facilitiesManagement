@@ -13,6 +13,9 @@ class InvoiceDetailModel
 private:
     LinkedList<InvoiceDetail> *data;
 
+private:
+    void readFile();
+
 public:
     InvoiceDetailModel();
     LinkedList<InvoiceDetail> *getListData();
@@ -22,8 +25,6 @@ public:
     void refreshData();
     InvoiceDetail *getDataById(QString id);
     size_t getSize();
-    template <typename T>
-    void linkData(T *data);
     ~InvoiceDetailModel();
 };
 

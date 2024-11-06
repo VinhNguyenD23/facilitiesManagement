@@ -1,8 +1,8 @@
 #ifndef INVOICEMODEL_H
 #define INVOICEMODEL_H
 #include "../datatype/LinkedList.h"
-#include "../object/Invoice.h"
 #include "../object/Date.h"
+#include "../object/Invoice.h"
 #include "../common/FilePath.h"
 #include <QString>
 #include <QFile>
@@ -13,6 +13,9 @@ class InvoiceModel
 private:
     LinkedList<Invoice> *data;
 
+private:
+    void readFile();
+
 public:
     InvoiceModel();
     LinkedList<Invoice> *getListData();
@@ -22,8 +25,6 @@ public:
     void refreshData();
     Invoice *getDataById(QString id);
     size_t getSize();
-    template <typename T>
-    void linkData(T *data);
     ~InvoiceModel();
 };
 

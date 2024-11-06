@@ -2,8 +2,8 @@
 #define STAFFS_H
 
 #include "../datatype/DynamicArray.h"
-#include "../object/Staff.h"
 #include "../common/FilePath.h"
+#include "../object/Staff.h"
 #include <QDebug>
 #include <QString>
 #include <QFile>
@@ -16,6 +16,9 @@ class StaffsModel
 private:
     DArray<Staff> *data;
 
+private:
+    void readFile();
+
 public:
     StaffsModel();
     ~StaffsModel();
@@ -27,7 +30,5 @@ public:
     Staff *getDataById(QString id);
     size_t getSize();
     long getMaxStaff();
-    template <typename T>
-    void linkData(T *data);
 };
 #endif

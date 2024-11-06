@@ -1,17 +1,15 @@
 #include "Invoices.h"
 
-const QString FILE_PATH = "databases/invoice.csv";
-
-InvoiceModel::InvoiceModel()
+void InvoiceModel::readFile()
 {
     this->data = new LinkedList<Invoice>();
     QFile file(FilePath::getPath(FilePath::databases::INVOICE));
     QStringList field;
+    QTextStream in(&file);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
     }
-    QTextStream in(&file);
     while (!in.atEnd())
     {
         QString line = in.readLine();
@@ -34,6 +32,11 @@ InvoiceModel::InvoiceModel()
         this->data->add(tempInvoice);
     }
     file.close();
+}
+
+InvoiceModel::InvoiceModel()
+{
+    this->readFile();
 }
 
 LinkedList<Invoice> *InvoiceModel::getListData()
@@ -63,32 +66,7 @@ void InvoiceModel::updateData(Invoice data)
 void InvoiceModel::refreshData()
 {
     this->data->clear();
-    this->data = new LinkedList<Invoice>();
-    QFile file(FILE_PATH);
-    QStringList field;
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
-    }
-    QTextStream in(&file);
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        field = line.split(',');
-        if (field.size() != 4)
-        {
-            throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
-        }
-        Invoice tempInvoice;
-        Date tempDate;
-        tempInvoice.id = field[0];
-        QStringList fieldDate = field[1].split('/');
-        tempDate = Date(fieldDate[0].toInt(), fieldDate[1].toInt(), fieldDate[2].toInt());
-        tempInvoice.date = tempDate;
-        tempInvoice.staffId = field[2];
-        tempInvoice.type = field[3].toInt();
-        this->data->add(tempInvoice);
-    }
+    this->readFile();
 }
 
 Invoice *InvoiceModel::getDataById(QString id)
@@ -111,10 +89,5 @@ size_t InvoiceModel::getSize()
 }
 
 InvoiceModel::~InvoiceModel()
-{
-}
-
-template <typename T>
-void InvoiceModel::linkData(T *data)
 {
 }

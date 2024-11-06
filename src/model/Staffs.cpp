@@ -1,8 +1,7 @@
 #include "Staffs.h"
 
-StaffsModel::StaffsModel()
+void StaffsModel::readFile()
 {
-    // Read data from databases
     this->data = new DArray<Staff>(MAX_STAFF);
     QFile file(FilePath::getPath(FilePath::databases::STAFF));
     QStringList field;
@@ -31,6 +30,11 @@ StaffsModel::StaffsModel()
         qDebug() << this->data->at(i).id << ' ' << this->data->at(i).lastName << ' ' << this->data->at(i).firstName << ' ' << this->data->at(i).gender;
     }
     file.close();
+}
+
+StaffsModel::StaffsModel()
+{
+    this->readFile();
 }
 
 StaffsModel::~StaffsModel()
@@ -76,34 +80,7 @@ void StaffsModel::updateData(Staff data)
 void StaffsModel::refreshData()
 {
     this->data->clear();
-    this->data = new DArray<Staff>(MAX_STAFF);
-    QFile file(FilePath::getPath(FilePath::databases::STAFF));
-    QStringList field;
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
-    }
-    QTextStream in(&file);
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        field = line.split(',');
-        if (field.size() != 4)
-        {
-            throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
-        }
-        Staff tempStaff;
-        tempStaff.id = field.at(0);
-        tempStaff.lastName = field.at(1);
-        tempStaff.firstName = field.at(2);
-        tempStaff.gender = (field.at(3) == QString::fromStdString("1") ? true : false);
-        this->insertData(tempStaff);
-    }
-    for (int i = 0; i < data->getSize(); i++)
-    {
-        qDebug() << this->data->at(i).id << ' ' << this->data->at(i).lastName << ' ' << this->data->at(i).firstName << ' ' << this->data->at(i).gender;
-    }
-    file.close();
+    this->readFile();
 }
 
 Staff *StaffsModel::getDataById(QString id)
@@ -129,10 +106,4 @@ size_t StaffsModel::getSize()
 long StaffsModel::getMaxStaff()
 {
     return MAX_STAFF;
-}
-
-template <typename T>
-void StaffsModel::linkData(T *data)
-{
-    // TODO: Link Data
 }

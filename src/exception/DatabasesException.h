@@ -12,12 +12,12 @@ public:
 
     static DatabasesException DatabaseBroken(const std::string name)
     {
-        return DatabasesException("[ERROR] DatabasesException: Database " + name + " is broken or inaccessible, please try again !");
+        return DatabasesException("[DATABASE.ERROR] Database broken: Database " + name + " is broken or inaccessible, please try again !");
     }
 
     static DatabasesException DatabaseNotFound(const std::string name)
     {
-        return DatabasesException("[ERROR] DatabasesException: Database " + name + " not found, please try again !");
+        return DatabasesException("[DATABASE.ERROR] Database not found: Database " + name + " not found, please try again !");
     }
 };
 

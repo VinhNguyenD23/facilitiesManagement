@@ -8,6 +8,6 @@
 extern FacilitiesModel *facilityModel = new FacilitiesModel();
 extern InvoiceDetailModel *invoiceDetailModel = new InvoiceDetailModel();
 extern InvoiceModel *invoiceModel = new InvoiceModel();
-extern StaffsModel *StaffModel = new StaffsModel();
+extern StaffsModel *staffModel = new StaffsModel();
 
 #endif

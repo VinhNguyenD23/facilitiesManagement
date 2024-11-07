@@ -3,12 +3,14 @@
 #include "../object/Invoice.h"
 #include "../datatype/LinkedList.h"
 #include "../model/GlobalModel.h"
+#include "../exception/DataException.h"
 #include <QString>
 class InvoiceService
 {
 private:
     /* data */
     InvoiceModel *invoiceRepository = nullptr;
+    StaffsModel *staffRepository = nullptr;
 
 public:
     InvoiceService(/* args */);

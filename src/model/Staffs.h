@@ -4,6 +4,7 @@
 #include "../datatype/DynamicArray.h"
 #include "../common/FilePath.h"
 #include "../object/Staff.h"
+#include "../exception/DatabasesException.h"
 #include <QDebug>
 #include <QString>
 #include <QFile>

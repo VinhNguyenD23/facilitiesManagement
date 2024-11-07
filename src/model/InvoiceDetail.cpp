@@ -7,7 +7,7 @@ void InvoiceDetailModel::readFile()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database (invoiceDetail) not found or broken, please try again !");
+        throw DatabasesException::DatabaseBroken("invoiceDetail");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -17,7 +17,7 @@ void InvoiceDetailModel::readFile()
         field = line.split(',');
         if (field.size() != 6)
         {
-            throw std::runtime_error("[ERROR] This database (invoiceDetail) not found or broken, please try again !");
+            throw DatabasesException::DatabaseBroken("invoiceDetail");
         }
         tempInvoiceDetail = InvoiceDetail();
         tempInvoiceDetail.id = field[0];

@@ -3,6 +3,7 @@
 #include "../datatype/LinkedList.h"
 #include "../object/Date.h"
 #include "../object/Invoice.h"
+#include "../exception/DatabasesException.h"
 #include "../common/FilePath.h"
 #include <QString>
 #include <QFile>

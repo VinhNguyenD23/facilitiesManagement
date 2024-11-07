@@ -7,7 +7,7 @@ void StaffsModel::readFile()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
+        throw DatabasesException::DatabaseBroken("staff");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -16,7 +16,7 @@ void StaffsModel::readFile()
         field = line.split(',');
         if (field.size() != 4)
         {
-            throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
+            throw DatabasesException::DatabaseBroken("staff");
         }
         Staff tempStaff;
         tempStaff.id = field.at(0);

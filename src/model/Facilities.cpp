@@ -7,7 +7,7 @@ void FacilitiesModel::readFile()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database (facilities) not found or broken, please try again !");
+        throw DatabasesException::DatabaseBroken("facilities");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -16,7 +16,7 @@ void FacilitiesModel::readFile()
         field = line.split(',');
         if (field.size() != 4)
         {
-            throw std::runtime_error("[ERROR] This database (facilities) not found or broken, please try again !");
+            throw DatabasesException::DatabaseBroken("facilities");
         }
         Facility tempFacility;
         tempFacility.id = field.at(0);

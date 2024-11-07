@@ -8,7 +8,7 @@ void InvoiceModel::readFile()
     QTextStream in(&file);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
+        throw DatabasesException::DatabaseBroken("invoice");
     }
     while (!in.atEnd())
     {
@@ -17,8 +17,7 @@ void InvoiceModel::readFile()
         qDebug() << field;
         if (field.size() != 4)
         {
-            qDebug() << field.size();
-            throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
+            throw DatabasesException::DatabaseBroken("invoice");
         }
         Invoice tempInvoice;
         Date tempDate;

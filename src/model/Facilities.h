@@ -4,6 +4,7 @@
 #include "../object/facility.h"
 #include "../datatype/Avl.h"
 #include "../common/FilePath.h"
+#include "../exception/DatabasesException.h"
 #include <QString>
 #include <QFile>
 #include <QDebug>

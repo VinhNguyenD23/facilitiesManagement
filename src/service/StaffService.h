@@ -8,6 +8,7 @@ class StaffService
 {
 private:
     /* data */
+    StaffsModel *staffRepository = nullptr;
 public:
     StaffService(/* args */);
     DArray<Staff> getListStaff();

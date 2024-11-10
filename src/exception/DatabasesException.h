@@ -19,6 +19,11 @@ public:
     {
         return DatabasesException("[DATABASE.ERROR] Database not found: Database " + name + " not found, please try again !");
     }
+
+    static DatabasesException InvalidDatabase()
+    {
+        return DatabasesException("[DATABASE.ERROR] Invalid database: Database is invalid, please try again !");
+    }
 };
 
 #endif

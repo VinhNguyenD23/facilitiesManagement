@@ -5,9 +5,9 @@
 #include "Staffs.h"
 #include "InvoiceDetail.h"
 
-extern FacilitiesModel *facilityModel = new FacilitiesModel();
-extern InvoiceDetailModel *invoiceDetailModel = new InvoiceDetailModel();
-extern InvoiceModel *invoiceModel = new InvoiceModel();
-extern StaffsModel *staffModel = new StaffsModel();
+extern FacilitiesModel *facilityModel;
+extern InvoiceDetailModel *invoiceDetailModel;
+extern InvoiceModel *invoiceModel;
+extern StaffsModel *staffModel;
 
 #endif

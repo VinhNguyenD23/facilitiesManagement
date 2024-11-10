@@ -33,6 +33,23 @@ void InvoiceModel::readFile()
     file.close();
 }
 
+void InvoiceModel::writeFile()
+{
+    QFile file(FilePath::getPath(FilePath::databases::INVOICE));
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        throw DatabasesException::DatabaseBroken("invoice");
+    }
+    QTextStream out(&file);
+    auto *currentHead = this->getListData()->getData();
+    while (currentHead->next != nullptr)
+    {
+        out << currentHead->data.id << ',' << currentHead->data.date.getFormatValue() << ',' << currentHead->data.staffId << ',' << currentHead->data.type << '\n';
+        currentHead = currentHead->next;
+    }
+    file.close();
+}
+
 InvoiceModel::InvoiceModel()
 {
     this->readFile();
@@ -45,6 +62,10 @@ LinkedList<Invoice> *InvoiceModel::getListData()
 
 void InvoiceModel::insertData(Invoice data)
 {
+    if (this->getDataById(data.id) != nullptr)
+    {
+        throw DataException::DuplicateDataId("This ID already exists, please try again!");
+    }
     this->data->add(data);
 }
 
@@ -58,7 +79,7 @@ void InvoiceModel::updateData(Invoice data)
     // TODO: Find data and update data
     if (this->getDataById(data.id) == nullptr)
     {
-        throw std::out_of_range("[ERROR] Data not found.");
+        throw DataException::DataNotFound("Data not found");
     }
 }
 

@@ -4,6 +4,7 @@
 #include "../object/Date.h"
 #include "../object/Invoice.h"
 #include "../exception/DatabasesException.h"
+#include "../exception/DataException.h"
 #include "../common/FilePath.h"
 #include <QString>
 #include <QFile>
@@ -16,6 +17,7 @@ private:
 
 private:
     void readFile();
+    void writeFile();
 
 public:
     InvoiceModel();

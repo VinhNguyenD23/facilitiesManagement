@@ -34,7 +34,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/model/InvoiceDetail.h src/model/InvoiceDetail.cpp
         src/model/Invoices.h src/model/Invoices.cpp
         src/model/Staffs.h src/model/Staffs.cpp
-        src/model/GlobalModel.h
+        src/model/GlobalModel.h src/model/GlobalModel.cpp
         src/object/Facility.h
         src/object/Invoice.h
         src/object/InvoiceDetail.h

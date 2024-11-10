@@ -7,7 +7,7 @@ void InvoiceDetailModel::readFile()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database (invoiceDetail) not found or broken, please try again !");
+        throw DatabasesException::DatabaseBroken("invoiceDetail");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -17,7 +17,7 @@ void InvoiceDetailModel::readFile()
         field = line.split(',');
         if (field.size() != 6)
         {
-            throw std::runtime_error("[ERROR] This database (invoiceDetail) not found or broken, please try again !");
+            throw DatabasesException::DatabaseBroken("invoiceDetail");
         }
         tempInvoiceDetail = InvoiceDetail();
         tempInvoiceDetail.id = field[0];
@@ -35,27 +35,28 @@ InvoiceDetailModel::InvoiceDetailModel()
     this->readFile();
 }
 
-LinkedList<InvoiceDetail> *InvoiceDetailModel::getListData()
+LinkedList<InvoiceDetail> *InvoiceDetailModel::getList()
 {
     return this->data;
 }
 
-void InvoiceDetailModel::insertData(InvoiceDetail data)
+void InvoiceDetailModel::insert(InvoiceDetail data)
 {
     this->data->add(data);
 }
 
-void InvoiceDetailModel::removeData(InvoiceDetail data)
+void InvoiceDetailModel::remove(InvoiceDetail data)
 {
-    this->data->deleteData(data);
+    this->data->remove(data);
 }
 
-void InvoiceDetailModel::updateData(InvoiceDetail data)
+void InvoiceDetailModel::update(InvoiceDetail data)
 {
     // TODO: Find data and update data
+    
 }
 
-void InvoiceDetailModel::refreshData()
+void InvoiceDetailModel::refresh()
 {
     this->data->clear();
     this->readFile();

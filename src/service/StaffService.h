@@ -11,11 +11,11 @@ private:
     StaffsModel *staffRepository = nullptr;
 public:
     StaffService(/* args */);
-    DArray<Staff> getListStaff();
-    Staff *findStaff(QString id);
-    void createStaff(Staff staff);
-    void updateStaff(QString id, Staff newData);
-    void deleteStaff(QString id);
+    DArray<Staff> getList();
+    Staff *find(QString id);
+    void create(Staff staff);
+    void update(QString id, Staff newData);
+    void remove(QString id);
     ~StaffService();
 };
 

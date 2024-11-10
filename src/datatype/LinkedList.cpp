@@ -49,7 +49,7 @@ void LinkedList<T>::add(T data)
 }
 
 template <typename T>
-void LinkedList<T>::deleteData(T data)
+void LinkedList<T>::remove(T data)
 {
     if (this->head == nullptr)
     {

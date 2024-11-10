@@ -8,7 +8,7 @@ void InvoiceModel::readFile()
     QTextStream in(&file);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
+        throw DatabasesException::DatabaseBroken("invoice");
     }
     while (!in.atEnd())
     {
@@ -17,8 +17,7 @@ void InvoiceModel::readFile()
         qDebug() << field;
         if (field.size() != 4)
         {
-            qDebug() << field.size();
-            throw std::runtime_error("[ERROR] This database (invoice) not found or broken, please try again !");
+            throw DatabasesException::DatabaseBroken("invoice");
         }
         Invoice tempInvoice;
         Date tempDate;
@@ -34,6 +33,23 @@ void InvoiceModel::readFile()
     file.close();
 }
 
+void InvoiceModel::writeFile()
+{
+    QFile file(FilePath::getPath(FilePath::databases::INVOICE));
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        throw DatabasesException::DatabaseBroken("invoice");
+    }
+    QTextStream out(&file);
+    auto *currentHead = this->getListData()->getData();
+    while (currentHead->next != nullptr)
+    {
+        out << currentHead->data.id << ',' << currentHead->data.date.getFormatValue() << ',' << currentHead->data.staffId << ',' << currentHead->data.type << '\n';
+        currentHead = currentHead->next;
+    }
+    file.close();
+}
+
 InvoiceModel::InvoiceModel()
 {
     this->readFile();
@@ -44,26 +60,30 @@ LinkedList<Invoice> *InvoiceModel::getListData()
     return this->data;
 }
 
-void InvoiceModel::insertData(Invoice data)
+void InvoiceModel::insert(Invoice data)
 {
+    if (this->getDataById(data.id) != nullptr)
+    {
+        throw DataException::DuplicateDataId("This ID already exists, please try again!");
+    }
     this->data->add(data);
 }
 
-void InvoiceModel::removeData(Invoice data)
+void InvoiceModel::remove(Invoice data)
 {
-    this->data->deleteData(data);
+    this->data->remove(data);
 }
 
-void InvoiceModel::updateData(Invoice data)
+void InvoiceModel::update(Invoice data)
 {
     // TODO: Find data and update data
     if (this->getDataById(data.id) == nullptr)
     {
-        throw std::out_of_range("[ERROR] Data not found.");
+        throw DataException::DataNotFound("Data not found");
     }
 }
 
-void InvoiceModel::refreshData()
+void InvoiceModel::refresh()
 {
     this->data->clear();
     this->readFile();

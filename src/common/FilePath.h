@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <iostream>
+#include "../exception/DatabasesException.h"
 
 class FilePath
 {
@@ -32,7 +33,7 @@ public:
             return "databases/invoicedetail.csv";
 
         default:
-            throw std::invalid_argument("[ERROR] Invalid database");
+            throw DatabasesException::InvalidDatabase();
         }
     }
 };

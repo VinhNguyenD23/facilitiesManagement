@@ -3,6 +3,8 @@
 #include "../datatype/LinkedList.h"
 #include "../object/Date.h"
 #include "../object/Invoice.h"
+#include "../exception/DatabasesException.h"
+#include "../exception/DataException.h"
 #include "../common/FilePath.h"
 #include <QString>
 #include <QFile>
@@ -15,14 +17,15 @@ private:
 
 private:
     void readFile();
+    void writeFile();
 
 public:
     InvoiceModel();
     LinkedList<Invoice> *getListData();
-    void insertData(Invoice data);
-    void removeData(Invoice data);
-    void updateData(Invoice data);
-    void refreshData();
+    void insert(Invoice data);
+    void remove(Invoice data);
+    void update(Invoice data);
+    void refresh();
     Invoice *getDataById(QString id);
     size_t getSize();
     ~InvoiceModel();

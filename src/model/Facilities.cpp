@@ -7,7 +7,7 @@ void FacilitiesModel::readFile()
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        throw std::runtime_error("[ERROR] This database (facilities) not found or broken, please try again !");
+        throw DatabasesException::DatabaseBroken("facilities");
     }
     QTextStream in(&file);
     while (!in.atEnd())
@@ -16,7 +16,7 @@ void FacilitiesModel::readFile()
         field = line.split(',');
         if (field.size() != 4)
         {
-            throw std::runtime_error("[ERROR] This database (facilities) not found or broken, please try again !");
+            throw DatabasesException::DatabaseBroken("facilities");
         }
         Facility tempFacility;
         tempFacility.id = field.at(0);
@@ -42,23 +42,23 @@ FacilitiesModel::~FacilitiesModel()
 {
 }
 
-AVLTree<Facility, QString> *FacilitiesModel::getListData()
+AVLTree<Facility, QString> *FacilitiesModel::getList()
 {
     return this->data;
 }
 
-void FacilitiesModel::updateData(Facility data)
+void FacilitiesModel::update(Facility data)
 {
     // TODO: Code update data for facilities [ priority: above normal ]
     this->data->insert(data, data.id);
 }
 
-void FacilitiesModel::removeData(QString id)
+void FacilitiesModel::remove(QString id)
 {
     // TODO: Code remove data for facilities [ priority: above normal ]
 }
 
-void FacilitiesModel::refreshData()
+void FacilitiesModel::refresh()
 {
     // TODO: Add function clear to AVL tree
     // this->data->clear();

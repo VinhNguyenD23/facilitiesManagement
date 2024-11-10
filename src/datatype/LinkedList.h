@@ -28,7 +28,7 @@ public:
     LinkedList();
     ~LinkedList();
     void add(T data);
-    void deleteData(T data);
+    void remove(T data);
     bool isEmpty() const;
     size_t getSize() const;
     Node *getData() const;

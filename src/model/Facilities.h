@@ -19,10 +19,10 @@ private:
 public:
     FacilitiesModel();
     ~FacilitiesModel();
-    AVLTree<Facility, QString> *getListData();
-    void updateData(Facility data);
-    void removeData(QString id);
-    void refreshData();
+    AVLTree<Facility, QString> *getList();
+    void update(Facility data);
+    void remove(QString id);
+    void refresh();
     AVLTree<Facility, QString>::Node *findByDataId(QString id);
 };
 

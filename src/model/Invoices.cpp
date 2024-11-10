@@ -60,7 +60,7 @@ LinkedList<Invoice> *InvoiceModel::getListData()
     return this->data;
 }
 
-void InvoiceModel::insertData(Invoice data)
+void InvoiceModel::insert(Invoice data)
 {
     if (this->getDataById(data.id) != nullptr)
     {
@@ -69,12 +69,12 @@ void InvoiceModel::insertData(Invoice data)
     this->data->add(data);
 }
 
-void InvoiceModel::removeData(Invoice data)
+void InvoiceModel::remove(Invoice data)
 {
     this->data->deleteData(data);
 }
 
-void InvoiceModel::updateData(Invoice data)
+void InvoiceModel::update(Invoice data)
 {
     // TODO: Find data and update data
     if (this->getDataById(data.id) == nullptr)
@@ -83,7 +83,7 @@ void InvoiceModel::updateData(Invoice data)
     }
 }
 
-void InvoiceModel::refreshData()
+void InvoiceModel::refresh()
 {
     this->data->clear();
     this->readFile();

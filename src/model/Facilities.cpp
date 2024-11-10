@@ -42,23 +42,23 @@ FacilitiesModel::~FacilitiesModel()
 {
 }
 
-AVLTree<Facility, QString> *FacilitiesModel::getListData()
+AVLTree<Facility, QString> *FacilitiesModel::getList()
 {
     return this->data;
 }
 
-void FacilitiesModel::updateData(Facility data)
+void FacilitiesModel::update(Facility data)
 {
     // TODO: Code update data for facilities [ priority: above normal ]
     this->data->insert(data, data.id);
 }
 
-void FacilitiesModel::removeData(QString id)
+void FacilitiesModel::remove(QString id)
 {
     // TODO: Code remove data for facilities [ priority: above normal ]
 }
 
-void FacilitiesModel::refreshData()
+void FacilitiesModel::refresh()
 {
     // TODO: Add function clear to AVL tree
     // this->data->clear();

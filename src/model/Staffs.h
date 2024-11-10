@@ -24,10 +24,10 @@ public:
     StaffsModel();
     ~StaffsModel();
     DArray<Staff> *getListData();
-    void insertData(Staff data);
-    void removeData(Staff data);
-    void updateData(Staff data);
-    void refreshData();
+    void insert(Staff data);
+    void remove(Staff data);
+    void update(Staff data);
+    void refresh();
     Staff *getDataById(QString id);
     size_t getSize();
     long getMaxStaff();

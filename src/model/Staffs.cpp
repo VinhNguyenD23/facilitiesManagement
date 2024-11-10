@@ -23,7 +23,7 @@ void StaffsModel::readFile()
         tempStaff.lastName = field.at(1);
         tempStaff.firstName = field.at(2);
         tempStaff.gender = (field.at(3) == QString::fromStdString("1") ? true : false);
-        this->insertData(tempStaff);
+        this->insert(tempStaff);
     }
     for (int i = 0; i < data->getSize(); i++)
     {
@@ -47,12 +47,12 @@ DArray<Staff> *StaffsModel::getListData()
     return this->data;
 }
 
-void StaffsModel::insertData(Staff data)
+void StaffsModel::insert(Staff data)
 {
     this->data->push(data);
 }
 
-void StaffsModel::removeData(Staff data)
+void StaffsModel::remove(Staff data)
 {
     // TODO: Code remove function for list staffs [ priority: above normal ] [Testing]
     QFile file(FilePath::getPath(FilePath::databases::STAFF));
@@ -71,13 +71,13 @@ void StaffsModel::removeData(Staff data)
     file.close();
 }
 
-void StaffsModel::updateData(Staff data)
+void StaffsModel::update(Staff data)
 {
     // TODO: Code update function for list staffs [ priority: above normal ] [TODO]
     this->data->push(data);
 }
 
-void StaffsModel::refreshData()
+void StaffsModel::refresh()
 {
     this->data->clear();
     this->readFile();

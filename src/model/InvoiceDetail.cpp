@@ -35,27 +35,27 @@ InvoiceDetailModel::InvoiceDetailModel()
     this->readFile();
 }
 
-LinkedList<InvoiceDetail> *InvoiceDetailModel::getListData()
+LinkedList<InvoiceDetail> *InvoiceDetailModel::getList()
 {
     return this->data;
 }
 
-void InvoiceDetailModel::insertData(InvoiceDetail data)
+void InvoiceDetailModel::insert(InvoiceDetail data)
 {
     this->data->add(data);
 }
 
-void InvoiceDetailModel::removeData(InvoiceDetail data)
+void InvoiceDetailModel::remove(InvoiceDetail data)
 {
-    this->data->deleteData(data);
+    this->data->remove(data);
 }
 
-void InvoiceDetailModel::updateData(InvoiceDetail data)
+void InvoiceDetailModel::update(InvoiceDetail data)
 {
     // TODO: Find data and update data
 }
 
-void InvoiceDetailModel::refreshData()
+void InvoiceDetailModel::refresh()
 {
     this->data->clear();
     this->readFile();

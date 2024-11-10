@@ -12,22 +12,22 @@ void StaffController::create(Staff data)
 
 void StaffController::updateExistStaff(Staff data)
 {
-    this->StaffService->update(data);
+    this->staffService->update(data);
 }
 
 void StaffController::removeStaff(Staff data)
 {
-    this->StaffService->remove(data);
+    this->staffService->remove(data);
 }
 
 DArray<Staff> *StaffController::getListStaff()
 {
-    return nullptr;
+    return this->staffService->getList();
 }
 
 Staff *StaffController::getStaffById(QString id)
 {
-    return nullptr;
+    return this->staffService->find(id);
 
 }
 

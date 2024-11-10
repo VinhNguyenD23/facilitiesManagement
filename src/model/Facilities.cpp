@@ -2,6 +2,7 @@
 
 void FacilitiesModel::readFile()
 {
+    int index = 0;
     this->data = new AVLTree<Facility, QString>();
     QFile file(FilePath::getPath(FilePath::databases::FACILITY));
     QStringList field;
@@ -24,12 +25,14 @@ void FacilitiesModel::readFile()
         tempFacility.unit = field.at(2);
         tempFacility.quantity = field.at(3).toLong();
         this->data->insert(tempFacility, tempFacility.id);
+        index++;
     }
-    DArray<Facility> toDynamicArray = this->data->toDynamicArray();
-    for (int i = 0; i < toDynamicArray.getSize(); i++)
-    {
-        qDebug() << toDynamicArray.at(i).id + ' ' + toDynamicArray.at(i).name + ' ' + toDynamicArray.at(i).unit;
-    }
+    // DArray<Facility> toDynamicArray = this->data->toDynamicArray();
+    // for (int i = 0; i < toDynamicArray.getSize(); i++)
+    // {
+    //     qDebug() << toDynamicArray.at(i).id + ' ' + toDynamicArray.at(i).name + ' ' + toDynamicArray.at(i).unit;
+    // }
+    qDebug() << "Facilities Databases load:" << index;
     file.close();
 }
 

@@ -15,6 +15,7 @@ template <typename T>
 LinkedList<T>::LinkedList()
 {
     this->head = nullptr;
+    this->size = 0;
 }
 
 template <typename T>

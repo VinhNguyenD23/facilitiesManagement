@@ -7,7 +7,11 @@ InvoiceDetailService::InvoiceDetailService()
 
 void InvoiceDetailService::create(InvoiceDetail data)
 {
-    this->invoiceDetailRepository->insertData(data);
+    if (this->invoiceDetailRepository->getDataById(data.id))
+    {
+        throw DataException::DuplicateDataId("This id is existing, please try again!");
+    }
+    this->invoiceDetailRepository->insert(data);
 }
 
 void InvoiceDetailService::update(InvoiceDetail data)
@@ -16,7 +20,7 @@ void InvoiceDetailService::update(InvoiceDetail data)
     {
         DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
     }
-    this->invoiceDetailRepository->updateData(data);
+    this->invoiceDetailRepository->update(data);
 }
 
 void InvoiceDetailService::remove(InvoiceDetail data)
@@ -25,17 +29,17 @@ void InvoiceDetailService::remove(InvoiceDetail data)
     {
         DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
     }
-    this->invoiceDetailRepository->removeData(data);
+    this->invoiceDetailRepository->remove(data);
 }
 
 LinkedList<InvoiceDetail> *InvoiceDetailService::readAll()
 {
-    return nullptr;
+    return this->invoiceDetailRepository->getList();
 }
 
 InvoiceDetail *InvoiceDetailService::readById(QString id)
 {
-    return nullptr;
+    return this->invoiceDetailRepository->getDataById(id);
 }
 
 InvoiceDetailService::~InvoiceDetailService()

@@ -14,7 +14,6 @@ void InvoiceModel::readFile()
     {
         QString line = in.readLine();
         field = line.split(',');
-        qDebug() << field;
         if (field.size() != 4)
         {
             throw DatabasesException::DatabaseBroken("invoice");
@@ -23,13 +22,13 @@ void InvoiceModel::readFile()
         Date tempDate;
         tempInvoice.id = field[0];
         QStringList fieldDate = field[1].split('/');
-        qDebug() << fieldDate;
         tempDate = Date(fieldDate[0].toInt(), fieldDate[1].toInt(), fieldDate[2].toInt());
         tempInvoice.date = tempDate;
         tempInvoice.staffId = field[2];
         tempInvoice.type = field[3].toInt();
         this->data->add(tempInvoice);
     }
+    qDebug() << "Invoice Databases load:" << this->getSize();
     file.close();
 }
 
@@ -41,7 +40,7 @@ void InvoiceModel::writeFile()
         throw DatabasesException::DatabaseBroken("invoice");
     }
     QTextStream out(&file);
-    auto *currentHead = this->getListData()->getData();
+    auto *currentHead = this->getList()->getData();
     while (currentHead->next != nullptr)
     {
         out << currentHead->data.id << ',' << currentHead->data.date.getFormatValue() << ',' << currentHead->data.staffId << ',' << currentHead->data.type << '\n';
@@ -55,7 +54,7 @@ InvoiceModel::InvoiceModel()
     this->readFile();
 }
 
-LinkedList<Invoice> *InvoiceModel::getListData()
+LinkedList<Invoice> *InvoiceModel::getList()
 {
     return this->data;
 }
@@ -67,11 +66,13 @@ void InvoiceModel::insert(Invoice data)
         throw DataException::DuplicateDataId("This ID already exists, please try again!");
     }
     this->data->add(data);
+    this->writeFile();
 }
 
 void InvoiceModel::remove(Invoice data)
 {
     this->data->remove(data);
+    this->writeFile();
 }
 
 void InvoiceModel::update(Invoice data)
@@ -81,6 +82,7 @@ void InvoiceModel::update(Invoice data)
     {
         throw DataException::DataNotFound("Data not found");
     }
+    this->writeFile();
 }
 
 void InvoiceModel::refresh()

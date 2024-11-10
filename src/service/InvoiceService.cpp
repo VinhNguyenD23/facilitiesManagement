@@ -8,12 +8,12 @@ InvoiceService::InvoiceService()
 
 void InvoiceService::create(Invoice data)
 {
-    this->invoiceRepository->insertData(data);
+    this->invoiceRepository->insert(data);
 }
 
 LinkedList<Invoice> *InvoiceService::readAll()
 {
-    return this->invoiceRepository->getListData();
+    return this->invoiceRepository->getList();
 }
 
 Invoice *InvoiceService::readById(QString id)
@@ -32,7 +32,7 @@ void InvoiceService::update(Invoice data)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
-    this->invoiceRepository->updateData(data);
+    this->invoiceRepository->update(data);
 }
 
 void InvoiceService::remove(Invoice data)
@@ -41,7 +41,7 @@ void InvoiceService::remove(Invoice data)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
-    this->invoiceRepository->removeData(data);
+    this->invoiceRepository->remove(data);
 }
 
 InvoiceService::~InvoiceService()

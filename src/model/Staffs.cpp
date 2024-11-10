@@ -25,10 +25,12 @@ void StaffsModel::readFile()
         tempStaff.gender = (field.at(3) == QString::fromStdString("1") ? true : false);
         this->insert(tempStaff);
     }
-    for (int i = 0; i < data->getSize(); i++)
-    {
-        qDebug() << this->data->at(i).id << ' ' << this->data->at(i).lastName << ' ' << this->data->at(i).firstName << ' ' << this->data->at(i).gender;
-    }
+    // for (int i = 0; i < data->getSize(); i++)
+    // {
+    //     qDebug() << this->data->at(i).id << ' ' << this->data->at(i).lastName << ' ' << this->data->at(i).firstName << ' ' << this->data->at(i).gender;
+    // }
+    qDebug() << "Staff Databases load: " << this->getSize();
+
     file.close();
 }
 

@@ -21,7 +21,7 @@ private:
 
 public:
     InvoiceModel();
-    LinkedList<Invoice> *getListData();
+    LinkedList<Invoice> *getList();
     void insert(Invoice data);
     void remove(Invoice data);
     void update(Invoice data);

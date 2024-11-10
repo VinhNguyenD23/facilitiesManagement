@@ -28,6 +28,8 @@ void InvoiceDetailModel::readFile()
         tempInvoiceDetail.vat = (double)(field[5].toDouble() / 100.0);
         this->data->add(tempInvoiceDetail);
     }
+    qDebug() << "InvoiceDetail Databases load:" << this->getSize();
+    file.close();
 }
 
 InvoiceDetailModel::InvoiceDetailModel()
@@ -53,7 +55,6 @@ void InvoiceDetailModel::remove(InvoiceDetail data)
 void InvoiceDetailModel::update(InvoiceDetail data)
 {
     // TODO: Find data and update data
-    
 }
 
 void InvoiceDetailModel::refresh()

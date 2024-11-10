@@ -179,9 +179,9 @@ QPushButton {
        <widget class="QTableView" name="facilityTable">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>270</x>
           <y>50</y>
-          <width>1071</width>
+          <width>821</width>
           <height>471</height>
          </rect>
         </property>
@@ -231,9 +231,9 @@ QPushButton {
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>270</x>
           <y>10</y>
-          <width>1071</width>
+          <width>821</width>
           <height>31</height>
          </rect>
         </property>
@@ -307,6 +307,19 @@ QPushButton {
           </widget>
          </item>
         </layout>
+       </widget>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>251</width>
+          <height>491</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Thông tin</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="Staff">

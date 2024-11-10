@@ -22,12 +22,12 @@ void InvoiceController::removeInvoice(Invoice data)
 
 LinkedList<Invoice> *InvoiceController::getListInvoices()
 {
-    return nullptr;
+    return this->getListInvoices();
 }
 
 Invoice *InvoiceController::getInvoiceById(QString id)
 {
-    return nullptr;
+    return this->getInvoiceById(id);
 }
 
 InvoiceController::~InvoiceController()

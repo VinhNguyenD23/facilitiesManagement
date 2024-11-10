@@ -2,28 +2,33 @@
 
 StaffService::StaffService()
 {
+    this->staffRepository = staffModel;
 }
 
-DArray<Staff> StaffService::getList()
+
+DArray<Staff> *StaffService::getList()
 {
-    return DArray<Staff>();
+    return this->staffRepository->getListData();
 }
 
 Staff *StaffService::find(QString id)
 {
-    return nullptr;
+    return this->staffRepository->getDataById(id);
 }
 
-void StaffService::create(Staff staff)
+void StaffService::create(Staff data)
 {
+    this->staffRepository -> insert(data);
 }
 
-void StaffService::update(QString id, Staff newData)
+void StaffService::update( Staff data)
 {
+    this->staffRepository->update(data);
 }
 
-void StaffService::remove(QString id)
+void StaffService::remove(Staff data)
 {
+    this->staffRepository->remove(data);
 }
 
 StaffService::~StaffService()

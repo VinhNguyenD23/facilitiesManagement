@@ -2,6 +2,42 @@
 
 FacilityService::FacilityService()
 {
+    this->facilityRepository = facilityModel;
+}
+
+void FacilityService::create(Facility data)
+{
+    this->facilityRepository->insert(data);
+}
+
+AVLTree<Facility> *FacilityService::readAll()
+{
+    return this->facilityRepository->getList();
+}
+
+Facility *FacilityService::readById(QString id)
+{
+    Facility *facilityDetail = this->facilityRepository->findByDataId(id);
+    if (facilityDetail = nullptr) {
+        throw DataException::DataNotFound("Not found any facility with facility id: " + id.toStdString());
+    }
+    return facilityDetail;
+}
+
+void FacilityService::update(Facility data)
+{
+    if ( this->facilityRepository->findByDataId(data.id) == nullptr) {
+        throw DataException::DataNotFound("Not found any facility with facility id: " + id.toStdString());
+    }
+    this->facilityRepository->update(data);
+}
+
+void FacilityService::remove(Facility data)
+{
+    if ( this->facilityRepository->findByDataId(data.id) == nullptr) {
+        throw DataException::DataNotFound("Not found any facility with facility id: " + id.toStdString());
+    }
+    this->facilityRepository->remove(data);
 }
 
 FacilityService::~FacilityService()

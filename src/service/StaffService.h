@@ -3,18 +3,21 @@
 
 #include "../object/Staff.h"
 #include "../datatype/DynamicArray.h"
+#include "../model/Staffs.h"
+#include "../model/GlobalModel.h"
 #include <QString>
 class StaffService
 {
 private:
     /* data */
+    StaffsModel *staffRepository = nullptr;
 public:
     StaffService(/* args */);
-    DArray<Staff> getList();
+    DArray<Staff> *getList();
     Staff *find(QString id);
-    void create(Staff staff);
-    void update(QString id, Staff newData);
-    void remove(QString id);
+    void create(Staff data);
+    void update(Staff data);
+    void remove(Staff data);
     ~StaffService();
 };
 

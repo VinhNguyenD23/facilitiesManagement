@@ -119,6 +119,49 @@ template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::deleteNode(Node *node, K key)
 {
     // TODO: Delete Node in AVL Tree [ priority: normal ]
+    if (!root)
+        return root;
+
+    if (key < root->key)
+        root->left = deleteNode(root->left, key);
+    else if (key > root->key)
+        root->right = deleteNode(root->right, key);
+    else {
+        if ((root->left == nullptr) || (root->right == nullptr)) {
+            Node* temp = root->left ? root->left : root->right;
+            if (!temp) {
+                temp = root;
+                root = nullptr;
+            } else
+                *root = *temp;
+            delete temp;
+        } else {
+            Node* temp = minValueNode(root->right);
+            root->key = temp->key;
+            root->right = deleteNode(root->right, temp->key);
+        }
+    }
+
+    if (!root)
+        return root;
+
+    root->height = 1 + max(height(root->left), height(root->right));
+    int balance = getBalance(root);
+
+    if (balance > 1 && getBalance(root->left) >= 0)
+        return rightRotate(root);
+    if (balance > 1 && getBalance(root->left) < 0) {
+        root->left = leftRotate(root->left);
+        return rightRotate(root);
+    }
+    if (balance < -1 && getBalance(root->right) <= 0)
+        return leftRotate(root);
+    if (balance < -1 && getBalance(root->right) > 0) {
+        root->right = rightRotate(root->right);
+        return leftRotate(root);
+    }
+    return root;
+
     if (!find(node, key))
     {
         throw std::runtime_error("[ERROR] Element not found!");

@@ -53,6 +53,7 @@ void InvoiceDetailModel::remove(InvoiceDetail data)
 void InvoiceDetailModel::update(InvoiceDetail data)
 {
     // TODO: Find data and update data
+    
 }
 
 void InvoiceDetailModel::refresh()

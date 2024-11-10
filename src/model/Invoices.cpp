@@ -71,7 +71,7 @@ void InvoiceModel::insert(Invoice data)
 
 void InvoiceModel::remove(Invoice data)
 {
-    this->data->deleteData(data);
+    this->data->remove(data);
 }
 
 void InvoiceModel::update(Invoice data)

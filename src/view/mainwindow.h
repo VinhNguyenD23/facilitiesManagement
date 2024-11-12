@@ -1,6 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "../controller/FacilityController.h"
+#include "../controller/InvoiceController.h"
+#include "../controller/InvoiceDetailController.h"
+#include "../controller/StaffController.h"
+
 #include <QMainWindow>
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -19,5 +24,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    FacilityController *facilityController = nullptr;
+    InvoiceDetailController *invoiceDetailControler = nullptr;
+    InvoiceController *invoiceController = nullptr;
+    StaffController *staffController = nullptr;
 };
 #endif // MAINWINDOW_H

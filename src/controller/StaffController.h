@@ -1,7 +1,8 @@
 #ifndef STAFFCTRL_H
 #define STAFFCTRL_H
-#include"../service/StaffService.h"
+#include "../service/StaffService.h"
 #include <QString>
+#include <QDebug>
 #include "../datatype/DynamicArray.h"
 #include "../object/Staff.h"
 class StaffController
@@ -9,6 +10,7 @@ class StaffController
 private:
     /* data */
     StaffService *staffService = nullptr;
+
 public:
     StaffController(/* args */);
     void create(Staff data);

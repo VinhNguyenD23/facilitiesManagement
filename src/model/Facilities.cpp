@@ -57,7 +57,6 @@ void FacilitiesModel::insert(Facility data)
 
 void FacilitiesModel::update(Facility data)
 {
-    // TODO: Code update data for facilities [ priority: above normal ]
     if (this->data->findIndex(data.id) == nullptr)
     {
         DataException::DataNotFound("Data with id " + data.id.toStdString() + " is not existing");
@@ -67,7 +66,6 @@ void FacilitiesModel::update(Facility data)
 
 void FacilitiesModel::remove(QString id)
 {
-    // TODO: Code remove data for facilities [ priority: above normal ]
     AVLTree<Facility, QString>::Node *element = this->data->findIndex(id);
     if (element == nullptr)
     {

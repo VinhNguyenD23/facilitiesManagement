@@ -5,6 +5,7 @@ InvoiceDetailController::InvoiceDetailController()
     try
     {
         this->invoiceDetailService = new InvoiceDetailService();
+        qDebug() << "Invoice detail controller initialized successfully";
     }
     catch (const std::exception &e)
     {
@@ -77,6 +78,7 @@ LinkedList<InvoiceDetail> *InvoiceDetailController::getListInvoice()
         msgBox.setText(e.what());
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
+        return nullptr;
     }
 }
 

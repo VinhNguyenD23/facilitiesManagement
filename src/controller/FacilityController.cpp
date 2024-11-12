@@ -5,6 +5,7 @@ FacilityController::FacilityController()
     try
     {
         this->facilityService = new FacilityService();
+        qDebug() << "Facility controller initialized successfully";
     }
     catch (const std::exception &e)
     {

@@ -40,7 +40,7 @@ void InvoiceModel::writeFile()
         throw DatabasesException::DatabaseBroken("invoice");
     }
     QTextStream out(&file);
-    auto *currentHead = this->getList()->getData();
+    auto *currentHead = this->getList()->getListData();
     while (currentHead->next != nullptr)
     {
         out << currentHead->data.id << ',' << currentHead->data.date.getFormatValue() << ',' << currentHead->data.staffId << ',' << currentHead->data.type << '\n';
@@ -78,10 +78,13 @@ void InvoiceModel::remove(Invoice data)
 void InvoiceModel::update(Invoice data)
 {
     // TODO: Find data and update data
-    if (this->getDataById(data.id) == nullptr)
+    // Invoice *element = this->getDataById(data.id);
+    LinkedList<Invoice>::Node *element = this->data->getElement(data);
+    if (element == nullptr)
     {
         throw DataException::DataNotFound("Data not found");
     }
+    element->data = data;
     this->writeFile();
 }
 
@@ -93,7 +96,7 @@ void InvoiceModel::refresh()
 
 Invoice *InvoiceModel::getDataById(QString id)
 {
-    auto *temp = this->data->getData();
+    auto *temp = this->data->getListData();
     while (temp != nullptr && temp->next != nullptr)
     {
         if (temp->data.id == id)

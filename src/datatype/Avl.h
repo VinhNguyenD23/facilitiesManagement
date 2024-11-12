@@ -43,6 +43,7 @@ public:
     void update(T data, K key);
     Node *findIndex(K key);
     Node *remove(Node *node, K key);
+    Node *getList();
     DArray<T> toDynamicArray();
     void clear();
 };

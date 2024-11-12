@@ -208,6 +208,12 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::remove(Node *node, K key)
 }
 
 template <class T, typename K>
+typename AVLTree<T, K>::Node *AVLTree<T, K>::getList()
+{
+    return this->root;
+}
+
+template <class T, typename K>
 DArray<T> AVLTree<T, K>::toDynamicArray()
 {
     DArray<T> data = DArray<T>();

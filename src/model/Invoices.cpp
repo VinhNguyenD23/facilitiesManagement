@@ -41,7 +41,8 @@ void InvoiceModel::writeFile()
     }
     QTextStream out(&file);
     auto *currentHead = this->getList()->getData();
-    while (currentHead->next != nullptr)
+    while (currentHead->next != nullptr)/*Nếu danh sách rỗng hoặc currentHead không có dữ liệu, đoạn mã này có thể gặp lỗi.
+Có thể cải tiến bằng cách kiểm tra điều kiện currentHead không null trước khi thực hiện vòng lặp.*/
     {
         out << currentHead->data.id << ',' << currentHead->data.date.getFormatValue() << ',' << currentHead->data.staffId << ',' << currentHead->data.type << '\n';
         currentHead = currentHead->next;

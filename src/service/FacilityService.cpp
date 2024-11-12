@@ -10,7 +10,7 @@ void FacilityService::create(Facility data)
     this->facilityRepository->insert(data);
 }
 
-AVLTree<Facility> *FacilityService::readAll()
+AVLTree<Facility, QString> *FacilityService::readAll()
 {
     return this->facilityRepository->getList();
 }
@@ -18,7 +18,8 @@ AVLTree<Facility> *FacilityService::readAll()
 Facility *FacilityService::readById(QString id)
 {
     Facility *facilityDetail = this->facilityRepository->findByDataId(id);
-    if (facilityDetail = nullptr) {
+    if (facilityDetail = nullptr)
+    {
         throw DataException::DataNotFound("Not found any facility with facility id: " + id.toStdString());
     }
     return facilityDetail;
@@ -26,18 +27,20 @@ Facility *FacilityService::readById(QString id)
 
 void FacilityService::update(Facility data)
 {
-    if ( this->facilityRepository->findByDataId(data.id) == nullptr) {
-        throw DataException::DataNotFound("Not found any facility with facility id: " + id.toStdString());
+    if (this->facilityRepository->findByDataId(data.id) == nullptr)
+    {
+        throw DataException::DataNotFound("Not found any facility with facility id: " + data.id.toStdString());
     }
     this->facilityRepository->update(data);
 }
 
 void FacilityService::remove(Facility data)
 {
-    if ( this->facilityRepository->findByDataId(data.id) == nullptr) {
-        throw DataException::DataNotFound("Not found any facility with facility id: " + id.toStdString());
+    if (this->facilityRepository->findByDataId(data.id) == nullptr)
+    {
+        throw DataException::DataNotFound("Not found any facility with facility id: " + data.id.toStdString());
     }
-    this->facilityRepository->remove(data);
+    this->facilityRepository->remove(data.id);
 }
 
 FacilityService::~FacilityService()

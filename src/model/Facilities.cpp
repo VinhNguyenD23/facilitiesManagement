@@ -58,27 +58,33 @@ void FacilitiesModel::insert(Facility data)
 void FacilitiesModel::update(Facility data)
 {
     // TODO: Code update data for facilities [ priority: above normal ]
-    if ( this->facility)
+    if (this->data->findIndex(data.id) == nullptr)
+    {
+        DataException::DataNotFound("Data with id " + data.id.toStdString() + " is not existing");
+    }
     this->data->update(data, data.id);
 }
 
 void FacilitiesModel::remove(QString id)
 {
     // TODO: Code remove data for facilities [ priority: above normal ]
-    this->data->deleteNode(data, data.id);
+    AVLTree<Facility, QString>::Node *element = this->data->findIndex(id);
+    if (element == nullptr)
+    {
+        DataException::DataNotFound("Data with id " + id.toStdString() + " is not existing");
+    }
+    this->data->remove(element, element->key);
 }
 
 void FacilitiesModel::refresh()
 {
     // TODO: Add function clear to AVL tree
-    // this->data->clear();
+    this->data->clear();
     this->readFile();
 }
 
-AVLTree<Facility, QString>::Node *FacilitiesModel::findByDataId(QString id)
+Facility *FacilitiesModel::findByDataId(QString id)
 {
-    AVLTree<Facility, QString>::Node *findElement = this->data->findIndex(id);
-    if (findElement != nullptr)
-        return findElement;
-    return nullptr;
+    Facility *findElement = &this->data->findIndex(id)->data;
+    return findElement;
 }

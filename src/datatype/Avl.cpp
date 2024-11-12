@@ -36,6 +36,27 @@ void AVLTree<T, K>::pushDataToDynamicArray(DArray<T> &data, Node *node)
 }
 
 template <class T, typename K>
+void AVLTree<T, K>::clear(Node *node)
+{
+    if (node == nullptr)
+        return;
+    clear(node->left);
+    clear(node->right);
+    delete node;
+}
+
+template <class T, typename K>
+typename AVLTree<T, K>::Node *AVLTree<T, K>::minValueNode(Node *node)
+{
+    Node *current = node;
+    while (current->left != nullptr)
+    {
+        current = current->left;
+    }
+    return current;
+}
+
+template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
 {
     Node *x = y->left;
@@ -110,53 +131,72 @@ void AVLTree<T, K>::insert(T data, K key)
 }
 
 template <class T, typename K>
+void AVLTree<T, K>::update(T data, K key)
+{
+    Node *element = this->find(root, key);
+    if (element == nullptr)
+    {
+        throw DataException::DataNotFound("Data not found!");
+    }
+    element->data = data;
+}
+
+template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
 {
     return find(root, key);
 }
 
 template <class T, typename K>
-typename AVLTree<T, K>::Node *AVLTree<T, K>::deleteNode(Node *node, K key)
+typename AVLTree<T, K>::Node *AVLTree<T, K>::remove(Node *node, K key)
 {
     // TODO: Delete Node in AVL Tree [ priority: normal ]
     if (!root)
         return root;
 
     if (key < root->key)
-        root->left = deleteNode(root->left, key);
+        root->left = remove(root->left, key);
     else if (key > root->key)
-        root->right = deleteNode(root->right, key);
-    else {
-        if ((root->left == nullptr) || (root->right == nullptr)) {
-            Node* temp = root->left ? root->left : root->right;
-            if (!temp) {
+        root->right = remove(root->right, key);
+    else
+    {
+        if ((root->left == nullptr) || (root->right == nullptr))
+        {
+            Node *temp = root->left ? root->left : root->right;
+            if (!temp)
+            {
                 temp = root;
                 root = nullptr;
-            } else
+            }
+            else
                 *root = *temp;
             delete temp;
-        } else {
-            Node* temp = minValueNode(root->right);
+        }
+        else
+        {
+            Node *temp = minValueNode(root->right);
             root->key = temp->key;
-            root->right = deleteNode(root->right, temp->key);
+            root->right = remove(root->right, temp->key);
         }
     }
 
     if (!root)
         return root;
 
-    root->height = 1 + max(height(root->left), height(root->right));
+    root->height = 1 + std::max(getHeight(root->left), getHeight(root->right));
     int balance = getBalance(root);
 
     if (balance > 1 && getBalance(root->left) >= 0)
         return rightRotate(root);
-    if (balance > 1 && getBalance(root->left) < 0) {
+    if (balance > 1 && getBalance(root->left) < 0)
+    {
         root->left = leftRotate(root->left);
         return rightRotate(root);
     }
     if (balance < -1 && getBalance(root->right) <= 0)
         return leftRotate(root);
-    if (balance < -1 && getBalance(root->right) > 0) {
+    if (balance < -1 && getBalance(root->right) > 0)
+    {
         root->right = rightRotate(root->right);
         return leftRotate(root);
     }
@@ -174,6 +214,13 @@ DArray<T> AVLTree<T, K>::toDynamicArray()
     DArray<T> data = DArray<T>();
     this->pushDataToDynamicArray(data, this->root);
     return data;
+}
+
+template <class T, typename K>
+void AVLTree<T, K>::clear()
+{
+    clear(root);
+    root = nullptr;
 }
 
 template <class T, typename K>

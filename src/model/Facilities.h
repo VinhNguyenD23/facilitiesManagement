@@ -5,6 +5,7 @@
 #include "../datatype/Avl.h"
 #include "../common/FilePath.h"
 #include "../exception/DatabasesException.h"
+#include "../exception/DataException.h"
 #include <QString>
 #include <QFile>
 #include <QDebug>
@@ -24,7 +25,7 @@ public:
     void update(Facility data);
     void remove(QString id);
     void refresh();
-    AVLTree<Facility, QString>::Node *findByDataId(QString id);
+    Facility *findByDataId(QString id);
 };
 
 #endif // FACILITIES_H

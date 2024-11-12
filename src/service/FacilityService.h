@@ -12,10 +12,11 @@ class FacilityService
 private:
     /* data */
     FacilitiesModel *facilityRepository = nullptr;
+
 public:
     FacilityService(/* args */);
     void create(Facility data);
-    AVLTree<Facility> *readAll();
+    AVLTree<Facility, QString> *readAll();
     Facility *readById(QString id);
     void update(Facility data);
     void remove(Facility data);

@@ -1,62 +1,102 @@
 #include "InvoiceController.h"
 
 InvoiceController::InvoiceController()
-{this->invoiceService = new InvoiceService();
+{
+    try
+    {
+        this->invoiceService = new InvoiceService();
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.exec();
+    }
 }
 
 void InvoiceController::createNewInvoice(Invoice data)
 {
-    this->invoiceService->create(data);
+    try
+    {
+        this->invoiceService->create(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.exec();
+    }
 }
 
 void InvoiceController::updateExistInvoice(Invoice data)
 {
-    this->invoiceService->update(data);
+    try
+    {
+        this->invoiceService->update(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.exec();
+    }
 }
 
 void InvoiceController::removeInvoice(Invoice data)
 {
     this->invoiceService->remove(data);
+    try
+    {
+        this->invoiceService->remove(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.exec();
+    }
 }
 
 LinkedList<Invoice> *InvoiceController::getListInvoices()
 {
-    return nullptr;
+    try
+    {
+        return this->invoiceService->readAll();
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.exec();
+        return nullptr;
+    }
 }
 
 Invoice *InvoiceController::getInvoiceById(QString id)
 {
-    return nullptr;
-}
-
-InvoiceController::~InvoiceController()
-{
-    this->invoiceService = new InvoiceService();
-}
-
-void InvoiceController::createNewInvoice(Invoice data)
-{
-    this->invoiceService->create(data);
-}
-
-void InvoiceController::updateExistInvoice(Invoice data)
-{
-    this->invoiceService->update(data);
-}
-
-void InvoiceController::removeInvoice(Invoice data)
-{
-    this->invoiceService->remove(data);
-}
-
-LinkedList<Invoice> *InvoiceController::getListInvoices()
-{
-    return this->getListInvoices();
-}
-
-Invoice *InvoiceController::getInvoiceById(QString id)
-{
-    return this->getInvoiceById(id);
+    try
+    {
+        return this->invoiceService->readById(id);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.exec();
+        return nullptr;
+    }
 }
 
 InvoiceController::~InvoiceController()

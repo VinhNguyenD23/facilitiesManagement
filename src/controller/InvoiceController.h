@@ -3,6 +3,7 @@
 #include "../service/InvoiceService.h"
 #include "../object/Invoice.h"
 #include <QString>
+#include <QMessageBox>
 #include "../datatype/LinkedList.h"
 class InvoiceController
 {

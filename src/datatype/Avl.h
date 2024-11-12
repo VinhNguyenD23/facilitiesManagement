@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "../object/Facility.h"
+#include "../exception/DataException.h"
 #include "DynamicArray.h"
 #include <QDebug>
 
@@ -32,14 +33,18 @@ private:
     int getHeight(Node *node);
     int getBalance(Node *node);
     void pushDataToDynamicArray(DArray<T> &data, Node *node);
+    void clear(Node *node);
+    Node *minValueNode(Node *node);
 
 public:
     AVLTree();
     ~AVLTree();
     void insert(T data, K key);
+    void update(T data, K key);
     Node *findIndex(K key);
-    Node *deleteNode(Node *node, K key);
+    Node *remove(Node *node, K key);
     DArray<T> toDynamicArray();
+    void clear();
 };
 
 #endif // AVL_TREE_H

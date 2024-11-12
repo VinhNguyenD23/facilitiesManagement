@@ -2,26 +2,85 @@
 
 FacilityController::FacilityController()
 {
-    this->facilityService = new InvoiceService();
+    try
+    {
+        this->facilityService = new FacilityService();
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
-void FacilityController::createNewFacility(Facility data) {
-    this->facilityService->create(data);
+void FacilityController::createNewFacility(Facility data)
+{
+    try
+    {
+        this->facilityService->create(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
-void FacilityController::updateExistFacility(Facility data) {
-    this->facilityService->update(data);
+void FacilityController::updateExistFacility(Facility data)
+{
+    try
+    {
+        this->facilityService->update(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
-void FacilityController::removeFacility(Facility data) {
-    this->facilityService->remove(data);
+void FacilityController::removeFacility(Facility data)
+{
+    try
+    {
+        this->facilityService->remove(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
-Avltree<Facility> *FacilityController::getListFacilities() {
-    
-    return nullptr;
-}
+AVLTree<Facility, QString> *FacilityController::getListFacilities()
+{
 
+    try
+    {
+        return this->facilityService->readAll();
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return nullptr;
+    }
+}
 
 FacilityController::~FacilityController()
 {

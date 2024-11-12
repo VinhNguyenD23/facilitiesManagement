@@ -2,33 +2,100 @@
 
 StaffController::StaffController()
 {
-    this->staffService = new StaffService();
+    try
+    {
+        this->staffService = new StaffService();
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
 void StaffController::create(Staff data)
 {
-    this->staffService->create(data);
+    try
+    {
+        this->staffService->create(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
 void StaffController::updateExistStaff(Staff data)
 {
-    this->staffService->update(data);
+    try
+    {
+        this->staffService->update(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
 void StaffController::removeStaff(Staff data)
 {
-    this->staffService->remove(data);
+    try
+    {
+        this->staffService->remove(data);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
 DArray<Staff> *StaffController::getListStaff()
 {
-    return this->staffService->getList();
+    try
+    {
+        return this->staffService->getList();
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return nullptr;
+    }
 }
 
 Staff *StaffController::getStaffById(QString id)
 {
-    return this->staffService->find(id);
-
+    try
+    {
+        return this->staffService->find(id);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return nullptr;
+    }
 }
 
 StaffController::~StaffController()

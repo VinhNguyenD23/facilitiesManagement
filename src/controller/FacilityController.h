@@ -3,17 +3,19 @@
 #include "../service/FacilityService.h"
 #include "../object/Invoice.h"
 #include "../datatype/Avl.h"
+#include <QMessageBox>
 class FacilityController
 {
 private:
     /* data */
-    FacilityController *facilityService = nullptr;
+    FacilityService *facilityService = nullptr;
+
 public:
     FacilityController();
     void createNewFacility(Facility data);
     void updateExistFacility(Facility data);
     void removeFacility(Facility data);
-    AVLTree<Facility> *getListFacilities();
+    AVLTree<Facility, QString> *getListFacilities();
     ~FacilityController();
 };
 

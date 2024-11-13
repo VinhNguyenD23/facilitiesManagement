@@ -32,6 +32,21 @@ void StaffsModel::readFile()
     file.close();
 }
 
+void StaffsModel::writeFile()
+{
+    QFile file(FilePath::getPath(FilePath::databases::STAFF));
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        throw DatabasesException::DatabaseBroken("staff");
+    }
+    QTextStream out(&file);
+    auto *ds = this->getListData;
+    for ( int i = 0; i < ds->getsize(); i++) {
+        out << ds->data->at(i).id << ' ' << ds->data->at(i).lastName << ' ' << ds->data->at(i).firstName << ' ' << ds->data->at(i).gender;
+    }
+    file.close();
+}
+
 StaffsModel::StaffsModel()
 {
     this->readFile();
@@ -55,20 +70,7 @@ void StaffsModel::insert(Staff data)
 void StaffsModel::remove(Staff data)
 {
     // TODO: Code remove function for list staffs [ priority: above normal ] [Testing]
-    QFile file(FilePath::getPath(FilePath::databases::STAFF));
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
-    }
-    QTextStream outData(&file);
-    for (int i = 0; i < this->getSize(); i++)
-    {
-        if (data.id != this->data->at(i).id)
-        {
-            outData << this->data->at(i).id << ',' << this->data->at(i).lastName << ',' << this->data->at(i).firstName << ',' << this->data->at(i).gender << '\n';
-        }
-    }
-    file.close();
+    this->data->popAt(data);
 }
 
 void StaffsModel::update(Staff data)

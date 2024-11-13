@@ -37,6 +37,8 @@ public:
     AVLTree();
     ~AVLTree();
     void insert(T data, K key);
+    void show(Node *node);
+    Node *getroot();
     Node *findIndex(K key);
     Node *deleteNode(Node *node, K key);
     DArray<T> toDynamicArray();

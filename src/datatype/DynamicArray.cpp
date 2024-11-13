@@ -73,6 +73,20 @@ void DArray<T>::popAt(T data)
     {
         throw std::logic_error("[ERROR] This dynamic array is empty. Can't remove any data.");
     }
+    int vt = 0;
+    for ( size_t i = 0; i < this->size(); i++) {
+        if (this->listData[i] == data) {
+            vt = i;
+        }
+        else {
+            throw std::logic_error("[ERROR] Can't find element in this dynamic array. Can't remove any data.");
+        }
+    }
+    for ( int i = vt + 1; i < this->size(); i++) {
+        this->listData[i-1] = this->listData[i];
+    }
+    delete this->listData[this->size()];
+    this->size--;
 }
 
 template <class T>

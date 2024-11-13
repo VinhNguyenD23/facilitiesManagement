@@ -15,6 +15,7 @@ private:
 
 private:
     void readFile();
+    void writeFile();
 
 public:
     FacilitiesModel();

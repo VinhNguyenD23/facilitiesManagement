@@ -109,6 +109,25 @@ void AVLTree<T, K>::insert(T data, K key)
     this->root = insert(root, data, key);
 }
 
+
+template <class T, typename K>
+void AVLTree<T, K>::show(Node *root)
+{
+    if (root != nullptr)
+    {
+      // xuat data nut
+        root->data;
+        show(root->left);
+        show(root->right);
+    }
+}
+
+template <class T, typename K>
+Node *AVLTree<T, K>::getroot()
+{
+    return this->root;
+}
+
 template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
 {
@@ -158,5 +177,6 @@ AVLTree<T, K>::Node::Node(T data, K key)
     this->right = nullptr;
     this->height = 1;
 }
+
 
 template class AVLTree<Facility, QString>;

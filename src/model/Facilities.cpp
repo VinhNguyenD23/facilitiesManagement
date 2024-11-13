@@ -33,6 +33,19 @@ void FacilitiesModel::readFile()
     file.close();
 }
 
+void FacilitiesModel::writeFile()
+{
+    QFile file(FilePath::getPath(FilePath::databases::FACILITY));
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        throw DatabasesException::DatabaseBroken("facilities");
+    }
+    QTextStream out(&file);
+    auto *currentRoot = this->data->getroot();
+    this->data->show(currentRoot);
+    file.close();
+}
+
 FacilitiesModel::FacilitiesModel()
 {
     this->readFile();

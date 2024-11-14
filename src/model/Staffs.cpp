@@ -33,6 +33,21 @@ void StaffsModel::readFile()
 
     file.close();
 }
+void StaffsModel::writeFile()
+{
+    QFile file(FilePath::getPath(FilePath::databases::STAFF));
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        throw DatabasesException::DatabaseBroken("staff");
+    }
+    QTextStream out(&file);
+    auto *current = this->getListData();
+    for(int i = 0; current.getSize() ; i++){
+        Staff data = current.at(i);
+        out << current->data.id << ',' << current->data.firstName << ',' << current->data.lastName << ',' << current->data.gender << '\n';
+    }
+    file.close();
+}
 
 StaffsModel::StaffsModel()
 {

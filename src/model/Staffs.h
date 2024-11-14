@@ -19,6 +19,7 @@ private:
 
 private:
     void readFile();
+    void writeFile();
 
 public:
     StaffsModel();

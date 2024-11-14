@@ -46,6 +46,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/service/StaffService.cpp src/service/StaffService.h
         src/exception/DatabasesException.h 
 	src/exception/DataException.h
+        src/util/StringUtil.h
         src/resource.qrc
     )
 # Define target properties for Android with Qt 6 as:

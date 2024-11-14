@@ -20,11 +20,38 @@ MainWindow::MainWindow(QWidget *parent)
     facilityTempTable->setColumnWidth(0, 205);
     facilityTempTable->setColumnWidth(1, 205);
     facilityTempTable->setColumnWidth(2, 205);
-    facilityTempTable->setColumnWidth(3, 200);
+    facilityTempTable->setColumnWidth(3, 190);
     facilityTempTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     facilityTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
     facilityTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     this->loadFacilityDataStartUp(facilityTempTable);
+
+    QTableWidget *staffTempTable = ui->staffTable;
+    staffTempTable->verticalHeader()->setVisible(false);
+    staffTempTable->horizontalHeader()->setVisible(false);
+    staffTempTable->setColumnCount(4);
+    staffTempTable->setColumnWidth(0, 205);
+    staffTempTable->setColumnWidth(1, 205);
+    staffTempTable->setColumnWidth(2, 205);
+    staffTempTable->setColumnWidth(3, 190);
+    staffTempTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    staffTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    staffTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    this->loadStaffDataStartUp(staffTempTable);
+
+    QTableWidget *invoiceTempTable = ui->InvoiceTable;
+    invoiceTempTable->verticalHeader()->setVisible(false);
+    invoiceTempTable->horizontalHeader()->setVisible(false);
+    invoiceTempTable->setColumnCount(5);
+    invoiceTempTable->setColumnWidth(0, 165);
+    invoiceTempTable->setColumnWidth(1, 165);
+    invoiceTempTable->setColumnWidth(2, 165);
+    invoiceTempTable->setColumnWidth(3, 165);
+    invoiceTempTable->setColumnWidth(4, 160);
+    invoiceTempTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    invoiceTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    invoiceTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    this->loadInvoiceDataStartUp(invoiceTempTable);
 }
 
 MainWindow::~MainWindow()
@@ -60,10 +87,45 @@ void MainWindow::loadFacilityDataStartUp(QTableWidget *table)
 
 void MainWindow::loadStaffDataStartUp(QTableWidget *table)
 {
+    auto *data = this->staffController->getListStaff();
+    for(size_t i = 0; i < data->getSize(); i++)
+    {
+        table->insertRow(i);
+        QTableWidgetItem *staffId = new QTableWidgetItem(data->at(i).id);
+        QTableWidgetItem *staffLastName = new QTableWidgetItem(data->at(i).lastName);
+        QTableWidgetItem *staffFirstName = new QTableWidgetItem(data->at(i).firstName);
+        QTableWidgetItem *staffGender = new QTableWidgetItem(data->at(i).gender ? "Nam" : "Nữ");
+        table->setItem(i, 0, staffId);
+        table->setItem(i, 1, staffLastName);
+        table->setItem(i, 2, staffFirstName);
+        table->setItem(i, 3, staffGender);
+    }
 }
 
 void MainWindow::loadInvoiceDataStartUp(QTableWidget *table)
 {
+    int row = 0;
+    auto *current = this->invoiceController->getListInvoices()->getListData();
+    while(current != nullptr)
+    {
+        table->insertRow(row);
+        auto staff = this->staffController->getStaffById(current->data.staffId);
+        // qDebug() << staff;
+        QString staffName;
+        staffName = staff->lastName + " " + staff->firstName;
+        QTableWidgetItem *invoiceId = new QTableWidgetItem(current->data.id);
+        QTableWidgetItem *invoiceDate = new QTableWidgetItem(current->data.date.getFormatValue());
+        QTableWidgetItem *invoiceStaffName = new QTableWidgetItem(staffName);
+        QTableWidgetItem *invoiceType = new QTableWidgetItem(current->data.type ? "Nhập" : "Xuất");
+        QTableWidgetItem *invoicePrice = new QTableWidgetItem("0");
+        table->setItem(row, 0, invoiceId);
+        table->setItem(row, 1, invoiceDate);
+        table->setItem(row, 2, invoiceStaffName);
+        table->setItem(row, 3, invoiceType);
+        table->setItem(row, 4, invoicePrice);
+        row++;
+        current = current->next;
+    }
 }
 
 void MainWindow::loadInvoiceDetailDataStartUp(QTableWidget *table)

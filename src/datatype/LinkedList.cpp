@@ -34,6 +34,7 @@ LinkedList<T>::~LinkedList()
 template <typename T>
 void LinkedList<T>::add(T data)
 {
+    this->size++;
     LinkedList<T>::Node *newNode = new LinkedList<T>::Node(data);
     if (this->head == nullptr)
     {
@@ -46,7 +47,6 @@ void LinkedList<T>::add(T data)
         currentNode = currentNode->next;
     }
     currentNode->next = newNode;
-    this->size++;
 }
 
 template <typename T>

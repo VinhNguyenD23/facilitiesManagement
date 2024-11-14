@@ -1,6 +1,7 @@
 #ifndef DATE_H
 #define DATE_H
 #include <QString>
+#include "../util/StringUtil.h"
 
 struct Date
 {
@@ -17,7 +18,7 @@ struct Date
     QString getFormatValue()
     {
         QString date;
-        date = QString::number(this->year) + '/' + QString::number(this->month) + '/' + QString::number(this->day);
+        date = StringUtil::formatNumber(this->day) + '/' + StringUtil::formatNumber(this->month) + '/' + StringUtil::formatNumber(this->year);
         return date;
     }
 };

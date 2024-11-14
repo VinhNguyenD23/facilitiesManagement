@@ -42,9 +42,9 @@ void StaffsModel::writeFile()
     }
     QTextStream out(&file);
     auto *current = this->getListData();
-    for(int i = 0; current.getSize() ; i++){
-        Staff data = current.at(i);
-        out << current->data.id << ',' << current->data.firstName << ',' << current->data.lastName << ',' << current->data.gender << '\n';
+    for(int i = 0; current->getSize() ; i++){
+        Staff data = current->at(i);
+        out << data.id << ',' << data.lastName << ',' << data.lastName << ',' << data.gender << '\n';
     }
     file.close();
 }
@@ -109,7 +109,7 @@ Staff *StaffsModel::getDataById(QString id)
         if (id == this->data->at(i).id)
         {
             Staff temp = this->data->at(i);
-            findData = &temp;
+            findData = new Staff(temp);
         }
     }
     return findData;

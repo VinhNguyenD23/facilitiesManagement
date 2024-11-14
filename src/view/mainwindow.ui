@@ -170,7 +170,7 @@ QPushButton {
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -347,7 +347,7 @@ QPushButton {
          </property>
         </widget>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>270</x>
@@ -603,7 +603,7 @@ QPushButton {
           <bool>true</bool>
          </property>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>100</x>
@@ -630,7 +630,7 @@ QPushButton {
          </layout>
         </widget>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>270</x>
@@ -713,7 +713,14 @@ QPushButton {
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="staffTable"/>
+          <widget class="QTableWidget" name="staffTable">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="gridStyle">
+            <enum>Qt::PenStyle::DashLine</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -870,7 +877,7 @@ QPushButton {
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>100</x>
@@ -897,7 +904,7 @@ QPushButton {
          </layout>
         </widget>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>269</x>
@@ -997,7 +1004,11 @@ QPushButton {
           </layout>
          </item>
          <item>
-          <widget class="QTableView" name="InvoiceTable"/>
+          <widget class="QTableWidget" name="InvoiceTable">
+           <property name="gridStyle">
+            <enum>Qt::PenStyle::DashLine</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -1057,7 +1068,7 @@ QPushButton {
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -1157,7 +1168,11 @@ QPushButton {
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="dsnv_5"/>
+          <widget class="QTableWidget" name="dsnv_5">
+           <property name="gridStyle">
+            <enum>Qt::PenStyle::DashLine</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -1166,7 +1181,7 @@ QPushButton {
        <attribute name="title">
         <string>THÔNG KÊ THEO THỜI GIAN</string>
        </attribute>
-       <widget class="QTableView" name="dsnv_6">
+       <widget class="QTableWidget" name="dsnv_6">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -1174,6 +1189,9 @@ QPushButton {
           <width>1071</width>
           <height>451</height>
          </rect>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::PenStyle::DashLine</enum>
         </property>
        </widget>
        <widget class="QLabel" name="thang">

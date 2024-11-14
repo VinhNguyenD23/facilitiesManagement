@@ -26,7 +26,8 @@ void DArray<T>::push(T data)
 {
     if (this->isFull())
     {
-        throw std::overflow_error("[ERROR] This dynamic array is full. Can't append any element.");
+        throw ArraySizeException::ArrayFull("This dynamic array is full. Can't append any data.");
+        // throw std::overflow_error("[ERROR] This dynamic array is full. Can't append any element.");
     }
     this->listData[this->size] = data;
     this->size++;
@@ -71,7 +72,8 @@ void DArray<T>::popAt(T data)
 {
     if (this->isEmpty())
     {
-        throw std::logic_error("[ERROR] This dynamic array is empty. Can't remove any data.");
+        throw ArraySizeException::ArrayEmpty("This dynamic array is empty. Can't remove any data.");
+        // throw std::logic_error("[ERROR] This dynamic array is empty. Can't remove any data.");
     }
 }
 

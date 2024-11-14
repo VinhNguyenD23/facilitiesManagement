@@ -6,6 +6,7 @@
 #include "../object/Facility.h"
 #include "../object/Invoice.h"
 #include "../object/InvoiceDetail.h"
+#include "../exception/ArraySizeException.h"
 
 template <class T>
 class DArray

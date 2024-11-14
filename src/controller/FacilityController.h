@@ -4,6 +4,7 @@
 #include "../object/Invoice.h"
 #include "../datatype/Avl.h"
 #include <QMessageBox>
+#include <QDebug>
 class FacilityController
 {
 private:

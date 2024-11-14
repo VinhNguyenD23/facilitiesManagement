@@ -54,7 +54,12 @@ void InvoiceDetailModel::remove(InvoiceDetail data)
 
 void InvoiceDetailModel::update(InvoiceDetail data)
 {
-    // TODO: Find data and update data
+    LinkedList<InvoiceDetail>::Node *element = this->data->getElement(data);
+    if (element == nullptr)
+    {
+        throw DataException::DataNotFound("Data not found");
+    }
+    element->data = data;
 }
 
 void InvoiceDetailModel::refresh()
@@ -65,6 +70,10 @@ void InvoiceDetailModel::refresh()
 
 InvoiceDetail *InvoiceDetailModel::getDataById(QString id)
 {
+    // LinkedList<InvoiceDetail>::Node *current = this->data->getListData();
+    // while (current->next != nullptr)
+    // {
+    // }
     return nullptr;
 }
 

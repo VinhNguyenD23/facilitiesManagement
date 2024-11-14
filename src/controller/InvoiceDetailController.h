@@ -2,8 +2,9 @@
 #define INVOICEDETAILCTRL_H
 #include "../service/InvoiceDetailService.h"
 #include "../object/InvoiceDetail.h"
-#include <QString>
 #include "../datatype/LinkedList.h"
+#include <QString>
+#include <QDebug>
 
 class InvoiceDetailController
 {

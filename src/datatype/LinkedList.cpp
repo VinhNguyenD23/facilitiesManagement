@@ -92,7 +92,7 @@ size_t LinkedList<T>::getSize() const
 }
 
 template <typename T>
-typename LinkedList<T>::Node *LinkedList<T>::getData() const
+typename LinkedList<T>::Node *LinkedList<T>::getListData() const
 {
     return this->head;
 }
@@ -112,10 +112,23 @@ void LinkedList<T>::clear() noexcept
 }
 
 template <typename T>
+typename LinkedList<T>::Node *LinkedList<T>::getElement(T data)
+{
+    Node *current = this->head;
+    while (current->next != nullptr)
+    {
+        if (current->data == data)
+            return current;
+        current = current->next;
+    }
+    return nullptr;
+}
+
+template <typename T>
 DArray<T> LinkedList<T>::toDynamicArray()
 {
     DArray<T> dynamicData = DArray<T>();
-    this->pushDataToDynamicArray(dynamicData, this->getData());
+    this->pushDataToDynamicArray(dynamicData, this->getListData());
     return dynamicData;
 }
 

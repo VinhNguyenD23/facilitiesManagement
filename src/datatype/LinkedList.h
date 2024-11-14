@@ -7,7 +7,7 @@
 template <typename T>
 class LinkedList
 {
-private:
+public:
     struct Node
     {
         T data;
@@ -31,8 +31,9 @@ public:
     void remove(T data);
     bool isEmpty() const;
     size_t getSize() const;
-    Node *getData() const;
+    Node *getListData() const;
     void clear() noexcept;
+    Node *getElement(T data);
     DArray<T> toDynamicArray();
 };
 

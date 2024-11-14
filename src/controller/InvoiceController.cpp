@@ -5,6 +5,7 @@ InvoiceController::InvoiceController()
     try
     {
         this->invoiceService = new InvoiceService();
+        qDebug() << "Invoice controller initialized successfully";
     }
     catch (const std::exception &e)
     {

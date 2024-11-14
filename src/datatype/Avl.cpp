@@ -150,7 +150,6 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
 template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::remove(Node *node, K key)
 {
-    // TODO: Delete Node in AVL Tree [ priority: normal ]
     if (!root)
         return root;
 
@@ -209,6 +208,12 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::remove(Node *node, K key)
 }
 
 template <class T, typename K>
+typename AVLTree<T, K>::Node *AVLTree<T, K>::getList()
+{
+    return this->root;
+}
+
+template <class T, typename K>
 DArray<T> AVLTree<T, K>::toDynamicArray()
 {
     DArray<T> data = DArray<T>();
@@ -226,7 +231,6 @@ void AVLTree<T, K>::clear()
 template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
 {
-    // TODO: Find element in AVL Tree [ priority: normal ] [ In Testing ]
     if (root != nullptr)
     {
         if (root->key == key)

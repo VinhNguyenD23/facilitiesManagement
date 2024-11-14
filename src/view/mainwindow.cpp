@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->invoiceController = new InvoiceController();
     this->staffController = new StaffController();
 
+    ui->mainTab->setCurrentIndex(0);
+
     QTableWidget *facilityTempTable = ui->facilityTable;
     facilityTempTable->verticalHeader()->setVisible(false);
     facilityTempTable->horizontalHeader()->setVisible(false);

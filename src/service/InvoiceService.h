@@ -5,6 +5,9 @@
 #include "../model/GlobalModel.h"
 #include "../exception/DataException.h"
 #include <QString>
+#include "../model/Invoices.h"
+#include "../model/Staffs.h"
+
 class InvoiceService
 {
 private:

@@ -51,6 +51,7 @@ void StaffsModel::writeFile()
 
 StaffsModel::StaffsModel()
 {
+    qDebug() << "Staff model initialized successfully";
     this->readFile();
 }
 

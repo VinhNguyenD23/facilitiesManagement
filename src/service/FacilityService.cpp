@@ -3,6 +3,7 @@
 FacilityService::FacilityService()
 {
     this->facilityRepository = facilityModel;
+    qDebug() << "Facility service initialized successfully";
 }
 
 void FacilityService::create(Facility data)

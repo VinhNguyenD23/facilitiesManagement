@@ -5,6 +5,7 @@
 #include <QDebug>
 #include "../datatype/DynamicArray.h"
 #include "../object/Staff.h"
+
 class StaffController
 {
 private:

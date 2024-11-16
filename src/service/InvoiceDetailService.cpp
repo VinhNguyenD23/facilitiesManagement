@@ -3,6 +3,7 @@
 InvoiceDetailService::InvoiceDetailService()
 {
     this->invoiceDetailRepository = invoiceDetailModel;
+    qDebug() << "Invoice detail service initialized successfully";
 }
 
 void InvoiceDetailService::create(InvoiceDetail data)

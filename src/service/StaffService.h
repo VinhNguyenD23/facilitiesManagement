@@ -3,9 +3,9 @@
 
 #include "../object/Staff.h"
 #include "../datatype/DynamicArray.h"
-#include "../model/Staffs.h"
 #include "../model/GlobalModel.h"
 #include <QString>
+#include "../model/Staffs.h"
 class StaffService
 {
 private:

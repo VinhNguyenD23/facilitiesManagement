@@ -26,7 +26,6 @@ void InvoiceModel::readFile()
         tempInvoice.date = tempDate;
         tempInvoice.staffId = field[2];
         tempInvoice.type = field[3].toInt();
-        qDebug() << line;
         this->data->add(tempInvoice);
     }
     qDebug() << "Invoice Databases load:" << this->getSize();
@@ -52,6 +51,7 @@ void InvoiceModel::writeFile()
 
 InvoiceModel::InvoiceModel()
 {
+    qDebug() << "Invoice model initialized successfully";
     this->readFile();
 }
 

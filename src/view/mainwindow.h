@@ -2,11 +2,10 @@
 #define MAINWINDOW_H
 
 #include "../controller/FacilityController.h"
-#include "../controller/InvoiceController.h"
-#include "../controller/InvoiceDetailController.h"
 #include "../controller/StaffController.h"
-
+#include "../controller/InvoiceController.h"
 #include "../datatype/Avl.h"
+#include "invoicedetailwindow.h"
 
 #include <QMainWindow>
 #include <QTableWidget>
@@ -27,6 +26,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+
+    void on_InvoiceTable_cellDoubleClicked(int row, int column);
+
 private:
     void loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row);
     void loadFacilityDataStartUp(QTableWidget *table);
@@ -36,9 +39,9 @@ private:
 
 private:
     Ui::MainWindow *ui;
-    FacilityController *facilityController = nullptr;
-    InvoiceDetailController *invoiceDetailControler = nullptr;
-    InvoiceController *invoiceController = nullptr;
-    StaffController *staffController = nullptr;
+    FacilityController *facility = nullptr;
+    // InvoiceDetailController *invoiceDetail = nullptr;
+    InvoiceController *invoice = nullptr;
+    StaffController *staff = nullptr;
 };
 #endif // MAINWINDOW_H

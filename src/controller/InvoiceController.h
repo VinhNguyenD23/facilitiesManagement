@@ -6,6 +6,7 @@
 #include <QString>
 #include <QMessageBox>
 #include <QDebug>
+
 class InvoiceController
 {
 private:

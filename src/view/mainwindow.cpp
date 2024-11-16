@@ -8,10 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setFixedSize(QSize(1150, 670));
     this->setWindowTitle("Phần mềm quản lý vật tư");
-    this->facilityController = new FacilityController();
-    this->invoiceDetailControler = new InvoiceDetailController();
-    this->invoiceController = new InvoiceController();
-    this->staffController = new StaffController();
+    this->facility = new FacilityController();
+    // this->invoiceDetail = invoiceDetailController;
+    this->invoice = new InvoiceController();
+    this->staff = new StaffController();
 
     ui->mainTab->setCurrentIndex(0);
 
@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     facilityTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
     facilityTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     this->loadFacilityDataStartUp(facilityTempTable);
+
 
     QTableWidget *staffTempTable = ui->staffTable;
     staffTempTable->verticalHeader()->setVisible(false);
@@ -54,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
     invoiceTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
     invoiceTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     this->loadInvoiceDataStartUp(invoiceTempTable);
+
 }
 
 MainWindow::~MainWindow()
@@ -83,13 +85,13 @@ void MainWindow::loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::No
 void MainWindow::loadFacilityDataStartUp(QTableWidget *table)
 {
     int row = 0;
-    AVLTree<Facility, QString>::Node *current = this->facilityController->getListFacilities()->getList();
+    AVLTree<Facility, QString>::Node *current = this->facility->getListFacilities()->getList();
     this->loadAvlData(table, current, row);
 }
 
 void MainWindow::loadStaffDataStartUp(QTableWidget *table)
 {
-    auto *data = this->staffController->getListStaff();
+    auto *data = this->staff->getListStaff();
     for(size_t i = 0; i < data->getSize(); i++)
     {
         table->insertRow(i);
@@ -107,11 +109,11 @@ void MainWindow::loadStaffDataStartUp(QTableWidget *table)
 void MainWindow::loadInvoiceDataStartUp(QTableWidget *table)
 {
     int row = 0;
-    auto *current = this->invoiceController->getListInvoices()->getListData();
+    auto *current = this->invoice->getListInvoices()->getListData();
     while(current != nullptr)
     {
         table->insertRow(row);
-        auto staff = this->staffController->getStaffById(current->data.staffId);
+        auto staff = this->staff->getStaffById(current->data.staffId);
         // qDebug() << staff;
         QString staffName;
         staffName = staff->lastName + " " + staff->firstName;
@@ -133,3 +135,14 @@ void MainWindow::loadInvoiceDataStartUp(QTableWidget *table)
 void MainWindow::loadInvoiceDetailDataStartUp(QTableWidget *table)
 {
 }
+
+
+void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column)
+{
+    QString getInvoiceId = ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
+    InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(this, getInvoiceId);
+    invoiceDetailForm->setAttribute(Qt::WA_DeleteOnClose);
+    invoiceDetailForm->show();
+    invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);
+}
+

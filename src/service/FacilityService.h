@@ -5,6 +5,7 @@
 #include "../datatype/Avl.h"
 #include "../datatype/LinkedList.h"
 #include "../model/GlobalModel.h"
+#include "../model/Facilities.h"
 #include <QString>
 
 class FacilityService

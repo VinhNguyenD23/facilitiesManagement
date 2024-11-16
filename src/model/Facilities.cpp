@@ -38,6 +38,7 @@ void FacilitiesModel::readFile()
 
 FacilitiesModel::FacilitiesModel()
 {
+    qDebug() << "Facility model initialized successfully";
     this->readFile();
 }
 

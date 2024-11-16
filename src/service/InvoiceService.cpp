@@ -4,6 +4,7 @@ InvoiceService::InvoiceService()
 {
     this->invoiceRepository = invoiceModel;
     this->staffRepository = staffModel;
+    qDebug() << "Invoice service initialized successfully";
 }
 
 void InvoiceService::create(Invoice data)

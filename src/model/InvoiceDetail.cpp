@@ -34,6 +34,7 @@ void InvoiceDetailModel::readFile()
 
 InvoiceDetailModel::InvoiceDetailModel()
 {
+    qDebug() << "Invoice Detail model initialized successfully";
     this->readFile();
 }
 

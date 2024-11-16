@@ -3,6 +3,7 @@
 StaffService::StaffService()
 {
     this->staffRepository = staffModel;
+    qDebug() << "Staff service initialized successfully";
 }
 
 

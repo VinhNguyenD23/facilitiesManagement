@@ -150,6 +150,11 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
 template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::remove(Node *node, K key)
 {
+    if (!find(node, key))
+    {
+        throw std::runtime_error("[ERROR] Element not found!");
+    }
+
     if (!root)
         return root;
 
@@ -200,11 +205,6 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::remove(Node *node, K key)
         return leftRotate(root);
     }
     return root;
-
-    if (!find(node, key))
-    {
-        throw std::runtime_error("[ERROR] Element not found!");
-    }
 }
 
 template <class T, typename K>
@@ -236,9 +236,9 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
         if (root->key == key)
             return root;
         if (root->key < key)
-            return this->find(root->left, key);
-        else
             return this->find(root->right, key);
+        else
+            return this->find(root->left, key);
     }
     return nullptr;
 }

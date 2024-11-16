@@ -19,7 +19,7 @@ AVLTree<Facility, QString> *FacilityService::readAll()
 Facility *FacilityService::readById(QString id)
 {
     Facility *facilityDetail = this->facilityRepository->findByDataId(id);
-    if (facilityDetail = nullptr)
+    if (facilityDetail == nullptr)
     {
         throw DataException::DataNotFound("Not found any facility with facility id: " + id.toStdString());
     }

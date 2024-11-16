@@ -1,4 +1,5 @@
 #include "FacilityController.h"
+#include <exception>
 
 FacilityController::FacilityController()
 {
@@ -62,6 +63,23 @@ void FacilityController::removeFacility(Facility data)
         msgBox.setText(e.what());
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
+    }
+}
+
+Facility *FacilityController::getFacilityById(QString id)
+{
+    try
+    {
+        return this->facilityService->readById(id);
+    }
+    catch(const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return nullptr;
     }
 }
 

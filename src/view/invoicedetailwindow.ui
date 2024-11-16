@@ -27,9 +27,9 @@ QTableWidget
 
 QPushButton {
 	border-radius: 5px;
-	background-color: black;
 	height: 24px;
-	font-weight: bold
+	font-weight: bold;
+	color: #ffffff;
 }
 
 #invoiceDetailAddButton
@@ -60,6 +60,11 @@ QPushButton {
 #invoiceDetailEditButton:hover
 {
 	background-color: #0b5ed7;
+}
+
+QDialog
+{
+	background-color: #fff;
 }</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
@@ -170,6 +175,9 @@ QPushButton {
    </property>
    <property name="horizontalScrollBarPolicy">
     <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="gridStyle">
+    <enum>Qt::PenStyle::DashLine</enum>
    </property>
   </widget>
   <widget class="QGroupBox" name="InvoiceGroup">
@@ -363,6 +371,9 @@ QPushButton {
       <width>141</width>
       <height>24</height>
      </rect>
+    </property>
+    <property name="editable">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

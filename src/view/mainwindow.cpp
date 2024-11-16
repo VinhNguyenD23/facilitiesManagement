@@ -140,7 +140,7 @@ void MainWindow::loadInvoiceDetailDataStartUp(QTableWidget *table)
 void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column)
 {
     QString getInvoiceId = ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
-    InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(this, getInvoiceId);
+    InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(this, getInvoiceId, this->facility);
     invoiceDetailForm->setAttribute(Qt::WA_DeleteOnClose);
     invoiceDetailForm->show();
     invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);

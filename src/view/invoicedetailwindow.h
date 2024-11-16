@@ -16,7 +16,7 @@ class InvoiceDetailWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit InvoiceDetailWindow(QWidget *parent = nullptr, QString invoiceid = "");
+    explicit InvoiceDetailWindow(QWidget *parent = nullptr, QString invoiceId = "");
     ~InvoiceDetailWindow();
 
 private:
@@ -24,7 +24,8 @@ private:
 
 private:
     Ui::InvoiceDetailWindow *ui;
-    QString invoiceid;
+    QWidget *parent;
+    QString invoiceId;
     InvoiceDetailController *invoiceDetail = nullptr;
 
 };

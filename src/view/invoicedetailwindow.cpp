@@ -2,15 +2,18 @@
 #include "ui_invoicedetailwindow.h"
 #include <qtablewidget.h>
 
-InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent, QString invoiceid)
+InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent, QString invoiceId)
     : QDialog(parent)
     , ui(new Ui::InvoiceDetailWindow)
 {
     ui->setupUi(this);
     this->setFixedSize(QSize(1000, 600));
-    this->invoiceid = invoiceid;
+    this->invoiceId = invoiceId;
     this->invoiceDetail = new InvoiceDetailController();
+    this->parent = parent;
+    this->parent->hide();
 
+    ui->InvoiceGroup->setTitle("Thông tin chi tiết hóa đơn: " + this->invoiceId);
     QTableWidget *invoiceDetailTempTable = ui->invoiceDetailTable;
     invoiceDetailTempTable->verticalHeader()->setVisible(false);
     invoiceDetailTempTable->horizontalHeader()->setVisible(false);
@@ -32,7 +35,7 @@ void InvoiceDetailWindow::loadDataInvoiceDetail(QTableWidget *table)
     auto *current = this->invoiceDetail->getListInvoice()->getListData();
     while(current != nullptr)
     {
-        if(current->data.invoiceId == this->invoiceid)
+        if(current->data.invoiceId == this->invoiceId)
         {
             table->insertRow(row);
             QTableWidgetItem *invoiceDetailId = new QTableWidgetItem(current->data.invoiceId);
@@ -55,5 +58,6 @@ void InvoiceDetailWindow::loadDataInvoiceDetail(QTableWidget *table)
 
 InvoiceDetailWindow::~InvoiceDetailWindow()
 {
+    this->parent->show();
     delete ui;
 }

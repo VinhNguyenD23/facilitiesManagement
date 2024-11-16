@@ -172,7 +172,7 @@ QPushButton {
     <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
    </property>
   </widget>
-  <widget class="QGroupBox" name="groupBox_3">
+  <widget class="QGroupBox" name="InvoiceGroup">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -182,7 +182,7 @@ QPushButton {
     </rect>
    </property>
    <property name="title">
-    <string>Thông tin hóa đơn</string>
+    <string>Thông tin chi tiết hóa đơn</string>
    </property>
    <widget class="QLabel" name="label_11">
     <property name="geometry">

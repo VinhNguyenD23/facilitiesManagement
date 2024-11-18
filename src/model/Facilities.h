@@ -16,6 +16,7 @@ private:
 
 private:
     void readFile();
+    void writeFile();
 
 public:
     FacilitiesModel();
@@ -26,6 +27,7 @@ public:
     void remove(QString id);
     void refresh();
     Facility *findByDataId(QString id);
+    void show(AVLTree<Facility, QString>::Node *root, QTextStream &out);
 };
 
 #endif // FACILITIES_H

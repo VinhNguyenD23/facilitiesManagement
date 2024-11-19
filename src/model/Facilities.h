@@ -16,6 +16,7 @@ private:
 
 private:
     void readFile();
+    //TODO: writeFile()
 
 public:
     FacilitiesModel();

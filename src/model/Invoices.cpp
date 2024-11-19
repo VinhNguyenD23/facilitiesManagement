@@ -27,6 +27,7 @@ void InvoiceModel::readFile()
         tempInvoice.staffId = field[2];
         tempInvoice.type = field[3].toInt();
         this->data->add(tempInvoice);
+        // qDebug() << field;
     }
     qDebug() << "Invoice Databases load:" << this->getSize();
     file.close();
@@ -41,9 +42,9 @@ void InvoiceModel::writeFile()
     }
     QTextStream out(&file);
     auto *currentHead = this->getList()->getListData();
-    while (currentHead->next != nullptr) /*Nếu danh sách rỗng hoặc currentHead không có dữ liệu, đoạn mã này có thể gặp lỗi. Có thể cải tiến bằng cách kiểm tra điều kiện currentHead không null trước khi thực hiện vòng lặp.*/
+    while (currentHead != nullptr)
     {
-        out << currentHead->data.id << ',' << currentHead->data.date.getFormatValue() << ',' << currentHead->data.staffId << ',' << currentHead->data.type << '\n';
+        out << currentHead->data.id << ',' << currentHead->data.date.toRawData() << ',' << currentHead->data.staffId << ',' << currentHead->data.type << '\n';
         currentHead = currentHead->next;
     }
     file.close();
@@ -98,11 +99,12 @@ void InvoiceModel::refresh()
 Invoice *InvoiceModel::getDataById(QString id)
 {
     auto *temp = this->data->getListData();
-    while (temp != nullptr && temp->next != nullptr)
+    while (temp != nullptr)
     {
         if (temp->data.id == id)
         {
-            return &temp->data;
+            Invoice *invoiceData = new Invoice(temp->data);
+            return invoiceData;
         }
         temp = temp->next;
     }

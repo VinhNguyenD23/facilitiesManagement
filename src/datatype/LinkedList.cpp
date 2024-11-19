@@ -115,7 +115,7 @@ template <typename T>
 typename LinkedList<T>::Node *LinkedList<T>::getElement(T data)
 {
     Node *current = this->head;
-    while (current->next != nullptr)
+    while (current != nullptr)
     {
         if (current->data == data)
             return current;

@@ -22,6 +22,7 @@ void FacilityController::createNewFacility(Facility data)
 {
     try
     {
+        // qDebug() << data.id << data.name << data.unit << data.quantity;
         this->facilityService->create(data);
     }
     catch (const std::exception &e)

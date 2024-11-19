@@ -70,7 +70,7 @@ void FacilitiesModel::remove(QString id)
     AVLTree<Facility, QString>::Node *element = this->data->findIndex(id);
     if (element == nullptr)
     {
-        DataException::DataNotFound("Data with id " + id.toStdString() + " is not existing");
+        throw DataException::DataNotFound("Data with id " + id.toStdString() + " is not existing");
     }
     this->data->remove(element, element->key);
 }
@@ -84,6 +84,11 @@ void FacilitiesModel::refresh()
 
 Facility *FacilitiesModel::findByDataId(QString id)
 {
-    Facility *findElement = &this->data->findIndex(id)->data;
+    Facility *findElement = nullptr;
+    if(this->data->findIndex(id) != nullptr)
+    {
+        findElement = &this->data->findIndex(id)->data;
+        // throw DataException::DataNotFound("Data with id " + id.toStdString() + " is not existing");
+    }
     return findElement;
 }

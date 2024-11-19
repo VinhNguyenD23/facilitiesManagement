@@ -17,6 +17,7 @@ private:
 
 private:
     void readFile();
+    //TODO: writeFile()
 
 public:
     InvoiceDetailModel();

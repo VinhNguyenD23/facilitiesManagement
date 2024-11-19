@@ -3,7 +3,10 @@
 #include <qcombobox.h>
 #include <qtablewidget.h>
 
-InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent, QString invoiceId, FacilityController *facility)
+InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent,
+                                         QString invoiceId,
+                                         FacilityController *facility,
+                                         InvoiceDetailController *invoiceDetail)
     : QDialog(parent)
     , ui(new Ui::InvoiceDetailWindow)
 {
@@ -11,7 +14,7 @@ InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent, QString invoiceId, Fac
     this->setFixedSize(QSize(1000, 600));
 
     this->invoiceId = invoiceId;
-    this->invoiceDetail = new InvoiceDetailController();
+    this->invoiceDetail = invoiceDetail;
     this->parent = parent;
     this->facility = facility;
 
@@ -48,7 +51,7 @@ void InvoiceDetailWindow::loadDataInvoiceDetail(QTableWidget *table)
             QTableWidgetItem *invoiceDetailId = new QTableWidgetItem(current->data.id);
             QTableWidgetItem *facilityName = new QTableWidgetItem(getFacility->name);
             QTableWidgetItem *facilityQuantity = new QTableWidgetItem(QString::number(current->data.quantity));
-            QTableWidgetItem *invoiceDetailPrice = new QTableWidgetItem(QString::number(current->data.price));
+            QTableWidgetItem *invoiceDetailPrice = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(current->data.price)));
             QTableWidgetItem *invoiceDetailVAT = new QTableWidgetItem(QString::number(current->data.vat * 100.000) + "%");
 
             table->setItem(row, 0, invoiceDetailId);
@@ -68,7 +71,7 @@ void InvoiceDetailWindow::loadAvlData(QComboBox *box, AVLTree<Facility, QString>
     if(node != nullptr)
     {
         this->loadAvlData(box, node->left);
-        box->addItem(node->data.name);
+        box->addItem(node->data.id + "/" +node->data.name);
         this->loadAvlData(box, node->right);
     }
 }

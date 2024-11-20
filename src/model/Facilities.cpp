@@ -36,6 +36,29 @@ void FacilitiesModel::readFile()
     file.close();
 }
 
+void FacilitiesModel::show(AVLTree<Facility,QString>::Node *root, QTextStream &out)
+{
+    if (root != nullptr)
+    {
+        // xuat data nut
+        out << root->data.id << ',' << root->data.name << ',' << root->data.unit << root->data.quantity;
+        show(root->left, out);
+        show(root->right, out);
+    }
+}
+
+void FacilitiesModel::writeFile() {
+    QFile file(FilePath::getPath(FilePath::databases::FACILITY));
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        throw DatabasesException::DatabaseBroken("facility");
+    }
+    QTextStream out(&file);
+    AVLTree<Facility, QString>::Node *currentroot = this->data->getroot();
+    show(currentroot,out);
+    file.close();
+}
+
 FacilitiesModel::FacilitiesModel()
 {
     qDebug() << "Facility model initialized successfully";

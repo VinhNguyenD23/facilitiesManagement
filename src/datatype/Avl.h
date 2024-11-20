@@ -37,6 +37,7 @@ private:
     void clear(Node *node);
     Node *minValueNode(Node *node);
 
+
 public:
     AVLTree();
     ~AVLTree();
@@ -45,6 +46,7 @@ public:
     Node *findIndex(K key);
     void remove(K key);
     Node *getList();
+    Node *getroot();
     DArray<T> toDynamicArray();
     void clear();
 };

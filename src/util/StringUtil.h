@@ -16,6 +16,16 @@ public:
         Qnumber.append(QString::number(number));
         return Qnumber;
     }
+
+    static QString formatNumberWithCommas(const QString &number) {
+        QString formatted = number;
+
+        // Duyệt ngược và thêm dấu phẩy sau mỗi 3 chữ số
+        for (int i = formatted.length() - 3; i > 0; i -= 3) {
+            formatted.insert(i, ',');
+        }
+        return formatted;
+    }
 };
 
 #endif

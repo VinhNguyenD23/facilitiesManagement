@@ -19,6 +19,7 @@ public:
     void removeInvoice(Invoice data);
     LinkedList<Invoice> *getListInvoices();
     Invoice *getInvoiceById(QString id);
+    double getSumOfInvoice(QString id);
     ~InvoiceController();
 };
 

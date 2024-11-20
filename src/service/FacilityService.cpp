@@ -8,6 +8,11 @@ FacilityService::FacilityService()
 
 void FacilityService::create(Facility data)
 {
+    // qDebug() << this->facilityRepository->findByDataId(data.id);
+    if(this->facilityRepository->findByDataId(data.id) != nullptr)
+    {
+        throw DataException::DuplicateDataId("This data id is already exist, please try again");
+    }
     this->facilityRepository->insert(data);
 }
 

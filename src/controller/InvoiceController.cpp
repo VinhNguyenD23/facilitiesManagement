@@ -51,7 +51,6 @@ void InvoiceController::updateExistInvoice(Invoice data)
 
 void InvoiceController::removeInvoice(Invoice data)
 {
-    this->invoiceService->remove(data);
     try
     {
         this->invoiceService->remove(data);
@@ -97,6 +96,23 @@ Invoice *InvoiceController::getInvoiceById(QString id)
         msg.setIcon(QMessageBox::Icon::Critical);
         msg.exec();
         return nullptr;
+    }
+}
+
+double InvoiceController::getSumOfInvoice(QString id)
+{
+    try
+    {
+        return this->invoiceService->getSum(id);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msg;
+        msg.setText(e.what());
+        msg.setIcon(QMessageBox::Icon::Critical);
+        msg.exec();
+        return 0.00;
     }
 }
 

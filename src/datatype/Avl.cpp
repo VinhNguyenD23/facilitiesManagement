@@ -241,9 +241,9 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
     {
         if (root->key == key)
             return root;
-        if (root->key < key)
+        if (root->key < key && root->right != nullptr)
             return this->find(root->right, key);
-        else
+        else if(root->key > key && root->left != nullptr)
             return this->find(root->left, key);
     }
     return nullptr;

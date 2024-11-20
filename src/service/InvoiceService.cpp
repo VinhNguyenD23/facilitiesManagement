@@ -4,6 +4,7 @@ InvoiceService::InvoiceService()
 {
     this->invoiceRepository = invoiceModel;
     this->staffRepository = staffModel;
+    this->invoiceDetailRepository = invoiceDetailModel;
     qDebug() << "Invoice service initialized successfully";
 }
 
@@ -43,6 +44,25 @@ void InvoiceService::remove(Invoice data)
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
     this->invoiceRepository->remove(data);
+}
+
+double InvoiceService::getSum(QString id)
+{
+    if (this->invoiceRepository->getDataById(id) == nullptr)
+    {
+        throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
+    }
+    double sum = 0.00;
+    auto *current = this->invoiceDetailRepository->getList()->getListData();
+    while (current != nullptr && current->next != nullptr)
+    {
+        if (current->data.invoiceId == id)
+        {
+            sum += double(current->data.price) + double(current->data.price) * current->data.vat;
+        }
+        current = current->next;
+    }
+    return sum;
 }
 
 InvoiceService::~InvoiceService()

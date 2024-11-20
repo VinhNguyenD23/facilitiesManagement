@@ -6,7 +6,6 @@ StaffService::StaffService()
     qDebug() << "Staff service initialized successfully";
 }
 
-
 DArray<Staff> *StaffService::getList()
 {
     return this->staffRepository->getListData();
@@ -19,10 +18,10 @@ Staff *StaffService::find(QString id)
 
 void StaffService::create(Staff data)
 {
-    this->staffRepository -> insert(data);
+    this->staffRepository->insert(data);
 }
 
-void StaffService::update( Staff data)
+void StaffService::update(Staff data)
 {
     this->staffRepository->update(data);
 }

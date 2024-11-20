@@ -42,7 +42,8 @@ void StaffsModel::writeFile()
     }
     QTextStream out(&file);
     auto *current = this->getListData();
-    for(int i = 0; current->getSize() ; i++){
+    for (int i = 0; current->getSize(); i++)
+    {
         Staff data = current->at(i);
         out << data.id << ',' << data.lastName << ',' << data.lastName << ',' << data.gender << '\n';
     }

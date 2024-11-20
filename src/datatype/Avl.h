@@ -30,6 +30,7 @@ private:
     Node *rightRotate(Node *y);
     Node *leftRotate(Node *x);
     Node *insert(Node *node, T data, K key);
+    Node *remove(Node *node, K key);
     int getHeight(Node *node);
     int getBalance(Node *node);
     void pushDataToDynamicArray(DArray<T> &data, Node *node);
@@ -42,7 +43,7 @@ public:
     void insert(T data, K key);
     void update(T data, K key);
     Node *findIndex(K key);
-    Node *remove(Node *node, K key);
+    void remove(K key);
     Node *getList();
     DArray<T> toDynamicArray();
     void clear();

@@ -72,7 +72,7 @@ void FacilitiesModel::remove(QString id)
     {
         throw DataException::DataNotFound("Data with id " + id.toStdString() + " is not existing");
     }
-    this->data->remove(element, element->key);
+    this->data->remove(element->key);
 }
 
 void FacilitiesModel::refresh()

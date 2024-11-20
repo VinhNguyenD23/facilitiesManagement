@@ -3,6 +3,9 @@
 
 #include "../object/Invoice.h"
 #include "../object/InvoiceDetail.h"
+
+#include "../exception/ArraySizeException.h"
+
 #include "DynamicArray.h"
 template <typename T>
 class LinkedList

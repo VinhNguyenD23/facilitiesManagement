@@ -147,64 +147,71 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::findIndex(K key)
     return find(root, key);
 }
 
+template<class T, typename K>
+void AVLTree<T, K>::remove(K key)
+{
+    this->root = this->remove(this->root, key);
+}
+
 template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::remove(Node *node, K key)
 {
     if (!find(node, key))
     {
-        throw std::runtime_error("[ERROR] Element not found!");
+        throw DataException::DataNotFound("Data not found!");
     }
 
-    if (!root)
-        return root;
+    if (!node)
+        return node;
 
-    if (key < root->key)
-        root->left = remove(root->left, key);
-    else if (key > root->key)
-        root->right = remove(root->right, key);
-    else
+    if (key < node->key)
+        node->left = remove(node->left, key);
+    else if (key > node->key)
+        node->right = remove(node->right, key);
+    else if(key == node->key)
     {
-        if ((root->left == nullptr) || (root->right == nullptr))
+        if ((node->left == nullptr) || (node->right == nullptr))
         {
-            Node *temp = root->left ? root->left : root->right;
-            if (!temp)
+            Node *temp = node->left ? node->left : node->right;
+            if (temp == nullptr)
             {
-                temp = root;
-                root = nullptr;
+                temp = node;
+                node = nullptr;
             }
             else
-                *root = *temp;
+                *node = *temp;
             delete temp;
         }
         else
         {
-            Node *temp = minValueNode(root->right);
-            root->key = temp->key;
-            root->right = remove(root->right, temp->key);
+            Node *temp = minValueNode(node->right);
+            node->key = temp->key;
+            node->data = temp->data;
+            node->right = remove(node->right, temp->key);
         }
     }
 
-    if (!root)
-        return root;
+    if (!node)
+        return node;
 
-    root->height = 1 + std::max(getHeight(root->left), getHeight(root->right));
-    int balance = getBalance(root);
+    node->height = 1 + std::max(getHeight(node->left), getHeight(node->right));
+    int balance = getBalance(node);
 
-    if (balance > 1 && getBalance(root->left) >= 0)
-        return rightRotate(root);
-    if (balance > 1 && getBalance(root->left) < 0)
+    if (balance > 1 && getBalance(node->left) >= 0)
+        return rightRotate(node);
+    if (balance > 1 && getBalance(node->left) < 0)
     {
-        root->left = leftRotate(root->left);
-        return rightRotate(root);
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
     }
-    if (balance < -1 && getBalance(root->right) <= 0)
-        return leftRotate(root);
-    if (balance < -1 && getBalance(root->right) > 0)
+    if (balance < -1 && getBalance(node->right) <= 0)
+        return leftRotate(node);
+    if (balance < -1 && getBalance(node->right) > 0)
     {
-        root->right = rightRotate(root->right);
-        return leftRotate(root);
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
     }
-    return root;
+    return node;
 }
 
 template <class T, typename K>
@@ -237,7 +244,7 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::find(Node *root, K key)
             return root;
         if (root->key < key && root->right != nullptr)
             return this->find(root->right, key);
-        else if(root->key > key && root->left != nullptr)
+        else if (root->key > key && root->left != nullptr)
             return this->find(root->left, key);
     }
     return nullptr;

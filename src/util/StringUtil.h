@@ -1,6 +1,5 @@
 #ifndef STRINGUTIL_H
 #define STRINGUTIL_H
-#include <iostream>
 #include <QString>
 class StringUtil
 {
@@ -17,10 +16,9 @@ public:
         return Qnumber;
     }
 
-    static QString formatNumberWithCommas(const QString &number) {
+    static QString formatNumberWithCommas(QString number) {
         QString formatted = number;
 
-        // Duyệt ngược và thêm dấu phẩy sau mỗi 3 chữ số
         for (int i = formatted.length() - 3; i > 0; i -= 3) {
             formatted.insert(i, ',');
         }

@@ -46,6 +46,10 @@ private slots:
 
     void on_invoiceEditButton_clicked();
 
+    void on_facilityDeleteButton_clicked();
+
+    void on_facilityEditButton_clicked();
+
 private:
     void loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row);
     void loadFacilityData(QTableWidget *table);

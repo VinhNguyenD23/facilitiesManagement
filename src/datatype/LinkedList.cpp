@@ -54,7 +54,7 @@ void LinkedList<T>::remove(T data)
 {
     if (this->head == nullptr)
     {
-        throw std::logic_error("[ERROR] Data is empty, Can't delete");
+        throw ArraySizeException::ArrayEmpty("List is empty, Can't delete");
     }
     if (this->head->data == data)
     {

@@ -256,3 +256,25 @@ void MainWindow::on_invoiceEditButton_clicked()
     this->loadInvoiceData(ui->InvoiceTable);
 }
 
+
+void MainWindow::on_facilityDeleteButton_clicked()
+{
+    QString facilityId = ui->facilityId->toPlainText();
+    Facility facility = Facility();
+    facility.id = facilityId;
+    this->facility->removeFacility(facility);
+    this->loadFacilityData(ui->facilityTable);
+}
+
+
+void MainWindow::on_facilityEditButton_clicked()
+{
+    Facility facility = Facility();
+    facility.id = ui->facilityId->toPlainText();
+    facility.name = ui->facilityName->toPlainText();
+    facility.unit = ui->facilityUnit->toPlainText();
+    facility.quantity = ui->facilityQuantity->toPlainText().toLong();
+    this->facility->updateExistFacility(facility);
+    this->loadFacilityData(ui->facilityTable);
+}
+

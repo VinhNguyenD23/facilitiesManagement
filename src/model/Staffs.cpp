@@ -73,11 +73,12 @@ void StaffsModel::insert(Staff data)
 
 void StaffsModel::remove(Staff data)
 {
-    // TODO: Code remove function for list staffs [ priority: above normal ] [Testing]
+    // TODO: Code remove function for list staffs [ priority: above normal ] [Rewrite]
     QFile file(FilePath::getPath(FilePath::databases::STAFF));
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         throw std::runtime_error("[ERROR] This database (staff) not found or broken, please try again !");
+        // throw DatabasesException::DatabaseBroken("staff");
     }
     QTextStream outData(&file);
     for (int i = 0; i < this->getSize(); i++)

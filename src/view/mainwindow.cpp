@@ -204,7 +204,7 @@ void MainWindow::on_invoiceAddButton_clicked()
     invoiceRequest.staffId = ui->invoiceStaffId->toPlainText();
     QString dateText = ui->invoiceDate->text();
     QStringList dateTextList = dateText.split('/');
-    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(1).toInt(), dateTextList.at(0).toInt());
+    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(), dateTextList.at(1).toInt());
     invoiceRequest.date = date;
     if (ui->invoiceImport->isChecked())
     {
@@ -239,7 +239,7 @@ void MainWindow::on_invoiceEditButton_clicked()
     invoiceRequest.staffId = ui->invoiceStaffId->toPlainText();
     QString dateText = ui->invoiceDate->text();
     QStringList dateTextList = dateText.split('/');
-    Date date = Date(dateTextList.at(1).toInt(), dateTextList.at(0).toInt(), dateTextList.at(2).toInt());
+    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(), dateTextList.at(1).toInt());
     invoiceRequest.date = date;
     if (ui->invoiceImport->isChecked())
     {

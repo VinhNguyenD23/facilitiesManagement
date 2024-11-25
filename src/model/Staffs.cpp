@@ -47,7 +47,7 @@ void StaffsModel::writeFile()
     for (int i = 0; i < current->getSize(); i++)
     {
         Staff data = current->at(i);
-        out << data.id << ',' << data.lastName << ',' << data.lastName << ',' << data.gender << '\n';
+        out << data.id << ',' << data.lastName << ',' << data.firstName << ',' << data.gender << '\n';
     }
     file.close();
 }

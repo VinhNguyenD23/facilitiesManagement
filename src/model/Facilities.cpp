@@ -36,14 +36,14 @@ void FacilitiesModel::readFile()
     file.close();
 }
 
-void FacilitiesModel::show(AVLTree<Facility,QString>::Node *root, QTextStream &out)
+void FacilitiesModel::writeNode(AVLTree<Facility,QString>::Node *root, QTextStream &out)
 {
     if (root != nullptr)
     {
         // xuat data nut
-        out << root->data.id << ',' << root->data.name << ',' << root->data.unit << root->data.quantity;
-        show(root->left, out);
-        show(root->right, out);
+        writeNode(root->left, out);
+        out << root->data.id << ',' << root->data.name << ',' << root->data.unit << ',' << root->data.quantity << '\n';
+        writeNode(root->right, out);
     }
 }
 
@@ -54,8 +54,8 @@ void FacilitiesModel::writeFile() {
         throw DatabasesException::DatabaseBroken("facility");
     }
     QTextStream out(&file);
-    AVLTree<Facility, QString>::Node *currentroot = this->data->getroot();
-    show(currentroot,out);
+    AVLTree<Facility, QString>::Node *currentroot = this->data->getList();
+    writeNode(currentroot, out);
     file.close();
 }
 
@@ -77,6 +77,7 @@ AVLTree<Facility, QString> *FacilitiesModel::getList()
 void FacilitiesModel::insert(Facility data)
 {
     this->data->insert(data, data.id);
+    this->writeFile();
 }
 
 void FacilitiesModel::update(Facility data)
@@ -86,6 +87,7 @@ void FacilitiesModel::update(Facility data)
         DataException::DataNotFound("Data with id " + data.id.toStdString() + " is not existing");
     }
     this->data->update(data, data.id);
+    this->writeFile();
 }
 
 void FacilitiesModel::remove(QString id)
@@ -96,6 +98,7 @@ void FacilitiesModel::remove(QString id)
         throw DataException::DataNotFound("Data with id " + id.toStdString() + " is not existing");
     }
     this->data->remove(element->key);
+    this->writeFile();
 }
 
 void FacilitiesModel::refresh()

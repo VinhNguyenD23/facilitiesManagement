@@ -1,12 +1,14 @@
 #ifndef DARRAY_H
 #define DARRAY_H
 #define DEFAULT 10000
-#include <iostream>
+#include <QDebug>
 #include "../object/Staff.h"
 #include "../object/Facility.h"
 #include "../object/Invoice.h"
 #include "../object/InvoiceDetail.h"
+
 #include "../exception/ArraySizeException.h"
+#include "../exception/DataException.h"
 
 template <class T>
 class DArray
@@ -21,6 +23,7 @@ public:
     ~DArray();
     DArray(long capacity);
     void push(T data);
+    void update(T data);
     // void pushFront(T *data);
     // void pushAt(size_t index, T *data);
     void popAt(T data);

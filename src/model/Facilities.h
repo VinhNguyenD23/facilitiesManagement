@@ -15,6 +15,7 @@ private:
     AVLTree<Facility, QString> *data;
 
 private:
+    void writeNode(AVLTree<Facility, QString>::Node *root, QTextStream &out);
     void readFile();
     void writeFile();
 
@@ -27,7 +28,7 @@ public:
     void remove(QString id);
     void refresh();
     Facility *findByDataId(QString id);
-    void show(AVLTree<Facility, QString>::Node *root, QTextStream &out);
+
 };
 
 #endif // FACILITIES_H

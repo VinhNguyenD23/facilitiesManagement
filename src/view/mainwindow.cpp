@@ -91,6 +91,8 @@ void MainWindow::loadFacilityData(QTableWidget *table)
 
 void MainWindow::loadStaffData(QTableWidget *table)
 {
+    table->clearContents();
+    table->setRowCount(0);
     auto *data = this->staff->getListStaff();
     for (size_t i = 0; i < data->getSize(); i++)
     {
@@ -237,7 +239,7 @@ void MainWindow::on_invoiceEditButton_clicked()
     invoiceRequest.staffId = ui->invoiceStaffId->toPlainText();
     QString dateText = ui->invoiceDate->text();
     QStringList dateTextList = dateText.split('/');
-    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(1).toInt(), dateTextList.at(0).toInt());
+    Date date = Date(dateTextList.at(1).toInt(), dateTextList.at(0).toInt(), dateTextList.at(2).toInt());
     invoiceRequest.date = date;
     if (ui->invoiceImport->isChecked())
     {
@@ -276,5 +278,55 @@ void MainWindow::on_facilityEditButton_clicked()
     facility.quantity = ui->facilityQuantity->toPlainText().toLong();
     this->facility->updateExistFacility(facility);
     this->loadFacilityData(ui->facilityTable);
+}
+
+
+void MainWindow::on_staffTable_cellClicked(int row, int column)
+{
+    int currentRow = ui->staffTable->currentRow();
+    QString staffId = ui->staffTable->item(currentRow, 0)->text();
+    ui->staffIdTxt->setText(staffId);
+    Staff *getCurrentStaff = this->staff->getStaffById(staffId);
+    ui->staffLastNameTxt->setText(getCurrentStaff->lastName);
+    ui->staffFirstNameTxt->setText(getCurrentStaff->firstName);
+    ui->maleRButton->setChecked(getCurrentStaff->gender);
+    ui->femaleRButton->setChecked(!getCurrentStaff->gender);
+}
+
+
+void MainWindow::on_staffAddButton_clicked()
+{
+    Staff currentStaff = Staff();
+    currentStaff.id = ui->staffIdTxt->toPlainText();
+    currentStaff.lastName = ui->staffLastNameTxt->toPlainText();
+    currentStaff.firstName = ui->staffFirstNameTxt->toPlainText();
+    currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
+    // qDebug() << currentStaff.id << currentStaff.lastName << currentStaff.firstName << currentStaff.gender;
+    this->staff->create(currentStaff);
+    this->loadStaffData(ui->staffTable);
+}
+
+
+void MainWindow::on_staffDeleteButton_clicked()
+{
+    Staff currentStaff = Staff();
+    currentStaff.id = ui->staffIdTxt->toPlainText();
+    currentStaff.lastName = ui->staffLastNameTxt->toPlainText();
+    currentStaff.firstName = ui->staffFirstNameTxt->toPlainText();
+    currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
+    this->staff->removeStaff(currentStaff);
+    this->loadStaffData(ui->staffTable);
+}
+
+
+void MainWindow::on_staffEditButton_clicked()
+{
+    Staff currentStaff = Staff();
+    currentStaff.id = ui->staffIdTxt->toPlainText();
+    currentStaff.lastName = ui->staffLastNameTxt->toPlainText();
+    currentStaff.firstName = ui->staffFirstNameTxt->toPlainText();
+    currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
+    this->staff->updateExistStaff(currentStaff);
+    this->loadStaffData(ui->staffTable);
 }
 

@@ -10,6 +10,15 @@ struct Staff
     QString firstName;
     QString lastName;
     bool gender;
+    bool operator==(Staff &other)
+    {
+        return this->id == other.id;
+    }
+
+    bool operator!=(Staff &other)
+    {
+        return this->id != other.id;
+    }
 };
 
 #endif

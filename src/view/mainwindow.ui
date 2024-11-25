@@ -170,7 +170,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -474,7 +474,7 @@
           <string>Mã</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_6">
+        <widget class="QTextEdit" name="staffLastNameTxt">
          <property name="geometry">
           <rect>
            <x>100</x>
@@ -516,7 +516,7 @@
           <string>Tên</string>
          </property>
         </widget>
-        <widget class="QTextEdit" name="textEdit_7">
+        <widget class="QTextEdit" name="staffFirstNameTxt">
          <property name="geometry">
           <rect>
            <x>100</x>
@@ -587,7 +587,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QTextEdit" name="textEdit_11">
+        <widget class="QTextEdit" name="staffIdTxt">
          <property name="geometry">
           <rect>
            <x>100</x>
@@ -614,14 +614,14 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QRadioButton" name="radioButton_3">
+           <widget class="QRadioButton" name="maleRButton">
             <property name="text">
              <string>Nam</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioButton_4">
+           <widget class="QRadioButton" name="femaleRButton">
             <property name="text">
              <string>Nữ</string>
             </property>

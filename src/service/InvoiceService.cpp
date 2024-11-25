@@ -10,6 +10,11 @@ InvoiceService::InvoiceService()
 
 void InvoiceService::create(Invoice data)
 {
+    auto getStaff = this->staffRepository->getDataById(data.staffId);
+    if (getStaff == nullptr)
+    {
+        throw DataException::DataNotFound("Staff id not found! Please try again.");
+    }
     this->invoiceRepository->insert(data);
 }
 

@@ -33,6 +33,20 @@ void DArray<T>::push(T data)
     this->size++;
 }
 
+template <class T>
+void DArray<T>::update(T data)
+{
+    for (int index = 0; index < this->getSize(); index++)
+    {
+        if (this->at(index) == data)
+        {
+            this->listData[index] = data;
+            return;
+        }
+    }
+    throw DataException::DataNotFound("Data not found!");
+}
+
 #pragma region unused
 // template <class T>
 // void DArray<T>::pushFront(T *data)
@@ -73,7 +87,27 @@ void DArray<T>::popAt(T data)
     if (this->isEmpty())
     {
         throw ArraySizeException::ArrayEmpty("This dynamic array is empty. Can't remove any data.");
-        // throw std::logic_error("[ERROR] This dynamic array is empty. Can't remove any data.");
+    }
+    int index = 0;
+    bool foundElement = false;
+    for (index = 0; index < this->getSize(); index++)
+    {
+        if (this->at(index) == data)
+        {
+            foundElement = true;
+            break;
+        }
+    }
+
+    if (!foundElement)
+    {
+        throw DataException::DataNotFound("Element not found!");
+    }
+
+    this->size--;
+    for (int process = index; process < this->getSize(); process++)
+    {
+        this->listData[process] = this->listData[process + 1];
     }
 }
 

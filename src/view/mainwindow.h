@@ -50,6 +50,14 @@ private slots:
 
     void on_facilityEditButton_clicked();
 
+    void on_staffTable_cellClicked(int row, int column);
+
+    void on_staffAddButton_clicked();
+
+    void on_staffDeleteButton_clicked();
+
+    void on_staffEditButton_clicked();
+
 private:
     void loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row);
     void loadFacilityData(QTableWidget *table);

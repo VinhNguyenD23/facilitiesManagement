@@ -57,12 +57,6 @@ typename AVLTree<T, K>::Node *AVLTree<T, K>::minValueNode(Node *node)
 }
 
 template <class T, typename K>
-typename AVLTree<T, K>::Node *AVLTree<T, K>::getroot()
-{
-    return this->root;
-}
-
-template <class T, typename K>
 typename AVLTree<T, K>::Node *AVLTree<T, K>::rightRotate(Node *y)
 {
     Node *x = y->left;

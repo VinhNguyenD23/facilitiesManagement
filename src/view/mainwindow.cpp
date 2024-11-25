@@ -54,6 +54,11 @@ MainWindow::MainWindow(QWidget *parent)
     invoiceTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
     invoiceTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     this->loadInvoiceData(invoiceTempTable);
+
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+    ui->invoiceDate->setDateTime(currentDateTime);
+    ui->fromDate->setDateTime(currentDateTime);
+    ui->toDate->setDateTime(currentDateTime);
 }
 
 MainWindow::~MainWindow()

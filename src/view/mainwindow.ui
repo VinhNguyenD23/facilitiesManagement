@@ -170,7 +170,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -1045,9 +1045,9 @@
        <widget class="QWidget" name="layoutWidget7">
         <property name="geometry">
          <rect>
-          <x>370</x>
+          <x>410</x>
           <y>50</y>
-          <width>431</width>
+          <width>341</width>
           <height>26</height>
          </rect>
         </property>
@@ -1060,7 +1060,20 @@
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="dateEdit"/>
+          <widget class="QDateEdit" name="fromDate"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
          <item>
           <widget class="QLabel" name="label_2">
@@ -1070,7 +1083,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="dateEdit_2"/>
+          <widget class="QDateEdit" name="toDate"/>
          </item>
         </layout>
        </widget>

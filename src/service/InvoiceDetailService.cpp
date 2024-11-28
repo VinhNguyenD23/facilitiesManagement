@@ -11,24 +11,25 @@ void InvoiceDetailService::create(InvoiceDetail data)
     if (this->invoiceDetailRepository->getDataById(data.id))
     {
         throw DataException::DuplicateDataId("This id is existing, please try again!");
+        // return;
     }
     this->invoiceDetailRepository->insert(data);
 }
 
 void InvoiceDetailService::update(InvoiceDetail data)
 {
-    if (this->invoiceDetailRepository->getDataById(data.id))
+    if (!this->invoiceDetailRepository->getDataById(data.id))
     {
-        DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
+        throw DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
     }
     this->invoiceDetailRepository->update(data);
 }
 
 void InvoiceDetailService::remove(InvoiceDetail data)
 {
-    if (this->invoiceDetailRepository->getDataById(data.id))
+    if (!this->invoiceDetailRepository->getDataById(data.id))
     {
-        DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
+        throw DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
     }
     this->invoiceDetailRepository->remove(data);
 }

@@ -7,8 +7,7 @@ InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent,
                                          QString invoiceId,
                                          FacilityController *facility,
                                          InvoiceDetailController *invoiceDetail)
-    : QDialog(parent)
-    , ui(new Ui::InvoiceDetailWindow)
+    : QDialog(parent), ui(new Ui::InvoiceDetailWindow)
 {
     ui->setupUi(this);
     this->setFixedSize(QSize(1000, 600));
@@ -18,7 +17,7 @@ InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent,
     this->parent = parent;
     this->facility = facility;
 
-    this->parent->hide();
+    // this->parent->hide();
 
     ui->InvoiceGroup->setTitle("Thông tin chi tiết hóa đơn: " + this->invoiceId);
     QTableWidget *invoiceDetailTempTable = ui->invoiceDetailTable;
@@ -40,11 +39,13 @@ InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent,
 
 void InvoiceDetailWindow::loadDataInvoiceDetail(QTableWidget *table)
 {
+    table->clearContents();
+    table->setRowCount(0);
     int row = 0;
     auto *current = this->invoiceDetail->getListInvoice()->getListData();
-    while(current != nullptr)
+    while (current != nullptr)
     {
-        if(current->data.invoiceId == this->invoiceId)
+        if (current->data.invoiceId == this->invoiceId)
         {
             table->insertRow(row);
             Facility *getFacility = this->facility->getFacilityById(current->data.facilityId);
@@ -68,10 +69,10 @@ void InvoiceDetailWindow::loadDataInvoiceDetail(QTableWidget *table)
 
 void InvoiceDetailWindow::loadAvlData(QComboBox *box, AVLTree<Facility, QString>::Node *node)
 {
-    if(node != nullptr)
+    if (node != nullptr)
     {
         this->loadAvlData(box, node->left);
-        box->addItem(node->data.id + "/" +node->data.name);
+        box->addItem(node->data.id + '/' + node->data.name);
         this->loadAvlData(box, node->right);
     }
 }
@@ -86,4 +87,65 @@ InvoiceDetailWindow::~InvoiceDetailWindow()
 {
     this->parent->show();
     delete ui;
+}
+
+void InvoiceDetailWindow::on_invoiceDetailTable_cellClicked(int row, int column)
+{
+    int currentRow = ui->invoiceDetailTable->currentRow();
+    QString facilityId = ui->invoiceDetailTable->item(currentRow, 0)->text();
+    ui->invoiceDetailId->setText(facilityId);
+    int indexFacility = -1;
+    for (int i = 0; i < ui->facilityNameBox->count(); i++)
+    {
+        // qDebug() << ui->facilityNameBox->itemText(i).split('/').at(1) << ui->invoiceDetailTable->item(currentRow, 1)->text();
+        if (ui->facilityNameBox->itemText(i).split('/').at(1).compare(ui->invoiceDetailTable->item(currentRow, 1)->text()) == 0)
+        {
+            indexFacility = i;
+            break;
+        }
+    }
+    if (indexFacility > 0)
+    {
+        ui->facilityNameBox->setCurrentIndex(indexFacility);
+    }
+    ui->facilityQuantityText->setText(ui->invoiceDetailTable->item(currentRow, 2)->text());
+    ui->invoiceDetailPriceText->setText(ui->invoiceDetailTable->item(currentRow, 3)->text());
+    QString vat = ui->invoiceDetailTable->item(currentRow, 4)->text();
+    vat.chop(1);
+    vat = QString::number(vat.toDouble() / 100.0);
+    ui->vatPrice->setText(vat);
+}
+
+void InvoiceDetailWindow::on_invoiceDetailAddButton_clicked()
+{
+    InvoiceDetail currentInvoiceDetail = InvoiceDetail();
+    currentInvoiceDetail.id = ui->invoiceDetailId->toPlainText();
+    currentInvoiceDetail.facilityId = ui->facilityNameBox->currentText().split('/').at(0);
+    currentInvoiceDetail.invoiceId = this->invoiceId;
+    currentInvoiceDetail.price = ui->invoiceDetailPriceText->toPlainText().toLongLong();
+    currentInvoiceDetail.quantity = ui->facilityQuantityText->toPlainText().toInt();
+    currentInvoiceDetail.vat = ui->vatPrice->toPlainText().toDouble();
+    this->invoiceDetail->createNewInvoiceDetail(currentInvoiceDetail);
+    this->loadDataInvoiceDetail(ui->invoiceDetailTable);
+}
+
+void InvoiceDetailWindow::on_invoiceDetailDeleteButton_clicked()
+{
+    InvoiceDetail currentInvoiceDetail = InvoiceDetail();
+    currentInvoiceDetail.id = ui->invoiceDetailId->toPlainText();
+    this->invoiceDetail->removeInvoiceDetail(currentInvoiceDetail);
+    this->loadDataInvoiceDetail(ui->invoiceDetailTable);
+}
+
+void InvoiceDetailWindow::on_invoiceDetailEditButton_clicked()
+{
+    InvoiceDetail currentInvoiceDetail = InvoiceDetail();
+    currentInvoiceDetail.id = ui->invoiceDetailId->toPlainText();
+    currentInvoiceDetail.facilityId = ui->facilityNameBox->currentText().split('/').at(0);
+    currentInvoiceDetail.invoiceId = this->invoiceId;
+    currentInvoiceDetail.price = ui->invoiceDetailPriceText->toPlainText().toLongLong();
+    currentInvoiceDetail.quantity = ui->facilityQuantityText->toPlainText().toInt();
+    currentInvoiceDetail.vat = ui->vatPrice->toPlainText().toDouble();
+    this->invoiceDetail->updateExistInvoiceDetail(currentInvoiceDetail);
+    this->loadDataInvoiceDetail(ui->invoiceDetailTable);
 }

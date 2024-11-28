@@ -31,6 +31,14 @@ void InvoiceDetailController::createNewInvoiceDetail(InvoiceDetail data)
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
     }
+    catch(...)
+    {
+        qDebug() << "Unknown exception";
+        QMessageBox msgBox;
+        msgBox.setText("Something is wrong, please try again!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
 void InvoiceDetailController::updateExistInvoiceDetail(InvoiceDetail data)

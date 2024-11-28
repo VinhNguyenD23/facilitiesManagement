@@ -32,6 +32,23 @@ void InvoiceDetailModel::readFile()
     file.close();
 }
 
+void InvoiceDetailModel::writeFile()
+{
+    QFile file(FilePath::getPath(FilePath::databases::INVOICEDETAIL));
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        throw DatabasesException::DatabaseBroken("invoiceDetail");
+    }
+    QTextStream out(&file);
+    auto *currentHead = this->getList()->getListData();
+    while (currentHead != nullptr)
+    {
+        out << currentHead->data.id << ',' << currentHead->data.invoiceId << ',' << currentHead->data.facilityId << ',' << QString::number(currentHead->data.quantity) << ',' << QString::number(currentHead->data.price) << ',' << QString::number(currentHead->data.vat * 100.0) << '\n';
+        currentHead = currentHead->next;
+    }
+    file.close();
+}
+
 InvoiceDetailModel::InvoiceDetailModel()
 {
     qDebug() << "Invoice Detail model initialized successfully";
@@ -46,11 +63,13 @@ LinkedList<InvoiceDetail> *InvoiceDetailModel::getList()
 void InvoiceDetailModel::insert(InvoiceDetail data)
 {
     this->data->add(data);
+    this->writeFile();
 }
 
 void InvoiceDetailModel::remove(InvoiceDetail data)
 {
     this->data->remove(data);
+    this->writeFile();
 }
 
 void InvoiceDetailModel::update(InvoiceDetail data)
@@ -58,9 +77,10 @@ void InvoiceDetailModel::update(InvoiceDetail data)
     LinkedList<InvoiceDetail>::Node *element = this->data->getElement(data);
     if (element == nullptr)
     {
-        throw DataException::DataNotFound("Data not found");
+        throw DataException::DataNotFound("Invoice detail data not found");
     }
     element->data = data;
+    this->writeFile();
 }
 
 void InvoiceDetailModel::refresh()
@@ -71,10 +91,16 @@ void InvoiceDetailModel::refresh()
 
 InvoiceDetail *InvoiceDetailModel::getDataById(QString id)
 {
-    // LinkedList<InvoiceDetail>::Node *current = this->data->getListData();
-    // while (current->next != nullptr)
-    // {
-    // }
+    auto *temp = this->data->getListData();
+    while (temp != nullptr)
+    {
+        if (temp->data.id == id)
+        {
+            InvoiceDetail *invoiceData = new InvoiceDetail(temp->data);
+            return invoiceData;
+        }
+        temp = temp->next;
+    }
     return nullptr;
 }
 

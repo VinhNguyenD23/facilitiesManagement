@@ -166,8 +166,11 @@ void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column)
     QString getInvoiceId = ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
     InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(this, getInvoiceId, this->facility, this->invoiceDetail);
     invoiceDetailForm->setAttribute(Qt::WA_DeleteOnClose);
-    invoiceDetailForm->show();
     invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);
+    invoiceDetailForm->exec();
+    this->loadInvoiceData(ui->InvoiceTable);
+
+
 }
 
 void MainWindow::on_facilityTable_cellClicked(int row, int column)
@@ -321,6 +324,7 @@ void MainWindow::on_staffDeleteButton_clicked()
     currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
     this->staff->removeStaff(currentStaff);
     this->loadStaffData(ui->staffTable);
+    this->loadInvoiceData(ui->InvoiceTable);
 }
 
 

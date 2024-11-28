@@ -84,7 +84,7 @@ void InvoiceModel::update(Invoice data)
     LinkedList<Invoice>::Node *element = this->data->getElement(data);
     if (element == nullptr)
     {
-        throw DataException::DataNotFound("Data not found");
+        throw DataException::DataNotFound("Invoice data not found");
     }
     element->data = data;
     this->writeFile();

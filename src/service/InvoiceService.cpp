@@ -59,7 +59,7 @@ double InvoiceService::getSum(QString id)
     }
     double sum = 0.00;
     auto *current = this->invoiceDetailRepository->getList()->getListData();
-    while (current != nullptr && current->next != nullptr)
+    while (current != nullptr)
     {
         if (current->data.invoiceId == id)
         {

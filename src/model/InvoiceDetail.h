@@ -17,6 +17,7 @@ private:
 
 private:
     void readFile();
+    void writeFile();
     //TODO: writeFile()
 
 public:

@@ -27,6 +27,15 @@ public:
                                  InvoiceDetailController *invoiceDetail = nullptr);
     ~InvoiceDetailWindow();
 
+private slots:
+    void on_invoiceDetailTable_cellClicked(int row, int column);
+
+    void on_invoiceDetailAddButton_clicked();
+
+    void on_invoiceDetailDeleteButton_clicked();
+
+    void on_invoiceDetailEditButton_clicked();
+
 private:
     void loadDataInvoiceDetail(QTableWidget *table);
     void loadAvlData(QComboBox *box, AVLTree<Facility, QString>::Node *node);

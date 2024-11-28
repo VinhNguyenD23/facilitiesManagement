@@ -8,7 +8,7 @@ struct InvoiceDetail
     QString invoiceId;
     QString facilityId;
     int quantity;
-    long price;
+    long long price;
     double vat;
     bool operator==(InvoiceDetail &other)
     {

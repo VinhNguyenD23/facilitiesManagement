@@ -10,12 +10,12 @@ public:
     ArraySizeException(const std::string message) : std::overflow_error(message) {}
     static ArraySizeException ArrayFull(const std::string message)
     {
-        return ArraySizeException("[ARRAY.SIZE:ERROR] Array is full: " + message);
+        return ArraySizeException("[ARRAY:SIZE.ERROR] Array is full: " + message);
     }
 
     static ArraySizeException ArrayEmpty(const std::string message)
     {
-        return ArraySizeException("[ARRAY.SIZE:ERROR] Array is empty: " + message);
+        return ArraySizeException("[ARRAY:SIZE.ERROR] Array is empty: " + message);
     }
 };
 

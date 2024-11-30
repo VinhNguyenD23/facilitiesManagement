@@ -6,6 +6,7 @@
 #include "../datatype/LinkedList.h"
 #include "../model/GlobalModel.h"
 #include "../model/Facilities.h"
+#include "../exception/ValidateException.h"
 #include <QString>
 
 class FacilityService

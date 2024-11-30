@@ -143,7 +143,7 @@ long DArray<T>::getCapacity() const
 }
 
 template <class T>
-T DArray<T>::at(int index)
+T& DArray<T>::at(int index)
 {
     return this->listData[index];
 }

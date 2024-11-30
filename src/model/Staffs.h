@@ -6,6 +6,7 @@
 #include "../object/Staff.h"
 #include "../exception/DatabasesException.h"
 #include "../exception/DataException.h"
+#include "../util/ArrayUtil.h"
 #include <QDebug>
 #include <QString>
 #include <QFile>

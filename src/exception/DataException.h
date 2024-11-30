@@ -18,6 +18,11 @@ public:
     {
         return DataException("[DATA.ERROR] Duplicate data id: " + message);
     }
+
+    static DataException ExistDataId(const std::string message)
+    {
+        return DataException("[DATA.ERROR]: " + message);
+    }
 };
 
 #endif

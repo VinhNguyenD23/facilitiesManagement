@@ -169,8 +169,6 @@ void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column)
     invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);
     invoiceDetailForm->exec();
     this->loadInvoiceData(ui->InvoiceTable);
-
-
 }
 
 void MainWindow::on_facilityTable_cellClicked(int row, int column)
@@ -279,13 +277,23 @@ void MainWindow::on_facilityDeleteButton_clicked()
 
 void MainWindow::on_facilityEditButton_clicked()
 {
-    Facility facility = Facility();
-    facility.id = ui->facilityId->toPlainText();
-    facility.name = ui->facilityName->toPlainText();
-    facility.unit = ui->facilityUnit->toPlainText();
-    facility.quantity = ui->facilityQuantity->toPlainText().toLong();
-    this->facility->updateExistFacility(facility);
-    this->loadFacilityData(ui->facilityTable);
+    Facility facilityEdit = Facility();
+    facilityEdit.id = ui->facilityId->toPlainText();
+    facilityEdit.name = ui->facilityName->toPlainText();
+    facilityEdit.unit = ui->facilityUnit->toPlainText();
+    facilityEdit.quantity = ui->facilityQuantity->toPlainText().toLong();
+    if(this->facility->getFacilityById(facilityEdit.id)->quantity == facilityEdit.quantity)
+    {
+        this->facility->updateExistFacility(facilityEdit);
+        this->loadFacilityData(ui->facilityTable);
+    }
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+    }
 }
 
 
@@ -337,5 +345,6 @@ void MainWindow::on_staffEditButton_clicked()
     currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
     this->staff->updateExistStaff(currentStaff);
     this->loadStaffData(ui->staffTable);
+    this->loadInvoiceData(ui->InvoiceTable);
 }
 

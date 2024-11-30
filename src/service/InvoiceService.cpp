@@ -10,10 +10,13 @@ InvoiceService::InvoiceService()
 
 void InvoiceService::create(Invoice data)
 {
-    auto getStaff = this->staffRepository->getDataById(data.staffId);
-    if (getStaff == nullptr)
+    if (this->staffRepository->getDataById(data.staffId) == nullptr)
     {
         throw DataException::DataNotFound("Staff id not found! Please try again.");
+    }
+    if(data.id.length() > 20 || data.id.length() == 0)
+    {
+        throw ValidateException::InvalidData("Staff id length must in range [1, 20], please try again");
     }
     this->invoiceRepository->insert(data);
 }

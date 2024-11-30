@@ -27,6 +27,7 @@ public:
     void update(Invoice data);
     void refresh();
     Invoice *getDataById(QString id);
+    bool isStaffAvailable(QString staffId);
     size_t getSize();
     ~InvoiceModel();
 };

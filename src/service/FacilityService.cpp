@@ -8,10 +8,13 @@ FacilityService::FacilityService()
 
 void FacilityService::create(Facility data)
 {
-    // qDebug() << this->facilityRepository->findByDataId(data.id);
     if(this->facilityRepository->findByDataId(data.id) != nullptr)
     {
         throw DataException::DuplicateDataId("This data id is already exist, please try again");
+    }
+    if(data.id.length() > 10 || data.id.length() == 0)
+    {
+        throw ValidateException::InvalidData("Facility id length must in range [1, 10], please try again");
     }
     this->facilityRepository->insert(data);
 }

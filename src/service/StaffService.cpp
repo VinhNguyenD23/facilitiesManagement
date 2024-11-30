@@ -3,6 +3,7 @@
 StaffService::StaffService()
 {
     this->staffRepository = staffModel;
+    this->invoiceRepository = invoiceModel;
     qDebug() << "Staff service initialized successfully";
 }
 
@@ -18,6 +19,10 @@ Staff *StaffService::find(QString id)
 
 void StaffService::create(Staff data)
 {
+    if(data.id.length() == 0 || data.firstName.length() == 0 || data.lastName.length() == 0)
+    {
+        throw ValidateException::InvalidData("Field of staff must not be blank, please try again!");
+    }
     this->staffRepository->insert(data);
 }
 
@@ -28,7 +33,8 @@ void StaffService::update(Staff data)
 
 void StaffService::remove(Staff data)
 {
-    this->staffRepository->remove(data);
+    if (!this->invoiceRepository->isStaffAvailable(data.id))
+        this->staffRepository->remove(data);
 }
 
 StaffService::~StaffService()

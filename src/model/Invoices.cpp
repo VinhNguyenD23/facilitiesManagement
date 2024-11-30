@@ -111,6 +111,20 @@ Invoice *InvoiceModel::getDataById(QString id)
     return nullptr;
 }
 
+bool InvoiceModel::isStaffAvailable(QString staffId)
+{
+    auto *temp = this->data->getListData();
+    while (temp != nullptr)
+    {
+        if (temp->data.staffId == staffId)
+        {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
 size_t InvoiceModel::getSize()
 {
     return this->data->getSize();

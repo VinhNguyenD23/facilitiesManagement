@@ -3,6 +3,7 @@
 InvoiceDetailService::InvoiceDetailService()
 {
     this->invoiceDetailRepository = invoiceDetailModel;
+    this->facilityRepository = facilityModel;
     qDebug() << "Invoice detail service initialized successfully";
 }
 
@@ -11,7 +12,6 @@ void InvoiceDetailService::create(InvoiceDetail data)
     if (this->invoiceDetailRepository->getDataById(data.id))
     {
         throw DataException::DuplicateDataId("This id is existing, please try again!");
-        // return;
     }
     this->invoiceDetailRepository->insert(data);
 }

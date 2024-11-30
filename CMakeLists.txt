@@ -33,6 +33,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/controller/InvoiceController.h src/controller/InvoiceController.cpp
         src/controller/InvoiceDetailController.h src/controller/InvoiceDetailController.cpp
         src/controller/StaffController.h src/controller/StaffController.cpp
+        src/controller/StatisticController.h src/controller/StatisticController.cpp
         src/model/Facilities.h src/model/Facilities.cpp
         src/model/InvoiceDetail.h src/model/InvoiceDetail.cpp
         src/model/Invoices.h src/model/Invoices.cpp
@@ -47,10 +48,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/service/InvoiceDetailService.h src/service/InvoiceDetailService.cpp
         src/service/InvoiceService.cpp src/service/InvoiceService.h
         src/service/StaffService.cpp src/service/StaffService.h
+        src/service/StatisticService.h src/service/StatisticService.cpp
         src/exception/DatabasesException.h 
 	src/exception/DataException.h
         src/util/StringUtil.h
         src/resource.qrc
+        src/util/ArrayUtil.h
+        src/exception/ValidateException.h
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -6,11 +6,15 @@
 #include "../model/GlobalModel.h"
 #include <QString>
 #include "../model/Staffs.h"
+#include "../model/Invoices.h"
+#include "../exception/DataException.h"
+#include "../exception/ValidateException.h"
 class StaffService
 {
 private:
     /* data */
     StaffsModel *staffRepository = nullptr;
+    InvoiceModel *invoiceRepository = nullptr;
 
 public:
     StaffService(/* args */);

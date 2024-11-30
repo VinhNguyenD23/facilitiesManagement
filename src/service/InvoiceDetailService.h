@@ -11,6 +11,7 @@ class InvoiceDetailService
 {
 private:
     InvoiceDetailModel *invoiceDetailRepository = nullptr;
+    FacilitiesModel *facilityRepository = nullptr;
 
 public:
     InvoiceDetailService(/* args */);

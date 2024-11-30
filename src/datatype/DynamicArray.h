@@ -32,6 +32,6 @@ public:
     void clear() noexcept;
     size_t getSize() const;
     long getCapacity() const;
-    T at(int index);
+    T& at(int index);
 };
 #endif

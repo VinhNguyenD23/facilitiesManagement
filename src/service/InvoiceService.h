@@ -3,6 +3,7 @@
 #include "../object/Invoice.h"
 #include "../datatype/LinkedList.h"
 #include "../exception/DataException.h"
+#include "../exception/ValidateException.h"
 #include <QString>
 #include "../model/GlobalModel.h"
 #include "../model/Invoices.h"

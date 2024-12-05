@@ -57,8 +57,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     QDateTime currentDateTime = QDateTime::currentDateTime();
     ui->invoiceDate->setDateTime(currentDateTime);
-    ui->fromDate->setDateTime(currentDateTime);
     ui->toDate->setDateTime(currentDateTime);
+    ui->fromDate->setDateTime(currentDateTime.addDays(-7));
+
 }
 
 MainWindow::~MainWindow()
@@ -140,6 +141,12 @@ void MainWindow::loadInvoiceData(QTableWidget *table)
         row++;
         current = current->next;
     }
+}
+
+void MainWindow::loadStatisticMonthTableData(QTableWidget *table)
+{
+    table->clearContents();
+    table->setRowCount(0);
 }
 
 // void MainWindow::loadInvoiceDetailData(QTableWidget *table)
@@ -294,6 +301,7 @@ void MainWindow::on_facilityEditButton_clicked()
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
     }
+    qDebug() << "Test";
 }
 
 
@@ -346,5 +354,35 @@ void MainWindow::on_staffEditButton_clicked()
     this->staff->updateExistStaff(currentStaff);
     this->loadStaffData(ui->staffTable);
     this->loadInvoiceData(ui->InvoiceTable);
+}
+
+
+void MainWindow::on_fromDate_dateTimeChanged(const QDateTime &dateTime)
+{
+    if(this->ui->fromDate->dateTime() > this->ui->toDate->dateTime())
+    {
+        qDebug() << this->ui->fromDate->dateTime() << this->ui->toDate->dateTime();
+        QMessageBox msgBox;
+        msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
+    this->loadStatisticMonthTableData(ui->statisticPriceTable);
+}
+
+
+void MainWindow::on_toDate_dateTimeChanged(const QDateTime &dateTime)
+{
+    if(this->ui->fromDate->dateTime() > this->ui->toDate->dateTime())
+    {
+        qDebug() << this->ui->fromDate->dateTime() << this->ui->toDate->dateTime();
+        QMessageBox msgBox;
+        msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
+    this->loadStatisticMonthTableData(ui->statisticPriceTable);
 }
 

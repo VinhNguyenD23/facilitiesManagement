@@ -59,12 +59,17 @@ private slots:
 
     void on_staffEditButton_clicked();
 
+    void on_fromDate_dateTimeChanged(const QDateTime &dateTime);
+
+    void on_toDate_dateTimeChanged(const QDateTime &dateTime);
+
 private:
     void loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row);
     void loadFacilityData(QTableWidget *table);
     void loadStaffData(QTableWidget *table);
     void loadInvoiceData(QTableWidget *table);
-    // void loadStatistic
+    void loadStatisticMonthTableData(QTableWidget *table);
+    void loadStatisticYearTableData(QTableWidget *table);
     // void loadInvoiceDetailDataStartUp(QTableWidget *table);
     // double getSumOfInvoice(QString invoiceId);
 

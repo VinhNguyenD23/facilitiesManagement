@@ -12,7 +12,7 @@ private:
 
 public:
     StatisticController();
-    LinkedList<Invoice> getTopInvoices(int limit);
+    LinkedList<Invoice> *getTopInvoices(int limit);
 
 };
 

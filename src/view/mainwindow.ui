@@ -170,7 +170,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -1187,7 +1187,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="dsnv_5">
+          <widget class="QTableWidget" name="statisticPriceTable">
            <property name="horizontalScrollBarPolicy">
             <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
            </property>
@@ -1203,7 +1203,7 @@
        <attribute name="title">
         <string>THÔNG KÊ THEO THỜI GIAN</string>
        </attribute>
-       <widget class="QTableWidget" name="dsnv_6">
+       <widget class="QTableWidget" name="statisticTimeTable">
         <property name="geometry">
          <rect>
           <x>20</x>

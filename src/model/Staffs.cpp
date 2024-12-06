@@ -24,7 +24,7 @@ void StaffsModel::readFile()
         tempStaff.firstName = field.at(2);
         tempStaff.gender = (field.at(3).contains("1") ? true : false);
         // qDebug() << field;
-        this->data->push(tempStaff);
+        this->insert(tempStaff);
     }
     // for (int i = 0; i < data->getSize(); i++)
     // {

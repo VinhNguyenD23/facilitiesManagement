@@ -40,7 +40,7 @@ public:
                 Staff secondStaff = staffList->at(secondCompareStaff);
                 if(compare(firstStaff, secondStaff))
                 {
-                    swap(staffList->at(firstCompareStaff), staffList->at(secondCompareStaff));
+                    ArrayUtil::swap(staffList->at(firstCompareStaff), staffList->at(secondCompareStaff));
                 }
             }
         }

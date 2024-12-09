@@ -56,8 +56,13 @@ MainWindow::MainWindow(QWidget *parent)
     this->loadInvoiceData(invoiceTempTable);
 
     QDateTime currentDateTime = QDateTime::currentDateTime();
+
     ui->invoiceDate->setDateTime(currentDateTime);
+
+    ui->statisticToDate->setDateTime(currentDateTime);
     ui->toDate->setDateTime(currentDateTime);
+
+    ui->statisticFromDate->setDateTime(currentDateTime.addDays(-7));
     ui->fromDate->setDateTime(currentDateTime.addDays(-7));
 
 }
@@ -155,6 +160,12 @@ void MainWindow::loadStatisticYearTableData(QTableWidget *table)
     table->setRowCount(0);
 }
 
+void MainWindow::loadStatisticFacilityTableData(QTableWidget *table)
+{
+    table->clearContents();
+    table->setRowCount(0);
+}
+
 void MainWindow::loadTableData()
 {
     this->loadStatisticYearTableData(ui->statisticYearTable);
@@ -162,6 +173,7 @@ void MainWindow::loadTableData()
     this->loadFacilityData(ui->facilityTable);
     this->loadStaffData(ui->staffTable);
     this->loadInvoiceData(ui->InvoiceTable);
+    this->loadStatisticFacilityTableData(ui->statisticFacilityTable);
 }
 
 // void MainWindow::loadInvoiceDetailData(QTableWidget *table)

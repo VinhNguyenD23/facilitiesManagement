@@ -72,6 +72,7 @@ private:
     void loadInvoiceData(QTableWidget *table);
     void loadStatisticTimeTableData(QTableWidget *table);
     void loadStatisticYearTableData(QTableWidget *table);
+    void loadStatisticFacilityTableData(QTableWidget *table);
     void loadTableData();
     // void loadInvoiceDetailDataStartUp(QTableWidget *table);
     // double getSumOfInvoice(QString invoiceId);

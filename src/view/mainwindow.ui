@@ -152,7 +152,7 @@
        <string/>
       </property>
       <property name="styleSheet">
-       <string notr="true">#dvt, #mvt, #slt, #tvt, #mnv, #ho, #ten, #phai, #dongia_2, #hoten_2, #ngay_2, #loai_2, #tenvattu_2, #soluong_2, #trigia_2, #shd, #nl, #lhd, #htnvl, #tghd, #thang, #doanhthu{
+       <string notr="true">#dvt, #mvt, #slt, #tvt, #mnv, #ho, #ten, #phai, #dongia_2, #hoten_2, #ngay_2, #loai_2, #tenvattu_2, #soluong_2, #trigia_2, #shd, #nl, #lhd, #htnvl, #tghd, #thang, #doanhthu, #statisticFacilityId, #statisticFacilityName, #statisticFacilityValue{
                                                                 background-color: #00A4E8;
                                                                 color: #ffffff;
                                                                 font: Bold &quot;Inter&quot;;
@@ -1197,6 +1197,154 @@
           </widget>
          </item>
         </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>THỐNG KÊ VẬT TƯ THEO THỜI GIAN</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>80</y>
+          <width>1071</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_25">
+         <item>
+          <widget class="QLabel" name="statisticFacilityId">
+           <property name="styleSheet">
+            <string notr="true">#label {
+                                                                                                                        background-color: #00A4E8;
+                                                                                                                        color: #ffffff;
+                                                                                                                        font: Bold &quot;Inter&quot;;
+                                                                                                                        }</string>
+           </property>
+           <property name="text">
+            <string>Mã vật tư</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="statisticFacilityName">
+           <property name="styleSheet">
+            <string notr="true">#label {
+                                                                                                                        background-color: #00A4E8;
+                                                                                                                        color: #ffffff;
+                                                                                                                        font: Bold &quot;Inter&quot;;
+                                                                                                                        }</string>
+           </property>
+           <property name="text">
+            <string>Tên vật tư</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="statisticFacilityValue">
+           <property name="styleSheet">
+            <string notr="true">#label {
+                                                                                                                        background-color: #00A4E8;
+                                                                                                                        color: #ffffff;
+                                                                                                                        font: Bold &quot;Inter&quot;;
+                                                                                                                        }</string>
+           </property>
+           <property name="text">
+            <string>Giá trị</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QTableWidget" name="statisticFacilityTable">
+        <property name="geometry">
+         <rect>
+          <x>21</x>
+          <y>110</y>
+          <width>1069</width>
+          <height>440</height>
+         </rect>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::PenStyle::DashLine</enum>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget7_2">
+        <property name="geometry">
+         <rect>
+          <x>369</x>
+          <y>40</y>
+          <width>381</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_24">
+         <item>
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>Từ ngày :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="statisticFromDate"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_18">
+           <property name="text">
+            <string>Đến ngày :</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="statisticToDate"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QLabel" name="tieude_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>1111</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#tieude {
+                                                                                font: bold &quot;Goldman&quot;;
+                                                                                color: #ffffff;
+                                                                                }</string>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG THỐNG KÊ CÁC VẬT TƯ THEO THỜI GIAN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="statisticsByTime">

@@ -161,7 +161,12 @@
                                                                 QPushButton {
                                                                 font: Bold &quot;Lato&quot;;
                                                                 color: #fff;
-                                                                }</string>
+                                                                }
+
+QTableWidget{
+	border: 1px solid gray;
+  	border-radius: 5px;
+ }</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::TabPosition::North</enum>
@@ -170,7 +175,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -1026,9 +1031,9 @@
        <widget class="QLabel" name="tieude_2">
         <property name="geometry">
          <rect>
-          <x>250</x>
+          <x>0</x>
           <y>10</y>
-          <width>671</width>
+          <width>1111</width>
           <height>31</height>
          </rect>
         </property>
@@ -1045,10 +1050,10 @@
        <widget class="QWidget" name="layoutWidget7">
         <property name="geometry">
          <rect>
-          <x>410</x>
+          <x>370</x>
           <y>50</y>
           <width>370</width>
-          <height>27</height>
+          <height>31</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_21">
@@ -1087,117 +1092,123 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="layoutWidget8">
+       <widget class="QWidget" name="">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>90</y>
+          <x>21</x>
+          <y>91</y>
           <width>1071</width>
-          <height>471</height>
+          <height>22</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_20">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_20">
-           <item>
-            <widget class="QLabel" name="shd">
-             <property name="styleSheet">
-              <string notr="true">#label {
+          <widget class="QLabel" name="shd">
+           <property name="styleSheet">
+            <string notr="true">#label {
                                                                                                                         background-color: #00A4E8;
                                                                                                                         color: #ffffff;
                                                                                                                         font: Bold &quot;Inter&quot;;
                                                                                                                         }</string>
-             </property>
-             <property name="text">
-              <string>Số hóa đơn</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="nl">
-             <property name="styleSheet">
-              <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
-             </property>
-             <property name="text">
-              <string>Ngày lập</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="lhd">
-             <property name="styleSheet">
-              <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
-             </property>
-             <property name="text">
-              <string>Loại hóa đơn</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="htnvl">
-             <property name="styleSheet">
-              <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
-             </property>
-             <property name="text">
-              <string>Họ tên nhân viên lập</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="tghd">
-             <property name="styleSheet">
-              <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
-             </property>
-             <property name="text">
-              <string>Trị giá hóa đơn</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignmentFlag::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
+           </property>
+           <property name="text">
+            <string>Số hóa đơn</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QTableWidget" name="statisticTimeTable">
-           <property name="horizontalScrollBarPolicy">
-            <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+          <widget class="QLabel" name="nl">
+           <property name="styleSheet">
+            <string notr="true">#label {
+                                                                                                                        background-color: #00A4E8;
+                                                                                                                        color: #ffffff;
+                                                                                                                        font: Bold &quot;Inter&quot;;
+                                                                                                                        }</string>
            </property>
-           <property name="gridStyle">
-            <enum>Qt::PenStyle::DashLine</enum>
+           <property name="text">
+            <string>Ngày lập</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lhd">
+           <property name="styleSheet">
+            <string notr="true">#label {
+                                                                                                                        background-color: #00A4E8;
+                                                                                                                        color: #ffffff;
+                                                                                                                        font: Bold &quot;Inter&quot;;
+                                                                                                                        }</string>
+           </property>
+           <property name="text">
+            <string>Loại hóa đơn</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="htnvl">
+           <property name="styleSheet">
+            <string notr="true">#label {
+                                                                                                                        background-color: #00A4E8;
+                                                                                                                        color: #ffffff;
+                                                                                                                        font: Bold &quot;Inter&quot;;
+                                                                                                                        }</string>
+           </property>
+           <property name="text">
+            <string>Họ tên nhân viên lập</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="tghd">
+           <property name="styleSheet">
+            <string notr="true">#label {
+                                                                                                                        background-color: #00A4E8;
+                                                                                                                        color: #ffffff;
+                                                                                                                        font: Bold &quot;Inter&quot;;
+                                                                                                                        }</string>
+           </property>
+           <property name="text">
+            <string>Trị giá hóa đơn</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
            </property>
           </widget>
          </item>
         </layout>
        </widget>
+       <widget class="QTableWidget" name="statisticTimeTable">
+        <property name="geometry">
+         <rect>
+          <x>21</x>
+          <y>120</y>
+          <width>1071</width>
+          <height>431</height>
+         </rect>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::PenStyle::DashLine</enum>
+        </property>
+       </widget>
+       <zorder>tieude_2</zorder>
+       <zorder>layoutWidget7</zorder>
+       <zorder>layoutWidget8</zorder>
+       <zorder>statisticTimeTable</zorder>
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1207,7 +1218,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>80</y>
+          <y>90</y>
           <width>1071</width>
           <height>22</height>
          </rect>
@@ -1270,9 +1281,9 @@
         <property name="geometry">
          <rect>
           <x>21</x>
-          <y>110</y>
+          <y>119</y>
           <width>1069</width>
-          <height>440</height>
+          <height>431</height>
          </rect>
         </property>
         <property name="horizontalScrollBarPolicy">
@@ -1285,10 +1296,10 @@
        <widget class="QWidget" name="layoutWidget7_2">
         <property name="geometry">
          <rect>
-          <x>369</x>
-          <y>40</y>
-          <width>381</width>
-          <height>27</height>
+          <x>370</x>
+          <y>50</y>
+          <width>371</width>
+          <height>31</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_24">

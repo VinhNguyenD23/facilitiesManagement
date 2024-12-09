@@ -26,7 +26,8 @@ public:
     void remove(InvoiceDetail data);
     void update(InvoiceDetail data);
     void refresh();
-    InvoiceDetail *getDataById(QString id);
+    InvoiceDetail *findDataById(QString id);
+    bool isFacilityAvailable(QString facilityId);
     size_t getSize();
     ~InvoiceDetailModel();
 };

@@ -28,7 +28,7 @@ LinkedList<Invoice> *InvoiceService::readAll()
 
 Invoice *InvoiceService::readById(QString id)
 {
-    Invoice *invoiceDetail = this->invoiceRepository->getDataById(id);
+    Invoice *invoiceDetail = this->invoiceRepository->findDataById(id);
     if (invoiceDetail == nullptr)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
@@ -38,7 +38,7 @@ Invoice *InvoiceService::readById(QString id)
 
 void InvoiceService::update(Invoice data)
 {
-    if (this->invoiceRepository->getDataById(data.id) == nullptr)
+    if (this->invoiceRepository->findDataById(data.id) == nullptr)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
@@ -47,7 +47,7 @@ void InvoiceService::update(Invoice data)
 
 void InvoiceService::remove(Invoice data)
 {
-    if (this->invoiceRepository->getDataById(data.id) == nullptr)
+    if (this->invoiceRepository->findDataById(data.id) == nullptr)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
@@ -56,7 +56,7 @@ void InvoiceService::remove(Invoice data)
 
 double InvoiceService::getSum(QString id)
 {
-    if (this->invoiceRepository->getDataById(id) == nullptr)
+    if (this->invoiceRepository->findDataById(id) == nullptr)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
     }

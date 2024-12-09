@@ -170,7 +170,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -609,7 +609,7 @@
            <x>100</x>
            <y>150</y>
            <width>141</width>
-           <height>24</height>
+           <height>28</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -883,7 +883,7 @@
            <x>100</x>
            <y>150</y>
            <width>141</width>
-           <height>24</height>
+           <height>28</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -1047,8 +1047,8 @@
          <rect>
           <x>410</x>
           <y>50</y>
-          <width>341</width>
-          <height>26</height>
+          <width>370</width>
+          <height>27</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_21">
@@ -1187,7 +1187,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="statisticPriceTable">
+          <widget class="QTableWidget" name="statisticTimeTable">
            <property name="horizontalScrollBarPolicy">
             <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
            </property>
@@ -1203,7 +1203,7 @@
        <attribute name="title">
         <string>THÔNG KÊ THEO THỜI GIAN</string>
        </attribute>
-       <widget class="QTableWidget" name="statisticTimeTable">
+       <widget class="QTableWidget" name="statisticYearTable">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -1276,8 +1276,8 @@
          <rect>
           <x>370</x>
           <y>20</y>
-          <width>331</width>
-          <height>28</height>
+          <width>373</width>
+          <height>30</height>
          </rect>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_8">

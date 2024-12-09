@@ -3,6 +3,7 @@
 FacilityService::FacilityService()
 {
     this->facilityRepository = facilityModel;
+    this->invoiceDetailRepository = invoiceDetailModel;
     qDebug() << "Facility service initialized successfully";
 }
 
@@ -45,9 +46,13 @@ void FacilityService::update(Facility data)
 
 void FacilityService::remove(Facility data)
 {
+    qDebug() << "Remove facility id: " << data.id;
     if (this->facilityRepository->findByDataId(data.id) == nullptr)
     {
         throw DataException::DataNotFound("Not found any facility with facility id: " + data.id.toStdString());
+    }
+    if (this->invoiceDetailRepository->isFacilityAvailable(data.id)) {
+        throw DataException::ExistDataId("Facility id is already in the invoice, cannot delete facility id");
     }
     this->facilityRepository->remove(data.id);
 }

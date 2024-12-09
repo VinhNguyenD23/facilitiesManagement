@@ -14,6 +14,7 @@ class FacilityService
 private:
     /* data */
     FacilitiesModel *facilityRepository = nullptr;
+    InvoiceDetailModel *invoiceDetailRepository = nullptr;
 
 public:
     FacilityService(/* args */);

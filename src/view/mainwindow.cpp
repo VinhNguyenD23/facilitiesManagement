@@ -143,10 +143,25 @@ void MainWindow::loadInvoiceData(QTableWidget *table)
     }
 }
 
-void MainWindow::loadStatisticMonthTableData(QTableWidget *table)
+void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
 {
     table->clearContents();
     table->setRowCount(0);
+}
+
+void MainWindow::loadStatisticYearTableData(QTableWidget *table)
+{
+    table->clearContents();
+    table->setRowCount(0);
+}
+
+void MainWindow::loadTableData()
+{
+    this->loadStatisticYearTableData(ui->statisticYearTable);
+    this->loadStatisticTimeTableData(ui->statisticTimeTable);
+    this->loadFacilityData(ui->facilityTable);
+    this->loadStaffData(ui->staffTable);
+    this->loadInvoiceData(ui->InvoiceTable);
 }
 
 // void MainWindow::loadInvoiceDetailData(QTableWidget *table)
@@ -176,6 +191,7 @@ void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column)
     invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);
     invoiceDetailForm->exec();
     this->loadInvoiceData(ui->InvoiceTable);
+    this->loadFacilityData(ui->facilityTable);
 }
 
 void MainWindow::on_facilityTable_cellClicked(int row, int column)
@@ -188,13 +204,22 @@ void MainWindow::on_facilityTable_cellClicked(int row, int column)
 
 void MainWindow::on_facilityAddButton_clicked()
 {
+    bool ok;
     Facility data = Facility();
     data.id = ui->facilityId->toPlainText();
     data.name = ui->facilityName->toPlainText();
     data.unit = ui->facilityUnit->toPlainText();
-    data.quantity = ui->facilityQuantity->toPlainText().toLong();
+    data.quantity = ui->facilityQuantity->toPlainText().toLong(&ok);
+    if(!ok)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Lỗi định dạng, vui lòng thử lại!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
     this->facility->createNewFacility(data);
-    this->loadFacilityData(ui->facilityTable);
+    this->loadTableData();
 }
 
 void MainWindow::on_InvoiceTable_cellClicked(int row, int column)
@@ -229,11 +254,14 @@ void MainWindow::on_invoiceAddButton_clicked()
     }
     else
     {
-        //TODO: MessageBox
+        QMessageBox msgBox;
+        msgBox.setText("Vui lòng chọn vào ô giới tính");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
         return;
     }
     this->invoice->createNewInvoice(invoiceRequest);
-    this->loadInvoiceData(ui->InvoiceTable);
+    this->loadTableData();
 }
 
 void MainWindow::on_invoiceDeleteButton_clicked()
@@ -241,7 +269,7 @@ void MainWindow::on_invoiceDeleteButton_clicked()
     Invoice invoiceRequest = Invoice();
     invoiceRequest.id = ui->invoiceId->toPlainText();
     this->invoice->removeInvoice(invoiceRequest);
-    this->loadInvoiceData(ui->InvoiceTable);
+    this->loadTableData();
 }
 
 
@@ -268,7 +296,7 @@ void MainWindow::on_invoiceEditButton_clicked()
         return;
     }
     this->invoice->updateExistInvoice(invoiceRequest);
-    this->loadInvoiceData(ui->InvoiceTable);
+    this->loadTableData();
 }
 
 
@@ -278,7 +306,7 @@ void MainWindow::on_facilityDeleteButton_clicked()
     Facility facility = Facility();
     facility.id = facilityId;
     this->facility->removeFacility(facility);
-    this->loadFacilityData(ui->facilityTable);
+    this->loadTableData();
 }
 
 
@@ -292,7 +320,7 @@ void MainWindow::on_facilityEditButton_clicked()
     if(this->facility->getFacilityById(facilityEdit.id)->quantity == facilityEdit.quantity)
     {
         this->facility->updateExistFacility(facilityEdit);
-        this->loadFacilityData(ui->facilityTable);
+        this->loadTableData();
     }
     else
     {
@@ -301,7 +329,6 @@ void MainWindow::on_facilityEditButton_clicked()
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
     }
-    qDebug() << "Test";
 }
 
 
@@ -325,9 +352,8 @@ void MainWindow::on_staffAddButton_clicked()
     currentStaff.lastName = ui->staffLastNameTxt->toPlainText();
     currentStaff.firstName = ui->staffFirstNameTxt->toPlainText();
     currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
-    // qDebug() << currentStaff.id << currentStaff.lastName << currentStaff.firstName << currentStaff.gender;
     this->staff->create(currentStaff);
-    this->loadStaffData(ui->staffTable);
+    this->loadTableData();
 }
 
 
@@ -340,7 +366,7 @@ void MainWindow::on_staffDeleteButton_clicked()
     currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
     this->staff->removeStaff(currentStaff);
     this->loadStaffData(ui->staffTable);
-    this->loadInvoiceData(ui->InvoiceTable);
+    this->loadTableData();
 }
 
 
@@ -353,7 +379,7 @@ void MainWindow::on_staffEditButton_clicked()
     currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
     this->staff->updateExistStaff(currentStaff);
     this->loadStaffData(ui->staffTable);
-    this->loadInvoiceData(ui->InvoiceTable);
+    this->loadTableData();
 }
 
 
@@ -368,7 +394,7 @@ void MainWindow::on_fromDate_dateTimeChanged(const QDateTime &dateTime)
         msgBox.exec();
         return;
     }
-    this->loadStatisticMonthTableData(ui->statisticPriceTable);
+    this->loadTableData();
 }
 
 
@@ -376,13 +402,27 @@ void MainWindow::on_toDate_dateTimeChanged(const QDateTime &dateTime)
 {
     if(this->ui->fromDate->dateTime() > this->ui->toDate->dateTime())
     {
-        qDebug() << this->ui->fromDate->dateTime() << this->ui->toDate->dateTime();
         QMessageBox msgBox;
         msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
         return;
     }
-    this->loadStatisticMonthTableData(ui->statisticPriceTable);
+    this->loadTableData();
+}
+
+
+void MainWindow::on_facilityQuantity_textChanged()
+{
+    bool ok;
+    long data = this->ui->facilityQuantity->toPlainText().toLong(&ok);
+    if(!ok)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Bạn không được nhập các ký tự khác [0, 9]");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
 }
 

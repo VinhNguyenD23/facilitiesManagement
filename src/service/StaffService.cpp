@@ -33,8 +33,11 @@ void StaffService::update(Staff data)
 
 void StaffService::remove(Staff data)
 {
-    if (!this->invoiceRepository->isStaffAvailable(data.id))
-        this->staffRepository->remove(data);
+    if (this->invoiceRepository->isStaffAvailable(data.id))
+    {
+        throw DataException::ExistDataId("Staff is already in the invoice, cannot delete staff.");
+    }
+    this->staffRepository->remove(data);
 }
 
 StaffService::~StaffService()

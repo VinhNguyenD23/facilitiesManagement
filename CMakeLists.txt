@@ -55,6 +55,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/resource.qrc
         src/util/ArrayUtil.h
         src/exception/ValidateException.h
+        src/exception/LogicException.h
 
     )
 # Define target properties for Android with Qt 6 as:

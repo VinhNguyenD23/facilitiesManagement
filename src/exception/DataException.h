@@ -21,7 +21,7 @@ public:
 
     static DataException ExistDataId(const std::string message)
     {
-        return DataException("[DATA.ERROR]: " + message);
+        return DataException("[DATA.ERROR] Existing data id: " + message);
     }
 };
 

@@ -89,7 +89,7 @@ void InvoiceDetailModel::refresh()
     this->readFile();
 }
 
-InvoiceDetail *InvoiceDetailModel::getDataById(QString id)
+InvoiceDetail *InvoiceDetailModel::findDataById(QString id)
 {
     auto *temp = this->data->getListData();
     while (temp != nullptr)
@@ -102,6 +102,20 @@ InvoiceDetail *InvoiceDetailModel::getDataById(QString id)
         temp = temp->next;
     }
     return nullptr;
+}
+
+bool InvoiceDetailModel::isFacilityAvailable(QString facilityId)
+{
+    auto *temp = this->data->getListData();
+    while (temp != nullptr)
+    {
+        if (temp->data.facilityId == facilityId)
+        {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
 }
 
 size_t InvoiceDetailModel::getSize()

@@ -109,7 +109,7 @@ void InvoiceDetailWindow::on_invoiceDetailTable_cellClicked(int row, int column)
         ui->facilityNameBox->setCurrentIndex(indexFacility);
     }
     ui->facilityQuantityText->setText(ui->invoiceDetailTable->item(currentRow, 2)->text());
-    ui->invoiceDetailPriceText->setText(ui->invoiceDetailTable->item(currentRow, 3)->text());
+    ui->invoiceDetailPriceText->setText(StringUtil::formatRawNumber(ui->invoiceDetailTable->item(currentRow, 3)->text()));
     QString vat = ui->invoiceDetailTable->item(currentRow, 4)->text();
     vat.chop(1);
     vat = QString::number(vat.toDouble() / 100.0);

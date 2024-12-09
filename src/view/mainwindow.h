@@ -63,13 +63,16 @@ private slots:
 
     void on_toDate_dateTimeChanged(const QDateTime &dateTime);
 
+    void on_facilityQuantity_textChanged();
+
 private:
     void loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row);
     void loadFacilityData(QTableWidget *table);
     void loadStaffData(QTableWidget *table);
     void loadInvoiceData(QTableWidget *table);
-    void loadStatisticMonthTableData(QTableWidget *table);
+    void loadStatisticTimeTableData(QTableWidget *table);
     void loadStatisticYearTableData(QTableWidget *table);
+    void loadTableData();
     // void loadInvoiceDetailDataStartUp(QTableWidget *table);
     // double getSumOfInvoice(QString invoiceId);
 

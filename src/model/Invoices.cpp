@@ -63,7 +63,7 @@ LinkedList<Invoice> *InvoiceModel::getList()
 
 void InvoiceModel::insert(Invoice data)
 {
-    if (this->getDataById(data.id) != nullptr)
+    if (this->findDataById(data.id) != nullptr)
     {
         throw DataException::DuplicateDataId("This ID already exists, please try again!");
     }
@@ -96,7 +96,7 @@ void InvoiceModel::refresh()
     this->readFile();
 }
 
-Invoice *InvoiceModel::getDataById(QString id)
+Invoice *InvoiceModel::findDataById(QString id)
 {
     auto *temp = this->data->getListData();
     while (temp != nullptr)

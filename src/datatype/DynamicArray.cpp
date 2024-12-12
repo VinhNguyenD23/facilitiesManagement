@@ -3,7 +3,7 @@
 template <class T>
 DArray<T>::DArray()
 {
-    this->capacity = DEFAULT;
+    this->capacity = DARRAY_DEFAULT;
     this->size = 0;
     this->listData = new T[this->capacity];
 }

@@ -7,7 +7,7 @@ StaffService::StaffService()
     qDebug() << "Staff service initialized successfully";
 }
 
-DArray<Staff> *StaffService::getList()
+PointerArray<Staff> *StaffService::getList()
 {
     return this->staffRepository->getListData();
 }

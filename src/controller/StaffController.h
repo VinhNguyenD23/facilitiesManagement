@@ -4,6 +4,7 @@
 #include <QString>
 #include <QDebug>
 #include "../datatype/DynamicArray.h"
+#include "../datatype/pointerarray.h"
 #include "../object/Staff.h"
 
 class StaffController
@@ -17,7 +18,7 @@ public:
     void create(Staff data);
     void updateExistStaff(Staff data);
     void removeStaff(Staff data);
-    DArray<Staff> *getListStaff();
+    PointerArray<Staff> *getListStaff();
     Staff *getStaffById(QString id);
     ~StaffController();
 };

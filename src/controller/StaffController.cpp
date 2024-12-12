@@ -65,7 +65,7 @@ void StaffController::removeStaff(Staff data)
     }
 }
 
-DArray<Staff> *StaffController::getListStaff()
+PointerArray<Staff> *StaffController::getListStaff()
 {
     try
     {
@@ -86,7 +86,12 @@ Staff *StaffController::getStaffById(QString id)
 {
     try
     {
-        return this->staffService->find(id);
+        auto *data = this->staffService->find(id);
+        if(data == nullptr)
+        {
+            throw DataException::DataNotFound(id.toStdString() + " not found");
+        }
+        return data;
     }
     catch (const std::exception &e)
     {

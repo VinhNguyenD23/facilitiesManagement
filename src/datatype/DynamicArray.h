@@ -1,6 +1,6 @@
 #ifndef DARRAY_H
 #define DARRAY_H
-#define DEFAULT 10000
+#define DARRAY_DEFAULT 10000
 #include <QDebug>
 #include "../object/Staff.h"
 #include "../object/Facility.h"

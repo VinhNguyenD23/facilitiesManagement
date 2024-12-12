@@ -2,7 +2,7 @@
 
 void StaffsModel::readFile()
 {
-    this->data = new DArray<Staff>(MAX_STAFF);
+    this->data = new PointerArray<Staff>(MAX_STAFF);
     QFile file(FilePath::getPath(FilePath::databases::STAFF));
     QStringList field;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -23,7 +23,6 @@ void StaffsModel::readFile()
         tempStaff.lastName = field.at(1);
         tempStaff.firstName = field.at(2);
         tempStaff.gender = (field.at(3).contains("1") ? true : false);
-        // qDebug() << field;
         this->insert(tempStaff);
     }
     // for (int i = 0; i < data->getSize(); i++)
@@ -46,8 +45,8 @@ void StaffsModel::writeFile()
     // qDebug() << current->getSize();
     for (int i = 0; i < current->getSize(); i++)
     {
-        Staff data = current->at(i);
-        out << data.id << ',' << data.lastName << ',' << data.firstName << ',' << data.gender << '\n';
+        Staff *data = current->at(i);
+        out << data->id << ',' << data->lastName << ',' << data->firstName << ',' << data->gender << '\n';
     }
     file.close();
 }
@@ -63,7 +62,7 @@ StaffsModel::~StaffsModel()
     this->data->clear();
 }
 
-DArray<Staff> *StaffsModel::getListData()
+PointerArray<Staff> *StaffsModel::getListData()
 {
     return this->data;
 }
@@ -75,7 +74,7 @@ void StaffsModel::insert(Staff data)
         throw DataException::DuplicateDataId("Staff id is existing, please try other id!");
     }
     this->data->push(data);
-    ArrayUtil<Staff>::StaffSort(this->getListData());
+    // ArrayUtil<Staff>::StaffSort(this->getListData());
     this->writeFile();
 }
 
@@ -97,7 +96,7 @@ void StaffsModel::remove(Staff data)
     //     }
     // }
     // file.close();
-    this->data->popAt(data);
+    this->data->remove(data);
     this->writeFile();
 }
 
@@ -117,16 +116,15 @@ void StaffsModel::refresh()
 Staff *StaffsModel::getDataById(QString id)
 {
     // TODO: Code get data by id object [ priority: above normal ] [TESTING]
-    Staff *findData = nullptr;
+    // Staff *findData = nullptr;
     for (int i = 0; i < this->getSize(); i++)
     {
-        if (id == this->data->at(i).id)
+        if (id == this->data->at(i)->id)
         {
-            Staff temp = this->data->at(i);
-            findData = new Staff(temp);
+            return this->data->at(i);
         }
     }
-    return findData;
+    return nullptr;
 }
 
 size_t StaffsModel::getSize()

@@ -2,6 +2,7 @@
 #define STAFFS_H
 
 #include "../datatype/DynamicArray.h"
+#include "../datatype/pointerarray.h"
 #include "../common/FilePath.h"
 #include "../object/Staff.h"
 #include "../exception/DatabasesException.h"
@@ -17,7 +18,7 @@
 class StaffsModel
 {
 private:
-    DArray<Staff> *data;
+    PointerArray<Staff> *data;
 
 private:
     void readFile();
@@ -26,7 +27,7 @@ private:
 public:
     StaffsModel();
     ~StaffsModel();
-    DArray<Staff> *getListData();
+    PointerArray<Staff> *getListData();
     void insert(Staff data);
     void remove(Staff data);
     void update(Staff data);

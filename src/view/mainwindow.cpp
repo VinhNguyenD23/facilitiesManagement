@@ -108,10 +108,10 @@ void MainWindow::loadStaffData(QTableWidget *table)
     for (size_t i = 0; i < data->getSize(); i++)
     {
         table->insertRow(i);
-        QTableWidgetItem *staffId = new QTableWidgetItem(data->at(i).id);
-        QTableWidgetItem *staffLastName = new QTableWidgetItem(data->at(i).lastName);
-        QTableWidgetItem *staffFirstName = new QTableWidgetItem(data->at(i).firstName);
-        QTableWidgetItem *staffGender = new QTableWidgetItem(data->at(i).gender ? "Nam" : "Nữ");
+        QTableWidgetItem *staffId = new QTableWidgetItem(data->at(i)->id);
+        QTableWidgetItem *staffLastName = new QTableWidgetItem(data->at(i)->lastName);
+        QTableWidgetItem *staffFirstName = new QTableWidgetItem(data->at(i)->firstName);
+        QTableWidgetItem *staffGender = new QTableWidgetItem(data->at(i)->gender ? "Nam" : "Nữ");
         table->setItem(i, 0, staffId);
         table->setItem(i, 1, staffLastName);
         table->setItem(i, 2, staffFirstName);

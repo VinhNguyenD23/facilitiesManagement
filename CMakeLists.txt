@@ -56,6 +56,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/util/ArrayUtil.h
         src/exception/ValidateException.h
         src/exception/LogicException.h
+        src/datatype/pointerarray.h src/datatype/pointerarray.cpp
 
     )
 # Define target properties for Android with Qt 6 as:
@@ -100,5 +101,5 @@ install(TARGETS Main
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(Main)
+    qt_finalize_executable(Main -Wno-sign-conversion)
 endif()

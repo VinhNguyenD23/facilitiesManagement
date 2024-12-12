@@ -10,6 +10,4 @@ extern InvoiceDetailModel *invoiceDetailModel;
 extern InvoiceModel *invoiceModel;
 extern StaffsModel *staffModel;
 
-void initialModel();
-
 #endif

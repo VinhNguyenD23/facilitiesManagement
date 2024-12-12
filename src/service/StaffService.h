@@ -3,6 +3,7 @@
 
 #include "../object/Staff.h"
 #include "../datatype/DynamicArray.h"
+#include "../datatype/pointerarray.h"
 #include "../model/GlobalModel.h"
 #include <QString>
 #include "../model/Staffs.h"
@@ -18,7 +19,7 @@ private:
 
 public:
     StaffService(/* args */);
-    DArray<Staff> *getList();
+    PointerArray<Staff> *getList();
     Staff *find(QString id);
     void create(Staff data);
     void update(Staff data);

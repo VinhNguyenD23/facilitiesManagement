@@ -74,7 +74,7 @@ void StaffsModel::insert(Staff data)
         throw DataException::DuplicateDataId("Staff id is existing, please try other id!");
     }
     this->data->push(data);
-    // ArrayUtil<Staff>::StaffSort(this->getListData());
+    ArrayUtil<Staff>::StaffSort(this->getListData());
     this->writeFile();
 }
 

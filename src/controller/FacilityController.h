@@ -1,8 +1,6 @@
 #ifndef FACILITYCTRL_H
 #define FACILITYCTRL_H
 #include "../service/FacilityService.h"
-#include "../object/Invoice.h"
-#include "../object/Facility.h"
 #include "../datatype/Avl.h"
 #include <QMessageBox>
 #include <QDebug>

@@ -5,7 +5,6 @@
 #include "../controller/FacilityController.h"
 #include "../datatype/Avl.h"
 
-#include "../util/StringUtil.h"
 
 #include <QDialog>
 #include <QString>

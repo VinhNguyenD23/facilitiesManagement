@@ -3,9 +3,7 @@
 
 #include "../object/InvoiceDetail.h"
 #include "../datatype/LinkedList.h"
-#include "../exception/DatabasesException.h"
-#include "../exception/DataException.h"
-#include "../common/FilePath.h"
+#include "Invoices.h"
 #include <QString>
 #include <QFile>
 #include <QDebug>

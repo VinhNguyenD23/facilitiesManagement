@@ -1,6 +1,8 @@
 #ifndef INVOICE_H
 #define INVOICE_H
 #include <QString>
+#include "../datatype/LinkedList.h"
+#include "InvoiceDetail.h"
 #include "Date.h"
 struct Invoice
 {
@@ -8,6 +10,7 @@ struct Invoice
     Date date;
     QString staffId;
     bool type; // true: Export, false: Import
+    LinkedList<InvoiceDetail> *invoiceDetailList;
     bool operator==(Invoice &other)
     {
         return this->id == other.id;

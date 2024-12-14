@@ -26,9 +26,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Main
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        src/datatype/Avl.h src/datatype/Avl.cpp
-        src/datatype/DynamicArray.h src/datatype/DynamicArray.cpp
-        src/datatype/LinkedList.h src/datatype/LinkedList.cpp
+        src/datatype/Avl.h
+        src/datatype/DynamicArray.h
+        src/datatype/LinkedList.h
         src/controller/FacilityController.h src/controller/FacilityController.cpp
         src/controller/InvoiceController.h src/controller/InvoiceController.cpp
         src/controller/InvoiceDetailController.h src/controller/InvoiceDetailController.cpp
@@ -56,7 +56,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/util/ArrayUtil.h
         src/exception/ValidateException.h
         src/exception/LogicException.h
-        src/datatype/pointerarray.h src/datatype/pointerarray.cpp
+        src/datatype/pointerarray.h
+        src/util/ValidateUtil.h
 
     )
 # Define target properties for Android with Qt 6 as:

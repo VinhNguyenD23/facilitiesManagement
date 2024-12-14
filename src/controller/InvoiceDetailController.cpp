@@ -1,4 +1,5 @@
 #include "InvoiceDetailController.h"
+#include <QMessageBox>
 
 InvoiceDetailController::InvoiceDetailController()
 {

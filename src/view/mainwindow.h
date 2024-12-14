@@ -7,10 +7,6 @@
 #include "../controller/InvoiceDetailController.h"
 #include "../datatype/Avl.h"
 
-#include "../object/Facility.h"
-
-#include "invoicedetailwindow.h"
-
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -74,8 +70,6 @@ private:
     void loadStatisticYearTableData(QTableWidget *table);
     void loadStatisticFacilityTableData(QTableWidget *table);
     void loadTableData();
-    // void loadInvoiceDetailDataStartUp(QTableWidget *table);
-    // double getSumOfInvoice(QString invoiceId);
 
 private:
     Ui::MainWindow *ui;

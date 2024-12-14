@@ -1,13 +1,9 @@
 #ifndef STAFFS_H
 #define STAFFS_H
 
-#include "../datatype/DynamicArray.h"
 #include "../datatype/pointerarray.h"
 #include "../common/FilePath.h"
 #include "../object/Staff.h"
-#include "../exception/DatabasesException.h"
-#include "../exception/DataException.h"
-#include "../util/ArrayUtil.h"
 #include <QDebug>
 #include <QString>
 #include <QFile>

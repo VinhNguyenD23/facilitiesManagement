@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <QMessageBox>
+#include "invoicedetailwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -216,6 +217,17 @@ void MainWindow::on_facilityTable_cellClicked(int row, int column)
 
 void MainWindow::on_facilityAddButton_clicked()
 {
+    if(ui->facilityId->toPlainText() == ""
+        || ui->facilityName->toPlainText() == ""
+        || ui->facilityUnit->toPlainText() == ""
+        || ui->facilityQuantity->toPlainText() == "")
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Bạn chưa nhập hết thông tin, vui lòng thử lại!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
     bool ok;
     Facility data = Facility();
     data.id = ui->facilityId->toPlainText();
@@ -225,7 +237,7 @@ void MainWindow::on_facilityAddButton_clicked()
     if(!ok)
     {
         QMessageBox msgBox;
-        msgBox.setText("Lỗi định dạng, vui lòng thử lại!");
+        msgBox.setText("Lỗi định dạng khi chuyển đổi số, vui lòng thử lại!");
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
         return;

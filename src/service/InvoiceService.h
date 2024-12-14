@@ -2,13 +2,10 @@
 #define INVOICESERVICE_H
 #include "../object/Invoice.h"
 #include "../datatype/LinkedList.h"
-#include "../exception/DataException.h"
-#include "../exception/ValidateException.h"
-#include <QString>
-#include "../model/GlobalModel.h"
 #include "../model/Invoices.h"
 #include "../model/Staffs.h"
 #include "../model/InvoiceDetail.h"
+#include <QString>
 
 class InvoiceService
 {

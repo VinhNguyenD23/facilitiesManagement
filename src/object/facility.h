@@ -1,7 +1,6 @@
 #ifndef FACILITY_H
 #define FACILITY_H
 
-#include <iostream>
 #include <QString>
 
 struct Facility

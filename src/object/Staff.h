@@ -1,7 +1,6 @@
 #ifndef STAFF_H
 #define STAFF_H
 
-#include <iostream>
 #include <QString>
 
 struct Staff

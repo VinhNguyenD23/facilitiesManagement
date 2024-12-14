@@ -1,3 +1,6 @@
+#include "../exception/DatabasesException.h"
+#include "../exception/DataException.h"
+#include "../util/ArrayUtil.h"
 #include "Staffs.h"
 
 void StaffsModel::readFile()

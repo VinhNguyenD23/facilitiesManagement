@@ -3,7 +3,6 @@
 #include "../service/StaffService.h"
 #include <QString>
 #include <QDebug>
-#include "../datatype/DynamicArray.h"
 #include "../datatype/pointerarray.h"
 #include "../object/Staff.h"
 

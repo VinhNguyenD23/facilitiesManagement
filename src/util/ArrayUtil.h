@@ -2,6 +2,7 @@
 #define ARRAYUTIL_H
 
 #include "../datatype/PointerArray.h"
+#include "../object/Staff.h"
 #include <QDebug>
 
 template <typename T>

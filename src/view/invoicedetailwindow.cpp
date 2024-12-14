@@ -2,6 +2,7 @@
 #include "ui_invoicedetailwindow.h"
 #include <qcombobox.h>
 #include <qtablewidget.h>
+#include "../util/StringUtil.h"
 
 InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent,
                                          QString invoiceId,

@@ -1,4 +1,7 @@
 #include "InvoiceDetailService.h"
+#include "../model/GlobalModel.h"
+#include "../exception/DataException.h"
+#include "../exception/LogicException.h"
 
 InvoiceDetailService::InvoiceDetailService()
 {

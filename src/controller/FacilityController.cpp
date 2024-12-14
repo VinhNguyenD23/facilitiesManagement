@@ -1,3 +1,5 @@
+#include "../object/Invoice.h"
+#include "../object/Facility.h"
 #include "FacilityController.h"
 #include <exception>
 

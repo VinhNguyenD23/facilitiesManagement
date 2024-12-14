@@ -1,3 +1,6 @@
+#include "../exception/DatabasesException.h"
+#include "../exception/DataException.h"
+#include "../common/FilePath.h"
 #include "Invoices.h"
 
 void InvoiceModel::readFile()

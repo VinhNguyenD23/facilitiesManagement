@@ -3,10 +3,8 @@
 
 #include "../object/facility.h"
 #include "../datatype/Avl.h"
-#include "../datatype/LinkedList.h"
-#include "../model/GlobalModel.h"
 #include "../model/Facilities.h"
-#include "../exception/ValidateException.h"
+#include "../model/InvoiceDetail.h"
 #include <QString>
 
 class FacilityService

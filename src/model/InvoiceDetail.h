@@ -12,6 +12,7 @@ class InvoiceDetailModel
 {
 private:
     LinkedList<InvoiceDetail> *data;
+    InvoiceModel *invoiceRepository = nullptr;
 
 private:
     void readFile();
@@ -19,12 +20,12 @@ private:
 
 public:
     InvoiceDetailModel();
-    LinkedList<InvoiceDetail> *getList();
-    void insert(InvoiceDetail data);
-    void remove(InvoiceDetail data);
-    void update(InvoiceDetail data);
+    LinkedList<InvoiceDetail>::Node *getList();
+    void push(InvoiceDetail &data);
+    void remove(InvoiceDetail &data);
+    void update(InvoiceDetail &data);
     void refresh();
-    InvoiceDetail *findDataById(QString id);
+    InvoiceDetail *findById(QString id);
     bool isFacilityAvailable(QString facilityId);
     size_t getSize();
     ~InvoiceDetailModel();

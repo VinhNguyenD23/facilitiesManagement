@@ -1,4 +1,3 @@
-#include "../object/Invoice.h"
 #include "../object/Facility.h"
 #include "FacilityController.h"
 #include <exception>
@@ -8,7 +7,6 @@ FacilityController::FacilityController()
     try
     {
         this->facilityService = new FacilityService();
-        qDebug() << "Facility controller initialized successfully";
     }
     catch (const std::exception &e)
     {

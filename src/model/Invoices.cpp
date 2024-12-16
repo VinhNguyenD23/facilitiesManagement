@@ -1,11 +1,13 @@
 #include "../exception/DatabasesException.h"
 #include "../exception/DataException.h"
+#include "../object/InvoiceDetail.h"
+#include "../util/ValidateUtil.h"
 #include "../common/FilePath.h"
+#include "GlobalModel.h"
 #include "Invoices.h"
 
 void InvoiceModel::readFile()
 {
-    this->data = new LinkedList<Invoice>();
     QFile file(FilePath::getPath(FilePath::databases::INVOICE));
     QStringList field;
     QTextStream in(&file);
@@ -21,15 +23,15 @@ void InvoiceModel::readFile()
         {
             throw DatabasesException::DatabaseBroken("invoice");
         }
-        Invoice tempInvoice;
+        Invoice *tempInvoice = new Invoice();
         Date tempDate;
-        tempInvoice.id = field[0];
+        tempInvoice->id = field[0];
         QStringList fieldDate = field[1].split('/');
         tempDate = Date(fieldDate[0].toInt(), fieldDate[1].toInt(), fieldDate[2].toInt());
-        tempInvoice.date = tempDate;
-        tempInvoice.staffId = field[2];
-        tempInvoice.type = field[3].toInt();
-        this->data->add(tempInvoice);
+        tempInvoice->date = tempDate;
+        tempInvoice->staffId = field[2];
+        tempInvoice->type = field[3].toInt();
+        this->data->add(*tempInvoice);
         // qDebug() << field;
     }
     qDebug() << "Invoice Databases load:" << this->getSize();
@@ -44,7 +46,7 @@ void InvoiceModel::writeFile()
         throw DatabasesException::DatabaseBroken("invoice");
     }
     QTextStream out(&file);
-    auto *currentHead = this->getList()->getListData();
+    auto *currentHead = this->getList();
     while (currentHead != nullptr)
     {
         out << currentHead->data.id << ',' << currentHead->data.date.toRawData() << ',' << currentHead->data.staffId << ',' << currentHead->data.type << '\n';
@@ -55,18 +57,19 @@ void InvoiceModel::writeFile()
 
 InvoiceModel::InvoiceModel()
 {
-    qDebug() << "Invoice model initialized successfully";
+    this->data = new LinkedList<Invoice>();
     this->readFile();
+    this->loadInvoiceDetailData();
 }
 
-LinkedList<Invoice> *InvoiceModel::getList()
+LinkedList<Invoice>::Node *InvoiceModel::getList()
 {
-    return this->data;
+    return this->data->getList();
 }
 
-void InvoiceModel::insert(Invoice data)
+void InvoiceModel::push(Invoice &data)
 {
-    if (this->findDataById(data.id) != nullptr)
+    if (this->findById(data.id) != nullptr)
     {
         throw DataException::DuplicateDataId("This ID already exists, please try again!");
     }
@@ -74,13 +77,13 @@ void InvoiceModel::insert(Invoice data)
     this->writeFile();
 }
 
-void InvoiceModel::remove(Invoice data)
+void InvoiceModel::remove(Invoice &data)
 {
     this->data->remove(data);
     this->writeFile();
 }
 
-void InvoiceModel::update(Invoice data)
+void InvoiceModel::update(Invoice &data)
 {
     // TODO: Find data and update data
     // Invoice *element = this->getDataById(data.id);
@@ -99,15 +102,16 @@ void InvoiceModel::refresh()
     this->readFile();
 }
 
-Invoice *InvoiceModel::findDataById(QString id)
+Invoice *InvoiceModel::findById(QString id)
 {
-    auto *temp = this->data->getListData();
+    auto *temp = this->data->getList();
     while (temp != nullptr)
     {
         if (temp->data.id == id)
         {
             Invoice *invoiceData = new Invoice(temp->data);
             return invoiceData;
+            // return &temp->data;
         }
         temp = temp->next;
     }
@@ -116,7 +120,7 @@ Invoice *InvoiceModel::findDataById(QString id)
 
 bool InvoiceModel::isStaffAvailable(QString staffId)
 {
-    auto *temp = this->data->getListData();
+    auto *temp = this->data->getList();
     while (temp != nullptr)
     {
         if (temp->data.staffId == staffId)
@@ -133,6 +137,56 @@ size_t InvoiceModel::getSize()
     return this->data->getSize();
 }
 
+void InvoiceModel::loadInvoiceDetailData()
+{
+    InvoiceDetailModel *invoiceDetailRepository = invoiceDetailModel;
+    if(ValidateUtil::isNull(invoiceDetailRepository))
+    {
+        invoiceDetailRepository = new InvoiceDetailModel();
+    }
+    auto *currentData = invoiceDetailRepository->getList();
+    while(!ValidateUtil::isNull(currentData))
+    {
+        qDebug() << currentData;
+        this->addInvoiceDetail(currentData->data.invoiceId, currentData->data);
+        currentData = currentData->next;
+    }
+}
+
+void InvoiceModel::addInvoiceDetail(QString invoiceId, InvoiceDetail &data)
+{
+    auto *existingData = this->findById(invoiceId);
+    if(ValidateUtil::isNull(existingData))
+    {
+        throw DataException::DataNotFound("Invoice id " + invoiceId.toStdString() + " not found");
+    }
+    LinkedList<Invoice>::Node *element = this->data->getElement(*existingData);
+    if(ValidateUtil::isNull(existingData->invoiceDetailList))
+    {
+        element->data.invoiceDetailList = new LinkedList<InvoiceDetail>();
+    }
+    element->data.invoiceDetailList->add(data);
+    // existingData->invoiceDetailList->add(data);
+    // qDebug() << "Invoice find id: " << element;
+}
+
+void InvoiceModel::refreshInvoiceDetail()
+{
+    InvoiceDetailModel *invoiceDetailRepository = invoiceDetailModel;
+    if(ValidateUtil::isNull(invoiceDetailRepository))
+    {
+        invoiceDetailRepository = new InvoiceDetailModel();
+    }
+    auto renewData = invoiceDetailRepository->getList();
+    auto *currentData = invoiceDetailRepository->getList();
+    while(!ValidateUtil::isNull(currentData))
+    {
+
+        currentData = currentData->next;
+    }
+}
+
 InvoiceModel::~InvoiceModel()
 {
+    this->data->clear();
 }

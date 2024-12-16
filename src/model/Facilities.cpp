@@ -30,16 +30,11 @@ void FacilitiesModel::readFile()
         this->data->insert(tempFacility, tempFacility.id);
         index++;
     }
-    // DArray<Facility> toDynamicArray = this->data->toDynamicArray();
-    // for (int i = 0; i < toDynamicArray.getSize(); i++)
-    // {
-    //     qDebug() << toDynamicArray.at(i).id + ' ' + toDynamicArray.at(i).name + ' ' + toDynamicArray.at(i).unit;
-    // }
     qDebug() << "Facilities Databases load:" << index;
     file.close();
 }
 
-void FacilitiesModel::writeNode(AVLTree<Facility,QString>::Node *root, QTextStream &out)
+void FacilitiesModel::writeNode(AVLTree<Facility, QString>::Node *root, QTextStream &out)
 {
     if (root != nullptr)
     {
@@ -50,9 +45,10 @@ void FacilitiesModel::writeNode(AVLTree<Facility,QString>::Node *root, QTextStre
     }
 }
 
-void FacilitiesModel::writeFile() {
+void FacilitiesModel::writeFile()
+{
     QFile file(FilePath::getPath(FilePath::databases::FACILITY));
-    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         throw DatabasesException::DatabaseBroken("facility");
     }
@@ -64,7 +60,6 @@ void FacilitiesModel::writeFile() {
 
 FacilitiesModel::FacilitiesModel()
 {
-    qDebug() << "Facility model initialized successfully";
     this->readFile();
 }
 
@@ -77,7 +72,7 @@ AVLTree<Facility, QString> *FacilitiesModel::getList()
     return this->data;
 }
 
-void FacilitiesModel::insert(Facility data)
+void FacilitiesModel::push(Facility data)
 {
     this->data->insert(data, data.id);
     this->writeFile();
@@ -106,7 +101,6 @@ void FacilitiesModel::remove(QString id)
 
 void FacilitiesModel::refresh()
 {
-    // TODO: Add function clear to AVL tree
     this->data->clear();
     this->readFile();
 }
@@ -114,10 +108,9 @@ void FacilitiesModel::refresh()
 Facility *FacilitiesModel::findByDataId(QString id)
 {
     Facility *findElement = nullptr;
-    if(this->data->findIndex(id) != nullptr)
+    if (this->data->findIndex(id) != nullptr)
     {
         findElement = &this->data->findIndex(id)->data;
-        // throw DataException::DataNotFound("Data with id " + id.toStdString() + " is not existing");
     }
     return findElement;
 }

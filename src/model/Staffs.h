@@ -23,13 +23,17 @@ private:
 public:
     StaffsModel();
     ~StaffsModel();
-    PointerArray<Staff> *getListData();
-    void insert(Staff data);
+    PointerArray<Staff> *getList();
+    void push(Staff data);
     void remove(Staff data);
     void update(Staff data);
     void refresh();
-    Staff *getDataById(QString id);
+    Staff *findById(QString id);
     size_t getSize();
     long getMaxStaff();
+    void loadInvoiceData();
+    void addInvoice(QString staffId, Invoice &data);
+    void refreshInvoice();
+
 };
 #endif

@@ -6,7 +6,6 @@ FacilityService::FacilityService()
 {
     this->facilityRepository = facilityModel;
     this->invoiceDetailRepository = invoiceDetailModel;
-    qDebug() << "Facility service initialized successfully";
 }
 
 void FacilityService::create(Facility data)
@@ -19,7 +18,7 @@ void FacilityService::create(Facility data)
     {
         throw ValidateException::InvalidData("Facility id length must in range [1, 10], please try again");
     }
-    this->facilityRepository->insert(data);
+    this->facilityRepository->push(data);
 }
 
 AVLTree<Facility, QString> *FacilityService::readAll()

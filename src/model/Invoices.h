@@ -18,15 +18,19 @@ private:
 
 public:
     InvoiceModel();
-    LinkedList<Invoice> *getList();
-    void insert(Invoice data);
-    void remove(Invoice data);
-    void update(Invoice data);
+    ~InvoiceModel();
+    LinkedList<Invoice>::Node *getList();
+    void push(Invoice &data);
+    void remove(Invoice &data);
+    void update(Invoice &data);
     void refresh();
-    Invoice *findDataById(QString id);
+    Invoice *findById(QString id);
     bool isStaffAvailable(QString staffId);
     size_t getSize();
-    ~InvoiceModel();
+    void loadInvoiceDetailData();
+    void addInvoiceDetail(QString invoiceId, InvoiceDetail &data);
+    void refreshInvoiceDetail();
+
 };
 
 #endif

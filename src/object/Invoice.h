@@ -9,8 +9,10 @@ struct Invoice
     QString id;
     Date date;
     QString staffId;
-    bool type; // true: Export, false: Import
+
+    bool type; // true: Import, false: Export
     LinkedList<InvoiceDetail> *invoiceDetailList = nullptr;
+
     bool operator==(Invoice &other)
     {
         return this->id == other.id;

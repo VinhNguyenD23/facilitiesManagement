@@ -159,6 +159,29 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table) {
 void MainWindow::loadStatisticYearTableData(QTableWidget *table) {
     table->clearContents();
     table->setRowCount(0);
+    QString getCurrentYear = ui->StatisticYearline->text();
+    int year = getCurrentYear.toInt();
+    double monthlyRevenue[13];
+    for ( int i = 1; i <= 12; i++) {
+        double sum = 0;
+        auto head = this->invoice->getListInvoices()->getListData();
+        while (head != nullptr) {
+            if ( head->data.date.month == i && head->data.date.year == year && head->data.type == 0 ) {
+                sum += this->invoice->getSumOfInvoice(head->data.id);
+            }
+        }
+        monthlyRevenue[i] = sum;
+        monthlyRevenue[0] += sum;
+    }
+    int row = 0;
+    for ( size_t i = 1; i <= 12; i++) {
+        table->insertRow(row);
+        QTableWidgetItem *month = new QTableWidgetItem(QString::number(i));
+        QTableWidgetItem *revenue = new QTableWidgetItem(QString::number(i));
+        table->setItem(row,0, month);
+        table->setItem(row, 1, revenue);
+        row++;
+    }
 }
 
 void MainWindow::loadStatisticFacilityTableData(QTableWidget *table) {
@@ -415,3 +438,10 @@ void MainWindow::on_facilityQuantity_textChanged() {
         return;
     }
 }
+
+void MainWindow::on_StatisticYearline_textChanged(const QString &arg1)
+{
+    this->loadStatisticYearTableData(ui->statisticYearTable);
+}
+
+

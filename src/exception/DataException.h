@@ -23,6 +23,11 @@ public:
     {
         return DataException("[DATA.ERROR] Existing data id: " + message);
     }
+
+    static DataException CantHandle(const std::string message)
+    {
+        return DataException("[DATA.ERROR] Cant handle with data id: " + message);
+    }
 };
 
 #endif

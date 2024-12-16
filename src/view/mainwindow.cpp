@@ -55,6 +55,16 @@ MainWindow::MainWindow(QWidget *parent)
     invoiceTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     this->loadInvoiceData(invoiceTempTable);
 
+    QTableWidget *statisticYearTableTemp = ui->statisticYearTable;
+    statisticYearTableTemp->verticalHeader()->setVisible(false);
+    statisticYearTableTemp->horizontalHeader()->setVisible(false);
+    statisticYearTableTemp->setColumnCount(2);
+    statisticYearTableTemp->setColumnWidth(0, 425);
+    statisticYearTableTemp->setColumnWidth(1, 640);
+    statisticYearTableTemp->setSelectionBehavior(QAbstractItemView::SelectRows);
+    statisticYearTableTemp->setSelectionMode(QAbstractItemView::SingleSelection);
+    statisticYearTableTemp->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
     QDateTime currentDateTime = QDateTime::currentDateTime();
 
     ui->invoiceDate->setDateTime(currentDateTime);
@@ -64,6 +74,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->statisticFromDate->setDateTime(currentDateTime.addDays(-7));
     ui->fromDate->setDateTime(currentDateTime.addDays(-7));
+
+    this->ui->statisticYearline->setText(QString::number(QDate::currentDate().year()));
 
     // qDebug() << this->staff->getStaffById("QL003")->id <<
     // this->staff->getStaffById("QL003")->invoicesList->getListData()->data.id;
@@ -159,29 +171,35 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table) {
 void MainWindow::loadStatisticYearTableData(QTableWidget *table) {
     table->clearContents();
     table->setRowCount(0);
-    QString getCurrentYear = ui->StatisticYearline->text();
-    int year = getCurrentYear.toInt();
-    double monthlyRevenue[13];
-    for ( int i = 1; i <= 12; i++) {
-        double sum = 0;
-        auto head = this->invoice->getListInvoices()->getListData();
-        while (head != nullptr) {
-            if ( head->data.date.month == i && head->data.date.year == year && head->data.type == 0 ) {
-                sum += this->invoice->getSumOfInvoice(head->data.id);
+    QString getCurrentYear = ui->statisticYearline->text();
+    bool ok = false;
+    int year = getCurrentYear.toInt(&ok);
+    if(ok)
+    {
+        double monthlyRevenue[13];
+        for ( int i = 1; i <= 12; i++) {
+            double sum = 0;
+            auto head = this->invoice->getListInvoices();
+            while (head != nullptr) {
+                if ( head->data.date.month == i && head->data.date.year == year && head->data.type == 0 ) {
+                    sum += this->invoice->getSumOfInvoice(head->data.id);
+                }
+                head = head->next;
             }
+            monthlyRevenue[i] = sum;
+            monthlyRevenue[0] += sum;
         }
-        monthlyRevenue[i] = sum;
-        monthlyRevenue[0] += sum;
+        int row = 0;
+        for ( int i = 1; i <= 12; i++) {
+            table->insertRow(row);
+            QTableWidgetItem *month = new QTableWidgetItem(QString::number(i));
+            QTableWidgetItem *revenue = new QTableWidgetItem(QString::number(monthlyRevenue[i]));
+            table->setItem(row,0, month);
+            table->setItem(row, 1, revenue);
+            row++;
+        }
     }
-    int row = 0;
-    for ( size_t i = 1; i <= 12; i++) {
-        table->insertRow(row);
-        QTableWidgetItem *month = new QTableWidgetItem(QString::number(i));
-        QTableWidgetItem *revenue = new QTableWidgetItem(QString::number(i));
-        table->setItem(row,0, month);
-        table->setItem(row, 1, revenue);
-        row++;
-    }
+
 }
 
 void MainWindow::loadStatisticFacilityTableData(QTableWidget *table) {
@@ -439,9 +457,9 @@ void MainWindow::on_facilityQuantity_textChanged() {
     }
 }
 
-void MainWindow::on_StatisticYearline_textChanged(const QString &arg1)
+
+void MainWindow::on_statisticYearline_textChanged(const QString &arg1)
 {
     this->loadStatisticYearTableData(ui->statisticYearTable);
 }
-
 

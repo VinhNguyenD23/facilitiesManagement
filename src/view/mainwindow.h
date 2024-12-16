@@ -61,7 +61,7 @@ private slots:
 
     void on_facilityQuantity_textChanged();
 
-    void on_StatisticYearline_textChanged(const QString &arg1);
+    void on_statisticYearline_textChanged(const QString &arg1);
 
 private:
     void loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row);

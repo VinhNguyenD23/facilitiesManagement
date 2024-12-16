@@ -1,8 +1,8 @@
 #ifndef INVOICEMODEL_H
 #define INVOICEMODEL_H
 #include "../datatype/LinkedList.h"
-#include "../object/Date.h"
 #include "../object/Invoice.h"
+#include "Staffs.h"
 #include <QString>
 #include <QFile>
 #include <QTextStream>
@@ -11,6 +11,7 @@ class InvoiceModel
 {
 private:
     LinkedList<Invoice> *data;
+    StaffsModel *staffRepository = nullptr;
 
 private:
     void readFile();

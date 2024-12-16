@@ -1,6 +1,7 @@
 #include "../exception/DataException.h"
 #include "../exception/ValidateException.h"
 #include "../model/GlobalModel.h"
+#include "../util/ValidateUtil.h"
 #include "InvoiceService.h"
 
 InvoiceService::InvoiceService()
@@ -30,26 +31,30 @@ LinkedList<Invoice>::Node *InvoiceService::readAll()
 
 Invoice *InvoiceService::readById(QString id)
 {
-    Invoice *invoiceDetail = this->invoiceRepository->findById(id);
-    if (invoiceDetail == nullptr)
+    Invoice *invoiceData = this->invoiceRepository->findById(id);
+    if ( ValidateUtil::isNull(invoiceData))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
     }
-    return invoiceDetail;
+    return invoiceData;
 }
 
 void InvoiceService::update(Invoice &data)
 {
-    if (this->invoiceRepository->findById(data.id) == nullptr)
+    if (ValidateUtil::isNull(this->invoiceRepository->findById(data.id)))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
+    }
+    if(this->invoiceRepository->findById(data.id)->type != data.type)
+    {
+        throw DataException::CantHandle(data.id.toStdString() + " can't be edited!");
     }
     this->invoiceRepository->update(data);
 }
 
 void InvoiceService::remove(Invoice &data)
 {
-    if (this->invoiceRepository->findById(data.id) == nullptr)
+    if ( ValidateUtil::isNull(this->invoiceRepository->findById(data.id)))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
@@ -58,13 +63,18 @@ void InvoiceService::remove(Invoice &data)
 
 double InvoiceService::getSum(QString id)
 {
-    if (this->invoiceRepository->findById(id) == nullptr)
+    if (ValidateUtil::isNull(this->invoiceRepository->findById(id)))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
     }
     double sum = 0.00;
-    auto *current = this->invoiceDetailRepository->getList();
-    while (current != nullptr)
+    auto getInvoiceDetail = this->invoiceRepository->findById(id)->invoiceDetailList;
+    if(ValidateUtil::isNull(getInvoiceDetail))
+    {
+        return 0;
+    }
+    auto *current = getInvoiceDetail->getList();
+    while (!ValidateUtil::isNull(current))
     {
         if (current->data.invoiceId == id)
         {

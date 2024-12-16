@@ -78,7 +78,12 @@ void InvoiceDetailModel::push(InvoiceDetail &data)
 
 void InvoiceDetailModel::remove(InvoiceDetail &data)
 {
+    if(ValidateUtil::isNull(this->invoiceRepository))
+    {
+        this->invoiceRepository = invoiceModel;
+    }
     this->data->remove(data);
+    this->invoiceRepository->refreshInvoiceDetail();
     this->writeFile();
 }
 
@@ -103,8 +108,7 @@ void InvoiceDetailModel::refresh()
 InvoiceDetail *InvoiceDetailModel::findById(QString id)
 {
     auto *temp = this->data->getList();
-    qDebug() << temp;
-    while (temp != nullptr)
+    while (!ValidateUtil::isNull(temp))
     {
         if (temp->data.id == id)
         {

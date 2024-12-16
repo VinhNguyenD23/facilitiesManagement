@@ -1454,7 +1454,7 @@ QTableWidget{
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="StatisticYearline"/>
+          <widget class="QLineEdit" name="statisticYearline"/>
          </item>
         </layout>
        </widget>

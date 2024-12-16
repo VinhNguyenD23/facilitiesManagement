@@ -473,3 +473,9 @@ void MainWindow::on_facilityQuantity_textChanged()
     }
 }
 
+
+void MainWindow::on_StatisticYearline_textChanged(const QString &arg1)
+{
+    this->loadStatisticYearTableData(ui->statisticYearTable);
+}
+

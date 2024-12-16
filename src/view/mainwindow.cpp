@@ -159,10 +159,10 @@ void MainWindow::loadStatisticYearTableData(QTableWidget *table)
 {
     table->clearContents();
     table->setRowCount(0);
-    QString stringyear = ui->StatisticYearline->text();
-    int year = stringyear.toInt();
-    double dtthang[13];
-    for ( size_t i = 1; i <= 12; i++) {
+    QString getCurrentYear = ui->StatisticYearline->text();
+    int year = getCurrentYear.toInt();
+    double monthlyRevenue[13];
+    for ( int i = 1; i <= 12; i++) {
         double sum = 0;
         auto head = this->invoice->getListInvoices()->getListData();
         while (head != nullptr) {
@@ -170,8 +170,8 @@ void MainWindow::loadStatisticYearTableData(QTableWidget *table)
                 sum += this->invoice->getSumOfInvoice(head->data.id);
             }
         }
-        dtthang[i] = sum;
-        dtthang[0] += sum;
+        monthlyRevenue[i] = sum;
+        monthlyRevenue[0] += sum;
     }
     int row = 0;
     for ( size_t i = 1; i <= 12; i++) {

@@ -15,10 +15,10 @@ private:
 
 public:
     InvoiceDetailService(/* args */);
-    void create(InvoiceDetail data);
-    void update(InvoiceDetail data);
-    void remove(InvoiceDetail data);
-    LinkedList<InvoiceDetail> *readAll();
+    void create(InvoiceDetail &data);
+    void update(InvoiceDetail &data);
+    void remove(InvoiceDetail &data);
+    LinkedList<InvoiceDetail>::Node *readAll();
     InvoiceDetail *readById(QString id);
     ~InvoiceDetailService();
 };

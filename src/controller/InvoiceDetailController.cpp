@@ -6,7 +6,6 @@ InvoiceDetailController::InvoiceDetailController()
     try
     {
         this->invoiceDetailService = new InvoiceDetailService();
-        qDebug() << "Invoice detail controller initialized successfully";
     }
     catch (const std::exception &e)
     {
@@ -18,7 +17,7 @@ InvoiceDetailController::InvoiceDetailController()
     }
 }
 
-void InvoiceDetailController::createNewInvoiceDetail(InvoiceDetail data)
+void InvoiceDetailController::createNewInvoiceDetail(InvoiceDetail &data)
 {
     try
     {
@@ -74,7 +73,7 @@ void InvoiceDetailController::removeInvoiceDetail(InvoiceDetail data)
     }
 }
 
-LinkedList<InvoiceDetail> *InvoiceDetailController::getListInvoice()
+LinkedList<InvoiceDetail>::Node *InvoiceDetailController::getListInvoice()
 {
     try
     {

@@ -6,17 +6,16 @@ StaffService::StaffService()
 {
     this->staffRepository = staffModel;
     this->invoiceRepository = invoiceModel;
-    qDebug() << "Staff service initialized successfully";
 }
 
 PointerArray<Staff> *StaffService::getList()
 {
-    return this->staffRepository->getListData();
+    return this->staffRepository->getList();
 }
 
 Staff *StaffService::find(QString id)
 {
-    return this->staffRepository->getDataById(id);
+    return this->staffRepository->findById(id);
 }
 
 void StaffService::create(Staff data)
@@ -25,7 +24,7 @@ void StaffService::create(Staff data)
     {
         throw ValidateException::InvalidData("Field of staff must not be blank, please try again!");
     }
-    this->staffRepository->insert(data);
+    this->staffRepository->push(data);
 }
 
 void StaffService::update(Staff data)

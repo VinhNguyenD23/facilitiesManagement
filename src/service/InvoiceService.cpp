@@ -8,12 +8,11 @@ InvoiceService::InvoiceService()
     this->invoiceRepository = invoiceModel;
     this->staffRepository = staffModel;
     this->invoiceDetailRepository = invoiceDetailModel;
-    qDebug() << "Invoice service initialized successfully";
 }
 
-void InvoiceService::create(Invoice data)
+void InvoiceService::create(Invoice &data)
 {
-    if (this->staffRepository->getDataById(data.staffId) == nullptr)
+    if (this->staffRepository->findById(data.staffId) == nullptr)
     {
         throw DataException::DataNotFound("Staff id not found! Please try again.");
     }
@@ -21,17 +20,17 @@ void InvoiceService::create(Invoice data)
     {
         throw ValidateException::InvalidData("Staff id length must in range [1, 20], please try again");
     }
-    this->invoiceRepository->insert(data);
+    this->invoiceRepository->push(data);
 }
 
-LinkedList<Invoice> *InvoiceService::readAll()
+LinkedList<Invoice>::Node *InvoiceService::readAll()
 {
     return this->invoiceRepository->getList();
 }
 
 Invoice *InvoiceService::readById(QString id)
 {
-    Invoice *invoiceDetail = this->invoiceRepository->findDataById(id);
+    Invoice *invoiceDetail = this->invoiceRepository->findById(id);
     if (invoiceDetail == nullptr)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
@@ -39,18 +38,18 @@ Invoice *InvoiceService::readById(QString id)
     return invoiceDetail;
 }
 
-void InvoiceService::update(Invoice data)
+void InvoiceService::update(Invoice &data)
 {
-    if (this->invoiceRepository->findDataById(data.id) == nullptr)
+    if (this->invoiceRepository->findById(data.id) == nullptr)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
     this->invoiceRepository->update(data);
 }
 
-void InvoiceService::remove(Invoice data)
+void InvoiceService::remove(Invoice &data)
 {
-    if (this->invoiceRepository->findDataById(data.id) == nullptr)
+    if (this->invoiceRepository->findById(data.id) == nullptr)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
@@ -59,12 +58,12 @@ void InvoiceService::remove(Invoice data)
 
 double InvoiceService::getSum(QString id)
 {
-    if (this->invoiceRepository->findDataById(id) == nullptr)
+    if (this->invoiceRepository->findById(id) == nullptr)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
     }
     double sum = 0.00;
-    auto *current = this->invoiceDetailRepository->getList()->getListData();
+    auto *current = this->invoiceDetailRepository->getList();
     while (current != nullptr)
     {
         if (current->data.invoiceId == id)

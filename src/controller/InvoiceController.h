@@ -14,10 +14,10 @@ private:
 
 public:
     InvoiceController(/* args */);
-    void createNewInvoice(Invoice data);
-    void updateExistInvoice(Invoice data);
-    void removeInvoice(Invoice data);
-    LinkedList<Invoice> *getListInvoices();
+    void createNewInvoice(Invoice &data);
+    void updateExistInvoice(Invoice &data);
+    void removeInvoice(Invoice &data);
+    LinkedList<Invoice>::Node *getListInvoices();
     Invoice *getInvoiceById(QString id);
     double getSumOfInvoice(QString id);
     ~InvoiceController();

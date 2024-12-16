@@ -5,7 +5,6 @@ InvoiceController::InvoiceController()
     try
     {
         this->invoiceService = new InvoiceService();
-        qDebug() << "Invoice controller initialized successfully";
     }
     catch (const std::exception &e)
     {
@@ -17,7 +16,7 @@ InvoiceController::InvoiceController()
     }
 }
 
-void InvoiceController::createNewInvoice(Invoice data)
+void InvoiceController::createNewInvoice(Invoice &data)
 {
     try
     {
@@ -33,7 +32,7 @@ void InvoiceController::createNewInvoice(Invoice data)
     }
 }
 
-void InvoiceController::updateExistInvoice(Invoice data)
+void InvoiceController::updateExistInvoice(Invoice &data)
 {
     try
     {
@@ -49,7 +48,7 @@ void InvoiceController::updateExistInvoice(Invoice data)
     }
 }
 
-void InvoiceController::removeInvoice(Invoice data)
+void InvoiceController::removeInvoice(Invoice &data)
 {
     try
     {
@@ -65,7 +64,7 @@ void InvoiceController::removeInvoice(Invoice data)
     }
 }
 
-LinkedList<Invoice> *InvoiceController::getListInvoices()
+LinkedList<Invoice>::Node *InvoiceController::getListInvoices()
 {
     try
     {

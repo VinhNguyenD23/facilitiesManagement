@@ -20,7 +20,7 @@ public:
     FacilitiesModel();
     ~FacilitiesModel();
     AVLTree<Facility, QString> *getList();
-    void insert(Facility data);
+    void push(Facility data);
     void update(Facility data);
     void remove(QString id);
     void refresh();

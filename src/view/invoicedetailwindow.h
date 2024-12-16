@@ -3,8 +3,8 @@
 
 #include "../controller/InvoiceDetailController.h"
 #include "../controller/FacilityController.h"
+#include "../controller/InvoiceController.h"
 #include "../datatype/Avl.h"
-
 
 #include <QDialog>
 #include <QString>
@@ -23,7 +23,8 @@ public:
     explicit InvoiceDetailWindow(QWidget *parent = nullptr,
                                  QString invoiceId = "",
                                  FacilityController *facility = nullptr,
-                                 InvoiceDetailController *invoiceDetail = nullptr);
+                                 InvoiceDetailController *invoiceDetail = nullptr,
+                                 InvoiceController *invoice = nullptr);
     ~InvoiceDetailWindow();
 
 private slots:
@@ -46,6 +47,7 @@ private:
     QString invoiceId;
     FacilityController *facility;
     InvoiceDetailController *invoiceDetail = nullptr;
+    InvoiceController *invoice = nullptr;
 
 };
 

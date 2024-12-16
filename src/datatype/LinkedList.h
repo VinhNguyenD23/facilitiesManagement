@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 
 #include "../exception/ArraySizeException.h"
+#include <QDebug>
 
 template <typename T>
 class LinkedList
@@ -9,11 +10,11 @@ class LinkedList
 public:
     struct Node
     {
-        T data;
+        T &data;
         Node *next;
-        Node(T data)
+        Node(T &data) : data(data)
         {
-            this->data = data;
+            // this->data = &data;
             this->next = nullptr;
         };
     };
@@ -28,6 +29,7 @@ public:
         this->head = nullptr;
         this->size = 0;
     }
+
     ~LinkedList()
     {
         this->size = 0;
@@ -39,10 +41,12 @@ public:
             delete temp;
         }
     }
-    void add(T data)
+
+    void add(T &data)
     {
         this->size++;
         LinkedList<T>::Node *newNode = new LinkedList<T>::Node(data);
+        qDebug() << "Clone address:" << &data << &newNode->data;
         if (this->head == nullptr)
         {
             this->head = newNode;
@@ -55,6 +59,7 @@ public:
         }
         currentNode->next = newNode;
     }
+
     void remove(T data)
     {
         if (this->head == nullptr)
@@ -83,18 +88,22 @@ public:
             return;
         }
     }
+
     bool isEmpty() const
     {
         return this->head == nullptr;
     }
+
     size_t getSize() const
     {
         return this->size;
     }
-    Node *getListData() const
+
+    Node *getList() const
     {
         return this->head;
     }
+
     void clear() noexcept
     {
         this->size = 0;
@@ -107,6 +116,7 @@ public:
         }
         this->head = nullptr;
     }
+
     Node *getElement(T data)
     {
         Node *current = this->head;

@@ -8,14 +8,13 @@ InvoiceDetailService::InvoiceDetailService()
     this->invoiceDetailRepository = invoiceDetailModel;
     this->facilityRepository = facilityModel;
     this->invoiceRepository = invoiceModel;
-    qDebug() << "Invoice detail service initialized successfully";
 }
 
-void InvoiceDetailService::create(InvoiceDetail data)
+void InvoiceDetailService::create(InvoiceDetail &data)
 {
     Facility *getFacility = this->facilityRepository->findByDataId(data.facilityId);
-    bool invoiceType = this->invoiceRepository->findDataById(data.invoiceId)->type;
-    if (this->invoiceDetailRepository->findDataById(data.id))
+    bool invoiceType = this->invoiceRepository->findById(data.invoiceId)->type;
+    if (this->invoiceDetailRepository->findById(data.id))
     {
         throw DataException::DuplicateDataId("This id is existing, please try again!");
     }
@@ -33,35 +32,35 @@ void InvoiceDetailService::create(InvoiceDetail data)
     tempData.quantity = (invoiceType ? (getFacility->quantity + data.quantity) : (getFacility->quantity - data.quantity));
     tempData.unit = getFacility->unit;
     this->facilityRepository->update(tempData);
-    this->invoiceDetailRepository->insert(data);
+    this->invoiceDetailRepository->push(data);
 }
 
-void InvoiceDetailService::update(InvoiceDetail data)
+void InvoiceDetailService::update(InvoiceDetail &data)
 {
-    if (!this->invoiceDetailRepository->findDataById(data.id))
+    if (!this->invoiceDetailRepository->findById(data.id))
     {
         throw DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
     }
     this->invoiceDetailRepository->update(data);
 }
 
-void InvoiceDetailService::remove(InvoiceDetail data)
+void InvoiceDetailService::remove(InvoiceDetail &data)
 {
-    if (!this->invoiceDetailRepository->findDataById(data.id))
+    if (!this->invoiceDetailRepository->findById(data.id))
     {
         throw DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
     }
     this->invoiceDetailRepository->remove(data);
 }
 
-LinkedList<InvoiceDetail> *InvoiceDetailService::readAll()
+LinkedList<InvoiceDetail>::Node *InvoiceDetailService::readAll()
 {
     return this->invoiceDetailRepository->getList();
 }
 
 InvoiceDetail *InvoiceDetailService::readById(QString id)
 {
-    return this->invoiceDetailRepository->findDataById(id);
+    return this->invoiceDetailRepository->findById(id);
 }
 
 InvoiceDetailService::~InvoiceDetailService()

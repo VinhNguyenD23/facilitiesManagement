@@ -1,11 +1,10 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include <QMessageBox>
 #include "invoicedetailwindow.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
-{
+    : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     this->setFixedSize(QSize(1150, 670));
     this->setWindowTitle("Phần mềm quản lý vật tư");
@@ -66,23 +65,22 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statisticFromDate->setDateTime(currentDateTime.addDays(-7));
     ui->fromDate->setDateTime(currentDateTime.addDays(-7));
 
+    // qDebug() << this->staff->getStaffById("QL003")->id <<
+    // this->staff->getStaffById("QL003")->invoicesList->getListData()->data.id;
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row)
-{
-    if (node != nullptr)
-    {
+void MainWindow::loadAvlData(QTableWidget *table,
+                             AVLTree<Facility, QString>::Node *node, int &row) {
+    if (node != nullptr) {
         table->insertRow(row);
         loadAvlData(table, node->left, row);
         QTableWidgetItem *facilityId = new QTableWidgetItem(node->data.id);
         QTableWidgetItem *facilityName = new QTableWidgetItem(node->data.name);
         QTableWidgetItem *facilityUnit = new QTableWidgetItem(node->data.unit);
-        QTableWidgetItem *facilityQuantity = new QTableWidgetItem(QString::number(node->data.quantity));
+        QTableWidgetItem *facilityQuantity =
+            new QTableWidgetItem(QString::number(node->data.quantity));
         table->setItem(row, 0, facilityId);
         table->setItem(row, 1, facilityName);
         table->setItem(row, 2, facilityUnit);
@@ -92,27 +90,28 @@ void MainWindow::loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::No
     }
 }
 
-void MainWindow::loadFacilityData(QTableWidget *table)
-{
+void MainWindow::loadFacilityData(QTableWidget *table) {
     table->clearContents();
     table->setRowCount(0);
     int row = 0;
-    AVLTree<Facility, QString>::Node *current = this->facility->getListFacilities()->getList();
+    AVLTree<Facility, QString>::Node *current =
+        this->facility->getListFacilities()->getList();
     this->loadAvlData(table, current, row);
 }
 
-void MainWindow::loadStaffData(QTableWidget *table)
-{
+void MainWindow::loadStaffData(QTableWidget *table) {
     table->clearContents();
     table->setRowCount(0);
     auto *data = this->staff->getListStaff();
-    for (size_t i = 0; i < data->getSize(); i++)
-    {
+    for (size_t i = 0; i < data->getSize(); i++) {
         table->insertRow(i);
         QTableWidgetItem *staffId = new QTableWidgetItem(data->at(i)->id);
-        QTableWidgetItem *staffLastName = new QTableWidgetItem(data->at(i)->lastName);
-        QTableWidgetItem *staffFirstName = new QTableWidgetItem(data->at(i)->firstName);
-        QTableWidgetItem *staffGender = new QTableWidgetItem(data->at(i)->gender ? "Nam" : "Nữ");
+        QTableWidgetItem *staffLastName =
+            new QTableWidgetItem(data->at(i)->lastName);
+        QTableWidgetItem *staffFirstName =
+            new QTableWidgetItem(data->at(i)->firstName);
+        QTableWidgetItem *staffGender =
+            new QTableWidgetItem(data->at(i)->gender ? "Nam" : "Nữ");
         table->setItem(i, 0, staffId);
         table->setItem(i, 1, staffLastName);
         table->setItem(i, 2, staffFirstName);
@@ -120,25 +119,28 @@ void MainWindow::loadStaffData(QTableWidget *table)
     }
 }
 
-void MainWindow::loadInvoiceData(QTableWidget *table)
-{
+void MainWindow::loadInvoiceData(QTableWidget *table) {
     table->clearContents();
     table->setRowCount(0);
     int row = 0;
-    auto *current = this->invoice->getListInvoices()->getListData();
-    while (current != nullptr)
-    {
+    auto *current = this->invoice->getListInvoices();
+    while (current != nullptr) {
         table->insertRow(row);
         auto staff = this->staff->getStaffById(current->data.staffId);
         // qDebug() << staff;
         QString staffName;
         staffName = staff->lastName + " " + staff->firstName;
-        // qDebug() << current->data.date.day << current->data.date.month << current->data.date.year;
+        // qDebug() << current->data.date.day << current->data.date.month <<
+        // current->data.date.year;
         QTableWidgetItem *invoiceId = new QTableWidgetItem(current->data.id);
-        QTableWidgetItem *invoiceDate = new QTableWidgetItem(current->data.date.getFormatValue());
+        QTableWidgetItem *invoiceDate =
+            new QTableWidgetItem(current->data.date.getFormatValue());
         QTableWidgetItem *invoiceStaffName = new QTableWidgetItem(staffName);
-        QTableWidgetItem *invoiceType = new QTableWidgetItem(current->data.type ? "Nhập" : "Xuất");
-        QTableWidgetItem *invoicePrice = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(this->invoice->getSumOfInvoice(current->data.id),'f', 0)));
+        QTableWidgetItem *invoiceType =
+            new QTableWidgetItem(current->data.type ? "Nhập" : "Xuất");
+        QTableWidgetItem *invoicePrice =
+            new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(
+            this->invoice->getSumOfInvoice(current->data.id), 'f', 0)));
         table->setItem(row, 0, invoiceId);
         table->setItem(row, 1, invoiceDate);
         table->setItem(row, 2, invoiceStaffName);
@@ -149,14 +151,12 @@ void MainWindow::loadInvoiceData(QTableWidget *table)
     }
 }
 
-void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
-{
+void MainWindow::loadStatisticTimeTableData(QTableWidget *table) {
     table->clearContents();
     table->setRowCount(0);
 }
 
-void MainWindow::loadStatisticYearTableData(QTableWidget *table)
-{
+void MainWindow::loadStatisticYearTableData(QTableWidget *table) {
     table->clearContents();
     table->setRowCount(0);
     QString getCurrentYear = ui->StatisticYearline->text();
@@ -184,14 +184,12 @@ void MainWindow::loadStatisticYearTableData(QTableWidget *table)
     }
 }
 
-void MainWindow::loadStatisticFacilityTableData(QTableWidget *table)
-{
+void MainWindow::loadStatisticFacilityTableData(QTableWidget *table) {
     table->clearContents();
     table->setRowCount(0);
 }
 
-void MainWindow::loadTableData()
-{
+void MainWindow::loadTableData() {
     this->loadStatisticYearTableData(ui->statisticYearTable);
     this->loadStatisticTimeTableData(ui->statisticTimeTable);
     this->loadFacilityData(ui->facilityTable);
@@ -212,17 +210,19 @@ void MainWindow::loadTableData()
 //     {
 //         if(current->data.invoiceId == invoiceId)
 //         {
-//             sum += double(current->data.price) + (double(current->data.price) * current->data.vat);
+//             sum += double(current->data.price) + (double(current->data.price)
+//             * current->data.vat);
 //         }
 //         current = current->next;
 //     }
 //     return sum;
 // }
 
-void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column)
-{
-    QString getInvoiceId = ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
-    InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(this, getInvoiceId, this->facility, this->invoiceDetail);
+void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column) {
+    QString getInvoiceId =
+        ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
+    InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(
+        this, getInvoiceId, this->facility, this->invoiceDetail, this->invoice);
     invoiceDetailForm->setAttribute(Qt::WA_DeleteOnClose);
     invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);
     invoiceDetailForm->exec();
@@ -230,21 +230,22 @@ void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column)
     this->loadFacilityData(ui->facilityTable);
 }
 
-void MainWindow::on_facilityTable_cellClicked(int row, int column)
-{
-    ui->facilityId->setText(ui->facilityTable->item(ui->facilityTable->currentRow(), 0)->text());
-    ui->facilityName->setText(ui->facilityTable->item(ui->facilityTable->currentRow(), 1)->text());
-    ui->facilityUnit->setText(ui->facilityTable->item(ui->facilityTable->currentRow(), 2)->text());
-    ui->facilityQuantity->setText(ui->facilityTable->item(ui->facilityTable->currentRow(), 3)->text());
+void MainWindow::on_facilityTable_cellClicked(int row, int column) {
+    ui->facilityId->setText(
+        ui->facilityTable->item(ui->facilityTable->currentRow(), 0)->text());
+    ui->facilityName->setText(
+        ui->facilityTable->item(ui->facilityTable->currentRow(), 1)->text());
+    ui->facilityUnit->setText(
+        ui->facilityTable->item(ui->facilityTable->currentRow(), 2)->text());
+    ui->facilityQuantity->setText(
+        ui->facilityTable->item(ui->facilityTable->currentRow(), 3)->text());
 }
 
-void MainWindow::on_facilityAddButton_clicked()
-{
-    if(ui->facilityId->toPlainText() == ""
-        || ui->facilityName->toPlainText() == ""
-        || ui->facilityUnit->toPlainText() == ""
-        || ui->facilityQuantity->toPlainText() == "")
-    {
+void MainWindow::on_facilityAddButton_clicked() {
+    if (ui->facilityId->toPlainText() == "" ||
+        ui->facilityName->toPlainText() == "" ||
+        ui->facilityUnit->toPlainText() == "" ||
+        ui->facilityQuantity->toPlainText() == "") {
         QMessageBox msgBox;
         msgBox.setText("Bạn chưa nhập hết thông tin, vui lòng thử lại!");
         msgBox.setIcon(QMessageBox::Icon::Critical);
@@ -257,8 +258,7 @@ void MainWindow::on_facilityAddButton_clicked()
     data.name = ui->facilityName->toPlainText();
     data.unit = ui->facilityUnit->toPlainText();
     data.quantity = ui->facilityQuantity->toPlainText().toLong(&ok);
-    if(!ok)
-    {
+    if (!ok) {
         QMessageBox msgBox;
         msgBox.setText("Lỗi định dạng khi chuyển đổi số, vui lòng thử lại!");
         msgBox.setIcon(QMessageBox::Icon::Critical);
@@ -269,86 +269,73 @@ void MainWindow::on_facilityAddButton_clicked()
     this->loadTableData();
 }
 
-void MainWindow::on_InvoiceTable_cellClicked(int row, int column)
-{
-    QString invoiceId = ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
+void MainWindow::on_InvoiceTable_cellClicked(int row, int column) {
+    QString invoiceId =
+        ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
     ui->invoiceId->setText(invoiceId);
     Invoice *data = this->invoice->getInvoiceById(invoiceId);
     ui->invoiceStaffId->setText(data->staffId);
-    Date getDate = Date(ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 1)->text());
+    Date getDate =
+        Date(ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 1)->text());
     QDate date(getDate.year, getDate.month, getDate.day);
     ui->invoiceDate->setDate(date);
     ui->invoiceImport->setChecked(data->type);
     ui->invoiceExport->setChecked(!data->type);
 }
 
-void MainWindow::on_invoiceAddButton_clicked()
-{
-    Invoice invoiceRequest = Invoice();
-    invoiceRequest.id = ui->invoiceId->toPlainText();
-    invoiceRequest.staffId = ui->invoiceStaffId->toPlainText();
+void MainWindow::on_invoiceAddButton_clicked() {
+    Invoice * invoiceRequest = new Invoice();
+    invoiceRequest->id = ui->invoiceId->toPlainText();
+    invoiceRequest->staffId = ui->invoiceStaffId->toPlainText();
     QString dateText = ui->invoiceDate->text();
     QStringList dateTextList = dateText.split('/');
-    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(), dateTextList.at(1).toInt());
-    invoiceRequest.date = date;
-    if (ui->invoiceImport->isChecked())
-    {
-        invoiceRequest.type = true;
-    }
-    else if (ui->invoiceExport->isChecked())
-    {
-        invoiceRequest.type = false;
-    }
-    else
-    {
+    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(),
+                     dateTextList.at(1).toInt());
+    invoiceRequest->date = date;
+    if (ui->invoiceImport->isChecked()) {
+        invoiceRequest->type = true;
+    } else if (ui->invoiceExport->isChecked()) {
+        invoiceRequest->type = false;
+    } else {
         QMessageBox msgBox;
         msgBox.setText("Vui lòng chọn vào ô giới tính");
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
         return;
     }
-    this->invoice->createNewInvoice(invoiceRequest);
+    this->invoice->createNewInvoice(*invoiceRequest);
     this->loadTableData();
 }
 
-void MainWindow::on_invoiceDeleteButton_clicked()
-{
+void MainWindow::on_invoiceDeleteButton_clicked() {
     Invoice invoiceRequest = Invoice();
     invoiceRequest.id = ui->invoiceId->toPlainText();
     this->invoice->removeInvoice(invoiceRequest);
     this->loadTableData();
 }
 
-
-void MainWindow::on_invoiceEditButton_clicked()
-{
+void MainWindow::on_invoiceEditButton_clicked() {
     Invoice invoiceRequest = Invoice();
     invoiceRequest.id = ui->invoiceId->toPlainText();
     invoiceRequest.staffId = ui->invoiceStaffId->toPlainText();
     QString dateText = ui->invoiceDate->text();
     QStringList dateTextList = dateText.split('/');
-    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(), dateTextList.at(1).toInt());
+    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(),
+                     dateTextList.at(1).toInt());
     invoiceRequest.date = date;
-    if (ui->invoiceImport->isChecked())
-    {
+    if (ui->invoiceImport->isChecked()) {
         invoiceRequest.type = true;
-    }
-    else if (ui->invoiceExport->isChecked())
-    {
+    } else if (ui->invoiceExport->isChecked()) {
         invoiceRequest.type = false;
-    }
-    else
-    {
-        //TODO: MessageBox
+    } else {
+        // TODO: MessageBox
         return;
     }
     this->invoice->updateExistInvoice(invoiceRequest);
     this->loadTableData();
 }
 
-
-void MainWindow::on_facilityDeleteButton_clicked()
-{
+void MainWindow::on_facilityDeleteButton_clicked() {
     QString facilityId = ui->facilityId->toPlainText();
     Facility facility = Facility();
     facility.id = facilityId;
@@ -356,21 +343,17 @@ void MainWindow::on_facilityDeleteButton_clicked()
     this->loadTableData();
 }
 
-
-void MainWindow::on_facilityEditButton_clicked()
-{
+void MainWindow::on_facilityEditButton_clicked() {
     Facility facilityEdit = Facility();
     facilityEdit.id = ui->facilityId->toPlainText();
     facilityEdit.name = ui->facilityName->toPlainText();
     facilityEdit.unit = ui->facilityUnit->toPlainText();
     facilityEdit.quantity = ui->facilityQuantity->toPlainText().toLong();
-    if(this->facility->getFacilityById(facilityEdit.id)->quantity == facilityEdit.quantity)
-    {
+    if (this->facility->getFacilityById(facilityEdit.id)->quantity ==
+        facilityEdit.quantity) {
         this->facility->updateExistFacility(facilityEdit);
         this->loadTableData();
-    }
-    else
-    {
+    } else {
         QMessageBox msgBox;
         msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
         msgBox.setIcon(QMessageBox::Icon::Critical);
@@ -378,9 +361,7 @@ void MainWindow::on_facilityEditButton_clicked()
     }
 }
 
-
-void MainWindow::on_staffTable_cellClicked(int row, int column)
-{
+void MainWindow::on_staffTable_cellClicked(int row, int column) {
     int currentRow = ui->staffTable->currentRow();
     QString staffId = ui->staffTable->item(currentRow, 0)->text();
     ui->staffIdTxt->setText(staffId);
@@ -391,9 +372,7 @@ void MainWindow::on_staffTable_cellClicked(int row, int column)
     ui->femaleRButton->setChecked(!getCurrentStaff->gender);
 }
 
-
-void MainWindow::on_staffAddButton_clicked()
-{
+void MainWindow::on_staffAddButton_clicked() {
     Staff currentStaff = Staff();
     currentStaff.id = ui->staffIdTxt->toPlainText();
     currentStaff.lastName = ui->staffLastNameTxt->toPlainText();
@@ -403,9 +382,7 @@ void MainWindow::on_staffAddButton_clicked()
     this->loadTableData();
 }
 
-
-void MainWindow::on_staffDeleteButton_clicked()
-{
+void MainWindow::on_staffDeleteButton_clicked() {
     Staff currentStaff = Staff();
     currentStaff.id = ui->staffIdTxt->toPlainText();
     currentStaff.lastName = ui->staffLastNameTxt->toPlainText();
@@ -416,9 +393,7 @@ void MainWindow::on_staffDeleteButton_clicked()
     this->loadTableData();
 }
 
-
-void MainWindow::on_staffEditButton_clicked()
-{
+void MainWindow::on_staffEditButton_clicked() {
     Staff currentStaff = Staff();
     currentStaff.id = ui->staffIdTxt->toPlainText();
     currentStaff.lastName = ui->staffLastNameTxt->toPlainText();
@@ -429,11 +404,8 @@ void MainWindow::on_staffEditButton_clicked()
     this->loadTableData();
 }
 
-
-void MainWindow::on_fromDate_dateTimeChanged(const QDateTime &dateTime)
-{
-    if(this->ui->fromDate->dateTime() > this->ui->toDate->dateTime())
-    {
+void MainWindow::on_fromDate_dateTimeChanged(const QDateTime &dateTime) {
+    if (this->ui->fromDate->dateTime() > this->ui->toDate->dateTime()) {
         qDebug() << this->ui->fromDate->dateTime() << this->ui->toDate->dateTime();
         QMessageBox msgBox;
         msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
@@ -444,11 +416,8 @@ void MainWindow::on_fromDate_dateTimeChanged(const QDateTime &dateTime)
     this->loadTableData();
 }
 
-
-void MainWindow::on_toDate_dateTimeChanged(const QDateTime &dateTime)
-{
-    if(this->ui->fromDate->dateTime() > this->ui->toDate->dateTime())
-    {
+void MainWindow::on_toDate_dateTimeChanged(const QDateTime &dateTime) {
+    if (this->ui->fromDate->dateTime() > this->ui->toDate->dateTime()) {
         QMessageBox msgBox;
         msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
         msgBox.setIcon(QMessageBox::Icon::Critical);
@@ -458,13 +427,10 @@ void MainWindow::on_toDate_dateTimeChanged(const QDateTime &dateTime)
     this->loadTableData();
 }
 
-
-void MainWindow::on_facilityQuantity_textChanged()
-{
+void MainWindow::on_facilityQuantity_textChanged() {
     bool ok;
     long data = this->ui->facilityQuantity->toPlainText().toLong(&ok);
-    if(!ok)
-    {
+    if (!ok) {
         QMessageBox msgBox;
         msgBox.setText("Bạn không được nhập các ký tự khác [0, 9]");
         msgBox.setIcon(QMessageBox::Icon::Critical);
@@ -473,9 +439,9 @@ void MainWindow::on_facilityQuantity_textChanged()
     }
 }
 
-
 void MainWindow::on_StatisticYearline_textChanged(const QString &arg1)
 {
     this->loadStatisticYearTableData(ui->statisticYearTable);
 }
+
 

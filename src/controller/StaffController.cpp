@@ -5,7 +5,6 @@ StaffController::StaffController()
     try
     {
         this->staffService = new StaffService();
-        qDebug() << "Staff controller initialized successfully";
     }
     catch (const std::exception &e)
     {

@@ -18,11 +18,11 @@ private:
 
 public:
     InvoiceService(/* args */);
-    void create(Invoice data);
-    LinkedList<Invoice> *readAll();
+    void create(Invoice &data);
+    void update(Invoice &data);
+    void remove(Invoice &data);
+    LinkedList<Invoice>::Node *readAll();
     Invoice *readById(QString id);
-    void update(Invoice data);
-    void remove(Invoice data);
     double getSum(QString id);
     ~InvoiceService();
 };

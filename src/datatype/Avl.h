@@ -2,6 +2,7 @@
 #define AVL_TREE_H
 
 #include "../exception/DataException.h"
+#include "../util/ValidateUtil.h"
 #include <QDebug>
 
 template <class T, typename K = int>
@@ -32,13 +33,13 @@ private:
 private:
     Node *find(Node *root, K key)
     {
-        if (root != nullptr)
+        if (!ValidateUtil::isNull(root))
         {
             if (root->key == key)
                 return root;
-            if (root->key < key && root->right != nullptr)
+            if (root->key < key && !ValidateUtil::isNull(root->right))
                 return this->find(root->right, key);
-            else if (root->key > key && root->left != nullptr)
+            else if (root->key > key && !ValidateUtil::isNull(root->left))
                 return this->find(root->left, key);
         }
         return nullptr;
@@ -71,7 +72,7 @@ private:
     }
     Node *insert(Node *node, T data, K key)
     {
-        if (node == nullptr)
+        if (ValidateUtil::isNull(node))
             return new Node(data, key);
 
         if (key < node->key)
@@ -119,12 +120,12 @@ private:
             node->left = remove(node->left, key);
         else if (key > node->key)
             node->right = remove(node->right, key);
-        else if(key == node->key)
+        else if (key == node->key)
         {
-            if ((node->left == nullptr) || (node->right == nullptr))
+            if (ValidateUtil::isNull(node->left) || ValidateUtil::isNull(node->right))
             {
                 Node *temp = node->left ? node->left : node->right;
-                if (temp == nullptr)
+                if (ValidateUtil::isNull(temp))
                 {
                     temp = node;
                     node = nullptr;
@@ -174,7 +175,7 @@ private:
     }
     void clear(Node *node)
     {
-        if (node == nullptr)
+        if (ValidateUtil::isNull(node))
             return;
         clear(node->left);
         clear(node->right);
@@ -183,13 +184,12 @@ private:
     Node *minValueNode(Node *node)
     {
         Node *current = node;
-        while (current->left != nullptr)
+        while (!ValidateUtil::isNull(current->left))
         {
             current = current->left;
         }
         return current;
     }
-
 
 public:
     AVLTree()
@@ -204,7 +204,7 @@ public:
     void update(T data, K key)
     {
         Node *element = this->find(root, key);
-        if (element == nullptr)
+        if (ValidateUtil::isNull(element))
         {
             throw DataException::DataNotFound("Data not found!");
         }

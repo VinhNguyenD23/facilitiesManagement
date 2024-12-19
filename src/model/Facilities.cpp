@@ -1,5 +1,6 @@
 #include "Facilities.h"
 #include "../common/FilePath.h"
+#include "../util/ValidateUtil.h"
 #include "../exception/DatabasesException.h"
 #include "../exception/DataException.h"
 
@@ -36,7 +37,7 @@ void FacilitiesModel::readFile()
 
 void FacilitiesModel::writeNode(AVLTree<Facility, QString>::Node *root, QTextStream &out)
 {
-    if (root != nullptr)
+    if (!ValidateUtil::isNull(root))
     {
         // xuat data nut
         writeNode(root->left, out);
@@ -74,15 +75,23 @@ AVLTree<Facility, QString> *FacilitiesModel::getList()
 
 void FacilitiesModel::push(Facility data)
 {
+    if (ValidateUtil::isBlank(data.id) || ValidateUtil::isBlank(data.name) || ValidateUtil::isBlank(data.unit))
+    {
+        DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
+    }
     this->data->insert(data, data.id);
     this->writeFile();
 }
 
 void FacilitiesModel::update(Facility data)
 {
-    if (this->data->findIndex(data.id) == nullptr)
+    if (ValidateUtil::isNull(this->data->findIndex(data.id)))
     {
         DataException::DataNotFound("Data with id " + data.id.toStdString() + " is not existing");
+    }
+    if (ValidateUtil::isBlank(data.id) || ValidateUtil::isBlank(data.name) || ValidateUtil::isBlank(data.unit))
+    {
+        DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
     }
     this->data->update(data, data.id);
     this->writeFile();
@@ -90,8 +99,12 @@ void FacilitiesModel::update(Facility data)
 
 void FacilitiesModel::remove(QString id)
 {
+    if (ValidateUtil::isBlank(id))
+    {
+        DataException::CantHandle("Id must not be blank");
+    }
     AVLTree<Facility, QString>::Node *element = this->data->findIndex(id);
-    if (element == nullptr)
+    if (ValidateUtil::isNull(element))
     {
         throw DataException::DataNotFound("Data with id " + id.toStdString() + " is not existing");
     }
@@ -108,7 +121,7 @@ void FacilitiesModel::refresh()
 Facility *FacilitiesModel::findByDataId(QString id)
 {
     Facility *findElement = nullptr;
-    if (this->data->findIndex(id) != nullptr)
+    if (!ValidateUtil::isNull(this->data->findIndex(id)))
     {
         findElement = &this->data->findIndex(id)->data;
     }

@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 
 #include "../exception/ArraySizeException.h"
+#include "../util/ValidateUtil.h"
 #include <QDebug>
 
 template <typename T>
@@ -34,7 +35,7 @@ public:
     {
         this->size = 0;
         LinkedList<T>::Node *currentNode = head;
-        while (currentNode->next != nullptr)
+        while (!ValidateUtil::isNull(currentNode->next))
         {
             LinkedList<T>::Node *temp = currentNode;
             currentNode = currentNode->next;
@@ -46,14 +47,14 @@ public:
     {
         this->size++;
         LinkedList<T>::Node *newNode = new LinkedList<T>::Node(data);
-        qDebug() << "Clone address:" << &data << &newNode->data;
-        if (this->head == nullptr)
+        // qDebug() << "Clone address:" << &data << &newNode->data;
+        if (ValidateUtil::isNull(this->head))
         {
             this->head = newNode;
             return;
         }
         LinkedList<T>::Node *currentNode = this->head;
-        while (currentNode->next != nullptr)
+        while (!ValidateUtil::isNull(currentNode->next))
         {
             currentNode = currentNode->next;
         }
@@ -62,7 +63,7 @@ public:
 
     void remove(T data)
     {
-        if (this->head == nullptr)
+        if (ValidateUtil::isNull(this->head))
         {
             throw ArraySizeException::ArrayEmpty("List is empty, Can't delete");
         }
@@ -75,12 +76,12 @@ public:
         }
 
         LinkedList<T>::Node *currentNode = this->head;
-        while (currentNode->next != nullptr && currentNode->next->data != data)
+        while (!ValidateUtil::isNull(currentNode->next) && currentNode->next->data != data)
         {
             currentNode = currentNode->next;
         }
 
-        if (currentNode->next != nullptr)
+        if (!ValidateUtil::isNull(currentNode->next))
         {
             LinkedList<T>::Node *temp = currentNode->next;
             currentNode->next = temp->next;
@@ -91,7 +92,7 @@ public:
 
     bool isEmpty() const
     {
-        return this->head == nullptr;
+        return ValidateUtil::isNull(this->head);
     }
 
     size_t getSize() const
@@ -108,7 +109,7 @@ public:
     {
         this->size = 0;
         LinkedList<T>::Node *currentNode = head;
-        while (currentNode->next != nullptr)
+        while (!ValidateUtil::isNull(currentNode->next))
         {
             LinkedList<T>::Node *temp = currentNode;
             currentNode = currentNode->next;
@@ -120,7 +121,7 @@ public:
     Node *getElement(T data)
     {
         Node *current = this->head;
-        while (current != nullptr)
+        while (!ValidateUtil::isNull(current))
         {
             if (current->data == data)
                 return current;

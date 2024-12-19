@@ -85,12 +85,7 @@ Staff *StaffController::getStaffById(QString id)
 {
     try
     {
-        auto *data = this->staffService->find(id);
-        if(data == nullptr)
-        {
-            throw DataException::DataNotFound(id.toStdString() + " not found");
-        }
-        return data;
+        return this->staffService->find(id);
     }
     catch (const std::exception &e)
     {

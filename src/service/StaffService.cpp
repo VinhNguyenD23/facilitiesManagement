@@ -16,7 +16,12 @@ PointerArray<Staff> *StaffService::getList()
 
 Staff *StaffService::find(QString id)
 {
-    return this->staffRepository->findById(id);
+    auto *data = this->staffRepository->findById(id);
+    if(ValidateUtil::isNull(data))
+    {
+        throw DataException::DataNotFound(id.toStdString() + " not found");
+    }
+    return data;
 }
 
 void StaffService::create(Staff data)
@@ -35,10 +40,12 @@ void StaffService::update(Staff data)
 
 void StaffService::remove(Staff data)
 {
-    if (this->invoiceRepository->isStaffAvailable(data.id))
+    auto *getListInvoices = this->staffRepository->findById(data.id)->invoicesList;
+    if(!ValidateUtil::isNull(getListInvoices) && !getListInvoices->isEmpty())
     {
         throw DataException::ExistDataId("Staff is already in the invoice, cannot delete staff.");
     }
+
     this->staffRepository->remove(data);
 }
 

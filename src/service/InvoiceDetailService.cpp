@@ -1,5 +1,6 @@
 #include "InvoiceDetailService.h"
 #include "../model/GlobalModel.h"
+#include "../util/ValidateUtil.h"
 #include "../exception/DataException.h"
 #include "../exception/LogicException.h"
 
@@ -18,7 +19,7 @@ void InvoiceDetailService::create(InvoiceDetail &data)
     {
         throw DataException::DuplicateDataId("This id is existing, please try again!");
     }
-    if (getFacility == nullptr)
+    if (ValidateUtil::isNull(getFacility))
     {
         throw DataException::DataNotFound("Facility id not found, please try again!");
     }

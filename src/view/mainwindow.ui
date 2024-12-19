@@ -27,49 +27,49 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#centralwidget {
-                                background-color: #fff
-                                }
+                    background-color: #fff
+                    }
 
-                                QPushButton {
-                                border-radius: 5px;
-                                background-color: black;
-                                height: 24px;
-                                }
+                    QPushButton {
+                    border-radius: 5px;
+                    background-color: black;
+                    height: 24px;
+                    }
 
-                                QTableWidget
-                                {
-                                background-color: #fff;
-                                }
+                    QTableWidget
+                    {
+                    background-color: #fff;
+                    }
 
-                                #facilityAddButton, #staffAddButton, #invoiceAddButton
-                                {
-                                background-color: #198754;
-                                }
+                    #facilityAddButton, #staffAddButton, #invoiceAddButton
+                    {
+                    background-color: #198754;
+                    }
 
-                                #facilityAddButton:hover,#staffAddButton:hover, #invoiceAddButton:hover
-                                {
-                                background-color: #157347;
-                                }
+                    #facilityAddButton:hover,#staffAddButton:hover, #invoiceAddButton:hover
+                    {
+                    background-color: #157347;
+                    }
 
-                                #facilityDeleteButton, #staffDeleteButton, #invoiceDeleteButton
-                                {
-                                background-color: #dc3545;
-                                }
+                    #facilityDeleteButton, #staffDeleteButton, #invoiceDeleteButton
+                    {
+                    background-color: #dc3545;
+                    }
 
-                                #facilityDeleteButton:hover,#staffDeleteButton:hover, #invoiceDeleteButton:hover
-                                {
-                                background-color: #bb2d3b;
-                                }
+                    #facilityDeleteButton:hover,#staffDeleteButton:hover, #invoiceDeleteButton:hover
+                    {
+                    background-color: #bb2d3b;
+                    }
 
-                                #facilityEditButton, #staffEditButton, #invoiceEditButton
-                                {
-                                background-color: #0d6efd;
-                                }
+                    #facilityEditButton, #staffEditButton, #invoiceEditButton
+                    {
+                    background-color: #0d6efd;
+                    }
 
-                                #facilityEditButton:hover,#staffEditButton:hover, #invoiceEditButton:hover
-                                {
-                                background-color: #0b5ed7;
-                                }</string>
+                    #facilityEditButton:hover,#staffEditButton:hover, #invoiceEditButton:hover
+                    {
+                    background-color: #0b5ed7;
+                    }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="maximumSize">
@@ -101,24 +101,24 @@
     </property>
     <property name="styleSheet">
      <string notr="true">#trang {
-                                                background-color: #f5f6fa;
-                                                border-radius: 7px;
-                                                }
-                                                #dsvt, #dsnv {
-                                                background-color: #f5f6fa;
-                                                }
+                              background-color: #f5f6fa;
+                              border-radius: 7px;
+                              }
+                              #dsvt, #dsnv {
+                              background-color: #f5f6fa;
+                              }
 
-                                                #tdvt, #tdnv, #tdhd, #tdtk, #tk_4 {
-                                                background-color: #00A4E8;
-                                                color: #ffffff;
-                                                font: Bold &quot;Lato&quot;;
-                                                border-radius: 7px
-                                                }
+                              #tdvt, #tdnv, #tdhd, #tdtk, #tk_4 {
+                              background-color: #00A4E8;
+                              color: #ffffff;
+                              font: Bold &quot;Lato&quot;;
+                              border-radius: 7px
+                              }
 
-                                                #nvt, #ivt, #ihd, #lhdn, #lhdx, #ttg, #dt, #nnv, #inv, #dt_4 {
-                                                font: Bold &quot;Lato&quot;;
-                                                color: #aab2c8;
-                                                }</string>
+                              #nvt, #ivt, #ihd, #lhdn, #lhdx, #ttg, #dt, #nnv, #inv, #dt_4 {
+                              font: Bold &quot;Lato&quot;;
+                              color: #aab2c8;
+                              }</string>
     </property>
     <widget class="QWidget" name="noidung" native="true">
      <property name="geometry">
@@ -131,8 +131,8 @@
      </property>
      <property name="styleSheet">
       <string notr="true">#noidung {
-                                                        background-color: white;
-                                                        }</string>
+                                   background-color: white;
+                                   }</string>
      </property>
      <widget class="QTabWidget" name="mainTab">
       <property name="geometry">
@@ -153,20 +153,20 @@
       </property>
       <property name="styleSheet">
        <string notr="true">#dvt, #mvt, #slt, #tvt, #mnv, #ho, #ten, #phai, #dongia_2, #hoten_2, #ngay_2, #loai_2, #tenvattu_2, #soluong_2, #trigia_2, #shd, #nl, #lhd, #htnvl, #tghd, #thang, #doanhthu, #statisticFacilityId, #statisticFacilityName, #statisticFacilityValue{
-                                                                background-color: #00A4E8;
-                                                                color: #ffffff;
-                                                                font: Bold &quot;Inter&quot;;
-                                                                }
+                                        background-color: #00A4E8;
+                                        color: #ffffff;
+                                        font: Bold &quot;Inter&quot;;
+                                        }
 
-                                                                QPushButton {
-                                                                font: Bold &quot;Lato&quot;;
-                                                                color: #fff;
-                                                                }
+                                        QPushButton {
+                                        font: Bold &quot;Lato&quot;;
+                                        color: #fff;
+                                        }
 
-QTableWidget{
-	border: 1px solid gray;
-  	border-radius: 5px;
- }</string>
+                                        QTableWidget{
+                                        border: 1px solid gray;
+                                        border-radius: 5px;
+                                        }</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::TabPosition::North</enum>
@@ -175,7 +175,7 @@ QTableWidget{
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -368,10 +368,10 @@ QTableWidget{
             <widget class="QLabel" name="mvt">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Mã vật tư</string>
@@ -385,10 +385,10 @@ QTableWidget{
             <widget class="QLabel" name="tvt">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Tên vật tư</string>
@@ -402,10 +402,10 @@ QTableWidget{
             <widget class="QLabel" name="dvt">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>ĐVT</string>
@@ -419,10 +419,10 @@ QTableWidget{
             <widget class="QLabel" name="slt">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Số lượng tồn</string>
@@ -651,10 +651,10 @@ QTableWidget{
             <widget class="QLabel" name="mnv">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Mã nhân viên</string>
@@ -668,10 +668,10 @@ QTableWidget{
             <widget class="QLabel" name="ho">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Họ</string>
@@ -685,10 +685,10 @@ QTableWidget{
             <widget class="QLabel" name="ten">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Tên</string>
@@ -702,10 +702,10 @@ QTableWidget{
             <widget class="QLabel" name="phai">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Giới tính</string>
@@ -928,10 +928,10 @@ QTableWidget{
             <widget class="QLabel" name="tenvattu_2">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Mã hóa đơn</string>
@@ -945,10 +945,10 @@ QTableWidget{
             <widget class="QLabel" name="ngay_2">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Ngày</string>
@@ -962,10 +962,10 @@ QTableWidget{
             <widget class="QLabel" name="hoten_2">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Tên người lập</string>
@@ -979,10 +979,10 @@ QTableWidget{
             <widget class="QLabel" name="loai_2">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Loại</string>
@@ -996,10 +996,10 @@ QTableWidget{
             <widget class="QLabel" name="trigia_2">
              <property name="styleSheet">
               <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                           background-color: #00A4E8;
+                                                                           color: #ffffff;
+                                                                           font: Bold &quot;Inter&quot;;
+                                                                           }</string>
              </property>
              <property name="text">
               <string>Trị giá</string>
@@ -1039,9 +1039,9 @@ QTableWidget{
         </property>
         <property name="styleSheet">
          <string notr="true">#tieude {
-                                                                                font: bold &quot;Goldman&quot;;
-                                                                                color: #ffffff;
-                                                                                }</string>
+                                                  font: bold &quot;Goldman&quot;;
+                                                  color: #ffffff;
+                                                  }</string>
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG LIỆT KÊ CÁC HÓA ĐƠN TRONG KHOẢNG THỜI GIAN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1092,7 +1092,7 @@ QTableWidget{
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="layoutWidget">
+       <widget class="QWidget" name="layoutWidget9">
         <property name="geometry">
          <rect>
           <x>21</x>
@@ -1106,10 +1106,10 @@ QTableWidget{
           <widget class="QLabel" name="shd">
            <property name="styleSheet">
             <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                 background-color: #00A4E8;
+                                                                 color: #ffffff;
+                                                                 font: Bold &quot;Inter&quot;;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>Số hóa đơn</string>
@@ -1123,10 +1123,10 @@ QTableWidget{
           <widget class="QLabel" name="nl">
            <property name="styleSheet">
             <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                 background-color: #00A4E8;
+                                                                 color: #ffffff;
+                                                                 font: Bold &quot;Inter&quot;;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>Ngày lập</string>
@@ -1140,10 +1140,10 @@ QTableWidget{
           <widget class="QLabel" name="lhd">
            <property name="styleSheet">
             <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                 background-color: #00A4E8;
+                                                                 color: #ffffff;
+                                                                 font: Bold &quot;Inter&quot;;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>Loại hóa đơn</string>
@@ -1157,10 +1157,10 @@ QTableWidget{
           <widget class="QLabel" name="htnvl">
            <property name="styleSheet">
             <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                 background-color: #00A4E8;
+                                                                 color: #ffffff;
+                                                                 font: Bold &quot;Inter&quot;;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>Họ tên nhân viên lập</string>
@@ -1174,10 +1174,10 @@ QTableWidget{
           <widget class="QLabel" name="tghd">
            <property name="styleSheet">
             <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                 background-color: #00A4E8;
+                                                                 color: #ffffff;
+                                                                 font: Bold &quot;Inter&quot;;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>Trị giá hóa đơn</string>
@@ -1205,7 +1205,7 @@ QTableWidget{
          <enum>Qt::PenStyle::DashLine</enum>
         </property>
        </widget>
-       <zorder>layoutWidget</zorder>
+       <zorder>layoutWidget9</zorder>
        <zorder>tieude_2</zorder>
        <zorder>layoutWidget7</zorder>
        <zorder>statisticTimeTable</zorder>
@@ -1214,7 +1214,7 @@ QTableWidget{
        <attribute name="title">
         <string>THỐNG KÊ VẬT TƯ THEO THỜI GIAN</string>
        </attribute>
-       <widget class="QWidget" name="layoutWidget">
+       <widget class="QWidget" name="layoutWidget10">
         <property name="geometry">
          <rect>
           <x>20</x>
@@ -1228,10 +1228,10 @@ QTableWidget{
           <widget class="QLabel" name="statisticFacilityId">
            <property name="styleSheet">
             <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                 background-color: #00A4E8;
+                                                                 color: #ffffff;
+                                                                 font: Bold &quot;Inter&quot;;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>Mã vật tư</string>
@@ -1245,10 +1245,10 @@ QTableWidget{
           <widget class="QLabel" name="statisticFacilityName">
            <property name="styleSheet">
             <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                 background-color: #00A4E8;
+                                                                 color: #ffffff;
+                                                                 font: Bold &quot;Inter&quot;;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>Tên vật tư</string>
@@ -1262,10 +1262,10 @@ QTableWidget{
           <widget class="QLabel" name="statisticFacilityValue">
            <property name="styleSheet">
             <string notr="true">#label {
-                                                                                                                        background-color: #00A4E8;
-                                                                                                                        color: #ffffff;
-                                                                                                                        font: Bold &quot;Inter&quot;;
-                                                                                                                        }</string>
+                                                                 background-color: #00A4E8;
+                                                                 color: #ffffff;
+                                                                 font: Bold &quot;Inter&quot;;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>Giá trị</string>
@@ -1349,9 +1349,9 @@ QTableWidget{
         </property>
         <property name="styleSheet">
          <string notr="true">#tieude {
-                                                                                font: bold &quot;Goldman&quot;;
-                                                                                color: #ffffff;
-                                                                                }</string>
+                                                  font: bold &quot;Goldman&quot;;
+                                                  color: #ffffff;
+                                                  }</string>
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG THỐNG KÊ CÁC VẬT TƯ THEO THỜI GIAN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1395,10 +1395,10 @@ QTableWidget{
         </property>
         <property name="styleSheet">
          <string notr="true">#label {
-                                                                                background-color: #00A4E8;
-                                                                                color: #ffffff;
-                                                                                font: Bold &quot;Inter&quot;;
-                                                                                }</string>
+                                                  background-color: #00A4E8;
+                                                  color: #ffffff;
+                                                  font: Bold &quot;Inter&quot;;
+                                                  }</string>
         </property>
         <property name="text">
          <string>THÁNG</string>
@@ -1418,10 +1418,10 @@ QTableWidget{
         </property>
         <property name="styleSheet">
          <string notr="true">#label {
-                                                                                background-color: #00A4E8;
-                                                                                color: #ffffff;
-                                                                                font: Bold &quot;Inter&quot;;
-                                                                                }</string>
+                                                  background-color: #00A4E8;
+                                                  color: #ffffff;
+                                                  font: Bold &quot;Inter&quot;;
+                                                  }</string>
         </property>
         <property name="text">
          <string>DOANH THU</string>
@@ -1444,9 +1444,9 @@ QTableWidget{
           <widget class="QLabel" name="tieude_3">
            <property name="styleSheet">
             <string notr="true">#tieude {
-                                                                                                        font: bold &quot;Goldman&quot;;
-                                                                                                        color: #ffffff;
-                                                                                                        }</string>
+                                                                 font: bold &quot;Goldman&quot;;
+                                                                 color: #ffffff;
+                                                                 }</string>
            </property>
            <property name="text">
             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG THỐNG KÊ DOANH THU NĂM&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1473,10 +1473,10 @@ QTableWidget{
     </property>
     <property name="styleSheet">
      <string notr="true">#tieude {
-                                                font: bold &quot;Goldman&quot;;
-                                                font-size: 32px;
-                                                color: #00A4E8;
-                                                }</string>
+                              font: bold &quot;Goldman&quot;;
+                              font-size: 32px;
+                              color: #00A4E8;
+                              }</string>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;QUẢN LÝ NHẬP XUẤT VẬT TƯ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

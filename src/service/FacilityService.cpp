@@ -10,11 +10,11 @@ FacilityService::FacilityService()
 
 void FacilityService::create(Facility data)
 {
-    if(this->facilityRepository->findByDataId(data.id) != nullptr)
+    if (!ValidateUtil::isNull(this->facilityRepository->findByDataId(data.id)))
     {
         throw DataException::DuplicateDataId("This data id is already exist, please try again");
     }
-    if(data.id.length() > 10 || data.id.length() == 0)
+    if (data.id.length() > 10 || data.id.length() == 0)
     {
         throw ValidateException::InvalidData("Facility id length must in range [1, 10], please try again");
     }
@@ -29,7 +29,7 @@ AVLTree<Facility, QString> *FacilityService::readAll()
 Facility *FacilityService::readById(QString id)
 {
     Facility *facilityDetail = this->facilityRepository->findByDataId(id);
-    if (facilityDetail == nullptr)
+    if (ValidateUtil::isNull(facilityDetail))
     {
         throw DataException::DataNotFound("Not found any facility with facility id: " + id.toStdString());
     }
@@ -38,7 +38,7 @@ Facility *FacilityService::readById(QString id)
 
 void FacilityService::update(Facility data)
 {
-    if (this->facilityRepository->findByDataId(data.id) == nullptr)
+    if (ValidateUtil::isNull(this->facilityRepository->findByDataId(data.id)))
     {
         throw DataException::DataNotFound("Not found any facility with facility id: " + data.id.toStdString());
     }
@@ -48,11 +48,12 @@ void FacilityService::update(Facility data)
 void FacilityService::remove(Facility data)
 {
     qDebug() << "Remove facility id: " << data.id;
-    if (this->facilityRepository->findByDataId(data.id) == nullptr)
+    if (ValidateUtil::isNull(this->facilityRepository->findByDataId(data.id)))
     {
         throw DataException::DataNotFound("Not found any facility with facility id: " + data.id.toStdString());
     }
-    if (this->invoiceDetailRepository->isFacilityAvailable(data.id)) {
+    if (this->invoiceDetailRepository->isFacilityAvailable(data.id))
+    {
         throw DataException::ExistDataId("Facility id is already in the invoice, cannot delete facility id");
     }
     this->facilityRepository->remove(data.id);

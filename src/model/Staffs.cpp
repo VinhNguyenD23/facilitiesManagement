@@ -56,7 +56,7 @@ StaffsModel::StaffsModel()
     this->data = new PointerArray<Staff>(MAX_STAFF);
     this->readFile();
     this->loadInvoiceData();
-    this->refreshInvoice();
+    // this->refreshInvoice();
 }
 
 StaffsModel::~StaffsModel()
@@ -71,7 +71,11 @@ PointerArray<Staff> *StaffsModel::getList()
 
 void StaffsModel::push(Staff data)
 {
-    if(this->findById(data.id) != nullptr)
+    if (ValidateUtil::isBlank(data.id) || ValidateUtil::isBlank(data.firstName) || ValidateUtil::isBlank(data.lastName))
+    {
+        DataException::CantHandle("Some field must not be blank, please try again!");
+    }
+    if (!ValidateUtil::isNull(this->findById(data.id)))
     {
         throw DataException::DuplicateDataId("Staff id is existing, please try other id!");
     }
@@ -88,6 +92,10 @@ void StaffsModel::remove(Staff data)
 
 void StaffsModel::update(Staff data)
 {
+    if (ValidateUtil::isBlank(data.id) || ValidateUtil::isBlank(data.firstName) || ValidateUtil::isBlank(data.lastName))
+    {
+        DataException::CantHandle("Some field must not be blank, please try again!");
+    }
     this->data->update(data);
     this->writeFile();
 }
@@ -123,12 +131,9 @@ long StaffsModel::getMaxStaff()
 void StaffsModel::loadInvoiceData()
 {
     InvoiceModel *invoiceRepository = invoiceModel;
-    if(ValidateUtil::isNull(invoiceRepository))
-    {
-        invoiceRepository = new InvoiceModel;
-    }
+    // this->refreshInvoice();
     auto *currentInvoiceData = invoiceRepository->getList();
-    while(!ValidateUtil::isNull(currentInvoiceData))
+    while (!ValidateUtil::isNull(currentInvoiceData))
     {
         // qDebug() <<"Staff invoice data: "<< &currentInvoiceData->data;
         this->addInvoice(currentInvoiceData->data.staffId, currentInvoiceData->data);
@@ -139,34 +144,44 @@ void StaffsModel::loadInvoiceData()
 void StaffsModel::addInvoice(QString staffId, Invoice &data)
 {
     auto *existingStaff = this->findById(staffId);
-    if(ValidateUtil::isNull(existingStaff))
+    if (ValidateUtil::isNull(existingStaff))
     {
         DataException::DataNotFound("Staff id: " + staffId.toStdString() + " not found");
     }
-    if(ValidateUtil::isNull(existingStaff->invoicesList))
+    if (ValidateUtil::isNull(existingStaff->invoicesList))
     {
         existingStaff->invoicesList = new LinkedList<Invoice>();
     }
     existingStaff->invoicesList->add(data);
     // qDebug() << data.invoiceDetailList;
-
 }
 
 void StaffsModel::refreshInvoice()
 {
+    InvoiceModel *invoiceRepository = invoiceModel;
     auto *getListStaff = this->getList();
-    for(int index = 0; index < getListStaff->getSize(); index++)
+    // if(ValidateUtil::isNull(getListStaff))
+    // {
+    //     return;
+    // }
+    for (int index = 0; index < getListStaff->getSize(); index++)
     {
-        if(!ValidateUtil::isNull(this->data->at(index)->invoicesList))
+        auto *getInvoicesList = this->data->at(index)->invoicesList;
+        if (!ValidateUtil::isNull(getInvoicesList))
         {
-            auto *currentInvoiceData = this->data->at(index)->invoicesList->getList();
-            // qDebug() << currentInvoiceData;
-            while(!ValidateUtil::isNull(currentInvoiceData))
-            {
-                // qDebug() << &currentInvoiceData->data;
-                currentInvoiceData = currentInvoiceData->next;
-            }
+            // auto *currentInvoiceData = getInvoicesList->getList();
+            // while (!ValidateUtil::isNull(currentInvoiceData))
+            // {
+            //     if (!ValidateUtil::isNull(currentInvoiceData))
+            //     {
+            //         // currentInvoiceData->data.invoiceDetailList->clear();
+            //         currentInvoiceData = nullptr;
+            //     }
+            //     currentInvoiceData = currentInvoiceData->next;
+            // }
+            getInvoicesList->clear();
+            getInvoicesList = nullptr;
         }
-
     }
+    this->loadInvoiceData();
 }

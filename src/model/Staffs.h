@@ -16,6 +16,7 @@ class StaffsModel
 private:
     PointerArray<Staff> *data;
 
+
 private:
     void readFile();
     void writeFile();

@@ -46,8 +46,8 @@ void InvoiceDetailWindow::loadDataInvoiceDetail(QTableWidget *table)
     table->clearContents();
     table->setRowCount(0);
     int row = 0;
-    auto *getInvoiceDetailList =this->invoice->getInvoiceById(this->invoiceId)->invoiceDetailList;
-    if(ValidateUtil::isNull(getInvoiceDetailList))
+    auto *getInvoiceDetailList = this->invoice->getInvoiceById(this->invoiceId)->invoiceDetailList;
+    if (ValidateUtil::isNull(getInvoiceDetailList))
     {
         return;
     }
@@ -78,7 +78,7 @@ void InvoiceDetailWindow::loadDataInvoiceDetail(QTableWidget *table)
 
 void InvoiceDetailWindow::loadAvlData(QComboBox *box, AVLTree<Facility, QString>::Node *node)
 {
-    if (node != nullptr)
+    if (!ValidateUtil::isNull(node))
     {
         this->loadAvlData(box, node->left);
         box->addItem(node->data.id + '/' + node->data.name);

@@ -69,22 +69,38 @@ LinkedList<Invoice>::Node *InvoiceModel::getList()
 
 void InvoiceModel::push(Invoice &data)
 {
+    if(ValidateUtil::isBlank(data.id)
+        || ValidateUtil::isBlank(data.staffId))
+    {
+        throw DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
+    }
     if (!ValidateUtil::isNull(this->findById(data.id)))
     {
         throw DataException::DuplicateDataId("This ID already exists, please try again!");
     }
     this->data->add(data);
+    this->staffRepository->addInvoice(data.staffId, data);
     this->writeFile();
 }
 
 void InvoiceModel::remove(Invoice &data)
 {
+    if(ValidateUtil::isNull(this->staffRepository))
+    {
+        this->staffRepository = staffModel;
+    }
     this->data->remove(data);
+    this->staffRepository->refreshInvoice();
     this->writeFile();
 }
 
 void InvoiceModel::update(Invoice &data)
 {
+    if(ValidateUtil::isBlank(data.id)
+        || ValidateUtil::isBlank(data.staffId))
+    {
+        throw DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
+    }
     LinkedList<Invoice>::Node *element = this->data->getElement(data);
     if (ValidateUtil::isNull(element))
     {
@@ -115,19 +131,19 @@ Invoice *InvoiceModel::findById(QString id)
     return nullptr;
 }
 
-bool InvoiceModel::isStaffAvailable(QString staffId)
-{
-    if(ValidateUtil::isNull(this->staffRepository))
-    {
-        this->staffRepository = staffModel;
-    }
-    auto *getInvoicesList = this->staffRepository->findById(staffId)->invoicesList;
-    if(!ValidateUtil::isNull(getInvoicesList))
-    {
-        return true;
-    }
-    return false;
-}
+// bool InvoiceModel::isStaffAvailable(QString staffId)
+// {
+//     if(ValidateUtil::isNull(this->staffRepository))
+//     {
+//         this->staffRepository = staffModel;
+//     }
+//     auto *getInvoicesList = this->staffRepository->findById(staffId)->invoicesList;
+//     if(!ValidateUtil::isNull(getInvoicesList))
+//     {
+//         return true;
+//     }
+//     return false;
+// }
 
 size_t InvoiceModel::getSize()
 {
@@ -141,6 +157,7 @@ void InvoiceModel::loadInvoiceDetailData()
     {
         invoiceDetailRepository = new InvoiceDetailModel();
     }
+    // this->refreshInvoiceDetail();
     auto *currentData = invoiceDetailRepository->getList();
     while(!ValidateUtil::isNull(currentData))
     {
@@ -174,9 +191,11 @@ void InvoiceModel::refreshInvoiceDetail()
     auto *current = this->data->getList();
     while(!ValidateUtil::isNull(current))
     {
-        if(!ValidateUtil::isNull(current->data.invoiceDetailList))
+        auto *getInvoiceDetailList = current->data.invoiceDetailList;
+        if(!ValidateUtil::isNull(getInvoiceDetailList))
         {
             current->data.invoiceDetailList->clear();
+            current->data.invoiceDetailList = nullptr;
         }
         current = current->next;
     }

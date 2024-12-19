@@ -13,11 +13,11 @@ InvoiceService::InvoiceService()
 
 void InvoiceService::create(Invoice &data)
 {
-    if (this->staffRepository->findById(data.staffId) == nullptr)
+    if (ValidateUtil::isNull(this->staffRepository->findById(data.staffId)))
     {
         throw DataException::DataNotFound("Staff id not found! Please try again.");
     }
-    if(data.id.length() > 20 || data.id.length() == 0)
+    if (data.id.length() > 20 || data.id.length() == 0)
     {
         throw ValidateException::InvalidData("Staff id length must in range [1, 20], please try again");
     }
@@ -32,7 +32,7 @@ LinkedList<Invoice>::Node *InvoiceService::readAll()
 Invoice *InvoiceService::readById(QString id)
 {
     Invoice *invoiceData = this->invoiceRepository->findById(id);
-    if ( ValidateUtil::isNull(invoiceData))
+    if (ValidateUtil::isNull(invoiceData))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
     }
@@ -45,7 +45,7 @@ void InvoiceService::update(Invoice &data)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
-    if(this->invoiceRepository->findById(data.id)->type != data.type)
+    if (this->invoiceRepository->findById(data.id)->type != data.type)
     {
         throw DataException::CantHandle(data.id.toStdString() + " can't be edited!");
     }
@@ -54,9 +54,16 @@ void InvoiceService::update(Invoice &data)
 
 void InvoiceService::remove(Invoice &data)
 {
-    if ( ValidateUtil::isNull(this->invoiceRepository->findById(data.id)))
+    if (ValidateUtil::isNull(this->invoiceRepository->findById(data.id)))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
+    }
+    // bool isDetailListNull = ;
+    if(!ValidateUtil::isNull(this->invoiceRepository->findById(data.id)->invoiceDetailList)
+        && !ValidateUtil::isNull(this->invoiceRepository->findById(data.id)->invoiceDetailList->getList()))
+    {
+        throw DataException::CantHandle(data.id.toStdString() + " can't be removed because this invoice contains internal information!");
+
     }
     this->invoiceRepository->remove(data);
 }
@@ -69,7 +76,7 @@ double InvoiceService::getSum(QString id)
     }
     double sum = 0.00;
     auto getInvoiceDetail = this->invoiceRepository->findById(id)->invoiceDetailList;
-    if(ValidateUtil::isNull(getInvoiceDetail))
+    if (ValidateUtil::isNull(getInvoiceDetail))
     {
         return 0;
     }

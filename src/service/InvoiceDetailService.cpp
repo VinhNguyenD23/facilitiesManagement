@@ -27,30 +27,54 @@ void InvoiceDetailService::create(InvoiceDetail &data)
     {
         throw LogicException::NegativeValue("The updated quantity must be less than the available stock, please try again");
     }
-    Facility tempData;
-    tempData.id = getFacility->id;
-    tempData.name = getFacility->name;
+    Facility tempData = Facility(*getFacility);
+    // tempData.id = getFacility->id;
+    // tempData.name = getFacility->name;
     tempData.quantity = (invoiceType ? (getFacility->quantity + data.quantity) : (getFacility->quantity - data.quantity));
-    tempData.unit = getFacility->unit;
+    // tempData.unit = getFacility->unit;
     this->facilityRepository->update(tempData);
     this->invoiceDetailRepository->push(data);
 }
 
 void InvoiceDetailService::update(InvoiceDetail &data)
 {
-    if (!this->invoiceDetailRepository->findById(data.id))
+    auto *existingData = this->invoiceDetailRepository->findById(data.id);
+    if (ValidateUtil::isNull(existingData))
     {
         throw DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
     }
+    Facility *getFacility = this->facilityRepository->findByDataId(data.facilityId);
+    bool invoiceType = this->invoiceRepository->findById(data.invoiceId)->type;
+    if (ValidateUtil::isNull(getFacility))
+    {
+        throw DataException::DataNotFound("Facility id not found, please try again!");
+    }
+    if(existingData->facilityId != getFacility->id)
+    {
+        throw DataException::CantHandle(data.id.toStdString() + " can't change facility id");
+    }
+    Facility tempData = Facility(*getFacility);
+    int changeValue = data.quantity - existingData->quantity;
+    tempData.quantity += (invoiceType ? changeValue : -changeValue);
+    this->facilityRepository->update(tempData);
     this->invoiceDetailRepository->update(data);
 }
 
 void InvoiceDetailService::remove(InvoiceDetail &data)
 {
-    if (!this->invoiceDetailRepository->findById(data.id))
+    auto *existingData = this->invoiceDetailRepository->findById(data.id);
+    if (ValidateUtil::isNull(existingData))
     {
         throw DataException::DataNotFound("Not found any invoice detail with id: " + data.id.toStdString());
     }
+    Facility *getFacility = this->facilityRepository->findByDataId(data.facilityId);
+    bool invoiceType = this->invoiceRepository->findById(data.invoiceId)->type;
+    if (ValidateUtil::isNull(getFacility))
+    {
+        throw DataException::DataNotFound("Facility id not found, please try again!");
+    }
+    Facility tempData = Facility(*getFacility);
+    tempData.quantity += (invoiceType ? -data.quantity : data.quantity);
     this->invoiceDetailRepository->remove(data);
 }
 

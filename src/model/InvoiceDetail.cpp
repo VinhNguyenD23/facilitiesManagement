@@ -78,7 +78,7 @@ void InvoiceDetailModel::push(InvoiceDetail &data)
     }
     this->data->add(data);
     // this->invoiceRepository->findById(data.invoiceId)->invoiceDetailList->add(data);
-    this->invoiceRepository->loadInvoiceDetailData();
+    this->invoiceRepository->addInvoiceDetail(data.invoiceId, data);
     this->writeFile();
 }
 

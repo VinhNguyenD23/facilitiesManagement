@@ -143,6 +143,8 @@ void InvoiceDetailWindow::on_invoiceDetailDeleteButton_clicked()
 {
     InvoiceDetail currentInvoiceDetail = InvoiceDetail();
     currentInvoiceDetail.id = ui->invoiceDetailId->toPlainText();
+    currentInvoiceDetail.invoiceId = this->invoiceId;
+    currentInvoiceDetail.facilityId = ui->facilityNameBox->currentText().split('/').at(0);
     this->invoiceDetail->removeInvoiceDetail(currentInvoiceDetail);
     this->loadDataInvoiceDetail(ui->invoiceDetailTable);
 }

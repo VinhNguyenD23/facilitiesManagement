@@ -40,6 +40,7 @@ private:
     void loadDataInvoiceDetail(QTableWidget *table);
     void loadAvlData(QComboBox *box, AVLTree<Facility, QString>::Node *node);
     void loadDataComboBoxFaclities();
+    void cleanContentInvoiceDetailData();
 
 private:
     Ui::InvoiceDetailWindow *ui;

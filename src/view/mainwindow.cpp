@@ -207,6 +207,31 @@ void MainWindow::loadStatisticFacilityTableData(QTableWidget *table)
     table->setRowCount(0);
 }
 
+void MainWindow::cleanContentFacilityTextBox()
+{
+    this->ui->facilityId->setText("");
+    this->ui->facilityName->setText("");
+    this->ui->facilityQuantity->setText("");
+    this->ui->facilityUnit->setText("");
+}
+
+void MainWindow::cleanContentStaffTextBox()
+{
+    this->ui->staffIdTxt->setText("");
+    this->ui->staffFirstNameTxt->setText("");
+    this->ui->staffLastNameTxt->setText("");
+    this->ui->maleRButton->setChecked(false);
+    this->ui->femaleRButton->setChecked(false);
+}
+
+void MainWindow::cleanContentInvoiceTextBox()
+{
+    this->ui->invoiceExport->setChecked(false);
+    this->ui->invoiceImport->setChecked(false);
+    this->ui->invoiceId->setText("");
+    this->ui->invoiceDate->setDate(QDate().currentDate());
+}
+
 void MainWindow::loadTableData()
 {
     this->loadStatisticYearTableData(ui->statisticYearTable);
@@ -271,6 +296,7 @@ void MainWindow::on_facilityAddButton_clicked()
     }
     this->facility->createNewFacility(data);
     this->loadTableData();
+    this->cleanContentFacilityTextBox();
 }
 
 void MainWindow::on_InvoiceTable_cellClicked(int row, int column)
@@ -316,6 +342,7 @@ void MainWindow::on_invoiceAddButton_clicked()
     }
     this->invoice->createNewInvoice(*invoiceRequest);
     this->loadTableData();
+    this->cleanContentInvoiceTextBox();
 }
 
 void MainWindow::on_invoiceDeleteButton_clicked()
@@ -324,6 +351,7 @@ void MainWindow::on_invoiceDeleteButton_clicked()
     invoiceRequest.id = ui->invoiceId->toPlainText();
     this->invoice->removeInvoice(invoiceRequest);
     this->loadTableData();
+    this->cleanContentInvoiceTextBox();
 }
 
 void MainWindow::on_invoiceEditButton_clicked()
@@ -351,6 +379,7 @@ void MainWindow::on_invoiceEditButton_clicked()
     }
     this->invoice->updateExistInvoice(invoiceRequest);
     this->loadTableData();
+    this->cleanContentInvoiceTextBox();
 }
 
 void MainWindow::on_facilityDeleteButton_clicked()
@@ -360,20 +389,30 @@ void MainWindow::on_facilityDeleteButton_clicked()
     facility.id = facilityId;
     this->facility->removeFacility(facility);
     this->loadTableData();
+    this->cleanContentFacilityTextBox();
 }
 
 void MainWindow::on_facilityEditButton_clicked()
 {
+    bool ok;
     Facility facilityEdit = Facility();
     facilityEdit.id = ui->facilityId->toPlainText();
     facilityEdit.name = ui->facilityName->toPlainText();
     facilityEdit.unit = ui->facilityUnit->toPlainText();
-    facilityEdit.quantity = ui->facilityQuantity->toPlainText().toLong();
-    if (this->facility->getFacilityById(facilityEdit.id)->quantity ==
-        facilityEdit.quantity)
+    facilityEdit.quantity = ui->facilityQuantity->toPlainText().toLong(&ok);
+    if (!ok)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Lỗi định dạng khi chuyển đổi số, vui lòng thử lại!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
+    if (this->facility->getFacilityById(facilityEdit.id)->quantity == facilityEdit.quantity)
     {
         this->facility->updateExistFacility(facilityEdit);
         this->loadTableData();
+        this->cleanContentFacilityTextBox();
     }
     else
     {
@@ -405,6 +444,7 @@ void MainWindow::on_staffAddButton_clicked()
     currentStaff.gender = ui->maleRButton->isChecked() ? true : false;
     this->staff->create(currentStaff);
     this->loadTableData();
+    this->cleanContentStaffTextBox();
 }
 
 void MainWindow::on_staffDeleteButton_clicked()
@@ -417,6 +457,7 @@ void MainWindow::on_staffDeleteButton_clicked()
     this->staff->removeStaff(currentStaff);
     this->loadStaffData(ui->staffTable);
     this->loadTableData();
+    this->cleanContentStaffTextBox();
 }
 
 void MainWindow::on_staffEditButton_clicked()
@@ -429,6 +470,7 @@ void MainWindow::on_staffEditButton_clicked()
     this->staff->updateExistStaff(currentStaff);
     this->loadStaffData(ui->staffTable);
     this->loadTableData();
+    this->cleanContentStaffTextBox();
 }
 
 void MainWindow::on_fromDate_dateTimeChanged(const QDateTime &dateTime)
@@ -458,19 +500,19 @@ void MainWindow::on_toDate_dateTimeChanged(const QDateTime &dateTime)
     this->loadTableData();
 }
 
-void MainWindow::on_facilityQuantity_textChanged()
-{
-    bool ok;
-    long data = this->ui->facilityQuantity->toPlainText().toLong(&ok);
-    if (!ok)
-    {
-        QMessageBox msgBox;
-        msgBox.setText("Bạn không được nhập các ký tự khác [0, 9]");
-        msgBox.setIcon(QMessageBox::Icon::Critical);
-        msgBox.exec();
-        return;
-    }
-}
+// void MainWindow::on_facilityQuantity_textChanged()
+// {
+//     bool ok;
+//     long data = this->ui->facilityQuantity->toPlainText().toLong(&ok);
+//     if (!ok)
+//     {
+//         QMessageBox msgBox;
+//         msgBox.setText("Bạn không được nhập các ký tự khác [0, 9]");
+//         msgBox.setIcon(QMessageBox::Icon::Critical);
+//         msgBox.exec();
+//         return;
+//     }
+// }
 
 void MainWindow::on_statisticYearline_textChanged(const QString &arg1)
 {

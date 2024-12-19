@@ -60,7 +60,7 @@ private slots:
 
     void on_toDate_dateTimeChanged(const QDateTime &dateTime);
 
-    void on_facilityQuantity_textChanged();
+    // void on_facilityQuantity_textChanged();
 
     void on_statisticYearline_textChanged(const QString &arg1);
 
@@ -72,6 +72,9 @@ private:
     void loadStatisticTimeTableData(QTableWidget *table);
     void loadStatisticYearTableData(QTableWidget *table);
     void loadStatisticFacilityTableData(QTableWidget *table);
+    void cleanContentFacilityTextBox();
+    void cleanContentStaffTextBox();
+    void cleanContentInvoiceTextBox();
     void loadTableData();
 
 private:

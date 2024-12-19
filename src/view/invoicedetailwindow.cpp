@@ -92,6 +92,13 @@ void InvoiceDetailWindow::loadDataComboBoxFaclities()
     this->loadAvlData(ui->facilityNameBox, current);
 }
 
+void InvoiceDetailWindow::cleanContentInvoiceDetailData()
+{
+    this->ui->invoiceDetailId->setText("");
+    this->ui->invoiceDetailPriceText->setText("");
+    this->ui->vatPrice->setText("");
+}
+
 InvoiceDetailWindow::~InvoiceDetailWindow()
 {
     this->parent->show();
@@ -128,7 +135,7 @@ void InvoiceDetailWindow::on_invoiceDetailTable_cellClicked(int row, int column)
 void InvoiceDetailWindow::on_invoiceDetailAddButton_clicked()
 {
     InvoiceDetail *currentInvoiceDetail = new InvoiceDetail();
-    qDebug() << "New invoice detail : " << currentInvoiceDetail;
+    // qDebug() << "New invoice detail : " << currentInvoiceDetail;
     currentInvoiceDetail->id = ui->invoiceDetailId->toPlainText();
     currentInvoiceDetail->facilityId = ui->facilityNameBox->currentText().split('/').at(0);
     currentInvoiceDetail->invoiceId = this->invoiceId;
@@ -137,6 +144,7 @@ void InvoiceDetailWindow::on_invoiceDetailAddButton_clicked()
     currentInvoiceDetail->vat = ui->vatPrice->toPlainText().toDouble();
     this->invoiceDetail->createNewInvoiceDetail(*currentInvoiceDetail);
     this->loadDataInvoiceDetail(ui->invoiceDetailTable);
+    this->cleanContentInvoiceDetailData();
 }
 
 void InvoiceDetailWindow::on_invoiceDetailDeleteButton_clicked()
@@ -147,6 +155,7 @@ void InvoiceDetailWindow::on_invoiceDetailDeleteButton_clicked()
     currentInvoiceDetail.facilityId = ui->facilityNameBox->currentText().split('/').at(0);
     this->invoiceDetail->removeInvoiceDetail(currentInvoiceDetail);
     this->loadDataInvoiceDetail(ui->invoiceDetailTable);
+    this->cleanContentInvoiceDetailData();
 }
 
 void InvoiceDetailWindow::on_invoiceDetailEditButton_clicked()
@@ -160,4 +169,5 @@ void InvoiceDetailWindow::on_invoiceDetailEditButton_clicked()
     currentInvoiceDetail.vat = ui->vatPrice->toPlainText().toDouble();
     this->invoiceDetail->updateExistInvoiceDetail(currentInvoiceDetail);
     this->loadDataInvoiceDetail(ui->invoiceDetailTable);
+    this->cleanContentInvoiceDetailData();
 }

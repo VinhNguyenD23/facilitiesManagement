@@ -31,6 +31,7 @@ public:
     void loadInvoiceDetailData();
     void addInvoiceDetail(QString invoiceId, InvoiceDetail &data);
     void refreshInvoiceDetail();
+    double getSumOfInvoice(QString id);
 
 };
 

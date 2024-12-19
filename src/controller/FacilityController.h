@@ -3,8 +3,8 @@
 #include "../service/FacilityService.h"
 #include "../datatype/Avl.h"
 #include <QMessageBox>
-#include <QDebug>
 #include <QString>
+#include <QDebug>
 class FacilityController
 {
 private:

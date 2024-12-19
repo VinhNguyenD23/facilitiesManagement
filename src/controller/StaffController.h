@@ -1,10 +1,10 @@
 #ifndef STAFFCTRL_H
 #define STAFFCTRL_H
+#include "../datatype/pointerarray.h"
 #include "../service/StaffService.h"
+#include "../object/Staff.h"
 #include <QString>
 #include <QDebug>
-#include "../datatype/pointerarray.h"
-#include "../object/Staff.h"
 
 class StaffController
 {

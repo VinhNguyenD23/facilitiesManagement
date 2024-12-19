@@ -70,26 +70,7 @@ void InvoiceService::remove(Invoice &data)
 
 double InvoiceService::getSum(QString id)
 {
-    if (ValidateUtil::isNull(this->invoiceRepository->findById(id)))
-    {
-        throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
-    }
-    double sum = 0.00;
-    auto getInvoiceDetail = this->invoiceRepository->findById(id)->invoiceDetailList;
-    if (ValidateUtil::isNull(getInvoiceDetail))
-    {
-        return 0;
-    }
-    auto *current = getInvoiceDetail->getList();
-    while (!ValidateUtil::isNull(current))
-    {
-        if (current->data.invoiceId == id)
-        {
-            sum += double(current->data.price) + double(current->data.price) * current->data.vat;
-        }
-        current = current->next;
-    }
-    return sum;
+    return this->invoiceRepository->getSumOfInvoice(id);
 }
 
 InvoiceService::~InvoiceService()

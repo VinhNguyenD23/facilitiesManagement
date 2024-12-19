@@ -1,10 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "../controller/FacilityController.h"
-#include "../controller/StaffController.h"
-#include "../controller/InvoiceController.h"
 #include "../controller/InvoiceDetailController.h"
+#include "../controller/StatisticController.h"
+#include "../controller/FacilityController.h"
+#include "../controller/InvoiceController.h"
+#include "../controller/StaffController.h"
 #include "../datatype/Avl.h"
 
 #include <QMainWindow>
@@ -79,5 +80,6 @@ private:
     InvoiceDetailController *invoiceDetail = nullptr;
     InvoiceController *invoice = nullptr;
     StaffController *staff = nullptr;
+    StatisticController *statistic = nullptr;
 };
 #endif // MAINWINDOW_H

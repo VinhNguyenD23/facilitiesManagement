@@ -2,17 +2,16 @@
 #define STATISTICCTRL_H
 
 #include "../service/StatisticService.h"
-#include "../controller/InvoiceController.h"
-#include "../datatype/LinkedList.h"
+#include "../datatype/DynamicArray.h"
 
 class StatisticController
 {
 private:
-    InvoiceController *invoice = nullptr;
+    StatisticService *statisticService = nullptr;
 
 public:
     StatisticController();
-    LinkedList<Invoice> *getTopInvoices(int limit);
+    DArray<double> getStatisticInvoiceOfYear(int year);
 
 };
 

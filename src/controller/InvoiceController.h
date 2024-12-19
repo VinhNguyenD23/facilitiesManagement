@@ -1,10 +1,10 @@
 #ifndef INVOICECTRL_H
 #define INVOICECTRL_H
-#include "../datatype/LinkedList.h"
 #include "../service/InvoiceService.h"
+#include "../datatype/LinkedList.h"
 #include "../object/Invoice.h"
-#include <QString>
 #include <QMessageBox>
+#include <QString>
 #include <QDebug>
 
 class InvoiceController

@@ -1,9 +1,8 @@
 #ifndef FILE_PATH_DEFINE_H
 #define FILE_PATH_DEFINE_H
 
-#include <QString>
-#include <iostream>
 #include "../exception/DatabasesException.h"
+#include <QString>
 
 class FilePath
 {

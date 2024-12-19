@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->invoiceDetail = new InvoiceDetailController();
     this->invoice = new InvoiceController();
     this->staff = new StaffController();
+    this->statistic = new StatisticController();
 
     ui->mainTab->setCurrentIndex(0);
 
@@ -186,28 +187,13 @@ void MainWindow::loadStatisticYearTableData(QTableWidget *table)
     int year = getCurrentYear.toInt(&ok);
     if (ok)
     {
-        double monthlyRevenue[13];
-        for (int i = 1; i <= 12; i++)
-        {
-            double sum = 0;
-            auto head = this->invoice->getListInvoices();
-            while (!ValidateUtil::isNull(head))
-            {
-                if (head->data.date.month == i && head->data.date.year == year && head->data.type == 0)
-                {
-                    sum += this->invoice->getSumOfInvoice(head->data.id);
-                }
-                head = head->next;
-            }
-            monthlyRevenue[i] = sum;
-            monthlyRevenue[0] += sum;
-        }
+        DArray<double> monthlyRevenue = this->statistic->getStatisticInvoiceOfYear(year);
         int row = 0;
         for (int i = 1; i <= 12; i++)
         {
             table->insertRow(row);
             QTableWidgetItem *month = new QTableWidgetItem(QString::number(i));
-            QTableWidgetItem *revenue = new QTableWidgetItem(QString::number(monthlyRevenue[i]));
+            QTableWidgetItem *revenue = new QTableWidgetItem(QString::number(monthlyRevenue.at(i)));
             table->setItem(row, 0, month);
             table->setItem(row, 1, revenue);
             row++;

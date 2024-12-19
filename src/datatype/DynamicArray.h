@@ -20,7 +20,10 @@ public:
         this->size = 0;
         this->listData = new T[this->capacity];
     }
-    ~DArray();
+    ~DArray()
+    {
+
+    }
     DArray(long capacity)
     {
         this->capacity = capacity;

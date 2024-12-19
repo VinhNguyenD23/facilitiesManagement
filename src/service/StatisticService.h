@@ -14,6 +14,11 @@ class StatisticService
 {
 private:
     LinkedList<Invoice> *getList;
+    InvoiceModel *invoiceRepository = nullptr;
+
+public:
+    StatisticService();
+    DArray<double> statisticYear(int year);
 };
 
 #endif

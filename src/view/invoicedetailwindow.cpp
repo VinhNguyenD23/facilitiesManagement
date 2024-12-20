@@ -97,6 +97,7 @@ void InvoiceDetailWindow::cleanContentInvoiceDetailData()
     this->ui->invoiceDetailId->setText("");
     this->ui->invoiceDetailPriceText->setText("");
     this->ui->vatPrice->setText("");
+    this->ui->facilityQuantityText->setText("");
 }
 
 InvoiceDetailWindow::~InvoiceDetailWindow()

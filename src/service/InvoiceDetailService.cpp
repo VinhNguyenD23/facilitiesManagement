@@ -75,6 +75,7 @@ void InvoiceDetailService::remove(InvoiceDetail &data)
     }
     Facility tempData = Facility(*getFacility);
     tempData.quantity += (invoiceType ? -data.quantity : data.quantity);
+    this->facilityRepository->update(tempData);
     this->invoiceDetailRepository->remove(data);
 }
 

@@ -30,19 +30,9 @@ public:
 
 private slots:
 
-    void on_InvoiceTable_cellDoubleClicked(int row, int column);
-
     void on_facilityTable_cellClicked(int row, int column);
 
     void on_facilityAddButton_clicked();
-
-    void on_InvoiceTable_cellClicked(int row, int column);
-
-    void on_invoiceAddButton_clicked();
-
-    void on_invoiceDeleteButton_clicked();
-
-    void on_invoiceEditButton_clicked();
 
     void on_facilityDeleteButton_clicked();
 
@@ -60,21 +50,19 @@ private slots:
 
     void on_toDate_dateTimeChanged(const QDateTime &dateTime);
 
-    // void on_facilityQuantity_textChanged();
-
     void on_statisticYearline_textChanged(const QString &arg1);
+
+    void on_staffTable_cellDoubleClicked(int row, int column);
 
 private:
     void loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row);
     void loadFacilityData(QTableWidget *table);
     void loadStaffData(QTableWidget *table);
-    void loadInvoiceData(QTableWidget *table);
     void loadStatisticTimeTableData(QTableWidget *table);
     void loadStatisticYearTableData(QTableWidget *table);
     void loadStatisticFacilityTableData(QTableWidget *table);
     void cleanContentFacilityTextBox();
     void cleanContentStaffTextBox();
-    void cleanContentInvoiceTextBox();
     void loadTableData();
 
 private:

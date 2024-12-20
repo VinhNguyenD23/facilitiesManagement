@@ -69,6 +69,10 @@ LinkedList<Invoice>::Node *InvoiceModel::getList()
 
 void InvoiceModel::push(Invoice &data)
 {
+    if(ValidateUtil::isNull(this->staffRepository))
+    {
+        this->staffRepository = staffModel;
+    }
     if(ValidateUtil::isBlank(data.id)
         || ValidateUtil::isBlank(data.staffId))
     {
@@ -224,7 +228,7 @@ double InvoiceModel::getSumOfInvoice(QString id)
     {
         if (current->data.invoiceId == id)
         {
-            sum += double(current->data.price) + double(current->data.price) * current->data.vat;
+            sum += double(current->data.price) * double(current->data.quantity) * double(1.00 + current->data.vat);
         }
         current = current->next;
     }

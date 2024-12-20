@@ -58,6 +58,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/exception/LogicException.h
         src/datatype/pointerarray.h
         src/util/ValidateUtil.h
+        src/view/invoiceform.h src/view/invoiceform.cpp src/view/invoiceform.ui
+
 
     )
 # Define target properties for Android with Qt 6 as:

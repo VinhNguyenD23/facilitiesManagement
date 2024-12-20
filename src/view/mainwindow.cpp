@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "invoicedetailwindow.h"
+#include "invoiceform.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -43,20 +43,6 @@ MainWindow::MainWindow(QWidget *parent)
     staffTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     this->loadStaffData(staffTempTable);
 
-    QTableWidget *invoiceTempTable = ui->InvoiceTable;
-    invoiceTempTable->verticalHeader()->setVisible(false);
-    invoiceTempTable->horizontalHeader()->setVisible(false);
-    invoiceTempTable->setColumnCount(5);
-    invoiceTempTable->setColumnWidth(0, 165);
-    invoiceTempTable->setColumnWidth(1, 165);
-    invoiceTempTable->setColumnWidth(2, 165);
-    invoiceTempTable->setColumnWidth(3, 165);
-    invoiceTempTable->setColumnWidth(4, 160);
-    invoiceTempTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-    invoiceTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
-    invoiceTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    this->loadInvoiceData(invoiceTempTable);
-
     QTableWidget *statisticYearTableTemp = ui->statisticYearTable;
     statisticYearTableTemp->verticalHeader()->setVisible(false);
     statisticYearTableTemp->horizontalHeader()->setVisible(false);
@@ -69,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QDateTime currentDateTime = QDateTime::currentDateTime();
 
-    ui->invoiceDate->setDateTime(currentDateTime);
+
 
     ui->statisticToDate->setDateTime(currentDateTime);
     ui->toDate->setDateTime(currentDateTime);
@@ -138,40 +124,6 @@ void MainWindow::loadStaffData(QTableWidget *table)
     }
 }
 
-void MainWindow::loadInvoiceData(QTableWidget *table)
-{
-    table->clearContents();
-    table->setRowCount(0);
-    int row = 0;
-    auto *current = this->invoice->getListInvoices();
-    while (!ValidateUtil::isNull(current))
-    {
-        table->insertRow(row);
-        auto staff = this->staff->getStaffById(current->data.staffId);
-        // qDebug() << staff;
-        QString staffName;
-        staffName = staff->lastName + " " + staff->firstName;
-        // qDebug() << current->data.date.day << current->data.date.month <<
-        // current->data.date.year;
-        QTableWidgetItem *invoiceId = new QTableWidgetItem(current->data.id);
-        QTableWidgetItem *invoiceDate =
-            new QTableWidgetItem(current->data.date.getFormatValue());
-        QTableWidgetItem *invoiceStaffName = new QTableWidgetItem(staffName);
-        QTableWidgetItem *invoiceType =
-            new QTableWidgetItem(current->data.type ? "Nhập" : "Xuất");
-        QTableWidgetItem *invoicePrice =
-            new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(
-                this->invoice->getSumOfInvoice(current->data.id), 'f', 0)));
-        table->setItem(row, 0, invoiceId);
-        table->setItem(row, 1, invoiceDate);
-        table->setItem(row, 2, invoiceStaffName);
-        table->setItem(row, 3, invoiceType);
-        table->setItem(row, 4, invoicePrice);
-        row++;
-        current = current->next;
-    }
-}
-
 void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
 {
     table->clearContents();
@@ -193,7 +145,7 @@ void MainWindow::loadStatisticYearTableData(QTableWidget *table)
         {
             table->insertRow(row);
             QTableWidgetItem *month = new QTableWidgetItem(QString::number(i));
-            QTableWidgetItem *revenue = new QTableWidgetItem(QString::number(monthlyRevenue.at(i)));
+            QTableWidgetItem *revenue = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(monthlyRevenue.at(i),'f', 0)));
             table->setItem(row, 0, month);
             table->setItem(row, 1, revenue);
             row++;
@@ -224,35 +176,13 @@ void MainWindow::cleanContentStaffTextBox()
     this->ui->femaleRButton->setChecked(false);
 }
 
-void MainWindow::cleanContentInvoiceTextBox()
-{
-    this->ui->invoiceExport->setChecked(false);
-    this->ui->invoiceImport->setChecked(false);
-    this->ui->invoiceId->setText("");
-    this->ui->invoiceDate->setDate(QDate().currentDate());
-}
-
 void MainWindow::loadTableData()
 {
     this->loadStatisticYearTableData(ui->statisticYearTable);
     this->loadStatisticTimeTableData(ui->statisticTimeTable);
     this->loadFacilityData(ui->facilityTable);
     this->loadStaffData(ui->staffTable);
-    this->loadInvoiceData(ui->InvoiceTable);
     this->loadStatisticFacilityTableData(ui->statisticFacilityTable);
-}
-
-void MainWindow::on_InvoiceTable_cellDoubleClicked(int row, int column)
-{
-    QString getInvoiceId =
-        ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
-    InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(
-        this, getInvoiceId, this->facility, this->invoiceDetail, this->invoice);
-    invoiceDetailForm->setAttribute(Qt::WA_DeleteOnClose);
-    invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);
-    invoiceDetailForm->exec();
-    this->loadInvoiceData(ui->InvoiceTable);
-    this->loadFacilityData(ui->facilityTable);
 }
 
 void MainWindow::on_facilityTable_cellClicked(int row, int column)
@@ -297,89 +227,6 @@ void MainWindow::on_facilityAddButton_clicked()
     this->facility->createNewFacility(data);
     this->loadTableData();
     this->cleanContentFacilityTextBox();
-}
-
-void MainWindow::on_InvoiceTable_cellClicked(int row, int column)
-{
-    QString invoiceId =
-        ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
-    ui->invoiceId->setText(invoiceId);
-    Invoice *data = this->invoice->getInvoiceById(invoiceId);
-    ui->invoiceStaffId->setText(data->staffId);
-    Date getDate =
-        Date(ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 1)->text());
-    QDate date(getDate.year, getDate.month, getDate.day);
-    ui->invoiceDate->setDate(date);
-    ui->invoiceImport->setChecked(data->type);
-    ui->invoiceExport->setChecked(!data->type);
-}
-
-void MainWindow::on_invoiceAddButton_clicked()
-{
-    Invoice *invoiceRequest = new Invoice();
-    invoiceRequest->id = ui->invoiceId->toPlainText();
-    invoiceRequest->staffId = ui->invoiceStaffId->toPlainText();
-    QString dateText = ui->invoiceDate->text();
-    QStringList dateTextList = dateText.split('/');
-    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(),
-                     dateTextList.at(1).toInt());
-    invoiceRequest->date = date;
-    if (ui->invoiceImport->isChecked())
-    {
-        invoiceRequest->type = true;
-    }
-    else if (ui->invoiceExport->isChecked())
-    {
-        invoiceRequest->type = false;
-    }
-    else
-    {
-        QMessageBox msgBox;
-        msgBox.setText("Vui lòng chọn vào ô giới tính");
-        msgBox.setIcon(QMessageBox::Icon::Critical);
-        msgBox.exec();
-        return;
-    }
-    this->invoice->createNewInvoice(*invoiceRequest);
-    this->loadTableData();
-    this->cleanContentInvoiceTextBox();
-}
-
-void MainWindow::on_invoiceDeleteButton_clicked()
-{
-    Invoice invoiceRequest = Invoice();
-    invoiceRequest.id = ui->invoiceId->toPlainText();
-    this->invoice->removeInvoice(invoiceRequest);
-    this->loadTableData();
-    this->cleanContentInvoiceTextBox();
-}
-
-void MainWindow::on_invoiceEditButton_clicked()
-{
-    Invoice invoiceRequest = Invoice();
-    invoiceRequest.id = ui->invoiceId->toPlainText();
-    invoiceRequest.staffId = ui->invoiceStaffId->toPlainText();
-    QString dateText = ui->invoiceDate->text();
-    QStringList dateTextList = dateText.split('/');
-    Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(),
-                     dateTextList.at(1).toInt());
-    invoiceRequest.date = date;
-    if (ui->invoiceImport->isChecked())
-    {
-        invoiceRequest.type = true;
-    }
-    else if (ui->invoiceExport->isChecked())
-    {
-        invoiceRequest.type = false;
-    }
-    else
-    {
-        // TODO: MessageBox
-        return;
-    }
-    this->invoice->updateExistInvoice(invoiceRequest);
-    this->loadTableData();
-    this->cleanContentInvoiceTextBox();
 }
 
 void MainWindow::on_facilityDeleteButton_clicked()
@@ -518,3 +365,24 @@ void MainWindow::on_statisticYearline_textChanged(const QString &arg1)
 {
     this->loadStatisticYearTableData(ui->statisticYearTable);
 }
+
+void MainWindow::on_staffTable_cellDoubleClicked(int row, int column)
+{
+    QString staffId = this->ui->staffIdTxt->toPlainText();
+    if(!ValidateUtil::isNull(this->staff->getStaffById(staffId)))
+    {
+        InvoiceForm *invoice = new InvoiceForm(nullptr, staffId, this->invoice, this->facility, this->invoiceDetail, this->staff);
+        invoice->setWindowTitle("Staff ID: " + staffId);
+        invoice->exec();
+        this->loadTableData();
+    }
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Không tìm thấy mã nhân viên " + staffId);
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
+}
+

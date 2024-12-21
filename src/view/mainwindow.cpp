@@ -148,6 +148,7 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
             if ( y < y1 || y > y2)
             {
                 head = head->next;
+                if (head == nullptr) break;
                 continue;
             }
             else
@@ -157,6 +158,7 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
                     if ( m < m1 || (m == m1 && d < d1))
                     {
                         head = head->next;
+                        if ( head == nullptr) break;
                         continue;
                     }
                 }
@@ -165,6 +167,7 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
                     if ( m > m2 || (m == m2 && d >d2))
                     {
                         head = head->next;
+                        if ( head == nullptr) break;
                         continue;
                     }
                 }

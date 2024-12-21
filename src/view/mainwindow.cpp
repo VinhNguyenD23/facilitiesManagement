@@ -151,8 +151,6 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
                 if (head == nullptr) break;
                 continue;
             }
-            else
-            {
                 if ( y == y1)
                 {
                     if ( m < m1 || (m == m1 && d < d1))
@@ -171,15 +169,22 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
                         continue;
                     }
                 }
-            }
             table->insertRow(row);
             QTableWidgetItem *idinvoice = new QTableWidgetItem(head->data.id);
             std::string datestring = std::to_string(d) + "/" + std::to_string(m) + "/" + std::to_string(y);
             QTableWidgetItem *dateinvoice = new QTableWidgetItem(QString::fromStdString(datestring));
-            QTableWidgetItem *typeinvoice = new QTableWidgetItem(head->data.type);
-            QString namestring = this->staff->getStaffById(head->data.staffId)->firstName + "" + this->staff->getStaffById(head->data.staffId)->lastName;
+            QTableWidgetItem *typeinvoice;
+            if (head->data.type == true)
+            {
+               typeinvoice = new QTableWidgetItem(QString::fromStdString("Nhap"));
+            }
+            else
+            {
+                typeinvoice = new QTableWidgetItem(QString::fromStdString("Xuat"));
+            }
+            QString namestring = this->staff->getStaffById(head->data.staffId)->lastName + " " + this->staff->getStaffById(head->data.staffId)->firstName;
             QTableWidgetItem *namestaff = new QTableWidgetItem(namestring);
-            QTableWidgetItem *invoicevalue = new QTableWidgetItem(this->invoice->getSumOfInvoice(head->data.id));
+            QTableWidgetItem *invoicevalue = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number((this->invoice->getSumOfInvoice(head->data.id)),'f', 2)));
             table->setItem(row, 0,idinvoice);
             table->setItem(row, 1, dateinvoice);
             table->setItem(row, 2, typeinvoice);

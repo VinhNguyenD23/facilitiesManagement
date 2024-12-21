@@ -175,7 +175,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -774,7 +774,7 @@
          <rect>
           <x>370</x>
           <y>50</y>
-          <width>370</width>
+          <width>378</width>
           <height>31</height>
          </rect>
         </property>
@@ -1034,7 +1034,7 @@
          <rect>
           <x>370</x>
           <y>50</y>
-          <width>371</width>
+          <width>378</width>
           <height>31</height>
          </rect>
         </property>

@@ -2,6 +2,8 @@
 #include "./ui_mainwindow.h"
 #include "invoiceform.h"
 #include <QMessageBox>
+#include <QDate>
+#include <QDateEdit>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -128,6 +130,62 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
 {
     table->clearContents();
     table->setRowCount(0);
+    QDate getfromday = ui->fromDate->date();
+    QDate gettoday = ui->toDate->date();
+    int d1 = getfromday.day();
+    int m1 = getfromday.month();
+    int y1 = getfromday.year();
+    int d2 = gettoday.day();
+    int m2 = gettoday.month();
+    int y2 = gettoday.year();
+    auto *data = this->staff->getListStaff();
+    int row = 0;
+    for ( size_t i = 0; i < data->getSize(); i++) {
+        auto *head = data->at(i)->invoicesList->getList();
+        while(head != nullptr) {
+            int d = head->data.date.day;
+            int m = head->data.date.month;
+            int y = head->data.date.year;
+            if ( y < y1|| y > y2)
+            {
+                head = head->next;
+                continue;
+            }
+            else
+            {
+                if ( y == y1)
+                {
+                    if ( m < m1 || (m == m1 && d < d1))
+                    {
+                        head = head->next;
+                        continue;
+                    }
+                    if (y == y2)
+                    {
+                        if ( m > m2 || (m == m2 && d >d2))
+                        {
+                            head = head->next;
+                            continue;
+                        }
+                    }
+                }
+            }
+            table->insertRow(row);
+            QTableWidgetItem *idinvoice = new QTableWidgetItem(head->data.id);
+            std::string datestring = std::to_string(d) + "/" + std::to_string(m) + "/" + std::to_string(y);
+            QTableWidgetItem *dateinvoice = new QTableWidgetItem(QString::fromStdString(datestring));
+            QTableWidgetItem *typeinvoice = new QTableWidgetItem(head->data.type);
+            QString namestring = data->at(i)->lastName + "" + data->at(i)->firstName;
+            QTableWidgetItem *namestaff = new QTableWidgetItem(namestring);
+            QTableWidgetItem *invoicevalue = new QTableWidgetItem(this->invoice->getSumOfInvoice(head->data.id));
+            table->setItem(row, 0,idinvoice);
+            table->setItem(row, 1, dateinvoice);
+            table->setItem(row, 2, typeinvoice);
+            table->setItem(row, 3, namestaff);
+            table->setItem(row, 4, invoicevalue);
+            row++;
+        }
+    }
 }
 
 void MainWindow::loadStatisticYearTableData(QTableWidget *table)
@@ -385,4 +443,5 @@ void MainWindow::on_staffTable_cellDoubleClicked(int row, int column)
         return;
     }
 }
+
 

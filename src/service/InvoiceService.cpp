@@ -58,12 +58,9 @@ void InvoiceService::remove(Invoice &data)
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
-    // bool isDetailListNull = ;
-    if(!ValidateUtil::isNull(this->invoiceRepository->findById(data.id)->invoiceDetailList)
-        && !ValidateUtil::isNull(this->invoiceRepository->findById(data.id)->invoiceDetailList->getList()))
+    if (!ValidateUtil::isNull(this->invoiceRepository->findById(data.id)->invoiceDetailList) && !ValidateUtil::isNull(this->invoiceRepository->findById(data.id)->invoiceDetailList->getList()))
     {
         throw DataException::CantHandle(data.id.toStdString() + " can't be removed because this invoice contains internal information!");
-
     }
     this->invoiceRepository->remove(data);
 }

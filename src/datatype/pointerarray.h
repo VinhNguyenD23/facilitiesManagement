@@ -5,7 +5,7 @@
 #include "../exception/ArraySizeException.h"
 #include "../exception/DataException.h"
 
-template<typename T>
+template <typename T>
 class PointerArray
 {
 private:
@@ -109,7 +109,6 @@ public:
     {
         return this->capacity;
     }
-    // void resize();
 };
 
 #endif // POINTERARRAY_H

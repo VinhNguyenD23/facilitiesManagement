@@ -8,8 +8,7 @@ InvoiceForm::InvoiceForm(QWidget *parent,
                          FacilityController *facility,
                          InvoiceDetailController *invoiceDetail,
                          StaffController *staff)
-    : QDialog(parent)
-    , ui(new Ui::InvoiceForm)
+    : QDialog(parent), ui(new Ui::InvoiceForm)
 {
     ui->setupUi(this);
     this->setFixedSize(QSize(1000, 600));
@@ -41,7 +40,7 @@ void InvoiceForm::loadInvoiceData(QTableWidget *table)
     table->setRowCount(0);
     int row = 0;
     auto *getInvoiceList = this->staff->getStaffById(this->staffId)->invoicesList;
-    if(!ValidateUtil::isNull(getInvoiceList))
+    if (!ValidateUtil::isNull(getInvoiceList))
     {
         auto *current = this->staff->getStaffById(this->staffId)->invoicesList->getList();
         while (!ValidateUtil::isNull(current))
@@ -53,7 +52,6 @@ void InvoiceForm::loadInvoiceData(QTableWidget *table)
             QTableWidgetItem *invoicePrice = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(this->invoice->getSumOfInvoice(current->data.id), 'f', 0)));
             table->setItem(row, 0, invoiceId);
             table->setItem(row, 1, invoiceDate);
-            // table->setItem(row, 2, invoiceStaffName);
             table->setItem(row, 2, invoiceType);
             table->setItem(row, 3, invoicePrice);
             row++;
@@ -106,7 +104,6 @@ void InvoiceForm::on_invoiceAddButton_clicked()
     this->cleanContentInvoiceTextBox();
 }
 
-
 void InvoiceForm::on_invoiceDeleteButton_clicked()
 {
     Invoice invoiceRequest = Invoice();
@@ -115,7 +112,6 @@ void InvoiceForm::on_invoiceDeleteButton_clicked()
     this->loadInvoiceData(this->ui->InvoiceTable);
     this->cleanContentInvoiceTextBox();
 }
-
 
 void InvoiceForm::on_invoiceEditButton_clicked()
 {
@@ -137,14 +133,16 @@ void InvoiceForm::on_invoiceEditButton_clicked()
     }
     else
     {
-        // TODO: MessageBox
+        QMessageBox msgBox;
+        msgBox.setText("Vui lòng chọn vào ô loại hoá đơn");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
         return;
     }
     this->invoice->updateExistInvoice(invoiceRequest);
     this->loadInvoiceData(this->ui->InvoiceTable);
     this->cleanContentInvoiceTextBox();
 }
-
 
 void InvoiceForm::on_InvoiceTable_cellClicked(int row, int column)
 {
@@ -158,14 +156,12 @@ void InvoiceForm::on_InvoiceTable_cellClicked(int row, int column)
     ui->invoiceExport->setChecked(!data->type);
 }
 
-
 void InvoiceForm::on_InvoiceTable_cellDoubleClicked(int row, int column)
 {
-    QString getInvoiceId =ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
+    QString getInvoiceId = ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
     InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(this, getInvoiceId, this->facility, this->invoiceDetail, this->invoice);
     invoiceDetailForm->setAttribute(Qt::WA_DeleteOnClose);
     invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);
     invoiceDetailForm->exec();
     this->loadInvoiceData(ui->InvoiceTable);
 }
-

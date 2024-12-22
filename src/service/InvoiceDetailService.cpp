@@ -28,10 +28,7 @@ void InvoiceDetailService::create(InvoiceDetail &data)
         throw LogicException::NegativeValue("The updated quantity must be less than the available stock, please try again");
     }
     Facility tempData = Facility(*getFacility);
-    // tempData.id = getFacility->id;
-    // tempData.name = getFacility->name;
     tempData.quantity = (invoiceType ? (getFacility->quantity + data.quantity) : (getFacility->quantity - data.quantity));
-    // tempData.unit = getFacility->unit;
     this->facilityRepository->update(tempData);
     this->invoiceDetailRepository->push(data);
 }
@@ -49,7 +46,7 @@ void InvoiceDetailService::update(InvoiceDetail &data)
     {
         throw DataException::DataNotFound("Facility id not found, please try again!");
     }
-    if(existingData->facilityId != getFacility->id)
+    if (existingData->facilityId != getFacility->id)
     {
         throw DataException::CantHandle(data.id.toStdString() + " can't change facility id");
     }

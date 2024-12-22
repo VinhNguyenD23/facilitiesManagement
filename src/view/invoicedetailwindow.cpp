@@ -21,8 +21,6 @@ InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent,
     this->facility = facility;
     this->invoice = invoice;
 
-    // this->parent->hide();
-
     ui->InvoiceGroup->setTitle("Thông tin chi tiết hóa đơn: " + this->invoiceId);
     QTableWidget *invoiceDetailTempTable = ui->invoiceDetailTable;
     invoiceDetailTempTable->verticalHeader()->setVisible(false);
@@ -114,7 +112,6 @@ void InvoiceDetailWindow::on_invoiceDetailTable_cellClicked(int row, int column)
     int indexFacility = -1;
     for (int i = 0; i < ui->facilityNameBox->count(); i++)
     {
-        // qDebug() << ui->facilityNameBox->itemText(i).split('/').at(1) << ui->invoiceDetailTable->item(currentRow, 1)->text();
         if (ui->facilityNameBox->itemText(i).split('/').at(1).compare(ui->invoiceDetailTable->item(currentRow, 1)->text()) == 0)
         {
             indexFacility = i;
@@ -136,7 +133,6 @@ void InvoiceDetailWindow::on_invoiceDetailTable_cellClicked(int row, int column)
 void InvoiceDetailWindow::on_invoiceDetailAddButton_clicked()
 {
     InvoiceDetail *currentInvoiceDetail = new InvoiceDetail();
-    // qDebug() << "New invoice detail : " << currentInvoiceDetail;
     currentInvoiceDetail->id = ui->invoiceDetailId->toPlainText();
     currentInvoiceDetail->facilityId = ui->facilityNameBox->currentText().split('/').at(0);
     currentInvoiceDetail->invoiceId = this->invoiceId;

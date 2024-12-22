@@ -39,7 +39,6 @@ void FacilitiesModel::writeNode(AVLTree<Facility, QString>::Node *root, QTextStr
 {
     if (!ValidateUtil::isNull(root))
     {
-        // xuat data nut
         writeNode(root->left, out);
         out << root->data.id << ',' << root->data.name << ',' << root->data.unit << ',' << root->data.quantity << '\n';
         writeNode(root->right, out);

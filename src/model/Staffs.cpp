@@ -41,8 +41,6 @@ void StaffsModel::writeFile()
         throw DatabasesException::DatabaseBroken("staff");
     }
     QTextStream out(&file);
-    auto *current = this->getList();
-    // qDebug() << current->getSize();
     for (int i = 0; i < current->getSize(); i++)
     {
         Staff *data = current->at(i);
@@ -56,7 +54,6 @@ StaffsModel::StaffsModel()
     this->data = new PointerArray<Staff>(MAX_STAFF);
     this->readFile();
     this->loadInvoiceData();
-    // this->refreshInvoice();
 }
 
 StaffsModel::~StaffsModel()
@@ -131,11 +128,9 @@ long StaffsModel::getMaxStaff()
 void StaffsModel::loadInvoiceData()
 {
     InvoiceModel *invoiceRepository = invoiceModel;
-    // this->refreshInvoice();
     auto *currentInvoiceData = invoiceRepository->getList();
     while (!ValidateUtil::isNull(currentInvoiceData))
     {
-        // qDebug() <<"Staff invoice data: "<< &currentInvoiceData->data;
         this->addInvoice(currentInvoiceData->data.staffId, currentInvoiceData->data);
         currentInvoiceData = currentInvoiceData->next;
     }
@@ -153,32 +148,17 @@ void StaffsModel::addInvoice(QString staffId, Invoice &data)
         existingStaff->invoicesList = new LinkedList<Invoice>();
     }
     existingStaff->invoicesList->add(data);
-    // qDebug() << data.invoiceDetailList;
 }
 
 void StaffsModel::refreshInvoice()
 {
     InvoiceModel *invoiceRepository = invoiceModel;
     auto *getListStaff = this->getList();
-    // if(ValidateUtil::isNull(getListStaff))
-    // {
-    //     return;
-    // }
     for (int index = 0; index < getListStaff->getSize(); index++)
     {
         auto *getInvoicesList = this->data->at(index)->invoicesList;
         if (!ValidateUtil::isNull(getInvoicesList))
         {
-            // auto *currentInvoiceData = getInvoicesList->getList();
-            // while (!ValidateUtil::isNull(currentInvoiceData))
-            // {
-            //     if (!ValidateUtil::isNull(currentInvoiceData))
-            //     {
-            //         // currentInvoiceData->data.invoiceDetailList->clear();
-            //         currentInvoiceData = nullptr;
-            //     }
-            //     currentInvoiceData = currentInvoiceData->next;
-            // }
             getInvoicesList->clear();
             getInvoicesList = nullptr;
         }

@@ -24,7 +24,6 @@ void InvoiceDetailModel::readFile()
         {
             throw DatabasesException::DatabaseBroken("invoiceDetail");
         }
-        // tempInvoiceDetail = InvoiceDetail();
         tempInvoiceDetail->id = field[0];
         tempInvoiceDetail->invoiceId = field[1];
         tempInvoiceDetail->facilityId = field[2];
@@ -32,7 +31,6 @@ void InvoiceDetailModel::readFile()
         tempInvoiceDetail->price = field[4].toLong();
         tempInvoiceDetail->vat = (double)(field[5].toDouble() / 100.0);
         this->data->add(*tempInvoiceDetail);
-        // this->push(*tempInvoiceDetail);
     }
     qDebug() << "InvoiceDetail Databases load:" << this->getSize();
     file.close();
@@ -77,7 +75,6 @@ void InvoiceDetailModel::push(InvoiceDetail &data)
         this->invoiceRepository = invoiceModel;
     }
     this->data->add(data);
-    // this->invoiceRepository->findById(data.invoiceId)->invoiceDetailList->add(data);
     this->invoiceRepository->addInvoiceDetail(data.invoiceId, data);
     this->writeFile();
 }
@@ -128,7 +125,6 @@ InvoiceDetail *InvoiceDetailModel::findById(QString id)
         {
             InvoiceDetail *invoiceData = new InvoiceDetail(temp->data);
             return invoiceData;
-            // return &temp->data;
         }
         temp = temp->next;
     }

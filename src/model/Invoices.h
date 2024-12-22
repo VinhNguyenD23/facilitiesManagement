@@ -26,13 +26,11 @@ public:
     void update(Invoice &data);
     void refresh();
     Invoice *findById(QString id);
-    // bool isStaffAvailable(QString staffId);
     size_t getSize();
     void loadInvoiceDetailData();
     void addInvoiceDetail(QString invoiceId, InvoiceDetail &data);
     void refreshInvoiceDetail();
     double getSumOfInvoice(QString id);
-
 };
 
 #endif

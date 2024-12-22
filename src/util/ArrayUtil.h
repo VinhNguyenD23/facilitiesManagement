@@ -22,8 +22,6 @@ private:
         return false;
     }
 
-
-
 public:
     ArrayUtil() {}
 
@@ -46,7 +44,6 @@ public:
                 Staff *secondStaff = staffList->at(secondCompareStaff);
                 if (compare(firstStaff, secondStaff))
                 {
-                    // ArrayUtil::swap(staffList->at(firstCompareStaff), staffList->at(secondCompareStaff));
                     minIndex = secondCompareStaff;
                 }
             }

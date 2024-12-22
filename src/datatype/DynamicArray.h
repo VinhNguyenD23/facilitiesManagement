@@ -51,8 +51,6 @@ public:
         }
         throw DataException::DataNotFound("Data not found!");
     }
-    // void pushFront(T *data);
-    // void pushAt(size_t index, T *data);
     void popAt(T data)
     {
         if (this->isEmpty())

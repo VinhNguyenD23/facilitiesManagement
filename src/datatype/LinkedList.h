@@ -15,7 +15,6 @@ public:
         Node *next;
         Node(T &data) : data(data)
         {
-            // this->data = &data;
             this->next = nullptr;
         };
     };
@@ -47,7 +46,6 @@ public:
     {
         this->size++;
         LinkedList<T>::Node *newNode = new LinkedList<T>::Node(data);
-        // qDebug() << "Clone address:" << &data << &newNode->data;
         if (ValidateUtil::isNull(this->head))
         {
             this->head = newNode;

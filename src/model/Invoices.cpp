@@ -69,12 +69,11 @@ LinkedList<Invoice>::Node *InvoiceModel::getList()
 
 void InvoiceModel::push(Invoice &data)
 {
-    if(ValidateUtil::isNull(this->staffRepository))
+    if (ValidateUtil::isNull(this->staffRepository))
     {
         this->staffRepository = staffModel;
     }
-    if(ValidateUtil::isBlank(data.id)
-        || ValidateUtil::isBlank(data.staffId))
+    if (ValidateUtil::isBlank(data.id) || ValidateUtil::isBlank(data.staffId))
     {
         throw DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
     }
@@ -89,7 +88,7 @@ void InvoiceModel::push(Invoice &data)
 
 void InvoiceModel::remove(Invoice &data)
 {
-    if(ValidateUtil::isNull(this->staffRepository))
+    if (ValidateUtil::isNull(this->staffRepository))
     {
         this->staffRepository = staffModel;
     }
@@ -100,8 +99,7 @@ void InvoiceModel::remove(Invoice &data)
 
 void InvoiceModel::update(Invoice &data)
 {
-    if(ValidateUtil::isBlank(data.id)
-        || ValidateUtil::isBlank(data.staffId))
+    if (ValidateUtil::isBlank(data.id) || ValidateUtil::isBlank(data.staffId))
     {
         throw DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
     }
@@ -135,20 +133,6 @@ Invoice *InvoiceModel::findById(QString id)
     return nullptr;
 }
 
-// bool InvoiceModel::isStaffAvailable(QString staffId)
-// {
-//     if(ValidateUtil::isNull(this->staffRepository))
-//     {
-//         this->staffRepository = staffModel;
-//     }
-//     auto *getInvoicesList = this->staffRepository->findById(staffId)->invoicesList;
-//     if(!ValidateUtil::isNull(getInvoicesList))
-//     {
-//         return true;
-//     }
-//     return false;
-// }
-
 size_t InvoiceModel::getSize()
 {
     return this->data->getSize();
@@ -157,13 +141,12 @@ size_t InvoiceModel::getSize()
 void InvoiceModel::loadInvoiceDetailData()
 {
     InvoiceDetailModel *invoiceDetailRepository = invoiceDetailModel;
-    if(ValidateUtil::isNull(invoiceDetailRepository))
+    if (ValidateUtil::isNull(invoiceDetailRepository))
     {
         invoiceDetailRepository = new InvoiceDetailModel();
     }
-    // this->refreshInvoiceDetail();
     auto *currentData = invoiceDetailRepository->getList();
-    while(!ValidateUtil::isNull(currentData))
+    while (!ValidateUtil::isNull(currentData))
     {
         this->addInvoiceDetail(currentData->data.invoiceId, currentData->data);
         currentData = currentData->next;
@@ -173,12 +156,12 @@ void InvoiceModel::loadInvoiceDetailData()
 void InvoiceModel::addInvoiceDetail(QString invoiceId, InvoiceDetail &data)
 {
     auto *existingData = this->findById(invoiceId);
-    if(ValidateUtil::isNull(existingData))
+    if (ValidateUtil::isNull(existingData))
     {
         throw DataException::DataNotFound("Invoice id " + invoiceId.toStdString() + " not found");
     }
     LinkedList<Invoice>::Node *element = this->data->getElement(*existingData);
-    if(ValidateUtil::isNull(existingData->invoiceDetailList))
+    if (ValidateUtil::isNull(existingData->invoiceDetailList))
     {
         element->data.invoiceDetailList = new LinkedList<InvoiceDetail>();
     }
@@ -188,15 +171,15 @@ void InvoiceModel::addInvoiceDetail(QString invoiceId, InvoiceDetail &data)
 void InvoiceModel::refreshInvoiceDetail()
 {
     InvoiceDetailModel *invoiceDetailRepository = invoiceDetailModel;
-    if(ValidateUtil::isNull(invoiceDetailRepository))
+    if (ValidateUtil::isNull(invoiceDetailRepository))
     {
         invoiceDetailRepository = new InvoiceDetailModel();
     }
     auto *current = this->data->getList();
-    while(!ValidateUtil::isNull(current))
+    while (!ValidateUtil::isNull(current))
     {
         auto *getInvoiceDetailList = current->data.invoiceDetailList;
-        if(!ValidateUtil::isNull(getInvoiceDetailList))
+        if (!ValidateUtil::isNull(getInvoiceDetailList))
         {
             current->data.invoiceDetailList->clear();
             current->data.invoiceDetailList = nullptr;
@@ -229,7 +212,6 @@ double InvoiceModel::getSumOfInvoice(QString id)
     {
         if (current->data.invoiceId == id)
         {
-            // sum += double(current->data.price) * double(current->data.quantity) * double(1.00 + current->data.vat);
             sum += invoiceDetailRepository->getSum(current->data);
         }
         current = current->next;

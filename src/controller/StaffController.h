@@ -9,7 +9,6 @@
 class StaffController
 {
 private:
-    /* data */
     StaffService *staffService = nullptr;
 
 public:

@@ -9,7 +9,6 @@
 class InvoiceDetailController
 {
 private:
-    /* data */
     InvoiceDetailService *invoiceDetailService = nullptr;
 
 public:

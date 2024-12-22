@@ -41,6 +41,7 @@ void StaffsModel::writeFile()
         throw DatabasesException::DatabaseBroken("staff");
     }
     QTextStream out(&file);
+    auto *current = this->getList();
     for (int i = 0; i < current->getSize(); i++)
     {
         Staff *data = current->at(i);

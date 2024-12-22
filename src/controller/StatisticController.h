@@ -3,6 +3,8 @@
 
 #include "../service/StatisticService.h"
 #include "../datatype/DynamicArray.h"
+#include "../object/Invoice.h"
+#include <QDate>
 
 class StatisticController
 {
@@ -12,7 +14,7 @@ private:
 public:
     StatisticController();
     DArray<double> getStatisticInvoiceOfYear(int year);
-
+    DArray<Invoice> getStatisticInvoiceByTime(QDate from, QDate to);
 };
 
 #endif

@@ -1,14 +1,11 @@
 #ifndef STATISTICSERVICE_H
 #define STATISTICSERVICE_H
 
-#include "../object/Invoice.h"
 #include "../datatype/DynamicArray.h"
-#include "../model/GlobalModel.h"
-#include <QString>
-#include "../model/Staffs.h"
+#include "../object/Invoice.h"
 #include "../model/Invoices.h"
-#include "../exception/DataException.h"
-#include "../exception/ValidateException.h"
+#include <QString>
+#include <QDate>
 
 class StatisticService
 {
@@ -19,6 +16,7 @@ private:
 public:
     StatisticService();
     DArray<double> statisticYear(int year);
+    DArray<Invoice> statisticTime(QDate from, QDate to);
 };
 
 #endif

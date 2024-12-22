@@ -1,4 +1,6 @@
 #include "StatisticService.h"
+#include "../model/GlobalModel.h"
+#include "../exception/ValidateException.h"
 
 StatisticService::StatisticService()
 {
@@ -24,4 +26,43 @@ DArray<double> StatisticService::statisticYear(int year)
         monthlyRevenue.at(0) += sum;
     }
     return monthlyRevenue;
+}
+
+DArray<Invoice> StatisticService::statisticTime(QDate from, QDate to)
+{
+    DArray<Invoice> result = DArray<Invoice>(10000);
+    auto *head = this->invoiceRepository->getList();
+    while(head != nullptr)
+    {
+        int getCurrentDay = head->data.date.day;
+        int getCurrentMonth = head->data.date.month;
+        int getCurrentYear = head->data.date.year;
+        if ( getCurrentYear < from.year() || getCurrentYear > to.year())
+        {
+            head = head->next;
+            if (ValidateUtil::isNull(head)) break;
+            continue;
+        }
+        if ( getCurrentYear == from.year())
+        {
+            if ( getCurrentMonth < from.month() || (getCurrentMonth == from.month() && getCurrentDay < from.day()))
+            {
+                head = head->next;
+                if (ValidateUtil::isNull(head)) break;
+                continue;
+            }
+        }
+        if (getCurrentYear == to.year())
+        {
+            if ( getCurrentMonth > to.month() || (getCurrentMonth == to.month() && getCurrentDay > to.day()))
+            {
+                head = head->next;
+                if (ValidateUtil::isNull(head)) break;
+                continue;
+            }
+        }
+        result.push(head->data);
+        head = head->next;
+    }
+    return result;
 }

@@ -175,7 +175,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -644,7 +644,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>Lưu ý: Click đúp vào nhân viên để mở hoá đơn</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic; color:#ff0000;&quot;&gt;Lưu ý: Click đúp vào nhân viên để mở hoá đơn&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
@@ -748,7 +748,7 @@
       </widget>
       <widget class="QWidget" name="StaticsByPrice">
        <attribute name="title">
-        <string>THỐNG KÊ THEO DOANH THU</string>
+        <string>THỐNG KÊ HOÁ ĐƠN THEO THỜI GIAN</string>
        </attribute>
        <widget class="QLabel" name="tieude_2">
         <property name="geometry">
@@ -1098,13 +1098,13 @@
                                                   }</string>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG THỐNG KÊ CÁC VẬT TƯ THEO THỜI GIAN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG THỐNG KÊ CÁC VẬT TƯ TRONG KHOẢNG THỜI GIAN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </widget>
       <widget class="QWidget" name="statisticsByTime">
        <attribute name="title">
-        <string>THÔNG KÊ THEO THỜI GIAN</string>
+        <string>THÔNG KÊ THEO NĂM</string>
        </attribute>
        <widget class="QTableWidget" name="statisticYearTable">
         <property name="geometry">
@@ -1210,7 +1210,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>10</y>
       <width>1151</width>
       <height>31</height>
      </rect>
@@ -1223,7 +1223,7 @@
                               }</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;QUẢN LÝ NHẬP XUẤT VẬT TƯ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;PHẦN MỀM QUẢN LÝ NHẬP XUẤT VẬT TƯ&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>

@@ -196,7 +196,10 @@ public:
     {
         this->root = nullptr;
     }
-    ~AVLTree();
+    ~AVLTree()
+    {
+
+    }
     void insert(T data, K key)
     {
         this->root = insert(root, data, key);

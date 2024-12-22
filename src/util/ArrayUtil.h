@@ -22,6 +22,11 @@ private:
         return false;
     }
 
+
+
+public:
+    ArrayUtil() {}
+
     void static swap(T &firstObject, T &secondObject)
     {
         T tempObject = firstObject;
@@ -29,8 +34,6 @@ private:
         secondObject = tempObject;
     }
 
-public:
-    ArrayUtil() {}
     void static StaffSort(PointerArray<Staff> *staffList)
     {
         size_t sizeOfStaff = staffList->getSize();

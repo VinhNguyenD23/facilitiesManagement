@@ -54,6 +54,10 @@ private slots:
 
     void on_staffTable_cellDoubleClicked(int row, int column);
 
+    void on_statisticFromDate_dateTimeChanged(const QDateTime &dateTime);
+
+    void on_statisticToDate_dateTimeChanged(const QDateTime &dateTime);
+
 private:
     void loadAvlData(QTableWidget *table, AVLTree<Facility, QString>::Node *node, int &row);
     void loadFacilityData(QTableWidget *table);

@@ -51,3 +51,20 @@ DArray<Invoice> StatisticController::getStatisticInvoiceByTime(QDate from, QDate
         return -1;
     }
 }
+
+DArray<Pair<QString, double>> StatisticController::getStatisticFacilityByTime(QDate from, QDate to)
+{
+    try
+    {
+        return this->statisticService->statisticFacilityByTime(from, to);
+    }
+    catch (const std::exception &e)
+    {
+        qDebug() << e.what() << '\n';
+        QMessageBox msgBox;
+        msgBox.setText(e.what());
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return -1;
+    }
+}

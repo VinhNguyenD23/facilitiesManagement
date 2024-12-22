@@ -28,6 +28,7 @@ public:
     InvoiceDetail *findById(QString id);
     bool isFacilityAvailable(QString facilityId);
     size_t getSize();
+    double getSum(InvoiceDetail &data);
     ~InvoiceDetailModel();
 };
 

@@ -59,6 +59,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         src/datatype/pointerarray.h
         src/util/ValidateUtil.h
         src/view/invoiceform.h src/view/invoiceform.cpp src/view/invoiceform.ui
+        src/datatype/Pair.h
 
 
     )

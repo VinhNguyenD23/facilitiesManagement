@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "../datatype/Pair.h"
 #include "invoiceform.h"
 #include <QMessageBox>
 #include <QDate>
@@ -23,10 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statisticToDate->setDateTime(currentDateTime);
     ui->toDate->setDateTime(currentDateTime);
 
-    ui->statisticFromDate->setDateTime(currentDateTime.addDays(-7));
-    ui->fromDate->setDateTime(currentDateTime.addDays(-7));
-
-    this->ui->statisticYearline->setText(QString::number(QDate::currentDate().year()));
+    ui->statisticFromDate->setDateTime(currentDateTime.addDays(-31));
+    ui->fromDate->setDateTime(currentDateTime.addDays(-31));
 
     QTableWidget *facilityTempTable = ui->facilityTable;
     facilityTempTable->verticalHeader()->setVisible(false);
@@ -77,6 +76,19 @@ MainWindow::MainWindow(QWidget *parent)
     statisticTimeTableTemp->setSelectionMode(QAbstractItemView::SingleSelection);
     statisticTimeTableTemp->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
+    QTableWidget *statisticFacilityTableTemp = ui->statisticFacilityTable;
+    statisticFacilityTableTemp->verticalHeader()->setVisible(false);
+    statisticFacilityTableTemp->horizontalHeader()->setVisible(false);
+    statisticFacilityTableTemp->setColumnCount(5);
+    statisticFacilityTableTemp->setColumnWidth(0, 355);
+    statisticFacilityTableTemp->setColumnWidth(1, 355);
+    statisticFacilityTableTemp->setColumnWidth(2, 355);
+    statisticFacilityTableTemp->setSelectionBehavior(QAbstractItemView::SelectRows);
+    statisticFacilityTableTemp->setSelectionMode(QAbstractItemView::SingleSelection);
+    statisticFacilityTableTemp->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+
+    this->ui->statisticYearline->setText(QString::number(QDate::currentDate().year()));
 
     // qDebug() << this->staff->getStaffById("QL003")->id <<
     // this->staff->getStaffById("QL003")->invoicesList->getListData()->data.id;
@@ -187,6 +199,17 @@ void MainWindow::loadStatisticFacilityTableData(QTableWidget *table)
 {
     table->clearContents();
     table->setRowCount(0);
+    DArray<Pair<QString, double>> data = this->statistic->getStatisticFacilityByTime(ui->statisticFromDate->date(), ui->statisticToDate->date());
+    for(int index = 0; index < (data.getSize() < 10 ? data.getSize() : 10); index++)
+    {
+        table->insertRow(index);
+        QTableWidgetItem *facilityId = new QTableWidgetItem(data.at(index).getFirst());
+        QTableWidgetItem *facilityName = new QTableWidgetItem(this->facility->getFacilityById(data.at(index).getFirst())->name);
+        QTableWidgetItem *facilityPrice = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(data.at(index).getSecond(), 'f', 0)));
+        table->setItem(index, 0, facilityId);
+        table->setItem(index, 1, facilityName);
+        table->setItem(index, 2, facilityPrice);
+    }
 }
 
 void MainWindow::cleanContentFacilityTextBox()
@@ -356,7 +379,7 @@ void MainWindow::on_fromDate_dateTimeChanged(const QDateTime &dateTime)
     {
         qDebug() << this->ui->fromDate->dateTime() << this->ui->toDate->dateTime();
         QMessageBox msgBox;
-        msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
+        msgBox.setText("Sai logic!");
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
         return;
@@ -369,7 +392,7 @@ void MainWindow::on_toDate_dateTimeChanged(const QDateTime &dateTime)
     if (this->ui->fromDate->dateTime() > this->ui->toDate->dateTime())
     {
         QMessageBox msgBox;
-        msgBox.setText("Bạn không thể thay đổi số lượng của vật tư!");
+        msgBox.setText("Sai logic!");
         msgBox.setIcon(QMessageBox::Icon::Critical);
         msgBox.exec();
         return;
@@ -416,4 +439,34 @@ void MainWindow::on_staffTable_cellDoubleClicked(int row, int column)
     }
 }
 
+
+
+void MainWindow::on_statisticFromDate_dateTimeChanged(const QDateTime &dateTime)
+{
+    if (this->ui->statisticFromDate->dateTime() > this->ui->statisticToDate->dateTime())
+    {
+        qDebug() << this->ui->statisticFromDate->dateTime() << this->ui->statisticToDate->dateTime();
+        QMessageBox msgBox;
+        msgBox.setText("Sai logic!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
+    this->loadTableData();
+}
+
+
+void MainWindow::on_statisticToDate_dateTimeChanged(const QDateTime &dateTime)
+{
+    if (this->ui->statisticFromDate->dateTime() > this->ui->statisticToDate->dateTime())
+    {
+        qDebug() << this->ui->statisticFromDate->dateTime() << this->ui->statisticToDate->dateTime();
+        QMessageBox msgBox;
+        msgBox.setText("Sai logic!");
+        msgBox.setIcon(QMessageBox::Icon::Critical);
+        msgBox.exec();
+        return;
+    }
+    this->loadTableData();
+}
 

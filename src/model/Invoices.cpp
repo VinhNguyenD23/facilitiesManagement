@@ -213,6 +213,7 @@ InvoiceModel::~InvoiceModel()
 
 double InvoiceModel::getSumOfInvoice(QString id)
 {
+    InvoiceDetailModel *invoiceDetailRepository = invoiceDetailModel;
     if (ValidateUtil::isNull(this->findById(id)))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
@@ -228,7 +229,8 @@ double InvoiceModel::getSumOfInvoice(QString id)
     {
         if (current->data.invoiceId == id)
         {
-            sum += double(current->data.price) * double(current->data.quantity) * double(1.00 + current->data.vat);
+            // sum += double(current->data.price) * double(current->data.quantity) * double(1.00 + current->data.vat);
+            sum += invoiceDetailRepository->getSum(current->data);
         }
         current = current->next;
     }

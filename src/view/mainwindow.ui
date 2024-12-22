@@ -175,7 +175,7 @@
        <enum>QTabWidget::TabShape::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="facilityLayout">
        <attribute name="title">
@@ -1098,7 +1098,7 @@
                                                   }</string>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG THỐNG KÊ CÁC VẬT TƯ TRONG KHOẢNG THỜI GIAN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt;BẢNG THỐNG KÊ &lt;/span&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt; font-weight:700;&quot;&gt;TOP 10&lt;/span&gt;&lt;span style=&quot; font-family:'Times New Roman','serif'; font-size:12pt;&quot;&gt; VẬT TƯ TRONG KHOẢNG THỜI GIAN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </widget>

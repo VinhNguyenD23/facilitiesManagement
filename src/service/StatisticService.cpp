@@ -78,6 +78,11 @@ DArray<Pair<QString, double>> StatisticService::statisticFacilityByTime(QDate fr
     int test = 0;
     while (!ValidateUtil::isNull(head))
     {
+        if(head->data.type != 0)
+        {
+            head = head->next;
+            continue;
+        }
         int getCurrentDay = head->data.date.day;
         int getCurrentMonth = head->data.date.month;
         int getCurrentYear = head->data.date.year;

@@ -5,7 +5,6 @@
 FacilityService::FacilityService()
 {
     this->facilityRepository = facilityModel;
-    this->invoiceDetailRepository = invoiceDetailModel;
 }
 
 void FacilityService::create(Facility data)

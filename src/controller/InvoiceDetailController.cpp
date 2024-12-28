@@ -41,37 +41,37 @@ void InvoiceDetailController::createNewInvoiceDetail(InvoiceDetail &data)
     }
 }
 
-void InvoiceDetailController::updateExistInvoiceDetail(InvoiceDetail data)
-{
-    try
-    {
-        this->invoiceDetailService->update(data);
-    }
-    catch (const std::exception &e)
-    {
-        qDebug() << e.what() << '\n';
-        QMessageBox msgBox;
-        msgBox.setText(e.what());
-        msgBox.setIcon(QMessageBox::Icon::Critical);
-        msgBox.exec();
-    }
-}
+// void InvoiceDetailController::updateExistInvoiceDetail(InvoiceDetail data)
+// {
+//     try
+//     {
+//         this->invoiceDetailService->update(data);
+//     }
+//     catch (const std::exception &e)
+//     {
+//         qDebug() << e.what() << '\n';
+//         QMessageBox msgBox;
+//         msgBox.setText(e.what());
+//         msgBox.setIcon(QMessageBox::Icon::Critical);
+//         msgBox.exec();
+//     }
+// }
 
-void InvoiceDetailController::removeInvoiceDetail(InvoiceDetail data)
-{
-    try
-    {
-        this->invoiceDetailService->remove(data);
-    }
-    catch (const std::exception &e)
-    {
-        qDebug() << e.what() << '\n';
-        QMessageBox msgBox;
-        msgBox.setText(e.what());
-        msgBox.setIcon(QMessageBox::Icon::Critical);
-        msgBox.exec();
-    }
-}
+// void InvoiceDetailController::removeInvoiceDetail(InvoiceDetail data)
+// {
+//     try
+//     {
+//         this->invoiceDetailService->remove(data);
+//     }
+//     catch (const std::exception &e)
+//     {
+//         qDebug() << e.what() << '\n';
+//         QMessageBox msgBox;
+//         msgBox.setText(e.what());
+//         msgBox.setIcon(QMessageBox::Icon::Critical);
+//         msgBox.exec();
+//     }
+// }
 
 LinkedList<InvoiceDetail>::Node *InvoiceDetailController::getListInvoice()
 {
@@ -90,22 +90,22 @@ LinkedList<InvoiceDetail>::Node *InvoiceDetailController::getListInvoice()
     }
 }
 
-InvoiceDetail *InvoiceDetailController::getInvoiceDetailByDetailId(QString id)
-{
-    try
-    {
-        return this->invoiceDetailService->readById(id);
-    }
-    catch (const std::exception &e)
-    {
-        qDebug() << e.what() << '\n';
-        QMessageBox msgBox;
-        msgBox.setText(e.what());
-        msgBox.setIcon(QMessageBox::Icon::Critical);
-        msgBox.exec();
-        return nullptr;
-    }
-}
+// InvoiceDetail *InvoiceDetailController::getInvoiceDetailByDetailId(QString id)
+// {
+//     try
+//     {
+//         return this->invoiceDetailService->readById(id);
+//     }
+//     catch (const std::exception &e)
+//     {
+//         qDebug() << e.what() << '\n';
+//         QMessageBox msgBox;
+//         msgBox.setText(e.what());
+//         msgBox.setIcon(QMessageBox::Icon::Critical);
+//         msgBox.exec();
+//         return nullptr;
+//     }
+// }
 
 InvoiceDetailController::~InvoiceDetailController()
 {

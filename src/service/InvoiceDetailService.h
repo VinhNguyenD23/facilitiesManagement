@@ -14,12 +14,13 @@ private:
     InvoiceModel *invoiceRepository = nullptr;
 
 public:
-    InvoiceDetailService(/* args */);
+    InvoiceDetailService();
+    InvoiceDetailService(QString staffId, QString invoiceId);
     void create(InvoiceDetail &data);
-    void update(InvoiceDetail &data);
-    void remove(InvoiceDetail &data);
+    // void update(InvoiceDetail &data);
+    // void remove(InvoiceDetail &data);
     LinkedList<InvoiceDetail>::Node *readAll();
-    InvoiceDetail *readById(QString id);
+    // InvoiceDetail *readById(QString id);
     ~InvoiceDetailService();
 };
 

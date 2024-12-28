@@ -4,6 +4,7 @@
 #include "../util/ValidateUtil.h"
 #include "../common/FilePath.h"
 #include "../object/Date.h"
+#include "InvoiceDetail.h"
 #include "GlobalModel.h"
 #include "Invoices.h"
 
@@ -124,7 +125,7 @@ void InvoiceModel::update(Invoice &data)
 void InvoiceModel::refresh()
 {
     this->data->clear();
-    this->readFile();
+    // this->getCurrentData->readFile();
 }
 
 Invoice *InvoiceModel::findById(QString id)
@@ -154,7 +155,7 @@ InvoiceModel::~InvoiceModel()
 
 double InvoiceModel::getSumOfInvoice(QString id)
 {
-    InvoiceDetailModel *invoiceDetailRepository = invoiceDetailModel;
+    InvoiceDetailModel *invoiceDetailRepository = new InvoiceDetailModel(id);
     if (ValidateUtil::isNull(this->findById(id)))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
@@ -168,10 +169,7 @@ double InvoiceModel::getSumOfInvoice(QString id)
     auto *current = getInvoiceDetail->getList();
     while (!ValidateUtil::isNull(current))
     {
-        if (current->data.invoiceId == id)
-        {
-            sum += invoiceDetailRepository->getSum(current->data);
-        }
+        sum += invoiceDetailRepository->getSum(current->data);
         current = current->next;
     }
     return sum;

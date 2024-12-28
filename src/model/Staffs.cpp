@@ -3,7 +3,6 @@
 #include "../util/ValidateUtil.h"
 #include "../util/ArrayUtil.h"
 #include "GlobalModel.h"
-#include "Invoices.h"
 #include "Staffs.h"
 
 void StaffsModel::readFile()
@@ -53,9 +52,8 @@ void StaffsModel::writeFile()
 
 StaffsModel::StaffsModel()
 {
-    this->data = dataModel->getCurrent();
-    // this->readFile();
-    // this->loadInvoiceData();
+    this->getCurrentData = dataModel;
+    this->data = getCurrentData->getCurrent();
 }
 
 StaffsModel::~StaffsModel()

@@ -8,55 +8,24 @@
 
 void InvoiceDetailModel::readFile()
 {
-    QFile file(FilePath::getPath(FilePath::databases::INVOICEDETAIL));
-    QStringList field;
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        throw DatabasesException::DatabaseBroken("invoiceDetail");
-    }
-    QTextStream in(&file);
-    while (!in.atEnd())
-    {
-        InvoiceDetail *tempInvoiceDetail = new InvoiceDetail();
-        QString line = in.readLine();
-        field = line.split(',');
-        if (field.size() != 6)
-        {
-            throw DatabasesException::DatabaseBroken("invoiceDetail");
-        }
-        tempInvoiceDetail->id = field[0];
-        tempInvoiceDetail->invoiceId = field[1];
-        tempInvoiceDetail->facilityId = field[2];
-        tempInvoiceDetail->quantity = field[3].toInt();
-        tempInvoiceDetail->price = field[4].toLong();
-        tempInvoiceDetail->vat = (double)(field[5].toDouble() / 100.0);
-        this->data->add(*tempInvoiceDetail);
-    }
-    qDebug() << "InvoiceDetail Databases load:" << this->getSize();
-    file.close();
 }
 
 void InvoiceDetailModel::writeFile()
 {
-    QFile file(FilePath::getPath(FilePath::databases::INVOICEDETAIL));
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        throw DatabasesException::DatabaseBroken("invoiceDetail");
-    }
-    QTextStream out(&file);
-    auto *currentHead = this->getList();
-    while (!ValidateUtil::isNull(currentHead))
-    {
-        out << currentHead->data.id << ',' << currentHead->data.invoiceId << ',' << currentHead->data.facilityId << ',' << QString::number(currentHead->data.quantity) << ',' << QString::number(currentHead->data.price) << ',' << QString::number(currentHead->data.vat * 100.0) << '\n';
-        currentHead = currentHead->next;
-    }
-    file.close();
+    this->getCurrentData->writeFile();
 }
 
 InvoiceDetailModel::InvoiceDetailModel()
 {
     this->data = new LinkedList<InvoiceDetail>();
     this->readFile();
+}
+
+InvoiceDetailModel::InvoiceDetailModel(QString invoiceId)
+{
+    this->getCurrentData = dataModel;
+    this->invoiceId = invoiceId;
+    this->data = this->getCurrentData->findInvoiceDetailListByInvoiceId(invoiceId);
 }
 
 LinkedList<InvoiceDetail>::Node *InvoiceDetailModel::getList()
@@ -66,70 +35,46 @@ LinkedList<InvoiceDetail>::Node *InvoiceDetailModel::getList()
 
 void InvoiceDetailModel::push(InvoiceDetail &data)
 {
-    if (ValidateUtil::isBlank(data.invoiceId) || ValidateUtil::isBlank(data.facilityId) || ValidateUtil::isBlank(data.id))
+    if (ValidateUtil::isBlank(data.facilityId))
     {
-        throw DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
+        throw DataException::CantHandle("Some field must not be blank, please try again!");
     }
-    if (ValidateUtil::isNull(this->invoiceRepository))
-    {
-        this->invoiceRepository = invoiceModel;
-    }
-    this->data->add(data);
-    this->invoiceRepository->addInvoiceDetail(data.invoiceId, data);
-    this->writeFile();
+    this->getCurrentData->pushToInvoiceDetailListByInvoiceId(this->invoiceId, data);
+    this->getCurrentData->writeFile();
 }
 
 void InvoiceDetailModel::remove(InvoiceDetail &data)
 {
-    if (ValidateUtil::isBlank(data.id))
-    {
-        throw DataException::CantHandle("Id must not be blank, please try again!");
-    }
-    if (ValidateUtil::isNull(this->invoiceRepository))
-    {
-        this->invoiceRepository = invoiceModel;
-    }
-    this->data->remove(data);
-    this->invoiceRepository->refreshInvoiceDetail();
-    this->writeFile();
+    this->getCurrentData->removeToInvoiceDetailListByInvoiceId(this->invoiceId, data);
+    this->getCurrentData->writeFile();
 }
 
 void InvoiceDetailModel::update(InvoiceDetail &data)
 {
-    if (ValidateUtil::isBlank(data.invoiceId) || ValidateUtil::isBlank(data.facilityId) || ValidateUtil::isBlank(data.id))
-    {
-        throw DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
-    }
-    LinkedList<InvoiceDetail>::Node *element = this->data->getElement(data);
-    if (ValidateUtil::isNull(element))
-    {
-        throw DataException::DataNotFound("Invoice detail data not found");
-    }
-    qDebug() << "InvoiceDetail data address pointer: " << &element->data;
-    element->data = data;
-    this->writeFile();
+    this->getCurrentData->updateToInvoiceDetailListByInvoiceId(this->invoiceId, data);
+    this->getCurrentData->writeFile();
 }
 
 void InvoiceDetailModel::refresh()
 {
     this->data->clear();
-    this->readFile();
+    // this->readFile();
 }
 
-InvoiceDetail *InvoiceDetailModel::findById(QString id)
-{
-    auto *temp = this->data->getList();
-    while (!ValidateUtil::isNull(temp))
-    {
-        if (temp->data.id == id)
-        {
-            InvoiceDetail *invoiceData = new InvoiceDetail(temp->data);
-            return invoiceData;
-        }
-        temp = temp->next;
-    }
-    return nullptr;
-}
+// InvoiceDetail *InvoiceDetailModel::findById(QString id)
+// {
+//     auto *temp = this->data->getList();
+//     while (!ValidateUtil::isNull(temp))
+//     {
+//         if (temp->data.id == id)
+//         {
+//             InvoiceDetail *invoiceData = new InvoiceDetail(temp->data);
+//             return invoiceData;
+//         }
+//         temp = temp->next;
+//     }
+//     return nullptr;
+// }
 
 bool InvoiceDetailModel::isFacilityAvailable(QString facilityId)
 {
@@ -157,4 +102,9 @@ double InvoiceDetailModel::getSum(InvoiceDetail &data)
 
 InvoiceDetailModel::~InvoiceDetailModel()
 {
+}
+
+QString InvoiceDetailModel::getInvoiceId()
+{
+    return this->invoiceId;
 }

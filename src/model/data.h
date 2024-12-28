@@ -19,9 +19,9 @@ public:
     void pushToInvoiceListByStaffId(QString staffId, Invoice data);
     void removeToInvoiceListByStaffId(QString staffId, Invoice data);
     void updateToInvoiceListByStaffId(QString staffId, Invoice data);
-    void pushToInvoiceDetailListByStaffId(QString staffId, InvoiceDetail data);
-    void removeToInvoiceDetailListByStaffId(QString staffId, InvoiceDetail data);
-    void updateToInvoiceDetailListByStaffId(QString staffId, InvoiceDetail data);
+    void pushToInvoiceDetailListByInvoiceId(QString invoiceId, InvoiceDetail data);
+    void removeToInvoiceDetailListByInvoiceId(QString invoiceId, InvoiceDetail data);
+    void updateToInvoiceDetailListByInvoiceId(QString invoiceId, InvoiceDetail data);
 
 };
 

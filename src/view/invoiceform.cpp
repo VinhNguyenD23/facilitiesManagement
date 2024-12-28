@@ -49,7 +49,7 @@ void InvoiceForm::loadInvoiceData(QTableWidget *table)
             QTableWidgetItem *invoiceId = new QTableWidgetItem(current->data.id);
             QTableWidgetItem *invoiceDate = new QTableWidgetItem(current->data.date.getFormatValue());
             QTableWidgetItem *invoiceType = new QTableWidgetItem(current->data.type ? "Nhập" : "Xuất");
-            QTableWidgetItem *invoicePrice = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(this->invoice->getSumOfInvoice(current->data.id), 'f', 0)));
+            QTableWidgetItem *invoicePrice = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(this->invoice->getSumOfInvoice(staffId, current->data.id), 'f', 0)));
             table->setItem(row, 0, invoiceId);
             table->setItem(row, 1, invoiceDate);
             table->setItem(row, 2, invoiceType);
@@ -77,7 +77,6 @@ void InvoiceForm::on_invoiceAddButton_clicked()
 {
     Invoice *invoiceRequest = new Invoice();
     invoiceRequest->id = ui->invoiceId->toPlainText();
-    invoiceRequest->staffId = this->staffId;
     QString dateText = ui->invoiceDate->text();
     QStringList dateTextList = dateText.split('/');
     Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(),
@@ -99,7 +98,7 @@ void InvoiceForm::on_invoiceAddButton_clicked()
         msgBox.exec();
         return;
     }
-    this->invoice->createNewInvoice(*invoiceRequest);
+    this->invoice->createNewInvoice(staffId, *invoiceRequest);
     this->loadInvoiceData(this->ui->InvoiceTable);
     this->cleanContentInvoiceTextBox();
 }
@@ -108,7 +107,7 @@ void InvoiceForm::on_invoiceDeleteButton_clicked()
 {
     Invoice invoiceRequest = Invoice();
     invoiceRequest.id = ui->invoiceId->toPlainText();
-    this->invoice->removeInvoice(invoiceRequest);
+    this->invoice->removeInvoice(staffId, invoiceRequest);
     this->loadInvoiceData(this->ui->InvoiceTable);
     this->cleanContentInvoiceTextBox();
 }
@@ -117,7 +116,6 @@ void InvoiceForm::on_invoiceEditButton_clicked()
 {
     Invoice invoiceRequest = Invoice();
     invoiceRequest.id = ui->invoiceId->toPlainText();
-    invoiceRequest.staffId = this->staffId;
     QString dateText = ui->invoiceDate->text();
     QStringList dateTextList = dateText.split('/');
     Date date = Date(dateTextList.at(2).toInt(), dateTextList.at(0).toInt(),
@@ -139,7 +137,7 @@ void InvoiceForm::on_invoiceEditButton_clicked()
         msgBox.exec();
         return;
     }
-    this->invoice->updateExistInvoice(invoiceRequest);
+    this->invoice->updateExistInvoice(staffId, invoiceRequest);
     this->loadInvoiceData(this->ui->InvoiceTable);
     this->cleanContentInvoiceTextBox();
 }

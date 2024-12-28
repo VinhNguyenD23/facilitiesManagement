@@ -21,12 +21,12 @@ void Data::readFile()
     }
     QTextStream in(&file);
     Invoice *newInvoice = nullptr;
+    Staff newStaff = Staff();
     while(!in.atEnd())
     {
-        Staff newStaff = Staff();
         QString line = in.readLine();
         field = line.split(',');
-        if(field.empty())
+        if(field.size() == 1)
         {
             if(!ValidateUtil::isNull(newInvoice))
                 newStaff.invoicesList->add(*newInvoice);
@@ -42,6 +42,7 @@ void Data::readFile()
             newStaff.firstName = field.at(2);
             newStaff.gender = field.at(3).toInt();
             isStaff = true;
+            newStaff.invoicesList = new LinkedList<Invoice>();
             continue;
         }
 
@@ -161,30 +162,114 @@ PointerArray<Staff> *Data::getCurrent()
 
 void Data::pushToInvoiceListByStaffId(QString staffId, Invoice data)
 {
-
+    for(int i = 0; i < this->staffModel->getSize(); i++)
+    {
+        if(this->staffModel->at(i)->id == staffId)
+        {
+            this->staffModel->at(i)->invoicesList->add(data);
+            break;
+        }
+    }
+    this->writeFile();
 }
 
 void Data::removeToInvoiceListByStaffId(QString staffId, Invoice data)
 {
-
+    for(int i = 0; i < this->staffModel->getSize(); i++)
+    {
+        if(this->staffModel->at(i)->id == staffId)
+        {
+            this->staffModel->at(i)->invoicesList->remove(data);
+            break;
+        }
+    }
+    this->writeFile();
 }
 
 void Data::updateToInvoiceListByStaffId(QString staffId, Invoice data)
 {
+    for(int i = 0; i < this->staffModel->getSize(); i++)
+    {
+        if(this->staffModel->at(i)->id == staffId)
+        {
+            auto *getCurrent = this->staffModel->at(i)->invoicesList->getElement(data);
+            if(ValidateUtil::isNull(getCurrent))
+            {
+                throw DataException::DataNotFound("Invoice data not found");
+            }
+            getCurrent->data = data;
+            break;
+        }
+    }
+    this->writeFile();
+}
+
+void Data::pushToInvoiceDetailListByInvoiceId(QString invoiceId, InvoiceDetail data)
+{
+    bool check = false;
+    for(int i = 0; i < this->staffModel->getSize(); i++)
+    {
+        if(!ValidateUtil::isNull(this->staffModel->at(i)->invoicesList))
+        {
+            auto *current = this->staffModel->at(i)->invoicesList->getList();
+            while(!ValidateUtil::isNull(current))
+            {
+                if(current->data.id == invoiceId)
+                {
+                    current->data.invoiceDetailList->add(data);
+                    check = true;
+                    break;
+                }
+                current = current->next;
+            }
+        }
+        if(check)break;
+    }
 
 }
 
-void Data::pushToInvoiceDetailListByStaffId(QString staffId, InvoiceDetail data)
+void Data::removeToInvoiceDetailListByInvoiceId(QString invoiceId, InvoiceDetail data)
 {
-
+    bool check = false;
+    for(int i = 0; i < this->staffModel->getSize(); i++)
+    {
+        if(!ValidateUtil::isNull(this->staffModel->at(i)->invoicesList))
+        {
+            auto *current = this->staffModel->at(i)->invoicesList->getList();
+            while(!ValidateUtil::isNull(current))
+            {
+                if(current->data.id == invoiceId)
+                {
+                    current->data.invoiceDetailList->remove(data);
+                    check = true;
+                    break;
+                }
+                current = current->next;
+            }
+        }
+        if(check)break;
+    }
 }
 
-void Data::removeToInvoiceDetailListByStaffId(QString staffId, InvoiceDetail data)
+void Data::updateToInvoiceDetailListByInvoiceId(QString invoiceId, InvoiceDetail data)
 {
-
-}
-
-void Data::updateToInvoiceDetailListByStaffId(QString staffId, InvoiceDetail data)
-{
-
+    bool check = false;
+    for(int i = 0; i < this->staffModel->getSize(); i++)
+    {
+        if(!ValidateUtil::isNull(this->staffModel->at(i)->invoicesList))
+        {
+            auto *current = this->staffModel->at(i)->invoicesList->getList();
+            while(!ValidateUtil::isNull(current))
+            {
+                if(current->data.id == invoiceId)
+                {
+                    current->data.invoiceDetailList->getElement(data);
+                    check = true;
+                    break;
+                }
+                current = current->next;
+            }
+        }
+        if(check)break;
+    }
 }

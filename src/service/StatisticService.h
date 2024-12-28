@@ -4,8 +4,7 @@
 #include "../datatype/DynamicArray.h"
 #include "../datatype/Pair.h"
 #include "../object/Invoice.h"
-#include "../model/Invoices.h"
-#include "../model/InvoiceDetail.h"
+#include "../model/Staffs.h"
 #include <QString>
 #include <QDate>
 
@@ -13,8 +12,9 @@ class StatisticService
 {
 private:
     LinkedList<Invoice> *getList;
-    InvoiceModel *invoiceRepository = nullptr;
-    InvoiceDetailModel *invoiceDetailRepository = nullptr;
+    // InvoiceModel *invoiceRepository = nullptr;
+    // InvoiceDetailModel *invoiceDetailRepository = nullptr;
+    StaffsModel *staffRepository = nullptr;
 
 public:
     StatisticService();

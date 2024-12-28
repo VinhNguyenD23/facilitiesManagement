@@ -157,9 +157,11 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
         QString getDateOfInvoice = getListInvoice.at(index).date.getFormatValue();
         QTableWidgetItem *dateOfInvoice = new QTableWidgetItem(getDateOfInvoice);
         QTableWidgetItem *invoiceType = new QTableWidgetItem(getListInvoice.at(index).type ? "Nhập" : "Xuất");
-        QString nameOfStaff = this->staff->getStaffById(getListInvoice.at(index).staffId)->lastName + " " + this->staff->getStaffById(getListInvoice.at(index).staffId)->firstName;
+        // QString nameOfStaff = this->staff->getStaffById(getListInvoice.at(index).staffId)->lastName + " " + this->staff->getStaffById(getListInvoice.at(index).staffId)->firstName;
+        QString nameOfStaff = "";
         QTableWidgetItem *toNameOfStaff = new QTableWidgetItem(nameOfStaff);
-        QTableWidgetItem *invoiceValue = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number((this->invoice->getSumOfInvoice(getListInvoice.at(index).id)), 'f', 0)));
+        // QTableWidgetItem *invoiceValue = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number((this->invoice->getSumOfInvoice(getListInvoice.at(index).id)), 'f', 0)));
+        QTableWidgetItem *invoiceValue = new QTableWidgetItem("NULL");
         table->setItem(index, 0, invoiceId);
         table->setItem(index, 1, dateOfInvoice);
         table->setItem(index, 2, invoiceType);

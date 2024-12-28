@@ -35,26 +35,27 @@ void StaffsModel::readFile()
 }
 void StaffsModel::writeFile()
 {
-    QFile file(FilePath::getPath(FilePath::databases::STAFF));
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        throw DatabasesException::DatabaseBroken("staff");
-    }
-    QTextStream out(&file);
-    auto *current = this->getList();
-    for (int i = 0; i < current->getSize(); i++)
-    {
-        Staff *data = current->at(i);
-        out << data->id << ',' << data->lastName << ',' << data->firstName << ',' << data->gender << '\n';
-    }
-    file.close();
+    // QFile file(FilePath::getPath(FilePath::databases::STAFF));
+    // if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    // {
+    //     throw DatabasesException::DatabaseBroken("staff");
+    // }
+    // QTextStream out(&file);
+    // auto *current = this->getList();
+    // for (int i = 0; i < current->getSize(); i++)
+    // {
+    //     Staff *data = current->at(i);
+    //     out << data->id << ',' << data->lastName << ',' << data->firstName << ',' << data->gender << '\n';
+    // }
+    // file.close();
+    getCurrentData->writeFile();
 }
 
 StaffsModel::StaffsModel()
 {
-    this->data = new PointerArray<Staff>(MAX_STAFF);
-    this->readFile();
-    this->loadInvoiceData();
+    this->data = dataModel->getCurrent();
+    // this->readFile();
+    // this->loadInvoiceData();
 }
 
 StaffsModel::~StaffsModel()
@@ -106,19 +107,21 @@ void StaffsModel::refresh()
 
 Staff *StaffsModel::findById(QString id)
 {
-    for (int i = 0; i < this->getSize(); i++)
-    {
-        if (id == this->data->at(i)->id)
-        {
-            return this->data->at(i);
-        }
-    }
-    return nullptr;
+    // for (int i = 0; i < this->getSize(); i++)
+    // {
+    //     if (id == this->data->at(i)->id)
+    //     {
+    //         return this->data->at(i);
+    //     }
+    // }
+    // return nullptr;
+    return this->getCurrentData->findStaffById(id);
 }
 
 size_t StaffsModel::getSize()
 {
-    return this->data->getSize();
+    // return this->data->getSize();
+    return this->getCurrentData->getCurrent()->getSize();
 }
 
 long StaffsModel::getMaxStaff()
@@ -126,43 +129,43 @@ long StaffsModel::getMaxStaff()
     return MAX_STAFF;
 }
 
-void StaffsModel::loadInvoiceData()
-{
-    InvoiceModel *invoiceRepository = invoiceModel;
-    auto *currentInvoiceData = invoiceRepository->getList();
-    while (!ValidateUtil::isNull(currentInvoiceData))
-    {
-        this->addInvoice(currentInvoiceData->data.staffId, currentInvoiceData->data);
-        currentInvoiceData = currentInvoiceData->next;
-    }
-}
+// void StaffsModel::loadInvoiceData()
+// {
+//     InvoiceModel *invoiceRepository = invoiceModel;
+//     auto *currentInvoiceData = invoiceRepository->getList();
+//     while (!ValidateUtil::isNull(currentInvoiceData))
+//     {
+//         this->addInvoice(currentInvoiceData->data.staffId, currentInvoiceData->data);
+//         currentInvoiceData = currentInvoiceData->next;
+//     }
+// }
 
-void StaffsModel::addInvoice(QString staffId, Invoice &data)
-{
-    auto *existingStaff = this->findById(staffId);
-    if (ValidateUtil::isNull(existingStaff))
-    {
-        DataException::DataNotFound("Staff id: " + staffId.toStdString() + " not found");
-    }
-    if (ValidateUtil::isNull(existingStaff->invoicesList))
-    {
-        existingStaff->invoicesList = new LinkedList<Invoice>();
-    }
-    existingStaff->invoicesList->add(data);
-}
+// void StaffsModel::addInvoice(QString staffId, Invoice &data)
+// {
+//     auto *existingStaff = this->findById(staffId);
+//     if (ValidateUtil::isNull(existingStaff))
+//     {
+//         DataException::DataNotFound("Staff id: " + staffId.toStdString() + " not found");
+//     }
+//     if (ValidateUtil::isNull(existingStaff->invoicesList))
+//     {
+//         existingStaff->invoicesList = new LinkedList<Invoice>();
+//     }
+//     existingStaff->invoicesList->add(data);
+// }
 
-void StaffsModel::refreshInvoice()
-{
-    InvoiceModel *invoiceRepository = invoiceModel;
-    auto *getListStaff = this->getList();
-    for (int index = 0; index < getListStaff->getSize(); index++)
-    {
-        auto *getInvoicesList = this->data->at(index)->invoicesList;
-        if (!ValidateUtil::isNull(getInvoicesList))
-        {
-            getInvoicesList->clear();
-            getInvoicesList = nullptr;
-        }
-    }
-    this->loadInvoiceData();
-}
+// void StaffsModel::refreshInvoice()
+// {
+//     InvoiceModel *invoiceRepository = invoiceModel;
+//     auto *getListStaff = this->getList();
+//     for (int index = 0; index < getListStaff->getSize(); index++)
+//     {
+//         auto *getInvoicesList = this->data->at(index)->invoicesList;
+//         if (!ValidateUtil::isNull(getInvoicesList))
+//         {
+//             getInvoicesList->clear();
+//             getInvoicesList = nullptr;
+//         }
+//     }
+//     this->loadInvoiceData();
+// }

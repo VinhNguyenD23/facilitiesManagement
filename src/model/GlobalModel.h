@@ -4,7 +4,9 @@
 #include "Invoices.h"
 #include "Staffs.h"
 #include "InvoiceDetail.h"
+#include "data.h"
 
+extern Data *dataModel;
 extern FacilitiesModel *facilityModel;
 extern InvoiceDetailModel *invoiceDetailModel;
 extern InvoiceModel *invoiceModel;

@@ -5,6 +5,7 @@
 FacilityService::FacilityService()
 {
     this->facilityRepository = facilityModel;
+    this->staffRepository = staffModel;
 }
 
 void FacilityService::create(Facility data)
@@ -46,14 +47,37 @@ void FacilityService::update(Facility data)
 
 void FacilityService::remove(Facility data)
 {
-    qDebug() << "Remove facility id: " << data.id;
     if (ValidateUtil::isNull(this->facilityRepository->findByDataId(data.id)))
     {
         throw DataException::DataNotFound("Not found any facility with facility id: " + data.id.toStdString());
     }
-    if (this->invoiceDetailRepository->isFacilityAvailable(data.id))
+    for(int staffIndex = 0; staffIndex < this->staffRepository->getSize(); staffIndex++)
     {
-        throw DataException::ExistDataId("Facility id is already in the invoice, cannot delete facility id");
+        auto *getCurrentInvoices = this->staffRepository->getList()->at(staffIndex)->invoicesList;
+        if(ValidateUtil::isNull(getCurrentInvoices))
+        {
+            continue;
+        }
+        auto *getCurrentNodeInvoices = getCurrentInvoices->getList();
+        while(!ValidateUtil::isNull(getCurrentNodeInvoices))
+        {
+            auto *getCurrentInvoiceDetails = getCurrentNodeInvoices->data.invoiceDetailList;
+            if(ValidateUtil::isNull(getCurrentInvoiceDetails))
+            {
+                getCurrentNodeInvoices = getCurrentNodeInvoices->next;
+                continue;
+            }
+            auto *getCurrentInvoiceDetailList = getCurrentInvoiceDetails->getList();
+            while(!ValidateUtil::isNull(getCurrentInvoiceDetailList))
+            {
+                if(getCurrentInvoiceDetailList->data.facilityId == data.id)
+                {
+                    throw DataException::ExistDataId("Facility id is already in the invoice, cannot delete this facility");
+                }
+                getCurrentInvoiceDetailList = getCurrentInvoiceDetailList->next;
+            }
+            getCurrentNodeInvoices = getCurrentNodeInvoices->next;
+        }
     }
     this->facilityRepository->remove(data.id);
 }

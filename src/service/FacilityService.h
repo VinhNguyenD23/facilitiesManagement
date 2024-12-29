@@ -4,6 +4,7 @@
 #include "../object/facility.h"
 #include "../datatype/Avl.h"
 #include "../model/Facilities.h"
+#include "../model/Staffs.h"
 #include "../model/InvoiceDetail.h"
 #include <QString>
 
@@ -12,6 +13,7 @@ class FacilityService
 private:
     /* data */
     FacilitiesModel *facilityRepository = nullptr;
+    StaffsModel *staffRepository = nullptr;
     InvoiceDetailModel *invoiceDetailRepository = nullptr;
 
 public:

@@ -28,7 +28,8 @@ void InvoiceDetailService::create(InvoiceDetail data)
     }
     if (!invoiceType && getFacility->quantity - data.quantity < 0)
     {
-        throw LogicException::NegativeValue("The updated quantity must be less than the available stock, please try again");
+        std::string message = "The updated quantity must be less than the available stock (available: " + QString::number(getFacility->quantity).toStdString() + ")" + " please try again";
+        throw LogicException::NegativeValue(message);
     }
     Facility tempData = Facility(*getFacility);
     tempData.quantity = (invoiceType ? (getFacility->quantity + data.quantity) : (getFacility->quantity - data.quantity));

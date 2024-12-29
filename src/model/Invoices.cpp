@@ -140,6 +140,10 @@ void InvoiceModel::refresh()
 
 Invoice *InvoiceModel::findById(QString id)
 {
+    if(ValidateUtil::isNull(this->data))
+    {
+        return nullptr;
+    }
     auto *temp = this->data->getList();
     while (!ValidateUtil::isNull(temp))
     {

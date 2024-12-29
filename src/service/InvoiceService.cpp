@@ -77,6 +77,7 @@ void InvoiceService::remove(QString staffId, Invoice &data)
 
 double InvoiceService::getSum(QString staffId, QString id)
 {
+    qDebug() << staffId << id;
     auto *invoiceRepository = new InvoiceModel(staffId);
     return invoiceRepository->getSumOfInvoice(id);
 }

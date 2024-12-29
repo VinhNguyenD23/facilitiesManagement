@@ -4,6 +4,7 @@
 #include "../util/ValidateUtil.h"
 #include <QStringList>
 #include <QTextStream>
+#include <QString>
 
 Data::Data() {
     this->staffModel = new PointerArray<Staff>(500);
@@ -27,7 +28,7 @@ void Data::readFile()
         field = line.split(',');
         if(ValidateUtil::isBlank(line))
         {
-            if(!ValidateUtil::isNull(newInvoice))
+            if(!ValidateUtil::isNull(newStaff) && !ValidateUtil::isNull(newInvoice))
                 newStaff->invoicesList->add(*newInvoice);
             this->staffModel->push(*newStaff);
             newInvoice = nullptr;
@@ -41,7 +42,6 @@ void Data::readFile()
             newStaff->lastName = field.at(1);
             newStaff->firstName = field.at(2);
             newStaff->gender = field.at(3).toInt();
-            newStaff->invoicesList = new LinkedList<Invoice>();
             continue;
         }
 
@@ -68,11 +68,11 @@ void Data::readFile()
             }
             else if(field.size() == 4) //Invoice Detail
             {
+                InvoiceDetail *newInvoiceDetail = new InvoiceDetail();
                 if(ValidateUtil::isNull(newInvoice->invoiceDetailList))
                 {
                     newInvoice->invoiceDetailList = new LinkedList<InvoiceDetail>();
                 }
-                InvoiceDetail *newInvoiceDetail = new InvoiceDetail();
                 newInvoiceDetail->facilityId = field.at(0);
                 newInvoiceDetail->quantity = field.at(1).toInt();
                 newInvoiceDetail->price = field.at(2).toInt();
@@ -81,6 +81,7 @@ void Data::readFile()
             }
         }
     }
+    file.close();
 }
 
 void Data::writeFile()

@@ -22,6 +22,7 @@ class InvoiceDetailWindow : public QDialog
 public:
     explicit InvoiceDetailWindow(QWidget *parent = nullptr,
                                  QString invoiceId = "",
+                                 QString staffId = "",
                                  FacilityController *facility = nullptr,
                                  InvoiceDetailController *invoiceDetail = nullptr,
                                  InvoiceController *invoice = nullptr);

@@ -157,7 +157,7 @@ void InvoiceForm::on_InvoiceTable_cellClicked(int row, int column)
 void InvoiceForm::on_InvoiceTable_cellDoubleClicked(int row, int column)
 {
     QString getInvoiceId = ui->InvoiceTable->item(ui->InvoiceTable->currentRow(), 0)->text();
-    InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(this, getInvoiceId, this->facility, this->invoiceDetail, this->invoice);
+    InvoiceDetailWindow *invoiceDetailForm = new InvoiceDetailWindow(this, getInvoiceId, staffId, this->facility, this->invoiceDetail, this->invoice);
     invoiceDetailForm->setAttribute(Qt::WA_DeleteOnClose);
     invoiceDetailForm->setWindowTitle("Invoice ID: " + getInvoiceId);
     invoiceDetailForm->exec();

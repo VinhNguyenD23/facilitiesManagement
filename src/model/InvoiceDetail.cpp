@@ -97,11 +97,6 @@ size_t InvoiceDetailModel::getSize()
     return this->data->getSize();
 }
 
-double InvoiceDetailModel::getSum(InvoiceDetail data)
-{
-    return double(data.price * data.quantity) * double(1.0 + data.vat);
-}
-
 InvoiceDetailModel::~InvoiceDetailModel()
 {
 }

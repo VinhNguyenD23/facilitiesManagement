@@ -13,7 +13,8 @@ private:
 
 public:
     InvoiceDetailController(/* args */);
-    void createNewInvoiceDetail(InvoiceDetail &data);
+    InvoiceDetailController(QString staffId, QString invoiceId);
+    void createNewInvoiceDetail(InvoiceDetail data);
     // void updateExistInvoiceDetail(InvoiceDetail data);
     // void removeInvoiceDetail(InvoiceDetail data);
     LinkedList<InvoiceDetail>::Node *getListInvoice();

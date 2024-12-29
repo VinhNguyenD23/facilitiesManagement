@@ -8,6 +8,7 @@
 
 InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent,
                                          QString invoiceId,
+                                         QString staffId,
                                          FacilityController *facility,
                                          InvoiceDetailController *invoiceDetail,
                                          InvoiceController *invoice)
@@ -17,7 +18,7 @@ InvoiceDetailWindow::InvoiceDetailWindow(QWidget *parent,
     this->setFixedSize(QSize(1000, 600));
 
     this->invoiceId = invoiceId;
-    this->invoiceDetail = invoiceDetail;
+    this->invoiceDetail = new InvoiceDetailController(staffId, invoiceId);
     this->parent = parent;
     this->facility = facility;
     this->invoice = invoice;

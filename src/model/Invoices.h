@@ -39,14 +39,15 @@ public:
     {
         InvoiceDetailModel *invoiceDetailRepository = new InvoiceDetailModel(id);
         double sum = 0.00;
-        if (ValidateUtil::isNull(invoiceDetailRepository))
+        if (ValidateUtil::isNull(invoiceDetailRepository->getList()))
         {
             return sum;
         }
         auto *current = invoiceDetailRepository->getList();
         while (!ValidateUtil::isNull(current))
         {
-            sum += invoiceDetailRepository->getSum(current->data);
+            sum += InvoiceDetailModel::getSum(current->data);
+            // sum += double(current->data.price * current->data.quantity) * double(1.0 + current->data.vat);
             current = current->next;
         }
         return sum;

@@ -18,7 +18,7 @@ InvoiceDetailService::InvoiceDetailService(QString staffId, QString invoiceId)
     this->invoiceRepository = new InvoiceModel(staffId);
 }
 
-void InvoiceDetailService::create(InvoiceDetail &data)
+void InvoiceDetailService::create(InvoiceDetail data)
 {
     Facility *getFacility = this->facilityRepository->findByDataId(data.facilityId);
     bool invoiceType = this->invoiceRepository->findById(this->invoiceDetailRepository->getInvoiceId())->type;

@@ -30,7 +30,10 @@ public:
     // InvoiceDetail *findById(QString id);
     bool isFacilityAvailable(QString facilityId);
     size_t getSize();
-    double getSum(InvoiceDetail data);
+    static double getSum(InvoiceDetail data)
+    {
+        return double(data.price * data.quantity) * double(1.0 + data.vat / 100.0);
+    }
     ~InvoiceDetailModel();
     QString getInvoiceId();
 };

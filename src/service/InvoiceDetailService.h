@@ -17,7 +17,7 @@ private:
 public:
     InvoiceDetailService();
     InvoiceDetailService(QString staffId, QString invoiceId);
-    void create(InvoiceDetail &data);
+    void create(InvoiceDetail data);
     // void update(InvoiceDetail &data);
     // void remove(InvoiceDetail &data);
     LinkedList<InvoiceDetail>::Node *readAll();

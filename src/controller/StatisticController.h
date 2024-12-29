@@ -15,7 +15,7 @@ private:
 public:
     StatisticController();
     DArray<double> getStatisticInvoiceOfYear(int year);
-    DArray<Invoice> getStatisticInvoiceByTime(QDate from, QDate to);
+    DArray<Staff> getStatisticInvoiceByTime(QDate from, QDate to);
     DArray<Pair<QString, double>> getStatisticFacilityByTime(QDate from, QDate to);
 };
 

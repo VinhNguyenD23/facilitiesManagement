@@ -6,14 +6,13 @@
 #include <QTextStream>
 
 Data::Data() {
-    this->staffModel = new PointerArray<Staff>();
+    this->staffModel = new PointerArray<Staff>(500);
     this->readFile();
 }
 
 void Data::readFile()
 {
     QFile file(FilePath::getPath(FilePath::databases::DATA));
-    bool isStaff = false, isInvoice = false;
     QStringList field;
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -21,39 +20,43 @@ void Data::readFile()
     }
     QTextStream in(&file);
     Invoice *newInvoice = nullptr;
-    Staff newStaff = Staff();
+    Staff *newStaff = nullptr;
     while(!in.atEnd())
     {
         QString line = in.readLine();
         field = line.split(',');
-        if(field.size() == 1)
+        if(ValidateUtil::isBlank(line))
         {
             if(!ValidateUtil::isNull(newInvoice))
-                newStaff.invoicesList->add(*newInvoice);
-            this->staffModel->push(newStaff);
-            isStaff = false;
-            isInvoice = false;
+                newStaff->invoicesList->add(*newInvoice);
+            this->staffModel->push(*newStaff);
+            newInvoice = nullptr;
+            newStaff = nullptr;
             continue;
         }
-        if(!isStaff && field.size() == 4)
+        if(ValidateUtil::isNull(newStaff) && field.size() == 4)
         {
-            newStaff.id = field.at(0);
-            newStaff.lastName = field.at(1);
-            newStaff.firstName = field.at(2);
-            newStaff.gender = field.at(3).toInt();
-            isStaff = true;
-            newStaff.invoicesList = new LinkedList<Invoice>();
+            newStaff = new Staff();
+            newStaff->id = field.at(0);
+            newStaff->lastName = field.at(1);
+            newStaff->firstName = field.at(2);
+            newStaff->gender = field.at(3).toInt();
+            newStaff->invoicesList = new LinkedList<Invoice>();
             continue;
         }
 
-        if(isStaff) //Check if staff is available
+        if(!ValidateUtil::isNull(newStaff)) //Check if staff is available
         {
             if(field.size() == 3) //Invoice
             {
-                newInvoice = new Invoice();
-                if(ValidateUtil::isNull(newStaff.invoicesList))
+                if(!ValidateUtil::isNull(newInvoice))
                 {
-                    newStaff.invoicesList = new LinkedList<Invoice>();
+                    newStaff->invoicesList->add(*newInvoice);
+                }
+                newInvoice = new Invoice();
+                if(ValidateUtil::isNull(newStaff->invoicesList))
+                {
+                    newStaff->invoicesList = new LinkedList<Invoice>();
                 }
                 Date tempDate;
 
@@ -98,17 +101,21 @@ void Data::writeFile()
             while(!ValidateUtil::isNull(current))
             {
                 out << current->data.id << ',' << current->data.date.toRawData() << ',' << current->data.type << '\n';
-                auto *getInvoiceDetailCurrent = current->data.invoiceDetailList->getList();
-                while(!ValidateUtil::isNull(getInvoiceDetailCurrent))
+                if(!ValidateUtil::isNull(current->data.invoiceDetailList))
                 {
-                    out << getInvoiceDetailCurrent->data.facilityId << ',' << getInvoiceDetailCurrent->data.quantity << ',' << getInvoiceDetailCurrent->data.price << ',' << getInvoiceDetailCurrent->data.vat << '\n';
-                    getInvoiceDetailCurrent = getInvoiceDetailCurrent->next;
+                    auto *getInvoiceDetailCurrent = current->data.invoiceDetailList->getList();
+                    while(!ValidateUtil::isNull(getInvoiceDetailCurrent))
+                    {
+                        out << getInvoiceDetailCurrent->data.facilityId << ',' << getInvoiceDetailCurrent->data.quantity << ',' << getInvoiceDetailCurrent->data.price << ',' << getInvoiceDetailCurrent->data.vat << '\n';
+                        getInvoiceDetailCurrent = getInvoiceDetailCurrent->next;
+                    }
                 }
                 current = current->next;
             }
         }
         out << '\n';
     }
+    file.close();
 }
 
 Staff *Data::findStaffById(QString id)
@@ -197,7 +204,7 @@ void Data::updateToInvoiceListByStaffId(QString staffId, Invoice data)
             {
                 throw DataException::DataNotFound("Invoice data not found");
             }
-            getCurrent->data = data;
+            getCurrent->data.date = data.date;
             break;
         }
     }

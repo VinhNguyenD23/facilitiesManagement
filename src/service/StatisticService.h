@@ -19,7 +19,7 @@ private:
 public:
     StatisticService();
     DArray<double> statisticYear(int year);
-    DArray<Invoice> statisticTime(QDate from, QDate to);
+    DArray<Staff> statisticTime(QDate from, QDate to);
     DArray<Pair<QString, double>> statisticFacilityByTime(QDate from, QDate to);
 };
 

@@ -4,7 +4,6 @@
 #include "../object/InvoiceDetail.h"
 #include "../datatype/LinkedList.h"
 #include "data.h"
-#include "Invoices.h"
 #include <QString>
 #include <QFile>
 #include <QDebug>
@@ -13,7 +12,6 @@ class InvoiceDetailModel
 {
 private:
     LinkedList<InvoiceDetail> *data;
-    InvoiceModel *invoiceRepository = nullptr;
     Data *getCurrentData = nullptr;
     QString invoiceId;
 
@@ -25,14 +23,14 @@ public:
     InvoiceDetailModel();
     InvoiceDetailModel(QString invoiceId);
     LinkedList<InvoiceDetail>::Node *getList();
-    void push(InvoiceDetail &data);
-    void remove(InvoiceDetail &data);
-    void update(InvoiceDetail &data);
+    void push(InvoiceDetail data);
+    void remove(InvoiceDetail data);
+    void update(InvoiceDetail data);
     void refresh();
     // InvoiceDetail *findById(QString id);
     bool isFacilityAvailable(QString facilityId);
     size_t getSize();
-    double getSum(InvoiceDetail &data);
+    double getSum(InvoiceDetail data);
     ~InvoiceDetailModel();
     QString getInvoiceId();
 };

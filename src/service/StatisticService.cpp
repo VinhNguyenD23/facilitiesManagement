@@ -20,7 +20,7 @@ DArray<double> StatisticService::statisticYear(int year)
         InvoiceModel *invoiceRepository = new InvoiceModel(current->at(staffIndex)->id);
         for (int i = 1; i <= 12; i++)
         {
-            double sum = 0;
+            double sum = 0.00;
             auto head = invoiceRepository->getList();
             while (!ValidateUtil::isNull(head))
             {
@@ -32,19 +32,22 @@ DArray<double> StatisticService::statisticYear(int year)
             }
             monthlyRevenue.at(i) += sum;
             monthlyRevenue.at(0) += sum;
+            qDebug() << i << ':' << monthlyRevenue.at(i);
         }
     }
 
     return monthlyRevenue;
 }
 
-DArray<Invoice> StatisticService::statisticTime(QDate from, QDate to)
+DArray<Staff> StatisticService::statisticTime(QDate from, QDate to)
 {
-    DArray<Invoice> result = DArray<Invoice>(10000);
+    DArray<Staff> result = DArray<Staff>(10000);
     for(int staffIndex = 0; staffIndex < this->staffRepository->getSize(); staffIndex++)
     {
+        Staff staffData = Staff(*this->staffRepository->getList()->at(staffIndex));
         auto *invoiceRepository = new InvoiceModel(this->staffRepository->getList()->at(staffIndex)->id);
         auto *head = invoiceRepository->getList();
+        staffData.invoicesList = new LinkedList<Invoice>();
         while (!ValidateUtil::isNull(head))
         {
             int getCurrentDay = head->data.date.day;
@@ -77,9 +80,11 @@ DArray<Invoice> StatisticService::statisticTime(QDate from, QDate to)
                     continue;
                 }
             }
-            result.push(head->data);
+            staffData.invoicesList->add(head->data);
             head = head->next;
         }
+        if(!ValidateUtil::isNull(staffData.invoicesList->getList()))
+            result.push(staffData);
     }
 
     return result;
@@ -90,7 +95,7 @@ DArray<Pair<QString, double>> StatisticService::statisticFacilityByTime(QDate fr
     DArray<Pair<QString, double>> result = DArray<Pair<QString, double>>();
     for(int staffIndex = 0; staffIndex < this->staffRepository->getSize(); staffIndex++)
     {
-         auto *invoiceRepository = new InvoiceModel(this->staffRepository->getList()->at(staffIndex)->id);
+        auto *invoiceRepository = new InvoiceModel(this->staffRepository->getList()->at(staffIndex)->id);
         auto *head = invoiceRepository->getList();
         int test = 0;
         while (!ValidateUtil::isNull(head))

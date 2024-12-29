@@ -15,9 +15,9 @@ void InvoiceService::create(QString staffId, Invoice &data)
     auto *invoiceRepository = new InvoiceModel(staffId);
     if (data.id.length() > 20 || data.id.length() == 0)
     {
-        throw ValidateException::InvalidData("Staff id length must in range [1, 20], please try again");
+        throw ValidateException::InvalidData("Id length must in range [1, 20], please try again");
     }
-    if(staffRepository->findById(staffId))
+    if(ValidateUtil::isNull(staffRepository->findById(staffId)))
     {
         throw DataException::DataNotFound("Staff not found");
     }

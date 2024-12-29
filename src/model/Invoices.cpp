@@ -4,7 +4,6 @@
 #include "../util/ValidateUtil.h"
 #include "../common/FilePath.h"
 #include "../object/Date.h"
-#include "InvoiceDetail.h"
 #include "GlobalModel.h"
 #include "Invoices.h"
 
@@ -64,16 +63,19 @@ InvoiceModel::InvoiceModel()
 
 InvoiceModel::InvoiceModel(QString staffId)
 {
+    this->staffId = staffId;
     this->getCurrentData = dataModel;
     this->data = this->getCurrentData->findInvoiceListByStaffId(staffId);
 }
 
 LinkedList<Invoice>::Node *InvoiceModel::getList()
 {
-    return this->data->getList();
+    if(!ValidateUtil::isNull(this->data))
+        return this->data->getList();
+    return nullptr;
 }
 
-void InvoiceModel::push(Invoice &data)
+void InvoiceModel::push(Invoice data)
 {
     // if (ValidateUtil::isNull(this->staffRepository))
     // {
@@ -90,10 +92,18 @@ void InvoiceModel::push(Invoice &data)
     // this->data->add(data);
     // this->staffRepository->addInvoice(data.staffId, data);
     // this->writeFile();
+    if (ValidateUtil::isBlank(data.id))
+    {
+        throw DataException::CantHandle( "Some field must not be blank, please try again!");
+    }
+    if(!ValidateUtil::isNull(this->findById(data.id)))
+    {
+        throw DataException::DuplicateDataId("This ID already exists, please try again!");
+    }
     this->getCurrentData->pushToInvoiceListByStaffId(this->staffId, data);
 }
 
-void InvoiceModel::remove(Invoice &data)
+void InvoiceModel::remove(Invoice data)
 {
     // if (ValidateUtil::isNull(this->staffRepository))
     // {
@@ -106,17 +116,17 @@ void InvoiceModel::remove(Invoice &data)
 
 }
 
-void InvoiceModel::update(Invoice &data)
+void InvoiceModel::update(Invoice data)
 {
     // if (ValidateUtil::isBlank(data.id) || ValidateUtil::isBlank(data.staffId))
     // {
     //     throw DataException::CantHandle(data.id.toStdString() + " some field must not be blank, please try again!");
     // }
-    // LinkedList<Invoice>::Node *element = this->data->getElement(data);
-    // if (ValidateUtil::isNull(element))
-    // {
-    //     throw DataException::DataNotFound("Invoice data not found");
-    // }
+    LinkedList<Invoice>::Node *element = this->data->getElement(data);
+    if (ValidateUtil::isNull(element))
+    {
+        throw DataException::DataNotFound("Invoice data not found");
+    }
     // element->data = data;
     // this->writeFile();
     this->getCurrentData->updateToInvoiceListByStaffId(this->staffId, data);
@@ -153,24 +163,3 @@ InvoiceModel::~InvoiceModel()
     this->data->clear();
 }
 
-double InvoiceModel::getSumOfInvoice(QString id)
-{
-    InvoiceDetailModel *invoiceDetailRepository = new InvoiceDetailModel(id);
-    if (ValidateUtil::isNull(this->findById(id)))
-    {
-        throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
-    }
-    double sum = 0.00;
-    auto getInvoiceDetail = this->findById(id)->invoiceDetailList;
-    if (ValidateUtil::isNull(getInvoiceDetail))
-    {
-        return 0;
-    }
-    auto *current = getInvoiceDetail->getList();
-    while (!ValidateUtil::isNull(current))
-    {
-        sum += invoiceDetailRepository->getSum(current->data);
-        current = current->next;
-    }
-    return sum;
-}

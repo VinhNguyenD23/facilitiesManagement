@@ -30,10 +30,12 @@ InvoiceDetailModel::InvoiceDetailModel(QString invoiceId)
 
 LinkedList<InvoiceDetail>::Node *InvoiceDetailModel::getList()
 {
-    return this->data->getList();
+    if(!ValidateUtil::isNull(this->data))
+        return this->data->getList();
+    return nullptr;
 }
 
-void InvoiceDetailModel::push(InvoiceDetail &data)
+void InvoiceDetailModel::push(InvoiceDetail data)
 {
     if (ValidateUtil::isBlank(data.facilityId))
     {
@@ -43,13 +45,13 @@ void InvoiceDetailModel::push(InvoiceDetail &data)
     this->getCurrentData->writeFile();
 }
 
-void InvoiceDetailModel::remove(InvoiceDetail &data)
+void InvoiceDetailModel::remove(InvoiceDetail data)
 {
     this->getCurrentData->removeToInvoiceDetailListByInvoiceId(this->invoiceId, data);
     this->getCurrentData->writeFile();
 }
 
-void InvoiceDetailModel::update(InvoiceDetail &data)
+void InvoiceDetailModel::update(InvoiceDetail data)
 {
     this->getCurrentData->updateToInvoiceDetailListByInvoiceId(this->invoiceId, data);
     this->getCurrentData->writeFile();
@@ -95,7 +97,7 @@ size_t InvoiceDetailModel::getSize()
     return this->data->getSize();
 }
 
-double InvoiceDetailModel::getSum(InvoiceDetail &data)
+double InvoiceDetailModel::getSum(InvoiceDetail data)
 {
     return double(data.price * data.quantity) * double(1.0 + data.vat);
 }

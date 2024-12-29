@@ -105,15 +105,15 @@ void StaffsModel::refresh()
 
 Staff *StaffsModel::findById(QString id)
 {
-    // for (int i = 0; i < this->getSize(); i++)
-    // {
-    //     if (id == this->data->at(i)->id)
-    //     {
-    //         return this->data->at(i);
-    //     }
-    // }
-    // return nullptr;
-    return this->getCurrentData->findStaffById(id);
+    for (int i = 0; i < this->getSize(); i++)
+    {
+        if (id == this->data->at(i)->id)
+        {
+            return this->data->at(i);
+        }
+    }
+    return nullptr;
+    // return this->getCurrentData->findStaffById(id);
 }
 
 size_t StaffsModel::getSize()

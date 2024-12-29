@@ -4,6 +4,7 @@
 #include "../datatype/LinkedList.h"
 #include "../model/Facilities.h"
 #include "../model/InvoiceDetail.h"
+#include "../model/Invoices.h"
 #include <QString>
 
 class InvoiceDetailService

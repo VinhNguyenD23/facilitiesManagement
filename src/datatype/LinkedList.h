@@ -42,7 +42,7 @@ public:
         }
     }
 
-    void add(T &data)
+    void add(T data)
     {
         this->size++;
         LinkedList<T>::Node *newNode = new LinkedList<T>::Node(data);

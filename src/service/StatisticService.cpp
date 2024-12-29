@@ -14,6 +14,10 @@ StatisticService::StatisticService()
 DArray<double> StatisticService::statisticYear(int year)
 {
     DArray<double> monthlyRevenue = DArray<double>(13);
+    for(int i = 0; i < monthlyRevenue.getCapacity(); i++)
+    {
+        monthlyRevenue.push(0.00);
+    }
     for(int staffIndex = 0; staffIndex < this->staffRepository->getSize(); staffIndex++)
     {
         auto *current = this->staffRepository->getList();
@@ -32,7 +36,6 @@ DArray<double> StatisticService::statisticYear(int year)
             }
             monthlyRevenue.at(i) += sum;
             monthlyRevenue.at(0) += sum;
-            qDebug() << i << ':' << monthlyRevenue.at(i);
         }
     }
 

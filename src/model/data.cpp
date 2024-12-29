@@ -82,6 +82,7 @@ void Data::readFile()
         }
     }
     file.close();
+    qDebug() << "Load data status: Done";
 }
 
 void Data::writeFile()
@@ -174,6 +175,10 @@ void Data::pushToInvoiceListByStaffId(QString staffId, Invoice data)
     {
         if(this->staffModel->at(i)->id == staffId)
         {
+            if(ValidateUtil::isNull(this->staffModel->at(i)->invoicesList))
+            {
+                this->staffModel->at(i)->invoicesList = new LinkedList<Invoice>();
+            }
             this->staffModel->at(i)->invoicesList->add(data);
             break;
         }
@@ -224,6 +229,10 @@ void Data::pushToInvoiceDetailListByInvoiceId(QString invoiceId, InvoiceDetail d
             {
                 if(current->data.id == invoiceId)
                 {
+                    if(ValidateUtil::isNull(current->data.invoiceDetailList))
+                    {
+                        current->data.invoiceDetailList = new LinkedList<InvoiceDetail>();
+                    }
                     current->data.invoiceDetailList->add(data);
                     check = true;
                     break;

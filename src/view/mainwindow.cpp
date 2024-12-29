@@ -46,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
     staffTempTable->setColumnCount(4);
     staffTempTable->setColumnWidth(0, 205);
     staffTempTable->setColumnWidth(1, 205);
-    staffTempTable->setColumnWidth(2, 205);
-    staffTempTable->setColumnWidth(3, 190);
+    staffTempTable->setColumnWidth(2, 210);
+    staffTempTable->setColumnWidth(3, 195);
     staffTempTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     staffTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
     staffTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -87,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent)
     statisticFacilityTableTemp->setSelectionBehavior(QAbstractItemView::SelectRows);
     statisticFacilityTableTemp->setSelectionMode(QAbstractItemView::SingleSelection);
     statisticFacilityTableTemp->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    this->loadStatisticFacilityTableData(statisticFacilityTableTemp);
 
     this->ui->statisticYearline->setText(QString::number(QDate::currentDate().year()));
 }
@@ -176,7 +177,7 @@ void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
                 table->setItem(row, 3, toNameOfStaff);
                 table->setItem(row, 4, invoiceValue);
                 // qDebug() << head->data.id << getDateOfInvoice << (head->data.type? "Nhập" : "Xuất") << staffName << StringUtil::formatNumberWithCommas(QString::number(InvoiceModel::getSumOfInvoice(head->data.id), 'f', 0));
-                qDebug() << invoiceId->text() << dateOfInvoice->text() << invoiceType->text() << toNameOfStaff->text() << invoiceValue->text();
+                // qDebug() << invoiceId->text() << dateOfInvoice->text() << invoiceType->text() << toNameOfStaff->text() << invoiceValue->text();
                 head = head->next;
                 row++;
             }

@@ -17,7 +17,7 @@ void InvoiceService::create(QString staffId, Invoice &data)
     {
         throw ValidateException::InvalidData("Id length must in range [1, 20], please try again");
     }
-    if(ValidateUtil::isNull(staffRepository->findById(staffId)))
+    if (ValidateUtil::isNull(staffRepository->findById(staffId)))
     {
         throw DataException::DataNotFound("Staff not found");
     }
@@ -33,12 +33,12 @@ LinkedList<Invoice>::Node *InvoiceService::readAll(QString staffId)
 Invoice *InvoiceService::readById(QString id)
 {
     Invoice *invoiceData = nullptr;
-    for(int i = 0; i < this->staffRepository->getSize(); i++)
+    for (int i = 0; i < this->staffRepository->getSize(); i++)
     {
         auto *invoiceRepository = new InvoiceModel(this->staffRepository->getList()->at(i)->id);
         invoiceData = invoiceRepository->findById(id);
-        if(!ValidateUtil::isNull(invoiceData))break;
-
+        if (!ValidateUtil::isNull(invoiceData))
+            break;
     }
     if (ValidateUtil::isNull(invoiceData))
     {
@@ -77,7 +77,7 @@ void InvoiceService::remove(QString staffId, Invoice &data)
 
 double InvoiceService::getSum(QString staffId, QString id)
 {
-    qDebug() << staffId << id;
+    // qDebug() << staffId << id;
     auto *invoiceRepository = new InvoiceModel(staffId);
     return invoiceRepository->getSumOfInvoice(id);
 }

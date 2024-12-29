@@ -4,6 +4,7 @@
 #include "../datatype/LinkedList.h"
 #include "../model/Facilities.h"
 #include "../model/InvoiceDetail.h"
+#include "../model/Invoices.h"
 #include <QString>
 
 class InvoiceDetailService
@@ -14,12 +15,13 @@ private:
     InvoiceModel *invoiceRepository = nullptr;
 
 public:
-    InvoiceDetailService(/* args */);
-    void create(InvoiceDetail &data);
-    void update(InvoiceDetail &data);
-    void remove(InvoiceDetail &data);
+    InvoiceDetailService();
+    InvoiceDetailService(QString staffId, QString invoiceId);
+    void create(InvoiceDetail data);
+    // void update(InvoiceDetail &data);
+    // void remove(InvoiceDetail &data);
     LinkedList<InvoiceDetail>::Node *readAll();
-    InvoiceDetail *readById(QString id);
+    // InvoiceDetail *readById(QString id);
     ~InvoiceDetailService();
 };
 

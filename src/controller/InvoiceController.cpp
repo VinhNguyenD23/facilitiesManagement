@@ -16,11 +16,11 @@ InvoiceController::InvoiceController()
     }
 }
 
-void InvoiceController::createNewInvoice(Invoice &data)
+void InvoiceController::createNewInvoice(QString staffId, Invoice &data)
 {
     try
     {
-        this->invoiceService->create(data);
+        this->invoiceService->create(staffId, data);
     }
     catch (const std::exception &e)
     {
@@ -32,11 +32,11 @@ void InvoiceController::createNewInvoice(Invoice &data)
     }
 }
 
-void InvoiceController::updateExistInvoice(Invoice &data)
+void InvoiceController::updateExistInvoice(QString staffId, Invoice &data)
 {
     try
     {
-        this->invoiceService->update(data);
+        this->invoiceService->update(staffId, data);
     }
     catch (const std::exception &e)
     {
@@ -48,11 +48,11 @@ void InvoiceController::updateExistInvoice(Invoice &data)
     }
 }
 
-void InvoiceController::removeInvoice(Invoice &data)
+void InvoiceController::removeInvoice(QString staffId, Invoice &data)
 {
     try
     {
-        this->invoiceService->remove(data);
+        this->invoiceService->remove(staffId, data);
     }
     catch (const std::exception &e)
     {
@@ -64,11 +64,11 @@ void InvoiceController::removeInvoice(Invoice &data)
     }
 }
 
-LinkedList<Invoice>::Node *InvoiceController::getListInvoices()
+LinkedList<Invoice>::Node *InvoiceController::getListInvoices(QString staffId)
 {
     try
     {
-        return this->invoiceService->readAll();
+        return this->invoiceService->readAll(staffId);
     }
     catch (const std::exception &e)
     {
@@ -98,11 +98,11 @@ Invoice *InvoiceController::getInvoiceById(QString id)
     }
 }
 
-double InvoiceController::getSumOfInvoice(QString id)
+double InvoiceController::getSumOfInvoice(QString staffId, QString id)
 {
     try
     {
-        return this->invoiceService->getSum(id);
+        return this->invoiceService->getSum(staffId, id);
     }
     catch (const std::exception &e)
     {

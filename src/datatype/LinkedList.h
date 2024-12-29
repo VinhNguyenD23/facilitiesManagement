@@ -11,10 +11,11 @@ class LinkedList
 public:
     struct Node
     {
-        T &data;
+        T data;
         Node *next;
-        Node(T &data) : data(data)
+        Node(T data)
         {
+            this->data = data;
             this->next = nullptr;
         };
     };
@@ -42,7 +43,7 @@ public:
         }
     }
 
-    void add(T &data)
+    void add(T data)
     {
         this->size++;
         LinkedList<T>::Node *newNode = new LinkedList<T>::Node(data);

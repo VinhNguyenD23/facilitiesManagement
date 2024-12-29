@@ -72,6 +72,7 @@ public:
         {
             this->PArray[process] = this->PArray[process + 1];
         }
+        this->PArray[this->size] = nullptr;
     }
     void update(T data)
     {
@@ -79,7 +80,7 @@ public:
         {
             if (*this->at(index) == data)
             {
-                this->PArray[index] = new T(data);
+                *this->PArray[index] = data;
                 return;
             }
         }

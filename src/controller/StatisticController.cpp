@@ -35,7 +35,7 @@ DArray<double> StatisticController::getStatisticInvoiceOfYear(int year)
     }
 }
 
-DArray<Invoice> StatisticController::getStatisticInvoiceByTime(QDate from, QDate to)
+DArray<Staff> StatisticController::getStatisticInvoiceByTime(QDate from, QDate to)
 {
     try
     {

@@ -12,7 +12,8 @@ public:
         FACILITY,
         STAFF,
         INVOICE,
-        INVOICEDETAIL
+        INVOICEDETAIL,
+        DATA
     };
 
 public:
@@ -30,6 +31,8 @@ public:
 
         case databases::INVOICEDETAIL:
             return "databases/invoicedetail.csv";
+        case databases::DATA:
+            return "databases/data.csv";
 
         default:
             throw DatabasesException::InvalidDatabase();

@@ -8,8 +8,6 @@ struct Invoice
 {
     QString id;
     Date date;
-    QString staffId;
-
     bool type; // true: Import, false: Export
     LinkedList<InvoiceDetail> *invoiceDetailList = nullptr;
 

@@ -4,20 +4,18 @@
 
 struct InvoiceDetail
 {
-    QString id;
-    QString invoiceId;
     QString facilityId;
     int quantity;
     long long price;
     double vat;
     bool operator==(InvoiceDetail &other)
     {
-        return this->id == other.id;
+        return (this->facilityId == other.facilityId && this->price == other.price && this->quantity == other.quantity && this->vat == other.vat);
     }
 
     bool operator!=(InvoiceDetail &other)
     {
-        return this->id != other.id;
+        return this->facilityId != other.facilityId;
     }
 };
 

@@ -6,7 +6,6 @@
 StaffService::StaffService()
 {
     this->staffRepository = staffModel;
-    this->invoiceRepository = invoiceModel;
 }
 
 PointerArray<Staff> *StaffService::getList()

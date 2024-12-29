@@ -4,6 +4,7 @@
 #include "../datatype/pointerarray.h"
 #include "../common/FilePath.h"
 #include "../object/Staff.h"
+#include "data.h"
 #include <QDebug>
 #include <QString>
 #include <QFile>
@@ -15,7 +16,7 @@ class StaffsModel
 {
 private:
     PointerArray<Staff> *data;
-
+    Data *getCurrentData = nullptr;
 
 private:
     void readFile();
@@ -32,9 +33,9 @@ public:
     Staff *findById(QString id);
     size_t getSize();
     long getMaxStaff();
-    void loadInvoiceData();
-    void addInvoice(QString staffId, Invoice &data);
-    void refreshInvoice();
+    // void loadInvoiceData();
+    // void addInvoice(QString staffId, Invoice &data);
+    // void refreshInvoice();
 
 };
 #endif

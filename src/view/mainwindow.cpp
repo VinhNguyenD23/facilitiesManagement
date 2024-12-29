@@ -46,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
     staffTempTable->setColumnCount(4);
     staffTempTable->setColumnWidth(0, 205);
     staffTempTable->setColumnWidth(1, 205);
-    staffTempTable->setColumnWidth(2, 205);
-    staffTempTable->setColumnWidth(3, 190);
+    staffTempTable->setColumnWidth(2, 210);
+    staffTempTable->setColumnWidth(3, 195);
     staffTempTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     staffTempTable->setSelectionMode(QAbstractItemView::SingleSelection);
     staffTempTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -75,6 +75,7 @@ MainWindow::MainWindow(QWidget *parent)
     statisticTimeTableTemp->setSelectionBehavior(QAbstractItemView::SelectRows);
     statisticTimeTableTemp->setSelectionMode(QAbstractItemView::SingleSelection);
     statisticTimeTableTemp->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    this->loadStatisticTimeTableData(statisticTimeTableTemp);
 
     QTableWidget *statisticFacilityTableTemp = ui->statisticFacilityTable;
     statisticFacilityTableTemp->verticalHeader()->setVisible(false);
@@ -86,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent)
     statisticFacilityTableTemp->setSelectionBehavior(QAbstractItemView::SelectRows);
     statisticFacilityTableTemp->setSelectionMode(QAbstractItemView::SingleSelection);
     statisticFacilityTableTemp->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    this->loadStatisticFacilityTableData(statisticFacilityTableTemp);
 
     this->ui->statisticYearline->setText(QString::number(QDate::currentDate().year()));
 }
@@ -147,24 +149,39 @@ void MainWindow::loadStaffData(QTableWidget *table)
 
 void MainWindow::loadStatisticTimeTableData(QTableWidget *table)
 {
-    table->clearContents();
+    table->clearFocus();
     table->setRowCount(0);
-    DArray<Invoice> getListInvoice = this->statistic->getStatisticInvoiceByTime(ui->fromDate->date(), ui->toDate->date());
-    for (int index = 0; index < getListInvoice.getSize(); index++)
+    table->clearContents();
+    int row = 0;
+    DArray<Staff> getList = this->statistic->getStatisticInvoiceByTime(ui->fromDate->date(), ui->toDate->date());
+    // qDebug() << ui->fromDate->date() << ui->toDate->date();
+    for(int index = 0; index < getList.getSize(); index++)
     {
-        table->insertRow(index);
-        QTableWidgetItem *invoiceId = new QTableWidgetItem(getListInvoice.at(index).id);
-        QString getDateOfInvoice = getListInvoice.at(index).date.getFormatValue();
-        QTableWidgetItem *dateOfInvoice = new QTableWidgetItem(getDateOfInvoice);
-        QTableWidgetItem *invoiceType = new QTableWidgetItem(getListInvoice.at(index).type ? "Nhập" : "Xuất");
-        QString nameOfStaff = this->staff->getStaffById(getListInvoice.at(index).staffId)->lastName + " " + this->staff->getStaffById(getListInvoice.at(index).staffId)->firstName;
-        QTableWidgetItem *toNameOfStaff = new QTableWidgetItem(nameOfStaff);
-        QTableWidgetItem *invoiceValue = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number((this->invoice->getSumOfInvoice(getListInvoice.at(index).id)), 'f', 0)));
-        table->setItem(index, 0, invoiceId);
-        table->setItem(index, 1, dateOfInvoice);
-        table->setItem(index, 2, invoiceType);
-        table->setItem(index, 3, toNameOfStaff);
-        table->setItem(index, 4, invoiceValue);
+        auto *getInvoiceList = getList.at(index).invoicesList;
+        if(!ValidateUtil::isNull(getInvoiceList))
+        {
+            auto *head = getInvoiceList->getList();
+            while(!ValidateUtil::isNull(head))
+            {
+                table->insertRow(row);
+                QTableWidgetItem *invoiceId = new QTableWidgetItem(head->data.id);
+                QString getDateOfInvoice = head->data.date.getFormatValue();
+                QTableWidgetItem *dateOfInvoice = new QTableWidgetItem(getDateOfInvoice);
+                QTableWidgetItem *invoiceType = new QTableWidgetItem(head->data.type? "Nhập" : "Xuất");
+                QString staffName = getList.at(index).lastName + ' ' + getList.at(index).firstName;
+                QTableWidgetItem *toNameOfStaff = new QTableWidgetItem(staffName);
+                QTableWidgetItem *invoiceValue = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(InvoiceModel::getSumOfInvoice(head->data.id), 'f', 0)));
+                table->setItem(row, 0, invoiceId);
+                table->setItem(row, 1, dateOfInvoice);
+                table->setItem(row, 2, invoiceType);
+                table->setItem(row, 3, toNameOfStaff);
+                table->setItem(row, 4, invoiceValue);
+                // qDebug() << head->data.id << getDateOfInvoice << (head->data.type? "Nhập" : "Xuất") << staffName << StringUtil::formatNumberWithCommas(QString::number(InvoiceModel::getSumOfInvoice(head->data.id), 'f', 0));
+                // qDebug() << invoiceId->text() << dateOfInvoice->text() << invoiceType->text() << toNameOfStaff->text() << invoiceValue->text();
+                head = head->next;
+                row++;
+            }
+        }
     }
 }
 
@@ -182,7 +199,7 @@ void MainWindow::loadStatisticYearTableData(QTableWidget *table)
         for (int i = 1; i <= 12; i++)
         {
             table->insertRow(row);
-            QTableWidgetItem *month = new QTableWidgetItem(QString::number(i));
+            QTableWidgetItem *month = new QTableWidgetItem("Tháng " + QString::number(i));
             QTableWidgetItem *revenue = new QTableWidgetItem(StringUtil::formatNumberWithCommas(QString::number(monthlyRevenue.at(i), 'f', 0)));
             table->setItem(row, 0, month);
             table->setItem(row, 1, revenue);
@@ -227,11 +244,11 @@ void MainWindow::cleanContentStaffTextBox()
 
 void MainWindow::loadTableData()
 {
-    this->loadStatisticYearTableData(ui->statisticYearTable);
-    this->loadStatisticTimeTableData(ui->statisticTimeTable);
     this->loadFacilityData(ui->facilityTable);
     this->loadStaffData(ui->staffTable);
     this->loadStatisticFacilityTableData(ui->statisticFacilityTable);
+    this->loadStatisticTimeTableData(ui->statisticTimeTable);
+    this->loadStatisticYearTableData(ui->statisticYearTable);
 }
 
 void MainWindow::on_facilityTable_cellClicked(int row, int column)
@@ -406,10 +423,20 @@ void MainWindow::on_staffTable_cellDoubleClicked(int row, int column)
     QString staffId = this->ui->staffIdTxt->toPlainText();
     if (!ValidateUtil::isNull(this->staff->getStaffById(staffId)))
     {
-        InvoiceForm *invoice = new InvoiceForm(nullptr, staffId, this->invoice, this->facility, this->invoiceDetail, this->staff);
-        invoice->setWindowTitle("Staff ID: " + staffId);
-        invoice->exec();
-        this->loadTableData();
+        try {
+            InvoiceForm *invoice = new InvoiceForm(nullptr, staffId, this->invoice, this->facility, this->invoiceDetail, this->staff);
+            invoice->setWindowTitle("Staff ID: " + staffId);
+            invoice->exec();
+            this->loadTableData();
+        }
+        catch (const std::exception &e)
+        {
+            qDebug() << e.what() << '\n';
+            QMessageBox msgBox;
+            msgBox.setText(e.what());
+            msgBox.setIcon(QMessageBox::Icon::Critical);
+            msgBox.exec();
+        }
     }
     else
     {

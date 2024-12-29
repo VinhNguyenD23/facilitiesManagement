@@ -22,6 +22,7 @@ class InvoiceDetailWindow : public QDialog
 public:
     explicit InvoiceDetailWindow(QWidget *parent = nullptr,
                                  QString invoiceId = "",
+                                 QString staffId = "",
                                  FacilityController *facility = nullptr,
                                  InvoiceDetailController *invoiceDetail = nullptr,
                                  InvoiceController *invoice = nullptr);
@@ -31,10 +32,6 @@ private slots:
     void on_invoiceDetailTable_cellClicked(int row, int column);
 
     void on_invoiceDetailAddButton_clicked();
-
-    void on_invoiceDetailDeleteButton_clicked();
-
-    void on_invoiceDetailEditButton_clicked();
 
 private:
     void loadDataInvoiceDetail(QTableWidget *table);

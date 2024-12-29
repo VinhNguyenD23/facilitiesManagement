@@ -6,32 +6,40 @@
 
 InvoiceService::InvoiceService()
 {
-    this->invoiceRepository = invoiceModel;
+    this->newData = dataModel;
     this->staffRepository = staffModel;
-    this->invoiceDetailRepository = invoiceDetailModel;
 }
 
-void InvoiceService::create(Invoice &data)
+void InvoiceService::create(QString staffId, Invoice &data)
 {
-    if (ValidateUtil::isNull(this->staffRepository->findById(data.staffId)))
-    {
-        throw DataException::DataNotFound("Staff id not found! Please try again.");
-    }
+    auto *invoiceRepository = new InvoiceModel(staffId);
     if (data.id.length() > 20 || data.id.length() == 0)
     {
-        throw ValidateException::InvalidData("Staff id length must in range [1, 20], please try again");
+        throw ValidateException::InvalidData("Id length must in range [1, 20], please try again");
     }
-    this->invoiceRepository->push(data);
+    if (ValidateUtil::isNull(staffRepository->findById(staffId)))
+    {
+        throw DataException::DataNotFound("Staff not found");
+    }
+    invoiceRepository->push(data);
 }
 
-LinkedList<Invoice>::Node *InvoiceService::readAll()
+LinkedList<Invoice>::Node *InvoiceService::readAll(QString staffId)
 {
-    return this->invoiceRepository->getList();
+    auto *invoiceRepository = new InvoiceModel(staffId);
+    return invoiceRepository->getList();
 }
 
 Invoice *InvoiceService::readById(QString id)
 {
-    Invoice *invoiceData = this->invoiceRepository->findById(id);
+    Invoice *invoiceData = nullptr;
+    for (int i = 0; i < this->staffRepository->getSize(); i++)
+    {
+        auto *invoiceRepository = new InvoiceModel(this->staffRepository->getList()->at(i)->id);
+        invoiceData = invoiceRepository->findById(id);
+        if (!ValidateUtil::isNull(invoiceData))
+            break;
+    }
     if (ValidateUtil::isNull(invoiceData))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + id.toStdString());
@@ -39,35 +47,39 @@ Invoice *InvoiceService::readById(QString id)
     return invoiceData;
 }
 
-void InvoiceService::update(Invoice &data)
+void InvoiceService::update(QString staffId, Invoice &data)
 {
-    if (ValidateUtil::isNull(this->invoiceRepository->findById(data.id)))
+    auto *invoiceRepository = new InvoiceModel(staffId);
+    if (ValidateUtil::isNull(invoiceRepository->findById(data.id)))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
-    if (this->invoiceRepository->findById(data.id)->type != data.type)
+    if (invoiceRepository->findById(data.id)->type != data.type)
     {
         throw DataException::CantHandle(data.id.toStdString() + " can't be edited!");
     }
-    this->invoiceRepository->update(data);
+    invoiceRepository->update(data);
 }
 
-void InvoiceService::remove(Invoice &data)
+void InvoiceService::remove(QString staffId, Invoice &data)
 {
-    if (ValidateUtil::isNull(this->invoiceRepository->findById(data.id)))
+    auto *invoiceRepository = new InvoiceModel(staffId);
+    if (ValidateUtil::isNull(invoiceRepository->findById(data.id)))
     {
         throw DataException::DataNotFound("Not found any invoice with invoice id: " + data.id.toStdString());
     }
-    if (!ValidateUtil::isNull(this->invoiceRepository->findById(data.id)->invoiceDetailList) && !ValidateUtil::isNull(this->invoiceRepository->findById(data.id)->invoiceDetailList->getList()))
+    if (!ValidateUtil::isNull(invoiceRepository->findById(data.id)->invoiceDetailList) && !ValidateUtil::isNull(invoiceRepository->findById(data.id)->invoiceDetailList->getList()))
     {
         throw DataException::CantHandle(data.id.toStdString() + " can't be removed because this invoice contains internal information!");
     }
-    this->invoiceRepository->remove(data);
+    invoiceRepository->remove(data);
 }
 
-double InvoiceService::getSum(QString id)
+double InvoiceService::getSum(QString staffId, QString id)
 {
-    return this->invoiceRepository->getSumOfInvoice(id);
+    // qDebug() << staffId << id;
+    auto *invoiceRepository = new InvoiceModel(staffId);
+    return invoiceRepository->getSumOfInvoice(id);
 }
 
 InvoiceService::~InvoiceService()

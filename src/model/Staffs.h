@@ -19,7 +19,6 @@ private:
     Data *getCurrentData = nullptr;
 
 private:
-    void readFile();
     void writeFile();
 
 public:

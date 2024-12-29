@@ -5,48 +5,8 @@
 #include "GlobalModel.h"
 #include "Staffs.h"
 
-void StaffsModel::readFile()
-{
-    QFile file(FilePath::getPath(FilePath::databases::STAFF));
-    QStringList field;
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        throw DatabasesException::DatabaseBroken("staff");
-    }
-    QTextStream in(&file);
-    while (!in.atEnd())
-    {
-        QString line = in.readLine();
-        field = line.split(',');
-        if (field.size() != 4)
-        {
-            throw DatabasesException::DatabaseBroken("staff");
-        }
-        Staff tempStaff;
-        tempStaff.id = field.at(0);
-        tempStaff.lastName = field.at(1);
-        tempStaff.firstName = field.at(2);
-        tempStaff.gender = (field.at(3).contains("1") ? true : false);
-        this->push(tempStaff);
-    }
-    qDebug() << "Staff Databases load: " << this->getSize();
-    file.close();
-}
 void StaffsModel::writeFile()
 {
-    // QFile file(FilePath::getPath(FilePath::databases::STAFF));
-    // if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    // {
-    //     throw DatabasesException::DatabaseBroken("staff");
-    // }
-    // QTextStream out(&file);
-    // auto *current = this->getList();
-    // for (int i = 0; i < current->getSize(); i++)
-    // {
-    //     Staff *data = current->at(i);
-    //     out << data->id << ',' << data->lastName << ',' << data->firstName << ',' << data->gender << '\n';
-    // }
-    // file.close();
     getCurrentData->writeFile();
 }
 
@@ -100,7 +60,6 @@ void StaffsModel::update(Staff data)
 void StaffsModel::refresh()
 {
     this->data->clear();
-    this->readFile();
 }
 
 Staff *StaffsModel::findById(QString id)
